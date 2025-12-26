@@ -4,8 +4,11 @@
 <div>
     <% if @anniversaries.present? %>
         <% @anniversaries.each do |anniversary| %>
+        <div>
             <%= anniversary.title %>
-            <%= anniversary.anniversary_date %>
+            <%= anniversary.anniversary_date %>            
+        </div>
+
         <% end %>
     <% else %>
         <div>

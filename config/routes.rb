@@ -17,6 +17,7 @@ Rails.application.routes.draw do
   #   registrations: 'users/registrations'
   #   # root: 'top_pages#index'
   # }
+  Rails.logger.info "===== ROUTES FILE LOADED ====="
 
   # Defines the root path route ("/")
   # root "posts#index"

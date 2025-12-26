@@ -36,7 +36,7 @@ class AnniversariesController < ApplicationController
     def destroy
         anniversary = current_user.anniversaries.find(params[:id])
         anniversary.destroy!
-        redirect_to anniversary_path, success: "success"
+        redirect_to anniversaries_path, success: "success"
     end
 
 

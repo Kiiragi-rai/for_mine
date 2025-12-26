@@ -17,6 +17,7 @@ Rails.application.routes.draw do
   #   registrations: 'users/registrations'
   #   # root: 'top_pages#index'
   # }
+  Rails.logger.info "===== ROUTES FILE LOADED ====="
 
   resources :anniversaries, only: %i[index new create]
 

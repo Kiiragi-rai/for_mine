@@ -19,7 +19,7 @@ Rails.application.routes.draw do
   # }
   Rails.logger.info "===== ROUTES FILE LOADED ====="
 
-  resources :anniversaries, only: %i[index new create]
+  resources :anniversaries, only: %i[index new create edit update destroy]
 
   # Defines the root path route ("/")
   # root "posts#index"

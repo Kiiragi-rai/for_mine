@@ -10,19 +10,19 @@ class AnniversariesController < ApplicationController
     end
 
     def create 
-        @anniversary = current_user.anniversarys.build(anniversary_params)
+        @anniversary = current_user.anniversaries.build(anniversary_params)
         if @anniversary.save 
             redirect_to anniversaries_path ,success: 'good'
-        end
-
+        else
         flash.now[:danger] = 'failure try again' 
         render :new, status: :unprocessable_entity
+        end
     end
 
 
 
     private 
     def anniversary_params
-        params.requre(:anniversary).permit(:title, :anniversary_date)
+        params.require(:anniversary).permit(:title, :anniversary_date)
     end
 end

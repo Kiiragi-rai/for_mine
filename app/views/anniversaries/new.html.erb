@@ -1,0 +1,13 @@
+<%= form_with model: @anniversary  do |f| %>
+<div>
+     <div>
+        <%= f.label :title%>
+        <%= f.text_field :title %>
+    </div>
+    <div>
+        <%= f.label :anniversary_date %>
+        <%= f.date_field :anniversary_date %>
+    </div>   
+    <%= f.submit nil %>
+<% end %>
+</div>

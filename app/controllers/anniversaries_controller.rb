@@ -19,6 +19,26 @@ class AnniversariesController < ApplicationController
         end
     end
 
+    def edit
+        @anniversary = current_user.anniversaries.find(params[:id])
+    end
+
+    def update
+        @anniversary = current_user.anniversaries.find(params[:id])
+        p @anniversary
+        if @anniversary.update(anniversary_params)
+            redirect_to anniversaries_path,success: "suceess"
+        else
+            flash.now[:danger] = "danger"
+            render :edit, status: :unprocessable_entity
+        end
+    end
+    def destroy
+        anniversary = current_user.anniversaries.find(params[:id])
+        anniversary.destroy!
+        redirect_to anniversary_path, success: "success"
+    end
+
 
 
     private 

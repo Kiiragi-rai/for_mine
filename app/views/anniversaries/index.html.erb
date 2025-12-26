@@ -1,0 +1,15 @@
+<li>
+    <%= link_to "ログアウト", destroy_user_session_path,data: { turbo_method: :delete } %>
+</li>
+<div>
+    <% if @anniversaries.present? %>
+        <% @anniversaries.each do |anniversary| %>
+            <%= anniversary.title %>
+            <%= anniversary.anniversary_date %>
+        <% end %>
+    <% else %>
+        <div>
+            <p>記念日がありません</p>
+        </div>
+    <% end %>
+</div>

@@ -18,7 +18,7 @@ Rails.application.routes.draw do
   #   # root: 'top_pages#index'
   # }
 
-  resources :anniversaries, only: %i[index]
+  resources :anniversaries, only: %i[index new create]
 
   # Defines the root path route ("/")
   # root "posts#index"

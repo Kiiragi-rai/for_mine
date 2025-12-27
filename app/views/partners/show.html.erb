@@ -9,10 +9,13 @@
 
 <div>
     <%= @partner.name%>
+    <%= link_to "編集", "#"%>
+    <%= link_to "削除", "#"%>
 </div>
 
 <% else %>
 <div>
     <p>相手が見つかっていません</p>
+    <%= link_to "見つけた", new_partner_path %>
 </div>
 <% end %>

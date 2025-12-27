@@ -6,10 +6,10 @@ class PartnersController < ApplicationController
     end
 
     def new 
-        @partner = Partner.new
+        @partner = current_user.build_partner
     end
-    def update
-        @partner = current_user.partner.build(partner_params)
+    def create
+        @partner = current_user.build_partner(partner_params)
         if @partner.save
             redirect_to partner_path, success: "OK"
         else
@@ -19,12 +19,25 @@ class PartnersController < ApplicationController
     end
 
 
-
     private
 
     def partner_params
-        params.require(:partner).partmit(:name, :sex, :relation, :job, :favorites, :avoidances,:hobbies,
+        par = params.require(:partner).permit(:name, :sex, :relation, :job, :favorites, :avoidances,:hobbies,
         :budget_min,:budget_max)
+
+        p par
+        
+        splitter = /[,\u3001]/  # , と 、どちらもOK
+
+        par[:favorites]  = par[:favorites].to_s.split(splitter).map(&:strip).reject(&:blank?)
+        par[:avoidances] = par[:avoidances].to_s.split(splitter).map(&:strip).reject(&:blank?)
+        par[:hobbies]    = par[:hobbies].to_s.split(splitter).map(&:strip).reject(&:blank?)
+
+        p par[:favorites] 
+        p par[:avoidances] 
+        p par[:hobbies] 
+
+        p par
     end
 end
 

@@ -1,0 +1,50 @@
+<%= form_with model:@partner , url: partner_path do |f| %>
+<div>
+     <div>
+        <%= f.label :name%>
+        <%= f.text_field :name %>
+    </div>
+     <div>
+        <%= f.label :sex%>
+        <%= f.text_field :sex %>
+    </div>
+     <div>
+        <%= f.label :relation%>
+        <%= f.text_field :relation %>
+    </div>
+     <div>
+        <%= f.label :job%>
+        <%= f.text_field :job %>
+    </div>
+
+  <!-- 配列カラム -->
+  <div>
+    <%= f.label :favorites, "好きなこと（、区切り）" %><br>
+    <%= f.text_area :favorites, value: @partner.favorites.join("、") %>
+  </div>
+
+  <div>
+    <%= f.label :avoidances, "苦手なこと（、区切り）" %><br>
+    <%= f.text_area :avoidances, value: @partner.avoidances.join("、") %>
+  </div>
+
+  <div>
+    <%= f.label :hobbies, "趣味（、区切り）" %><br>
+    <%= f.text_area :hobbies, value: @partner.hobbies.join("\n")  %>
+  </div>
+
+  <div>
+    <%= f.label :budget_min, "予算（下限）" %><br>
+    <%= f.number_field :budget_min %>
+  </div>
+
+  <div>
+    <%= f.label :budget_max, "予算（上限）" %><br>
+    <%= f.number_field :budget_max %>
+  </div>
+    <%= f.submit nil %>
+<% end %>
+
+</div>
+
+

@@ -20,6 +20,8 @@ Rails.application.routes.draw do
   Rails.logger.info "===== ROUTES FILE LOADED ====="
 
   resources :anniversaries, only: %i[index new create edit update destroy]
+  # has_oneなのでresorce
+  resource :partner ,only: i%[index]
 
   # Defines the root path route ("/")
   # root "posts#index"

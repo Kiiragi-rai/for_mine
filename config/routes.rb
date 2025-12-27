@@ -21,7 +21,7 @@ Rails.application.routes.draw do
 
   resources :anniversaries, only: %i[index new create edit update destroy]
   # has_oneなのでresorce
-  resource :partner ,only: i%[index]
+  resource :partner 
 
   # Defines the root path route ("/")
   # root "posts#index"

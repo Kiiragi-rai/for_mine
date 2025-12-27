@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.2].define(version: 2025_12_26_105022) do
+ActiveRecord::Schema[7.2].define(version: 2025_12_27_053846) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -21,6 +21,22 @@ ActiveRecord::Schema[7.2].define(version: 2025_12_26_105022) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["user_id"], name: "index_anniversaries_on_user_id"
+  end
+
+  create_table "partners", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.string "name"
+    t.string "sex"
+    t.string "relation"
+    t.string "job"
+    t.text "favorites", default: [], array: true
+    t.text "avoidances", default: [], array: true
+    t.text "hobbies", default: [], array: true
+    t.integer "budget_min"
+    t.integer "budget_max"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_partners_on_user_id", unique: true
   end
 
   create_table "users", force: :cascade do |t|
@@ -37,4 +53,5 @@ ActiveRecord::Schema[7.2].define(version: 2025_12_26_105022) do
   end
 
   add_foreign_key "anniversaries", "users"
+  add_foreign_key "partners", "users"
 end

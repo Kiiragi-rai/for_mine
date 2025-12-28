@@ -4,7 +4,7 @@ class PartnersController < ApplicationController
     def show
         @partner = current_user.partner
     end
-
+#  newとcreate だと入らなかった
     def new 
         @partner = current_user.build_partner
     end
@@ -28,9 +28,12 @@ class PartnersController < ApplicationController
         p par
         
         splitter = /[,\u3001]/  # , と 、どちらもOK
-
+        # 「nilでも落ちない」→「区切って配列」→「空白を消す」→「空要素を消す」
         par[:favorites]  = par[:favorites].to_s.split(splitter).map(&:strip).reject(&:blank?)
-        par[:avoidances] = par[:avoidances].to_s.split(splitter).map(&:strip).reject(&:blank?)
+        par[:avoidances] = par[:avoidances].to_s
+        p  par[:avoidances] = par[:avoidances].split(splitter)
+        p par[:avoidances] = par[:avoidances].map(&:strip)
+        p par[:avoidances] = par[:avoidances].reject(&:blank?)
         par[:hobbies]    = par[:hobbies].to_s.split(splitter).map(&:strip).reject(&:blank?)
 
         p par[:favorites] 

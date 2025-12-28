@@ -25,6 +25,7 @@
 
   <div>
     <%= f.label :avoidances, "苦手なこと（、区切り）" %><br>
+    <!-- 　 value 、は表示用 -->
     <%= f.text_area :avoidances, value: @partner.avoidances.join("、") %>
   </div>
 

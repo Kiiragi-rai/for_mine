@@ -1,6 +1,22 @@
 class Partner < ApplicationRecord
-    belongs_to :user
+
 
     #一人につき一つ
     validates :user_id, uniqueness: true 
-end
+
+    validates :budget_max, numericality: { greater_than_or_equal_to: 0}
+    validates :budget_min ,numericality: { greater_than_or_equal_to: 0}
+
+    validate :budget_max_is_greater_than_budget_min
+
+
+    belongs_to :user
+
+    # 予算（下限）が予算（上限）を超えないように
+    def budget_max_is_greater_than_budget_min
+        if budget_min >= budget_max
+            errors.add(:budget_min,"予算（下限）が予算（上限）を超えることはできません")
+        end
+    end
+end 
+

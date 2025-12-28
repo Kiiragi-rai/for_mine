@@ -18,6 +18,22 @@ class PartnersController < ApplicationController
         end
     end
 
+    def edit
+        @partner = current_user.partner
+    end
+
+    def update
+        @partner = current_user.partner
+        p @partner
+        if @partner.update(partner_params)
+            redirect_to partner_path,success: "suceess"
+        else
+            flash.now[:danger] = "danger"
+            render :edit, status: :unprocessable_entity
+        end
+
+    end
+
 
     private
 
@@ -26,9 +42,9 @@ class PartnersController < ApplicationController
         :budget_min,:budget_max)
 
         p par
-        
-        splitter = /[,\u3001]/  # , と 、どちらもOK
-        # 「nilでも落ちない」→「区切って配列」→「空白を消す」→「空要素を消す」
+        # , と 、どちらもOK
+        splitter = /[, 、]/  
+        # nil OK, 区切る（配列化）、空白削除、空欄削除
         par[:favorites]  = par[:favorites].to_s.split(splitter).map(&:strip).reject(&:blank?)
         par[:avoidances] = par[:avoidances].to_s
         p  par[:avoidances] = par[:avoidances].split(splitter)
@@ -41,7 +57,7 @@ class PartnersController < ApplicationController
         p par[:hobbies] 
 
         p par
-    end
+    end 
 end
 
 

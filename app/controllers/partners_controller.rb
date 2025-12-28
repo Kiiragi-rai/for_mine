@@ -18,6 +18,22 @@ class PartnersController < ApplicationController
         end
     end
 
+    def edit
+        @partner = current_user.partner.find(params[:id])
+    end
+
+    def update
+        @partner = current_user.partner.find(params[:id])
+        p @partner
+        if @partner.update(partner_params)
+            redirect_to anniversaries_path,success: "suceess"
+        else
+            flash.now[:danger] = "danger"
+            render :edit, status: :unprocessable_entity
+        end
+
+    end
+
 
     private
 

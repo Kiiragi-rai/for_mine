@@ -9,8 +9,8 @@
 
 <div>
     <%= @partner.name%>
-    <%= link_to "編集", edit_partner_path%>
-    <%= link_to "削除", "#"%>
+    <%= link_to "編集", edit_partner_path %>
+    <%= link_to "削除", partner_path, data: { turbo_method: :delete } %>
 </div>
 
 <% else %>

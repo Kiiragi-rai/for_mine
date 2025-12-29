@@ -3,6 +3,8 @@ class ApplicationController < ActionController::Base
   # allow_browser versions: :
   # before_action :authenticate_user!
 
+  add_flash_types :success, :danger
+
   
   def after_sign_in_path_for(resource)
     anniversaries_path

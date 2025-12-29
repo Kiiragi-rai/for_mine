@@ -15,7 +15,7 @@ class PartnersController < ApplicationController
             redirect_to partner_path, success: "OK"
         else
             flash.now[:danger] = "out"
-            render :new, status: :unprocessable_entity
+            render :new, status: :unprocessable_content
         end
     end
 
@@ -30,7 +30,7 @@ class PartnersController < ApplicationController
             redirect_to partner_path,success: "suceess"
         else
             flash.now[:danger] = "danger"
-            render :edit, status: :unprocessable_entity
+            render :edit, status: :unprocessable_content
         end
 
     end

@@ -15,7 +15,7 @@ class AnniversariesController < ApplicationController
             redirect_to anniversaries_path ,success: 'good'
         else
         flash.now[:danger] = 'failure try again' 
-        render :new, status: :unprocessable_entity
+        render :new, status: :unprocessable_content
         end
     end
 
@@ -30,7 +30,7 @@ class AnniversariesController < ApplicationController
             redirect_to anniversaries_path,success: "suceess"
         else
             flash.now[:danger] = "danger"
-            render :edit, status: :unprocessable_entity
+            render :edit, status: :unprocessable_content
         end
     end
     def destroy

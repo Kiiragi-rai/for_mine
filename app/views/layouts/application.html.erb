@@ -25,6 +25,7 @@
     <% if devise_controller? == false  && user_signed_in? == false  %>
     <%= render 'shared/before_login_header' %>
    <% end %>
+   <%= render "shared/flash_message"%>
 
     <%= yield %>
 

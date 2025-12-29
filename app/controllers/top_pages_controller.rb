@@ -1,5 +1,5 @@
 class TopPagesController < ApplicationController
-    def index
+    def top
         # @user = current_user
     end
 end

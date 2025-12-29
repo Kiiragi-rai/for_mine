@@ -7,11 +7,6 @@
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
 
-    
-    <p class="notice"><%= notice %></p>
-    <p class="alert"><%= alert %></p>
-
-
     <%= yield :head %>
 
     <link rel="manifest" href="/manifest.json">
@@ -23,6 +18,16 @@
   </head>
 
   <body>
+    <% if user_signed_in? %>
+    <%= render 'shared/header' %>
+    <% else %>
+    <%= render 'shared/before_login_header' %>
+    <% end %>
+
+
+    <p class="notice"><%= notice %></p>
+    <p class="alert"><%= alert %></p>
     <%= yield %>
+
   </body>,  
 </html>

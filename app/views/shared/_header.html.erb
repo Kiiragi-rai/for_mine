@@ -1,8 +1,7 @@
 <header> 
     <div>
         <li>
-            <%= link_to "記念日", anniversaries_path %>
-            <%= link_to "パートナー" , partner_path %>
+            <%= link_to "ホーム", user_root_path%>
             <%= link_to "ログアウト", destroy_user_session_path,data: { turbo_method: :delete } %>
         </li>
     </div>

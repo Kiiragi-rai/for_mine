@@ -5,6 +5,10 @@ class AnniversariesController < ApplicationController
         @anniversaries = current_user.anniversaries
     end
 
+    def show
+        @anniversary = current_user.anniversaries.find(params[:id])
+    end
+
     def new 
         @anniversary = Anniversary.new
     end

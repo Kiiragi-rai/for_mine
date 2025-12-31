@@ -1,5 +1,5 @@
 <%= form_with model:@partner , url: partner_path do |f| %>
-<%= render 'shared/error_messages', object: f.object %>※
+<%= render 'shared/error_messages', object: f.object %>
 <div>
      <div>
         <%= f.label :name%>
@@ -46,6 +46,9 @@
   </div>
     <%= f.submit nil %>
 <% end %>
+<div>
+  <%= link_to "詳細へ", partner_path %>
+</div>
 
 </div>
 

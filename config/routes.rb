@@ -10,7 +10,17 @@ Rails.application.routes.draw do
   get "service-worker" => "rails/pwa#service_worker", as: :pwa_service_worker
   get "manifest" => "rails/pwa#manifest", as: :pwa_manifest
 
-  root 'top_pages#top'
+
+  authenticated :user do
+    root to: "home_pages#index", as: :user_root
+  end
+  
+  # ログイン前のルートページ
+  unauthenticated do
+    root to: "top_pages#top"
+  end
+
+
   devise_for :users
   # devise_for :users, controllers: {
   #   sessions: 'users/sessions',
@@ -19,7 +29,7 @@ Rails.application.routes.draw do
   # }
   Rails.logger.info "===== ROUTES FILE LOADED ====="
 
-  resources :anniversaries, only: %i[index new create edit update destroy]
+  resources :anniversaries, only: %i[index show new create edit update destroy]
   # has_oneなのでresorce
   resource :partner 
 

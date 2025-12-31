@@ -19,7 +19,7 @@
 
   <body>
     <% if user_signed_in? %>
-    <%= render 'shared/header' %>
+    <%= render "shared/header" %>
     <% end %>
 
     <% if devise_controller? == false  && user_signed_in? == false  %>
@@ -28,6 +28,7 @@
    <%= render "shared/flash_message"%>
 
     <%= yield %>
+    <%= render "shared/footer"%>
 
-  </body>,  
+  </body>
 </html>

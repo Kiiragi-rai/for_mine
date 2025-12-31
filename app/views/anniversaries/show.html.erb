@@ -1,0 +1,16 @@
+<div>
+
+        <div>
+        <div>
+            <%= @anniversary.title %>
+            <%= @anniversary.anniversary_date %>               
+        </div>
+        <div>
+            <%= link_to "edit",edit_anniversary_path(@anniversary) %>
+            <%= link_to "削除", anniversary_path(@anniversary), data: { turbo_method: :delete }%>
+        </div>
+        <div>
+            <%= link_to "一覧へ", anniversaries_path%>
+        </div>
+        </div>
+</div>

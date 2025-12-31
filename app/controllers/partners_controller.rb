@@ -3,7 +3,6 @@ class PartnersController < ApplicationController
 #has one はpartner s付かない
     def show
         @partner = current_user.partner
-        redirect_to new_partner_path, notice: "パートナーを登録してください" if @partner.nil?
     end
 #  newとcreate だと入らなかった
     def new 

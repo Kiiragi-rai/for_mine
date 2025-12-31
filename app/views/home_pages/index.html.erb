@@ -1,15 +1,14 @@
-<div>
-<%= link_to "anniversary", anniversaries_path %>
-<%= link_to "partner" ,partner_path %>
-</div>
-
-  <div class="jumbotron">
-    <div class='index-content text-center'>
-      <h1 class='home-index'>レシピを共有しよう!</h1>
+<div class="container ">
+    <div class="row g-3">
+      <div class="col-12 col-md-6">
+        <%= link_to "anniversary", anniversaries_path,
+          class: "btn btn-primary w-100 py-5 fs-2" %>
+      </div>
   
-      <div class='index-btn d-flex justify-content-around'>
-        <%= link_to '新規登録', "#", class: "btn btn-success btn-lg" %>
-        <%= link_to 'ログイン', "#", class: "btn btn-success btn-lg" %>
+      <div class="col-12 col-md-6">
+        <%= link_to "partner", partner_path,
+          class: "btn btn-primary w-100 py-5 fs-2" %>
       </div>
     </div>
   </div>
+  

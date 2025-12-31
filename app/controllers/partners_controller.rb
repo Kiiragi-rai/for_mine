@@ -39,7 +39,7 @@ class PartnersController < ApplicationController
         def destroy
             partner = current_user.partner
             partner.destroy!
-            redirect_to partner_path, success: "success"
+            redirect_to root_path, success: "success"
         end
     
 

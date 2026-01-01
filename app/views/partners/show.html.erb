@@ -1,16 +1,44 @@
-
-
-<% if @partner.present?%>
-
-<div>
-    <%= @partner.name%>
-    <%= link_to "編集", edit_partner_path %>
-    <%= link_to "削除", partner_path, data: { turbo_method: :delete } %>
+<div class="mt-3">
+    <h1><%= "パートナーについて" %></h1>
 </div>
 
-<% else %>
-<div>
-    <p>相手が見つかっていません</p>
-    <%= link_to "見つけた", new_partner_path %>
-</div>
-<% end %>
+<div class="container pt-5">
+    <div class="row mb-3">
+      <div class="col-lg-8 offset-lg-2">
+  
+        <% if @partner.present? %>
+          <article class="card">
+            <div class="card-body">
+              <div class="col">
+                <h3>タイトル: <%= @partner.name %></h3>
+              </div>
+  
+              <div class="col">
+                <h3>好きなこと: <%= @partner.favorites.join('、') %></h3>
+              </div>
+  
+              <div class="col">
+                <h3>嫌いなこと: <%= @partner.avoidances.join('、') %></h3>
+              </div>
+  
+              <div class="col">
+                <h3>趣味: <%= @partner.hobbies.join('、') %></h3>
+              </div>
+  
+              <div class="mt-3">
+                <%= link_to "編集", edit_partner_path %>
+                <%= link_to "削除", partner_path, data: { turbo_method: :delete } %>
+              </div>
+            </div>
+          </article>
+        <% else %>
+          <div>
+            <p>相手が見つかっていません</p>
+            <%= link_to "見つけた", new_partner_path %>
+          </div>
+        <% end %>
+  
+      </div>
+    </div>
+  </div>
+  

@@ -1,15 +1,28 @@
-<div>
-        <div>
-        <div>
-            <%= @anniversary.title %>
-            <%= @anniversary.anniversary_date %>               
-        </div>
-        <div>
-            <%= link_to "edit",edit_anniversary_path(@anniversary) %>
-            <%= link_to "削除", anniversary_path(@anniversary), data: { turbo_method: :delete }%>
-        </div>
-        <div>
-            <%= link_to "一覧へ", anniversaries_path%>
-        </div>
-        </div>
+<div class="container pt-5">
+    <div class="row mb-3">
+      <div class="col-lg-8 offset-lg-2">
+        <h1><%= "記念日詳細" %></h1>
+  
+        <article class="card">
+          <div class="card-body">
+            <div class="row">
+              <div class="col-md-6">
+                <h3>タイトル: <%= @anniversary.title %></h3>
+              </div>
+              <div class="col-md-6">
+                <h3>日: <%= @anniversary.anniversary_date %></h3>
+              </div>
+            </div>
+            <div>
+              <%= link_to "編集", edit_anniversary_path(@anniversary) %>
+              <%= link_to "削除", anniversary_path(@anniversary), data: { turbo_method: :delete } %>
+            </div>
+          </div>
+        </article>
+      </div>
+    </div>
+    <div>
+      <%= link_to "一覧へ", anniversaries_path %>
+    </div>
 </div>
+  

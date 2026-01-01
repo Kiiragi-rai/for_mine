@@ -1,17 +1,23 @@
-<%= form_with model: @anniversary  do |f| %>
-<%= render 'shared/error_messages', object: f.object %>
-<div>
-     <div>
-        <%= f.label :title%>
-        <%= f.text_field :title %>
+<div class="container">
+    <div class="row">
+      <div class="col-lg-8 offset-lg-2">
+        <h1><%= "記念日作成" %></h1>
+        <%= form_with model: @anniversary  do |f| %>
+        <%= render 'shared/error_messages', object: f.object %>
+          <div class="mb-3">
+            <%= f.label :title %>
+            <%= f.text_field :title, class: "form-control" %>
+          </div>
+          <div class="mb-3">
+            <%= f.label :anniversary_date %>
+            <%= f.date_field :anniversary_date, class: "form-control"%>
+          </div>
+          <%= f.submit "作成", class: "btn btn-primary" %>
+        <% end %>
+      </div>
+      <div class="mt-4 ">
+        <%= link_to "一覧へ", anniversaries_path%>
+      </div>
     </div>
-    <div>
-        <%= f.label :anniversary_date %>
-        <%= f.date_field :anniversary_date %>
-    </div>   
-    <%= f.submit nil %>
-<% end %>
-<div>
-    <%= link_to "一覧へ", anniversaries_path%>
 </div>
-</div>
+  

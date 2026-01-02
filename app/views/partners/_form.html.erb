@@ -1,0 +1,72 @@
+<%= form_with model: partner ,url: partner_path do |f| %>
+  <%= render 'shared/error_messages', object: f.object %>
+
+  <div class="mb-3">
+    <%= f.label :name, "名前:" %>
+    <%= f.text_field :name, class: "form-control" %>
+  </div>
+
+  <div class="row">
+    <div class="col mb-3">
+      <%= f.label :sex, "性別:" %>
+      <%= f.text_field :sex, class: "form-control" %>
+    </div>
+
+    <div class="col mb-3">
+      <%= f.label :age, "年齢:" %>
+      <%= f.number_field :age, class: "form-control" %>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col mb-3">
+      <%= f.label :job, "職業：" %>
+      <%= f.text_field :job, class: "form-control" %>
+    </div>
+
+    <div class="col mb-3">
+      <%= f.label :relation, "関係性:" %>
+      <%= f.text_field :relation, class: "form-control" %>
+    </div>
+  </div>
+
+  <div class="mb-3">
+    <%= f.label :favorites, "好きなもの（、区切り）" %>
+    <%= f.text_area :favorites,
+      value: partner.favorites.join("、"),
+      class: "form-control",
+      rows: 2 %>
+  </div>
+
+  <div class="mb-3">
+    <%= f.label :avoidances, "苦手なもの（、区切り）" %>
+    <%= f.text_area :avoidances,
+      value: partner.avoidances.join("、"),
+      class: "form-control",
+      rows: 2 %>
+  </div>
+
+  <div class="mb-3">
+    <%= f.label :hobbies, "趣味（、区切り）" %>
+    <%= f.text_area :hobbies,
+      value: partner.hobbies.join("、"),
+      class: "form-control",
+      rows: 2 %>
+  </div>
+
+  <div class="row">
+    <div class="col mb-3">
+      <%= f.label :budget_min, "予算（下限）" %>
+      <%= f.number_field :budget_min, class: "form-control" %>
+    </div>
+
+    <div class="col mb-3">
+      <%= f.label :budget_max, "予算（上限）" %>
+      <%= f.number_field :budget_max, class: "form-control" %>
+    </div>
+  </div>
+
+  <div class="text-center">
+    <%= f.submit submit_label, class: "btn btn-primary" %>
+  </div>
+<% end %>

@@ -1,62 +1,8 @@
-
 <div class="container">
   <div class="row">
     <div class="col-lg-8 offset-lg-2">
-      <h1><%= "パートナー登録" %></h1>
-      <%= form_with model: @partner , url: partner_path do |f| %>
-      <%= render 'shared/error_messages', object: f.object %>
-      <div class="mb-3">
-        <%= f.label :name, "名前:" %>
-        <%= f.text_field :name %>
-      </div>
-     <div class="row">
-       <div class="col mb-3">
-        <%= f.label :sex, "性別:"%>
-        <%= f.text_field :sex %>
-       </div>
-       <div class="col mb-3">
-        <%= f.label :age, "年齢:"%>
-        <%= f.number_field :age %>
-       </div>    
-    </div>
-    <div class="row">
-      <div class="col mb-3">
-        <%= f.label :job,"職業："%>
-        <%= f.text_field :job %>
-     </div>
-     <div class="col mb-3">
-      <%= f.label :relation, "関係性:"%>
-      <%= f.text_field :relation %>
-     </div>  
-    </div>
-        <div class="mb-3">
-          <%= f.label :favorites,"好きなもの（、区切り）" %>
-          <%= f.text_area :favorites, value: @partner.favorites.join("、"),class: "form-control", rows: "2" %>
-        </div>
-        <div class="mb-3">
-          <%= f.label :avoidances,"苦手なもの（、区切り）" %>
-          <%= f.text_area :avoidances, value: @partner.avoidances.join("、"),class: "form-control" ,rows: "2"%>
-        </div>
-        <div class="mb-3">
-          <%= f.label :hobbies, "趣味（、区切り）" %>
-          <%= f.text_area :hobbies, value: @partner.hobbies.join("、"),class: "form-control" , rows:"2"%>
-        </div>
-        <div class="row">
-          <div class="col mb-3">
-            <%= f.label :budget_min, "予算（下限）" %><br>
-            <%= f.number_field :budget_min %>
-          </div>
-        
-          <div class="col mb-3">
-            <%= f.label :budget_max, "予算（上限）" %><br>
-            <%= f.number_field :budget_max %>
-          </div>
-        </div>
-        <div class="text-center ">
-           <%= f.submit "登録", class: "btn btn-primary " %>
-        </div>
-       
-      <% end %>
+      <h1>パートナー登録</h1>
+      <%= render "form", partner: @partner, submit_label: "登録" %>
     </div>
   </div>
 </div>

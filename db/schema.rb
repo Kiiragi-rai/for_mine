@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.2].define(version: 2025_12_27_053846) do
+ActiveRecord::Schema[7.2].define(version: 2026_01_02_092508) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -36,6 +36,7 @@ ActiveRecord::Schema[7.2].define(version: 2025_12_27_053846) do
     t.integer "budget_max"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "age"
     t.index ["user_id"], name: "index_partners_on_user_id", unique: true
   end
 

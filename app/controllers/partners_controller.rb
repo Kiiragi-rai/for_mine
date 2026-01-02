@@ -48,26 +48,12 @@ class PartnersController < ApplicationController
 
     # モデルに移動にする？
     def partner_params
-        par = params.require(:partner).permit(:name, :sex, :relation, :job, :favorites, :avoidances,:hobbies,
+        params.require(:partner).permit(:name, :sex, :age,:relation, :job,:favorites, :avoidances,:hobbies,
         :budget_min,:budget_max)
 
-        p par
-        # , と 、どちらもOK
-        splitter = /[, 、]/  
-        # nil OK, 区切る（配列化）、空白削除、空欄削除
-        par[:favorites]  = par[:favorites].to_s.split(splitter).map(&:strip).reject(&:blank?)
-        par[:avoidances] = par[:avoidances].to_s
-        p  par[:avoidances] = par[:avoidances].split(splitter)
-        p par[:avoidances] = par[:avoidances].map(&:strip)
-        p par[:avoidances] = par[:avoidances].reject(&:blank?)
-        par[:hobbies]    = par[:hobbies].to_s.split(splitter).map(&:strip).reject(&:blank?)
 
-        p par[:favorites] 
-        p par[:avoidances] 
-        p par[:hobbies] 
-
-        p par
     end 
 end
+
 
 

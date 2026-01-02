@@ -48,7 +48,7 @@ class PartnersController < ApplicationController
 
     # モデルに移動にする？
     def partner_params
-        params.require(:partner).permit(:name, :sex, :relation, :job,:favorites, :avoidances,:hobbies,
+        params.require(:partner).permit(:name, :sex, :age,:relation, :job,:favorites, :avoidances,:hobbies,
         :budget_min,:budget_max)
 
 

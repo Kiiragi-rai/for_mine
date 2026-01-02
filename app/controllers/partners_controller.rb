@@ -11,9 +11,9 @@ class PartnersController < ApplicationController
     def create
         @partner = current_user.build_partner(partner_params)
         if @partner.save
-            redirect_to partner_path, success: "OK"
+            redirect_to partner_path, success: "大切な人を見つけました"
         else
-            flash.now[:danger] = "out"
+            flash.now[:danger] = "登録に失敗しました。再度入力していください"
             render :new, status: :unprocessable_content
         end
     end
@@ -26,9 +26,9 @@ class PartnersController < ApplicationController
         @partner = current_user.partner
         p @partner
         if @partner.update(partner_params)
-            redirect_to partner_path,success: "suceess"
+            redirect_to partner_path,success: "更新に成功しました"
         else
-            flash.now[:danger] = "danger"
+            flash.now[:danger] = "更新に失敗しました。再度入力してください"
             render :edit, status: :unprocessable_content
         end
 
@@ -38,7 +38,7 @@ class PartnersController < ApplicationController
         def destroy
             partner = current_user.partner
             partner.destroy!
-            redirect_to root_path, success: "success"
+            redirect_to root_path, success: "削除しました"
         end
     
 
@@ -50,8 +50,6 @@ class PartnersController < ApplicationController
     def partner_params
         params.require(:partner).permit(:name, :sex, :age,:relation, :job,:favorites, :avoidances,:hobbies,
         :budget_min,:budget_max)
-
-
     end 
 end
 

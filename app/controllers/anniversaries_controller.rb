@@ -16,9 +16,9 @@ class AnniversariesController < ApplicationController
     def create 
         @anniversary = current_user.anniversaries.build(anniversary_params)
         if @anniversary.save 
-            redirect_to anniversaries_path ,success: 'good'
+            redirect_to anniversaries_path ,success: '記念日を登録しました'
         else
-        flash.now[:danger] = 'failure try again' 
+        flash.now[:danger] = '記念日登録に失敗しました。再度入力して下さい' 
         render :new, status: :unprocessable_content
         end
     end
@@ -31,16 +31,16 @@ class AnniversariesController < ApplicationController
         @anniversary = current_user.anniversaries.find(params[:id])
         p @anniversary
         if @anniversary.update(anniversary_params)
-            redirect_to anniversaries_path,success: "suceess"
+            redirect_to anniversaries_path,success: "記念日を更新しました"
         else
-            flash.now[:danger] = "danger"
+            flash.now[:danger] = "記念日更新に失敗しました"
             render :edit, status: :unprocessable_content
         end
     end
     def destroy
         anniversary = current_user.anniversaries.find(params[:id])
         anniversary.destroy!
-        redirect_to anniversaries_path, success: "success"
+        redirect_to anniversaries_path, success: "記念日を削除しました"
     end
 
 

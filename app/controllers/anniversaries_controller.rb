@@ -3,6 +3,8 @@ class AnniversariesController < ApplicationController
 
     def index
         @anniversaries = current_user.anniversaries
+    
+
     end
 
     def show

@@ -1,18 +1,26 @@
+<% today = Date.current %>
+
 <h1><%= "記念日一覧" %></h1>
 <div class="container py-3">
-
     <% if @anniversaries.present? %>
       <div class="row g-3">
         <% @anniversaries.each do |anniversary| %>
+        <% diff = (anniversary.anniversary_date.to_date - today).to_i %>
           <div class="col-12 col-md-6 col-lg-4">
             <div class="card h-100 shadow-sm">
               <div class="card-body">
                 <h5 class="card-title mb-2">
                     タイトル：  <%= anniversary.title %>
-                </h5>
+                </h5> 
                 <p class="card-text mb-0">
                   記念日：<%= anniversary.anniversary_date %>
                 </p>
+                <% if diff == 0 %>
+                <div class="text-success mt-2">今日は記念日です！</div>
+              <% elsif diff < 0 %>
+
+                <div class="text-primary mt-2">記念日から<%= diff.abs %>日経ちました</div>
+              <% end %>
               </div>
   
               <div class="card-body pt-0">
@@ -36,3 +44,6 @@
   <% end %>
   </div>
   
+
+    
+

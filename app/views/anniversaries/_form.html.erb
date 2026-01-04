@@ -7,8 +7,27 @@
   </div>
 
   <div class="mb-3">
-    <%= f.label :anniversary_date, "記念日" %>
-    <%= f.date_field :anniversary_date, class: "form-control" %>
+    <div class="row">
+      <div class="col">
+     <%= f.label :anniversary_date, "記念日" %>
+    <%= f.date_field :anniversary_date, class: "form-control" %>         
+      </div>
+      <div class="col">
+        <div class="row">
+          <div>
+            <p>通知設定</p>
+          </div>
+          <div class="col">
+            <%= f.radio_button :notification_on, true %>
+            <%= f.label :notification_on, "ON" %>
+          </div>
+          <div class="col">
+            <%= f.radio_button :notification_on, false %>
+            <%= f.label :notification_on, "OFF" %>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
 
   <%= f.submit submit_label, class: "btn btn-primary" %>

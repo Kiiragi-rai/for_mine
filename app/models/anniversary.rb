@@ -19,6 +19,7 @@
 #  fk_rails_...  (user_id => users.id)
 #
 class Anniversary < ApplicationRecord
+    belongs_to :user
     validates :title, presence:  { message: "を入力してね" }
     validates :anniversary_date, presence:  { message: "を入力してね" }
 

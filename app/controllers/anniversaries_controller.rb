@@ -8,7 +8,7 @@ class AnniversariesController < ApplicationController
     end
 
     def show
-        @anniversary = current_user.anniversaries.find(params[:id])
+        @anniversary = current_user.anniversaries.find_by_hashid(params[:id])
     end
 
     def new 
@@ -26,11 +26,11 @@ class AnniversariesController < ApplicationController
     end
 
     def edit
-        @anniversary = current_user.anniversaries.find(params[:id])
+        @anniversary = current_user.anniversaries.find_by_hashid(params[:id])
     end
 
     def update
-        @anniversary = current_user.anniversaries.find(params[:id])
+        @anniversary = current_user.anniversaries.find_by_hashid(params[:id])
         p @anniversary
         if @anniversary.update(anniversary_params)
             redirect_to anniversaries_path,success: "記念日を更新しました"
@@ -40,7 +40,7 @@ class AnniversariesController < ApplicationController
         end
     end
     def destroy
-        anniversary = current_user.anniversaries.find(params[:id])
+        anniversary = current_user.anniversaries.find_by_hashid(params[:id])
         anniversary.destroy!
         redirect_to anniversaries_path, success: "記念日を削除しました"
     end

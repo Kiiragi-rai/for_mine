@@ -103,6 +103,7 @@ Rails.application.configure do
 
   config.hosts << "for-mine.com"
   config.hosts << "www.for-mine.com"
+  config.hosts << "for-mine.onrender.com"
   # Skip DNS rebinding protection for the default health check endpoint.
   # config.host_authorization = { exclude: ->(request) { request.path == "/up" } }
 end

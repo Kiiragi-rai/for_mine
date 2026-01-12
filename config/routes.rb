@@ -10,7 +10,8 @@ Rails.application.routes.draw do
   get "service-worker" => "rails/pwa#service_worker", as: :pwa_service_worker
   get "manifest" => "rails/pwa#manifest", as: :pwa_manifest
 
-  devise_for :users, controllers: { omniauth_callbacks: 'users/omniauth_callbacks' }
+  # lineログインの準備ができたらONに、
+  # devise_for :users, controllers: { omniauth_callbacks: 'users/omniauth_callbacks' }
   authenticated :user do
     root to: "home_pages#index", as: :user_root
   end
@@ -20,7 +21,7 @@ Rails.application.routes.draw do
     root to: "top_pages#top"
   end
 
-
+# LINE ログインの準備ができたらOFFに
   devise_for :users
   # devise_for :users, controllers: {
   #   sessions: 'users/sessions',

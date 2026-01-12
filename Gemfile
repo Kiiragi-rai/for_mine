@@ -37,8 +37,9 @@ gem "bootsnap", require: false
 # gem "image_processing", "~> 1.2"
 
 gem "devise", "~> 4.9", ">= 4.9.4"
-
 gem "hashid-rails", "~> 1.0"
+gem "omniauth-line-v2"
+gem "omniauth-rails_csrf_protection"
 
 
 group :development, :test do

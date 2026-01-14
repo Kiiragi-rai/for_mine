@@ -2,28 +2,33 @@
 #
 # Table name: users
 #
-#  id                     :bigint           not null, primary key
-#  email                  :string           default(""), not null
-#  encrypted_password     :string           default(""), not null
-#  name                   :string           default(""), not null
-#  remember_created_at    :datetime
-#  reset_password_sent_at :datetime
-#  reset_password_token   :string
-#  created_at             :datetime         not null
-#  updated_at             :datetime         not null
+#  id         :bigint           not null, primary key
+#  name       :string           default(""), not null
+#  provider   :string           default(""), not null
+#  uid        :string           default(""), not null
+#  created_at :datetime         not null
+#  updated_at :datetime         not null
 #
 # Indexes
 #
-#  index_users_on_email                 (email) UNIQUE
-#  index_users_on_reset_password_token  (reset_password_token) UNIQUE
+#  index_users_on_provider_and_uid  (provider,uid) UNIQUE
 #
 class User < ApplicationRecord
+  validates :name , presence: true, length: {maximum: 30 }
+  validates :provider, presence: true
+  validates :uid, presence: true
+  validates :provider, uniqueness: { scope: :uid }
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
-  devise :database_authenticatable, :registerable,
-         :recoverable, :rememberable, :validatable,
-         :omniauthable, omniauth_providers: [:line]
+  devise  :rememberable,:omniauthable, omniauth_providers: [:line]
 
   has_many :anniversaries, dependent: :destroy
   has_one :partner, dependent: :destroy
+
+
+  def self.from_line(auth)
+    where(provider: auth.provider, uid: auth.uid).first_or_create do |user|
+      user.name = auth.info.name
+    end
+  end
 end

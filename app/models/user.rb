@@ -20,7 +20,7 @@ class User < ApplicationRecord
   validates :provider, uniqueness: { scope: :uid }
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
-  devise  :rememberable,:omniauthable, omniauth_providers: [:line]
+  devise  :omniauthable, omniauth_providers: [:line]
 
   has_many :anniversaries, dependent: :destroy
   has_one :partner, dependent: :destroy

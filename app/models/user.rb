@@ -24,4 +24,11 @@ class User < ApplicationRecord
 
   has_many :anniversaries, dependent: :destroy
   has_one :partner, dependent: :destroy
+
+
+  def self.from_line(auth)
+    where(provider: auth.provider, uid: auth.uid).first_or_create do |user|
+      user.name = auth.info.name
+    end
+  end
 end

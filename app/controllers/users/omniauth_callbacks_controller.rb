@@ -17,8 +17,6 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
       session["devise.line_data"] = request.env["omniauth.auth"].except("extra")
     rescue OAuth2::Error => e
       redirect_to rootpath, alert: "LINE認証に失敗しました（#{e.message}）"
-
-    end
   end
 
   def failure

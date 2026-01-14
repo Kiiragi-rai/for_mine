@@ -11,8 +11,8 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
     @user = User.from_line(request.env["omniauth.auth"])
 
     if @user.persisted?
-      sign_in_and_redirect @user, event: :authentication
-      set_flash_message(:notice, :success, kind: "LINE") if is_navigational_format?
+      sign_in  @user, event: :authentication
+      redirect_to user_root_path, notice: "LINEログイン成功"
     else
       session["devise.line_data"] = request.env["omniauth.auth"].except("extra")
       redirect_to new_user_registration_url, alert: @user.errors.full_messages.join("\n")

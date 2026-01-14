@@ -33,11 +33,7 @@ Rails.application.routes.draw do
   devise_scope :user do
     delete "logout", to: "devise/sessions#destroy", as: :logout
   end
-  # devise_for :users, controllers: {
-  #   sessions: 'users/sessions',
-  #   registrations: 'users/registrations'
-  #   # root: 'top_pages#index'
-  # }
+
   Rails.logger.info "===== ROUTES FILE LOADED ====="
 
   resources :anniversaries, only: %i[index show new create edit update destroy]
@@ -46,6 +42,8 @@ Rails.application.routes.draw do
 
   mount LetterOpenerWeb::Engine, at: "/letter_opener" if Rails.env.development?
   
-  # Defines the root path route ("/")
-  # root "posts#index"
+  if Rails.env.development?
+    post "/dev_login", to: "dev_sessions#create"
+    delete "/dev_logout", to: "dev_sessions#destroy"
+  end
 end

@@ -29,7 +29,7 @@
         <%= link_to "ホーム", user_root_path, {class: "navbar-brand"}%>
         <!-- link_to は基本「最後に options を1つ」なので、data: と class: を 同じハッシュにまとめる必要があります。 -->
         <%= link_to "ログアウト",
-        destroy_user_session_path,
+        logout_path,
         class: "navbar-brand",
         data: { turbo_method: :delete } %>
       

@@ -2,7 +2,10 @@
 
 class Users::SessionsController < Devise::SessionsController
   # before_action :configure_sign_in_params, only: [:create]
-
+  def destroy
+    reset_session
+    redirect_to root_path, info: "ログアウトしました"
+  end
   # GET /resource/sign_in
   # def new
   #   super
@@ -18,7 +21,11 @@ class Users::SessionsController < Devise::SessionsController
   #   super
   # end
 
-  # protected
+  protected
+#  
+  def after_sign_out_path_for(_resource_or_scope)
+    root_path
+  end
 
   # If you have extra params to permit, append them to the sanitizer.
   # def configure_sign_in_params

@@ -15,14 +15,20 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
       redirect_to user_root_path, notice: "LINEログイン成功"
     else
       session["devise.line_data"] = request.env["omniauth.auth"].except("extra")
-    rescue OAuth2::Error => e
-      redirect_to rootpath, alert: "LINE認証に失敗しました（#{e.message}）"
+      redirect_to root_path, alert: @user.errors.full_messages.join("\n")
+    end
   end
 
   def failure
     redirect_to root_path, alert: "認証に失敗しました。再度お試しください。"
   end
 
+  private
+
+def after_omniauth_failure_path_for(_scope)
+  root_path
+end
+end
   # More info at:
   # https://github.com/heartcombo/devise#omniauth
 
@@ -42,4 +48,4 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
   # def after_omniauth_failure_path_for(scope)
   #   super(scope)
   # end
-end
+

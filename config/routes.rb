@@ -22,11 +22,7 @@ Rails.application.routes.draw do
   end
 
 # LINE ログインの準備ができたらOFFに
-  devise_for :users,{
-    # sessons: "user/sessions"
-    skip: [:registrations, :passwords, :sessions],
-    omniauth_callbacks: "users/omniauth_callbacks"
-  }
+  devise_for :users, controllers: {omniauth_callbacks: "users/omniauth_callbacks"}
   # devise_for :users, controllers: {
   #   sessions: 'users/sessions',
   #   registrations: 'users/registrations'

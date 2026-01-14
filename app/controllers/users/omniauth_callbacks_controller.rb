@@ -3,14 +3,12 @@
 class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
 
   def line
-    @user = User.from_line(request.env["omniauth.auth"])
-
+    auth = request.env["omniauth.auth"]
+    @user = callback(auth)
     if @user.persisted?
-      sign_in(@user)
-      redirect_to user_root_path, notice: "LINEログイン成功"
+      success_login
     else
-      session["devise.line_data"] = request.env["omniauth.auth"].except("extra")
-      redirect_to root_path, alert: @user.errors.full_messages.join("\n")
+      not_success_login(auth)
     end
   end
 
@@ -20,9 +18,19 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
 
   private
 
-def after_omniauth_failure_path_for(_scope)
-  root_path
-end
+  def callback(auth)
+     User.from_line(auth)
+  end
+
+  def success_login
+      sign_in(@user)
+      redirect_to user_root_path, notice: "LINEログイン成功"
+  end
+
+  def not_success_login(auth)
+    session["devise.line_data"] = auth.except("extra")
+    redirect_to root_path, alert: @user.errors.full_messages.join("\n")
+  end
 end
 
 

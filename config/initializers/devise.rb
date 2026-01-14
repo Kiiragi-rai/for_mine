@@ -1,4 +1,7 @@
 # frozen_string_literal: true
+if ENV["OMNIAUTH_FULL_HOST"].present?
+  OmniAuth.config.full_host = ENV["OMNIAUTH_FULL_HOST"]
+end
 
 # Assuming you have not yet modified this file, each configuration option below
 # is set to its default value. Note that some are commented out while others
@@ -305,13 +308,15 @@ Devise.setup do |config|
   config.responder.error_status = :unprocessable_content
   config.responder.redirect_status = :see_other
 
-  config.omniauth :line, ENV['LINE_CHANNEL_ID'], ENV['LINE_CHANNEL_SECRET'],
+  config.omniauth :line, ENV['LINE_CHANNEL_ID'], ENV['LINE_CHANNEL_SECRET']
   {
     scope: "profile openid",
     prompt: "consent"
     
   }
-
+  #開発用
+  
+  # ,redirect_uri: ENV['LINE_LOGIN_REDIRECT_URI']
   # ==> Configuration for :registerable
 
   # When set to false, does not sign a user in automatically after their password is

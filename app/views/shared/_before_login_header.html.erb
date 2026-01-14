@@ -26,7 +26,7 @@
         </div>
       </div>
       <div class="ms-auto d-flex gap-2">
-            <%= link_to "ログイン", user_line_omniauth_authorize_path, {class: "nav-link"} %>
+            <%= button_to "ログイン", user_line_omniauth_authorize_path,method: :post, form: { data: {turbo: false}} %>
         </div>    
       </div>
     </div>

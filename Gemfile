@@ -63,6 +63,7 @@ group :development do
   gem "web-console"
   gem 'letter_opener_web'
   gem "annotate"
+  gem 'rubocop', require: false
 end
 
 group :test do

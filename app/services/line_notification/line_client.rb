@@ -1,5 +1,5 @@
 module LineNotification
-    class LineClient
+  class LineClient
       DEFAULT_TEXT = "今日が記念日だぜ"
 
       # def send_message(_uid, message_contents: DEFAULT_TEXT)

@@ -1,5 +1,4 @@
 Rails.application.routes.draw do
-
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
   # Reveal health status on /up that returns 200 if the app boots with no exceptions, otherwise 500.
@@ -15,13 +14,13 @@ Rails.application.routes.draw do
   authenticated :user do
     root to: "home_pages#index", as: :user_root
   end
-  
+
   # ログイン前のルートページ
   unauthenticated do
     root to: "top_pages#top"
   end
 
-# LINE ログインの準備ができたらOFFに
+  # LINE ログインの準備ができたらOFFに
   # devise_for :users, controllers: {omniauth_callbacks: "users/omniauth_callbacks"}
 
 
@@ -38,10 +37,10 @@ Rails.application.routes.draw do
 
   resources :anniversaries, only: %i[index show new create edit update destroy]
   # has_oneなのでresorce
-  resource :partner 
+  resource :partner
 
   mount LetterOpenerWeb::Engine, at: "/letter_opener" if Rails.env.development?
-  
+
   if Rails.env.development?
     post "/dev_login", to: "dev_sessions#create"
     delete "/dev_logout", to: "dev_sessions#destroy"

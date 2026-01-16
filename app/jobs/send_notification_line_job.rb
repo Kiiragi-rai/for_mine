@@ -9,17 +9,14 @@ class SendNotificationLineJob < ApplicationJob
     anniversaries = Anniversary.notification_target_get(target_today)
     Rails.logger.info "@annversariesの中身 #{anniversaries}"
 
-   
     return if anniversaries.blank?
 
     anniversaries.each do |anniversary|
       uid = anniversary.user.uid
 
-
       next if uid.blank?
 
-      LineNotification::LineClient.send_message(uid: uid,text_messages: DEFAULT_TEXT)
+      LineNotification::LineClient.send_message(uid: uid, text_messages: DEFAULT_TEXT)
     end
-    end
+  end
 end
- 

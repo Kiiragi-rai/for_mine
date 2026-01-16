@@ -3,7 +3,7 @@ module LineNotification
       DEFAULT_TEXT = "今日が記念日だぜ"
 
       # def send_message(_uid, message_contents: DEFAULT_TEXT)
-      def self.send_message(uid:,text_messages: DEFAULT_TEXT)
+      def self.send_message(uid:, text_messages: DEFAULT_TEXT)
         push_request = Line::Bot::V2::MessagingApi::PushMessageRequest.new(
       to: uid,
       messages: [
@@ -17,7 +17,6 @@ module LineNotification
       status == 200
 
       Rails.logger.info "[LINENOTICATION:LINECLIENT] status=#{status}"
-
       end
 
       private
@@ -27,6 +26,5 @@ module LineNotification
           channel_access_token: ENV.fetch("LINE_MESSAGING_CHANNEL_ACCESS_TOKEN")
         )
       end
-
   end
 end

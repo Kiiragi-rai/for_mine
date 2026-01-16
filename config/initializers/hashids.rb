@@ -1,6 +1,6 @@
 Hashid::Rails.configure do |config|
   # The salt to use for generating hashid. Prepended with pepper (table name).
-  config.salt = ENV['HASHIDS_SALT']
+  config.salt = ENV["HASHIDS_SALT"]
   # config.pepper = table_name
 
   # The minimum length of generated hashids

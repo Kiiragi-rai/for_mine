@@ -1,7 +1,6 @@
 # frozen_string_literal: true
 
 class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
-
   def line
     auth = request.env["omniauth.auth"]
     @user = callback(auth)
@@ -32,5 +31,3 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
     redirect_to root_path, alert: @user.errors.full_messages.join("\n")
   end
 end
-
-

@@ -3,24 +3,22 @@ class AnniversariesController < ApplicationController
 
     def index
         @anniversaries = current_user.anniversaries
-    
-
     end
 
     def show
         @anniversary = current_user.anniversaries.find_by_hashid(params[:id])
     end
 
-    def new 
+    def new
         @anniversary = Anniversary.new
     end
 
-    def create 
+    def create
         @anniversary = current_user.anniversaries.build(anniversary_params)
-        if @anniversary.save 
-            redirect_to anniversaries_path ,success: '記念日を登録しました'
+        if @anniversary.save
+            redirect_to anniversaries_path, success: "記念日を登録しました"
         else
-        flash.now[:danger] = '記念日登録に失敗しました。再度入力して下さい' 
+        flash.now[:danger] = "記念日登録に失敗しました。再度入力して下さい"
         render :new, status: :unprocessable_content
         end
     end
@@ -33,7 +31,7 @@ class AnniversariesController < ApplicationController
         @anniversary = current_user.anniversaries.find_by_hashid(params[:id])
         p @anniversary
         if @anniversary.update(anniversary_params)
-            redirect_to anniversaries_path,success: "記念日を更新しました"
+            redirect_to anniversaries_path, success: "記念日を更新しました"
         else
             flash.now[:danger] = "記念日更新に失敗しました"
             render :edit, status: :unprocessable_content
@@ -47,8 +45,8 @@ class AnniversariesController < ApplicationController
 
 
 
-    private 
+    private
     def anniversary_params
-        params.require(:anniversary).permit(:title, :anniversary_date,:notification_on)
+        params.require(:anniversary).permit(:title, :anniversary_date, :notification_on)
     end
 end

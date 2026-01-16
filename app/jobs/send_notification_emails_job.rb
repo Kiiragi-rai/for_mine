@@ -16,11 +16,9 @@ class SendNotificationEmailsJob < ApplicationJob
       Rails.logger.info "[SendNotificationEmailsJob] sending to=#{email} anniversary_id=#{anniversary.id} anniversary_date=#{your_anniversary_title}"
 
 
-      NotificationMailer.send_notification_mail(email,your_anniversary_title).deliver_now
+      NotificationMailer.send_notification_mail(email, your_anniversary_title).deliver_now
       Rails.logger.info "[SendNotificationEmailsJob] sending to=#{email} anniversary_id=#{anniversary.id} anniversary_date=#{your_anniversary_title}"
-
     end
     Rails.logger.info "[SendNotificationEmailsJob] done"
-
   end
 end

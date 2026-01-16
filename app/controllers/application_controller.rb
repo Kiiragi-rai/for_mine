@@ -5,7 +5,7 @@ class ApplicationController < ActionController::Base
 
   add_flash_types :success, :danger
 
-  
+
   def after_sign_in_path_for(resource)
     root_path
   end

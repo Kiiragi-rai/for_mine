@@ -12,7 +12,7 @@ Rails.application.configure do
   config.eager_load = false
 
   config.hosts << "gideon-scaldic-nonreproductively.ngrok-free.dev"
-                   
+
   # Show full error reports.
   config.consider_all_requests_local = true
 

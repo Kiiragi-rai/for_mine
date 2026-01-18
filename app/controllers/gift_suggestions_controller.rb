@@ -8,7 +8,6 @@ class GiftSuggestionsController < ApplicationController
         @contents = session.delete(:gift_contents)
   end
 
-
   def create
     if Rails.env.production?
     partner = current_user.partner
@@ -24,8 +23,7 @@ class GiftSuggestionsController < ApplicationController
       avoidances: partner.turn_to_string(partner.avoidances),
       hobbies: partner.turn_to_string(partner.hobbies)
     }
-
-    Rails.logger.info "#{partner}"
+ 
     prompt = <<-PROMPT
 
     #{partner_info.to_json}を元におすすめのプレゼント3つとその理由を教えてください。

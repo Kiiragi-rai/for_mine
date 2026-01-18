@@ -18,11 +18,11 @@ module GiftSuggestions
           temperature: 0.7
         }
       )
-      Rails.logger.info("response.class=#{response.class}")
-      Rails.logger.info("response.inspect=#{response.inspect}")
+      # Rails.logger.info("response.class=#{response.class}")
+      # Rails.logger.info("response.inspect=#{response.inspect}")
 
       raw_response = response.dig("choices", 0, "message", "content")
-      Rails.logger.info " raw_responseの中身だよ#{raw_response}"
+      # Rails.logger.info " raw_responseの中身だよ#{raw_response}"
       JSON.parse(raw_response)
     end
   end

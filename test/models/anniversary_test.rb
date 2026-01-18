@@ -4,7 +4,6 @@
 #
 #  id               :bigint           not null, primary key
 #  anniversary_date :date             not null
-#  notification_on  :boolean          default(FALSE), not null
 #  title            :string           not null
 #  created_at       :datetime         not null
 #  updated_at       :datetime         not null

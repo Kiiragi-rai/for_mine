@@ -4,7 +4,6 @@
 #
 #  id               :bigint           not null, primary key
 #  anniversary_date :date             not null
-#  notification_on  :boolean          default(FALSE), not null
 #  title            :string           not null
 #  created_at       :datetime         not null
 #  updated_at       :datetime         not null
@@ -22,6 +21,9 @@ class Anniversary < ApplicationRecord
     include Hashid::Rails
 
     belongs_to :user
+    has_one :notification_setting
+
+    
     validates :title, presence:  { message: "を入力してね" }
     validates :anniversary_date, presence:  { message: "を入力してね" }
 

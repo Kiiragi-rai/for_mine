@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.2].define(version: 2026_01_18_144743) do
+ActiveRecord::Schema[7.2].define(version: 2026_01_18_164847) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -20,7 +20,6 @@ ActiveRecord::Schema[7.2].define(version: 2026_01_18_144743) do
     t.date "anniversary_date", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.boolean "notification_on", default: false, null: false
     t.index ["user_id"], name: "index_anniversaries_on_user_id"
   end
 
@@ -33,6 +32,18 @@ ActiveRecord::Schema[7.2].define(version: 2026_01_18_144743) do
     t.string "status"
     t.text "error_message"
     t.index ["user_id"], name: "index_gift_suggestions_on_user_id"
+  end
+
+  create_table "notification_settings", force: :cascade do |t|
+    t.bigint "anniversary_id", null: false
+    t.boolean "is_enabled", default: false, null: false
+    t.date "start_on"
+    t.time "notification_time"
+    t.integer "frequency_days", default: 1, null: false
+    t.date "last_sent_on"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["anniversary_id"], name: "index_notification_settings_on_anniversary_id", unique: true
   end
 
   create_table "partners", force: :cascade do |t|
@@ -63,5 +74,6 @@ ActiveRecord::Schema[7.2].define(version: 2026_01_18_144743) do
 
   add_foreign_key "anniversaries", "users"
   add_foreign_key "gift_suggestions", "users"
+  add_foreign_key "notification_settings", "anniversaries"
   add_foreign_key "partners", "users"
 end

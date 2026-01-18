@@ -5,7 +5,7 @@ class GiftSuggestionsController < ApplicationController
 
 
   def new
-    @contens = nil
+    @contents = nil
   end
     「#{ partner_info }」を元におすすめプレゼントとそれを提案した理由をして下さい。
   #  関係性は#{partner.relation},年齢は#{partner.age},好きなものは#{partner.likes.join(",")}で、これを元に
@@ -15,8 +15,8 @@ class GiftSuggestionsController < ApplicationController
   def create
     partner = current_user.partner
 
-    Rails.logger.info "#{partner_info}"
-    prompt <<-PROMPT
+    Rails.logger.info "#{partner}"
+    prompt = <<-PROMPT
 
     男性向けのプレゼントを２つ提案してください。あとその理由も。
   

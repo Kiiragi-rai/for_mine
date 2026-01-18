@@ -1,6 +1,6 @@
 module GiftSuggestions
   class Generate
-    def initializer(prompt)
+    def initialize(prompt)
       @prompt = prompt
       Rails.logger.info "promptの中身だよん#{@prompt}"
     end
@@ -18,8 +18,10 @@ module GiftSuggestions
           temperature: 0.7
         }
       )
+      Rails.logger.info("response.class=#{response.class}")
+      Rails.logger.info("response.inspect=#{response.inspect}")
 
-      raw_response = response.dig("choise", 0, "message", "content")
+      raw_response = response.dig("choices", 0, "message", "content")
       Rails.logger.info " raw_responseの中身だよ#{raw_response}"
       JSON.parse(raw_response)
     end

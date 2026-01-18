@@ -15,25 +15,37 @@ class GiftSuggestionsController < ApplicationController
   def create
     partner = current_user.partner
 
+    partner_info = {
+      sex: partner.sex.presence || "未入力",
+      age: partner.age.presence || "未入力",
+      job: partner.job.presence || "未入力",
+      relation: partner.relation || "未入力",
+      budget_min: partner.with_yen(partner.budget_min)
+      budget_max: partner.with_yen(partner.budget_max)
+      favorites: partner.turn_to_string(partner.favorites),
+      avoidances: partner.turn_to_string(partner.avoidances),
+      likes: partner.turn_to_string(partner.favorites)
+  }
+
     Rails.logger.info "#{partner}"
     prompt = <<-PROMPT
 
-    男性向けのプレゼントを２つ提案してください。あとその理由も。
+    #{partner_info.to_json}を元におすすめのプレゼント3つとその理由を教えてください。
+    以下のJSON形式で、キーや値の型も完全に守って応答してください。
   
-
- 
     {
       "presentSuggestion": [
         { "name": "プレゼント提案1", "reason": "プレゼント提案１の理由"},
-        { "name": "プレゼント提案2", "reason": "プレゼント提案2の理由"}
+        { "name": "プレゼント提案2", "reason": "プレゼント提案2の理由"},
+        { "name": "プレゼント提案3", "reason": "プレゼント提案3の理由"}
        ]
     }
     PROMPT
 
-   
-
+  
     @contents = GiftSuggestions::Generate.new(prompt).call
 
     render :new, status: :ok
   end
 end
+

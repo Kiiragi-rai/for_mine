@@ -3,6 +3,7 @@ module GiftSuggestions
     
     def initializer(prompt)
       @prompt = prompt
+      Rails.logger.info "promptの中身だよん#{@prompt}"
     end
 
     def call 
@@ -20,7 +21,8 @@ module GiftSuggestions
       )
 
       raw_response = response.dig("choise", 0, "message", "content")
-      @content = JSON.parse(raw_response)
+      Rails.logger.info " raw_responseの中身だよ#{raw_response}"
+      JSON.parse(raw_response)
     end
   end
 end

@@ -23,7 +23,7 @@ class GiftSuggestionsController < ApplicationController
       avoidances: partner.turn_to_string(partner.avoidances),
       hobbies: partner.turn_to_string(partner.hobbies)
     }
- 
+
     prompt = <<-PROMPT
 
     #{partner_info.to_json}を元におすすめのプレゼント3つとその理由を教えてください。

@@ -63,7 +63,7 @@ class Partner < ApplicationRecord
 
         "#{object}円"
       end
-      
+
 
     private
     # 予算（下限）が予算（上限）を超えないように
@@ -84,6 +84,4 @@ class Partner < ApplicationRecord
              .map(&:strip)
              .reject(&:blank?)
       end
-
-
 end

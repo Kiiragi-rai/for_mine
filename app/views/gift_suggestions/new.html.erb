@@ -1,2 +1,41 @@
-<h1>GiftSuggestions#new</h1>
-<p>Find me in app/views/gift_suggestions/new.html.erb</p>
+
+<div class="container mx-auto px-4 py-8">
+    <h1 class=" font-bold text-center mb-6">プレゼント提案</h1>
+  
+    <%= form_with url: gift_suggestions_path, data: { turbo: false } do |form| %>
+  
+      <div class="flex items-center justify-center">
+        <%= form.submit "提案", id: "recipe-submit-button",class: "bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline cursor-pointer" %>
+      </div>
+    <% end %>
+  </div>
+  <div id="loading-indicator" style="display:none" class="text-center mt-4">
+
+    <p class="text-gray-600">AIがレシピを考えています...</p>
+  </div>
+
+  <% if @contents %>
+
+<div class="container mx-auto px-4 py-8 max-w-2xl">
+    <h1 class="text-3xl font-bold text-center mb-6">present提案</h1>
+  
+    <div class="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4">
+        
+  
+      <!-- 材料リストを表示 -->
+      <h3 class="text-xl font-semibold mb-2">提案</h3>
+      <ul class="list-disc list-inside mb-4">
+        <% @contents['presentSuggestion'].each do |suggestion| %>
+          <li><%= suggestion['name'] %> - <%= suggestion['reason'] %></li>
+        <% end %>
+      </ul>
+    </div>
+  
+    <div class="text-center mt-6">
+      <%= link_to "もう一度試す", root_path, class: "text-blue-500 hover:text-blue-800" %>
+    </div>
+  </div>
+
+
+  
+  <% end %>

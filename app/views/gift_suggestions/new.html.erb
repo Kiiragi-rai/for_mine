@@ -1,0 +1,29 @@
+<div class="container">
+    <h1 class="text-center">プレゼント提案</h1>
+  
+    <%= form_with url: gift_suggestions_path, data: { turbo: false } do |form| %>
+  
+      <div class="flex mb-5 mt-5 text-center">
+        <%= form.submit "提案", id: "gift-submit-button",class: "rounded" %>
+      </div>
+    <% end %>
+  </div>
+  <div id="loading-indicator" style="display:none" class="">
+    <p class="">AIがレシピを考えています...</p>
+  </div>
+
+  <% if @contents %>
+  <div class="container border mt-5">
+      <div class="">  
+        <h3 class="">提案</h3>
+        <ul class="">
+          <% @contents['presentSuggestions'].each do |presentSuggestion| %>
+            <li><%= presentSuggestion['name'] %> - <%= presentSuggestion['reason'] %></li>
+          <% end %>
+        </ul>
+      </div>
+    </div>
+  <% end %>
+
+  
+  

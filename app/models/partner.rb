@@ -52,6 +52,19 @@ class Partner < ApplicationRecord
         super(normalize_list(value))
       end
 
+
+
+      def turn_to_string(object)
+         object.join("、").presence || "未入力"
+      end
+
+      def with_yen(object)
+        return "未入力" if object.blank?
+
+        "#{object}円"
+      end
+
+
     private
     # 予算（下限）が予算（上限）を超えないように
     def budget_max_is_greater_than_budget_min

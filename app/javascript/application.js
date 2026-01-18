@@ -5,7 +5,7 @@ import * as bootstrap from "bootstrap"
 
 document.addEventListener("DOMContentLoaded", () => {
     const form = document.querySelector("form");
-    const submitButton = document.getElementById("recipe-submit-button");
+    const submitButton = document.getElementById("gift-submit-button");
     const loadingIndicator = document.getElementById("loading-indicator");
   
     if (form) {

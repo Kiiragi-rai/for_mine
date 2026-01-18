@@ -4,7 +4,7 @@
     <%= form_with url: gift_suggestions_path, data: { turbo: false } do |form| %>
   
       <div class="flex mb-5 mt-5 text-center">
-        <%= form.submit "提案", id: "recipe-submit-button",class: "rounded" %>
+        <%= form.submit "提案", id: "gift-submit-button",class: "rounded" %>
       </div>
     <% end %>
   </div>
@@ -15,11 +15,10 @@
   <% if @contents %>
   <div class="container border mt-5">
       <div class="">  
-        <!-- 材料リストを表示 -->
         <h3 class="">提案</h3>
         <ul class="">
-          <% @contents['presentSuggestion'].each do |suggestion| %>
-            <li><%= suggestion['name'] %> - <%= suggestion['reason'] %></li>
+          <% @contents['presentSuggestions'].each do |presentSuggestion| %>
+            <li><%= presentSuggestion['name'] %> - <%= presentSuggestion['reason'] %></li>
           <% end %>
         </ul>
       </div>

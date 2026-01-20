@@ -35,12 +35,20 @@ class AnniversariesController < ApplicationController
 
     def edit
         @anniversary = current_user.anniversaries.find_by_hashid(params[:id])
+        @form = AnniversaryNotificationSettingForm.new(
+            user: current_user,
+            anniversary: @anniversary
+          )
     end
 
     def update
         @anniversary = current_user.anniversaries.find_by_hashid(params[:id])
-        p @anniversary
-        if @anniversary.update(anniversary_params)
+        @form = AnniversaryNotificationSettingForm.new(
+            user: current_user,
+            anniversary: @anniversary,
+            **anniversary_notification_setting_params
+          )
+        if @form.save
             redirect_to anniversaries_path, success: "記念日を更新しました"
         else
             flash.now[:danger] = "記念日更新に失敗しました"
@@ -57,12 +65,9 @@ class AnniversariesController < ApplicationController
 
     private
 
-    def anniversary_params
-        params.require(:anniversary).permit(:title, :anniversary_date)
-    end
 
     def anniversary_notification_setting_params
         params.require(:anniversary_notification_setting_form).permit(:title, :anniversary_date, :is_enabled)
     end
 end
-# , :notification_on
+

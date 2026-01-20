@@ -21,7 +21,7 @@ class Anniversary < ApplicationRecord
     include Hashid::Rails
 
     belongs_to :user
-    has_one :notification_setting
+    has_one :notification_setting, dependent: :destroy
 
 
     validates :title, presence:  { message: "を入力してね" }

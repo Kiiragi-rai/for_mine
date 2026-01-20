@@ -10,7 +10,7 @@ class AnniversaryNotificationSettingForm
 
 
 
-  def initialize(user:, anniversary: nil,   **attrs)
+  def initialize(user:, anniversary: nil,**attrs)
     @user = user
     @anniversary = anniversary || user.anniversaries.build
     @notification_setting =  @anniversary.notification_setting || @anniversary.build_notification_setting
@@ -20,7 +20,10 @@ class AnniversaryNotificationSettingForm
     defaults ={
       title: @anniversary.title,
       anniversary_date: @anniversary.anniversary_date,
-      is_enabled: @notification_setting.is_enabled
+      is_enabled: @notification_setting.is_enabled,
+      notification_time: @notification_setting.notification_time,
+      start_on: @notification_setting.start_on,
+      frequency_days: @notification_setting.frequency_days
     }
 
     super(defaults.merge(attrs))
@@ -49,5 +52,8 @@ class AnniversaryNotificationSettingForm
     anniversary.title = title
     anniversary.anniversary_date = anniversary_date
     notification_setting.is_enabled = is_enabled
+    notification_setting.frequency_days = 
+    notification_setting.start_on = start_on
+    notification_setting.notification_time = notification_time
   end
 end

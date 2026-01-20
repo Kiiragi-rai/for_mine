@@ -1,4 +1,7 @@
-<%= form_with model: form ,url: anniversaries_path, method: :post do |f| %>
+<% form_with_options = form.anniversary.persisted? ?
+  { url: anniversary_path(form.anniversary), method: :patch } :
+  { url: anniversary_path, method: :post} %>
+<%= form_with model: form ,url: anniversaries_path, **form_with_options do |f| %>
   <%= render 'shared/error_messages', object: f.object %>
   
   <div class="mb-3">
@@ -18,17 +21,35 @@
             <p>通知設定</p>
           </div>
           <div class="col">
-            <%= f.radio_button :notification_on, true %>
-            <%= f.label :notification_on, "ON" %>
+            <%= f.radio_button :is_enabled, true %>
+            <%= f.label :is_enabled, "ON" %>
           </div>
           <div class="col">
-            <%= f.radio_button :notification_on, false %>
-            <%= f.label :notification_on, "OFF" %>
+            <%= f.radio_button :is_enabled, false %>
+            <%= f.label :is_enabled, "OFF" %>
           </div>
         </div>
       </div>
     </div>
   </div>
 
+  <div>
+
+  </div>
+
   <%= f.submit submit_label, class: "btn btn-primary" %>
 <% end %>  
+
+
+// #
+// #  id                :bigint           not null, primary key
+// #  frequency_days    :integer          default(1), not null
+// #  is_enabled        :boolean          default(FALSE), not null
+// #  last_sent_on      :date
+// #  notification_time :time
+// #  start_on          :date
+// #  created_at        :datetime         not null
+// #  updated_at        :datetime         not null
+// #  anniversary_id    :bigint           not null
+// #
+// # Indexes

@@ -47,6 +47,7 @@ class AnniversariesController < ApplicationController
 
     private
     def anniversary_params
-        params.require(:anniversary).permit(:title, :anniversary_date, :notification_on)
+        params.require(:anniversary).permit(:title, :anniversary_date)
     end
 end
+# , :notification_on

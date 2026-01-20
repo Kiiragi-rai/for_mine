@@ -10,7 +10,10 @@ class AnniversariesController < ApplicationController
     end
 
     def new
-        @anniversary = Anniversary.new
+        @user = current_user
+        @anniversary = current_user.anniversaries.build
+        
+        @form = AnniversaryNotificationSetting.new
     end
 
     def create
@@ -21,6 +24,8 @@ class AnniversariesController < ApplicationController
         flash.now[:danger] = "記念日登録に失敗しました。再度入力して下さい"
         render :new, status: :unprocessable_content
         end
+
+        @form = AnniversaryNotificationSetting.new(user: @user, anniverary: @anniversary,**anniverary_notification_setting_params)
     end
 
     def edit
@@ -48,6 +53,10 @@ class AnniversariesController < ApplicationController
     private
     def anniversary_params
         params.require(:anniversary).permit(:title, :anniversary_date)
+    end
+
+    def nniverary_notification_setting_params
+        params.require(:anniverary_notification_setting).permit(:title, :anniversry_date, :is_enabled)
     end
 end
 # , :notification_on

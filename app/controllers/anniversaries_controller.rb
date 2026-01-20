@@ -9,24 +9,29 @@ class AnniversariesController < ApplicationController
         @anniversary = current_user.anniversaries.find_by_hashid(params[:id])
     end
 
+
     def new
-        @user = current_user
+        Rails.logger.debug params.to_unsafe_h
         @anniversary = current_user.anniversaries.build
-        
-        @form = AnniversaryNotificationSetting.new
-    end
+        @form = AnniversaryNotificationSettingForm.new(user: current_user, anniversary: @anniversary)
+      end
 
     def create
-        @anniversary = current_user.anniversaries.build(anniversary_params)
-        if @anniversary.save
-            redirect_to anniversaries_path, success: "記念日を登録しました"
-        else
-        flash.now[:danger] = "記念日登録に失敗しました。再度入力して下さい"
-        render :new, status: :unprocessable_content
-        end
+        Rails.logger.debug params.to_unsafe_h
+        @anniversary = current_user.anniversaries.build
+        @form = AnniversaryNotificationSettingForm.new(
+          user: current_user,
+          anniversary: @anniversary,
+          **anniversary_notification_setting_params
+        )
 
-        @form = AnniversaryNotificationSetting.new(user: @user, anniverary: @anniversary,**anniverary_notification_setting_params)
+        if @form.save
+          redirect_to anniversaries_path, notice: "記念日を登録しました"
+        else
+          render :new, status: :unprocessable_entity
+        end
     end
+
 
     def edit
         @anniversary = current_user.anniversaries.find_by_hashid(params[:id])
@@ -51,12 +56,13 @@ class AnniversariesController < ApplicationController
 
 
     private
+
     def anniversary_params
         params.require(:anniversary).permit(:title, :anniversary_date)
     end
 
-    def nniverary_notification_setting_params
-        params.require(:anniverary_notification_setting).permit(:title, :anniversry_date, :is_enabled)
+    def anniversary_notification_setting_params
+        params.require(:anniversary_notification_setting_form).permit(:title, :anniversary_date, :is_enabled)
     end
 end
 # , :notification_on

@@ -15,7 +15,9 @@
                 <p class="card-text mb-2">
                   記念日：<%= anniversary.anniversary_date %>
                 </p>
-
+                <p class="card-text mb-0">
+                  通知設定：<%= anniversary.notification_setting.is_enabled ? "ON" : "OFF" %>
+                </p>
                 <% if diff == 0 %>
                 <div class="text-success mt-2">今日は記念日です！</div>
               <% elsif diff < 0 %>
@@ -61,5 +63,5 @@
     
 
   <!-- <p class="card-text mb-0">
-    通知設定： anniversary.notification_on ? "ON" : "OFF" %>
+    通知設定： anniversary.notification_settings.notifiation_on ? "ON" : "OFF" %>
   </p> -->

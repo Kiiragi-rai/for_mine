@@ -15,6 +15,9 @@
                 <p class="card-text mb-2">
                   記念日：<%= anniversary.anniversary_date %>
                 </p>
+                <p class="card-text mb-2">
+                  通知日：<%= anniversary.notification_setting.start_on %>
+                </p>
                 <p class="card-text mb-0">
                   通知設定：<%= anniversary.notification_setting.is_enabled ? "ON" : "OFF" %>
                 </p>

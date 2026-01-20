@@ -11,13 +11,56 @@ class AnniversaryNotificationSettingForm
   attribute :notification_time, :time
   attribute :start_on, :date
 
+
+  validates :title, presence:  { message: "を入力してね" },length: { maximum: 50}
+  validates :anniversary_date, presence:  { message: "を入力してね" }
+  # validates :is_enabled
+  # validates :frequency_days
+  # validates :notification_time
+  # validates :start_on
+
+  validate :start_on_not_before_anniversary
+  validate :anniversary_date_not_after_today
+  validate :not_accept_ten_years_later_start_on
+  
+
+  def start_on_not_before_anniversary
+    return if start_on.blank? || anniversary_date.blank?
+
+    if start_on < anniversary_date
+      errors.add(:start_on, "通知開始日は記念日より前では登録できません")
+    end
+  end
+
+  def anniversary_date_not_after_today
+    return if anniversary_date.blank?
+    today = Date.current
+
+    if anniversary_date > today
+      errors.add(:anniversary_date, "記念日は未来には設定できません")
+    end
+  end
+
+  def not_accept_ten_years_later_start_on
+    return if start_on.blank?
+
+    today = Date.current
+    ten_years_later = today + 10.year
+
+    if start_on > ten_years_later 
+      errors.add(:start_on, "通知開始日は１０年後以降に設定はできません")
+    end
+
+  end
+
+
   def initialize(user:, anniversary: nil,**attrs)
     @user = user
     @anniversary = anniversary || user.anniversaries.build
     @notification_setting =  @anniversary.notification_setting || @anniversary.build_notification_setting
 
 
-
+ #editの時
     defaults ={
       title: @anniversary.title,
       anniversary_date: @anniversary.anniversary_date,

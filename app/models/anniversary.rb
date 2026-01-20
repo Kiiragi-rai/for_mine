@@ -28,4 +28,16 @@ class Anniversary < ApplicationRecord
     validates :anniversary_date, presence:  { message: "を入力してね" }
 
     scope :notification_target_get, ->(date) { where(notification_on: true).where(anniversary_date: date) }
+
+
+    def anniversary_calculate
+      # ゴーr 記念日からどれくらいったか
+      today = Date.current
+     diff =  (anniversary_date - today ).to_i
+     if diff == 0
+        "今日が記念日"
+     else diff < 0 
+        "記念日から#{diff.abs}日経ちました"
+     end
+    end
 end

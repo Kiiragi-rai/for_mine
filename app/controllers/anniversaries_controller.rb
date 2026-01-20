@@ -12,13 +12,13 @@ class AnniversariesController < ApplicationController
 
     def new
         @anniversary = current_user.anniversaries.build
-        @form = AnniversaryNotificationSettingForm.new(user: current_user, anniversary: @anniversary)
+        @form = AnniversaryNotificationSettingForm.new( anniversary: @anniversary)
       end
 
     def create
         @anniversary = current_user.anniversaries.build
         @form = AnniversaryNotificationSettingForm.new(
-          user: current_user,
+          # user: current_user,
           anniversary: @anniversary,
           **anniversary_notification_setting_params
         )
@@ -33,7 +33,7 @@ class AnniversariesController < ApplicationController
     def edit
         @anniversary = current_user.anniversaries.find_by_hashid(params[:id])
         @form = AnniversaryNotificationSettingForm.new(
-            user: current_user,
+            # user: current_user,
             anniversary: @anniversary
           )
     end
@@ -41,7 +41,7 @@ class AnniversariesController < ApplicationController
     def update
         @anniversary = current_user.anniversaries.find_by_hashid(params[:id])
         @form = AnniversaryNotificationSettingForm.new(
-            user: current_user,
+            # user: current_user,
             anniversary: @anniversary,
             **anniversary_notification_setting_params
           )

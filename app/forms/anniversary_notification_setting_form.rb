@@ -2,7 +2,7 @@ class AnniversaryNotificationSettingForm
   include ActiveModel::API
   include ActiveModel::Attributes
 
-  attr_accessor :user, :anniversary, :notification_setting
+  attr_reader :anniversary, :notification_setting
 
   attribute :title, :string
   attribute :anniversary_date, :date
@@ -14,10 +14,7 @@ class AnniversaryNotificationSettingForm
 
   validates :title, presence:  { message: "を入力してね" },length: { maximum: 50}
   validates :anniversary_date, presence:  { message: "を入力してね" }
-  # validates :is_enabled
-  # validates :frequency_days
-  # validates :notification_time
-  # validates :start_on
+  
 
   validate :start_on_not_before_anniversary
   validate :anniversary_date_not_after_today
@@ -54,9 +51,8 @@ class AnniversaryNotificationSettingForm
   end
 
 
-  def initialize(user:, anniversary: nil,**attrs)
-    @user = user
-    @anniversary = anniversary || user.anniversaries.build
+  def initialize( anniversary: nil,**attrs)
+    @anniversary = anniversary
     @notification_setting =  @anniversary.notification_setting || @anniversary.build_notification_setting
 
 

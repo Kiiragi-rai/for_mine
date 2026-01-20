@@ -1,7 +1,7 @@
 <% form_with_options = form.anniversary.persisted? ?
   { url: anniversary_path(form.anniversary), method: :patch } :
-  { url: anniversary_path, method: :post} %>
-<%= form_with model: form ,url: anniversaries_path, **form_with_options do |f| %>
+  { url: anniversaries_path, method: :post} %>
+<%= form_with model: form ,**form_with_options do |f| %>
   <%= render 'shared/error_messages', object: f.object %>
   
   <div class="mb-3">
@@ -34,22 +34,19 @@
   </div>
 
   <div>
-
+    <%= f.select :frequency_days, options_for_select(NotificationSetting.frequency_days.map {|k,v| [k,v]}, f.object.frequency_days) %>
+  </div>
+ 
+  <div>
+    <%= f.select :notification_time,
+    options_for_select((1..23).map { |h| ["%02d:00" % h, "%02d:00" % h] }, f.object.notification_time&.strftime("%H:00")),
+    { include_blank: true }%>
+  </div>
+  <div>
+    <%= f.date_field :start_on %>
   </div>
 
   <%= f.submit submit_label, class: "btn btn-primary" %>
 <% end %>  
 
 
-// #
-// #  id                :bigint           not null, primary key
-// #  frequency_days    :integer          default(1), not null
-// #  is_enabled        :boolean          default(FALSE), not null
-// #  last_sent_on      :date
-// #  notification_time :time
-// #  start_on          :date
-// #  created_at        :datetime         not null
-// #  updated_at        :datetime         not null
-// #  anniversary_id    :bigint           not null
-// #
-// # Indexes

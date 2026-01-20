@@ -7,8 +7,9 @@ class AnniversaryNotificationSettingForm
   attribute :title, :string
   attribute :anniversary_date, :date
   attribute :is_enabled, :boolean
-
-
+  attribute :frequency_days, :integer
+  attribute :notification_time, :time
+  attribute :start_on, :date
 
   def initialize(user:, anniversary: nil,**attrs)
     @user = user
@@ -52,7 +53,7 @@ class AnniversaryNotificationSettingForm
     anniversary.title = title
     anniversary.anniversary_date = anniversary_date
     notification_setting.is_enabled = is_enabled
-    notification_setting.frequency_days = 
+    notification_setting.frequency_days = frequency_days
     notification_setting.start_on = start_on
     notification_setting.notification_time = notification_time
   end

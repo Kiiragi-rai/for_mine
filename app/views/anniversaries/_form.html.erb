@@ -17,18 +17,19 @@
           <div>
             <p>通知設定</p>
           </div>
-          <div class="col">
-            <%= f.radio_button :notification_on, true %>
-            <%= f.label :notification_on, "ON" %>
-          </div>
-          <div class="col">
-            <%= f.radio_button :notification_on, false %>
-            <%= f.label :notification_on, "OFF" %>
-          </div>
+
         </div>
       </div>
     </div>
   </div>
 
   <%= f.submit submit_label, class: "btn btn-primary" %>
-<% end %>
+<% end %>  
+        <!-- <div class="col">
+            f.radio_button :notification_on, true %>
+            = f.label :notification_on, "ON" %>
+          </div>
+          <div class="col">
+            %f.radio_button :notification_on, false %>
+            = f.label :notification_on, "OFF" %>
+          </div> -->

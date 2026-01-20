@@ -9,28 +9,43 @@ class AnniversariesController < ApplicationController
         @anniversary = current_user.anniversaries.find_by_hashid(params[:id])
     end
 
+
     def new
-        @anniversary = Anniversary.new
-    end
+        @anniversary = current_user.anniversaries.build
+        @form = AnniversaryNotificationSettingForm.new( anniversary: @anniversary)
+      end
 
     def create
-        @anniversary = current_user.anniversaries.build(anniversary_params)
-        if @anniversary.save
-            redirect_to anniversaries_path, success: "記念日を登録しました"
+        @anniversary = current_user.anniversaries.build
+        @form = AnniversaryNotificationSettingForm.new(
+          # user: current_user,
+          anniversary: @anniversary,
+          **anniversary_notification_setting_params
+        )
+        if @form.save
+          redirect_to anniversaries_path, notice: "記念日を登録しました"
         else
-        flash.now[:danger] = "記念日登録に失敗しました。再度入力して下さい"
-        render :new, status: :unprocessable_content
+          render :new, status: :unprocessable_entity
         end
     end
 
+
     def edit
         @anniversary = current_user.anniversaries.find_by_hashid(params[:id])
+        @form = AnniversaryNotificationSettingForm.new(
+            # user: current_user,
+            anniversary: @anniversary
+          )
     end
 
     def update
         @anniversary = current_user.anniversaries.find_by_hashid(params[:id])
-        p @anniversary
-        if @anniversary.update(anniversary_params)
+        @form = AnniversaryNotificationSettingForm.new(
+            # user: current_user,
+            anniversary: @anniversary,
+            **anniversary_notification_setting_params
+          )
+        if @form.save
             redirect_to anniversaries_path, success: "記念日を更新しました"
         else
             flash.now[:danger] = "記念日更新に失敗しました"
@@ -46,8 +61,10 @@ class AnniversariesController < ApplicationController
 
 
     private
-    def anniversary_params
-        params.require(:anniversary).permit(:title, :anniversary_date)
+
+
+    def anniversary_notification_setting_params
+        params.require(:anniversary_notification_setting_form).permit(:title, :anniversary_date, :is_enabled, :frequency_days,
+        :notification_time, :start_on)
     end
 end
-# , :notification_on

@@ -1,6 +1,9 @@
-<%= form_with model: anniversary do |f| %>
+<% form_with_options = form.anniversary.persisted? ?
+  { url: anniversary_path(form.anniversary), method: :patch } :
+  { url: anniversaries_path, method: :post} %>
+<%= form_with model: form ,**form_with_options do |f| %>
   <%= render 'shared/error_messages', object: f.object %>
-
+  
   <div class="mb-3">
     <%= f.label :title, "タイトル" %>
     <%= f.text_field :title, class: "form-control" %>
@@ -17,19 +20,33 @@
           <div>
             <p>通知設定</p>
           </div>
-
+          <div class="col">
+            <%= f.radio_button :is_enabled, true %>
+            <%= f.label :is_enabled, "ON" %>
+          </div>
+          <div class="col">
+            <%= f.radio_button :is_enabled, false %>
+            <%= f.label :is_enabled, "OFF" %>
+          </div>
         </div>
       </div>
     </div>
   </div>
 
+  <div>
+    <%= f.select :frequency_days, options_for_select(NotificationSetting.frequency_days.map {|k,v| [k,v]}, f.object.frequency_days) %>
+  </div>
+ 
+  <div>
+    <%= f.select :notification_time,
+    options_for_select((1..23).map { |h| ["%02d:00" % h, "%02d:00" % h] }, f.object.notification_time&.strftime("%H:00")),
+    { include_blank: true }%>
+  </div>
+  <div>
+    <%= f.date_field :start_on %>
+  </div>
+
   <%= f.submit submit_label, class: "btn btn-primary" %>
 <% end %>  
-        <!-- <div class="col">
-            f.radio_button :notification_on, true %>
-            = f.label :notification_on, "ON" %>
-          </div>
-          <div class="col">
-            %f.radio_button :notification_on, false %>
-            = f.label :notification_on, "OFF" %>
-          </div> -->
+
+

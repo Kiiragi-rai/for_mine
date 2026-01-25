@@ -16,27 +16,27 @@ class AnniversaryNotificationSettingForm
   validates :anniversary_date, presence:  { message: "を入力してね" }
   
 
-  validate :start_on_not_before_anniversary
-  validate :anniversary_date_not_after_today
+  # validate :start_on_not_before_anniversary
+  # validate :anniversary_date_not_after_today
   validate :not_accept_ten_years_later_start_on
   
 
-  def start_on_not_before_anniversary
-    return if start_on.blank? || anniversary_date.blank?
+  # def start_on_not_before_anniversary
+  #   return if start_on.blank? || anniversary_date.blank?
 
-    if start_on < anniversary_date
-      errors.add(:start_on, "通知開始日は記念日より前では登録できません")
-    end
-  end
+  #   if start_on > anniversary_date
+  #     errors.add(:start_on, "通知開始日は記念日より前にしか")
+  #   end
+  # end
 
-  def anniversary_date_not_after_today
-    return if anniversary_date.blank?
-    today = Date.current
+  # def anniversary_date_not_after_today
+  #   return if anniversary_date.blank?
+  #   today = Date.current
 
-    if anniversary_date > today
-      errors.add(:anniversary_date, "記念日は未来には設定できません")
-    end
-  end
+  #   if anniversary_date > today
+  #     errors.add(:anniversary_date, "記念日は未来には設定できません")
+  #   end
+  # end
 
   def not_accept_ten_years_later_start_on
     return if start_on.blank?

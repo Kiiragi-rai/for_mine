@@ -1,57 +1,42 @@
-# module LineNotification
-#   class NotificationGet
+module LineNotification
+  class NotificationGet
   
-#     def setting
-#       sql= <<~SQL
-#       SELECT 
-#         u.id AS user_id,
-#         u.uid,
-#         ns.id 
-#         FROM anniversaries a
+    def setting
+      sql= <<~SQL
+      SELECT 
+        u.id AS user_id,
+        u.uid,
+        ns.id 
+        FROM anniversaries a
 
-#         ns.notificaiton_time ,
-#         ns.notification_date,
-
-
-#         INNER JOIN users u 
-#         ON a.user_id = u.id
-#         INNER JOIN notification_settings ns 
-#         ON a.id = ns.anniversary_id
-#         WHERE 
-#           ns.is_enabled = true
-#           AND 
+        ns.notificaiton_time ,
+        ns.notification_date,
 
 
-#           ns.start_on <= CURRENT_DATE
-#           AND
-#           としまたぎ閏年処理
+        INNER JOIN users u 
+        ON a.user_id = u.id
+        INNER JOIN notification_settings ns 
+        ON a.id = ns.anniversary_id
+        WHERE 
+          ns.is_enabled = true
+          AND 
+          ns.start_on <= CURRENT_DATE
 
-#           currentdate が12/31で記念日が１/1の時に問題が出る
-#           # 今年に合わせた記念日をつくってる
-
-#           case when  = 1/1の時は
-    
-#           end
-#           make_date(
-#             CAST(EXTRACT(YEAR FROM CURRENT_DATE) AS int),
-#             CAST(EXTRACT(MONTH FROM a.anniversary_date) AS int),
-#             CAST(EXTRACT(DAY FROM a.anniversary_date) AS int)
-#           ) >= CURRENT_DATE
+          AND
+          CURRENT_DATE  BETWEEN ns.start_on and ns.end_on
 
         
-#           AND
-#           EXTRACT(HOUR FROM ns.notification_time) = EXTRACT(HOUR FROM CURRENT_TIME + INTERVAL '1 hour')
+          AND
+          EXTRACT(HOUR FROM ns.notification_time) = EXTRACT(HOUR FROM CURRENT_TIME + INTERVAL '1 hour')
 
-#           AND 
-#           (ns.last_sent_on IS NULL 
-#           OR 
-#           ns.frequency_days <= ( CURRENT_DATE - ns.last_sent_on )
-#           )
-
-
+          AND 
+          (ns.last_sent_on IS NULL 
+          OR 
+          ns.frequency_days <= ( CURRENT_DATE - ns.last_sent_on )
+          )
         
-#       SQL
-# # 閏年だけ書く
+      SQL
+# 閏年だけ書く
 
 
 #       result = ActiveRecord::Base.connection.exec_query(

@@ -9,19 +9,23 @@ module LineNotification
         ns.id 
         FROM anniversaries a
 
-        ns.notificaiton_time ,
+        ns.notificaiton_time,
         ns.notification_date,
+        ns.start_on,
+        ns.end_on
+
+        今日の通知の組み立てはtarget側でやる
 
 
         INNER JOIN users u 
         ON a.user_id = u.id
         INNER JOIN notification_settings ns 
         ON a.id = ns.anniversary_id
+
+        # leftjoin
         WHERE 
           ns.is_enabled = true
-          AND 
-          ns.start_on <= CURRENT_DATE
-
+      
           AND
           CURRENT_DATE  BETWEEN ns.start_on and ns.end_on
 
@@ -34,8 +38,22 @@ module LineNotification
           OR 
           ns.frequency_days <= ( CURRENT_DATE - ns.last_sent_on )
           )
+
+          ORDER BY ns.id, u.id
         
       SQL
+
+
+      result = ActiveRecord::Base.connection.exec_query(
+        sql,
+        "notification_date"
+      )
+
+
+      result.map do |row|
+        NotificationScheduleTartget.new(row.to_h)
+      end
+
 # 閏年だけ書く
 
 

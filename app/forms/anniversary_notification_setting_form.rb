@@ -10,24 +10,51 @@ class AnniversaryNotificationSettingForm
   attribute :frequency_days, :integer
   attribute :notification_time, :time
   attribute :start_on, :date
+  
+  attribute :end_on, :date
 
 
   validates :title, presence:  { message: "を入力してね" },length: { maximum: 50}
   validates :anniversary_date, presence:  { message: "を入力してね" }
   
 
-  validate :start_on_not_before_anniversary
-  validate :anniversary_date_not_after_today
+  # validate :start_on_not_before_anniversary
+  # validate :anniversary_date_not_after_today
   validate :not_accept_ten_years_later_start_on
+  validate :start_on_not_before_today
+  validate :anniversary_date_not_after_today
+  validate :start_on_not_work_when_disable
+  validate :start_on_required_when_enable
   
+# today に変更
+# 通知開始日は今日より前には追加できない
+# 通知いらない　：開始時刻は入れられない
 
-  def start_on_not_before_anniversary
-    return if start_on.blank? || anniversary_date.blank?
+def start_on_not_work_when_disable
+  return if is_enabled
+  return if start_on.blank?
 
-    if start_on < anniversary_date
-      errors.add(:start_on, "通知開始日は記念日より前では登録できません")
+  errors.add(:start_on, "通知OFFのときは通知開始日は設定できません")
+end
+
+ def start_on_required_when_enable
+  return unless is_enabled
+  return if start_on.present?
+
+  errors.add(:start_on, "通知ONの時は通知開始日が必要です")
+ end
+
+
+  def start_on_not_before_today 
+    return unless is_enabled
+    return if start_on.blank? 
+    today = Date.current
+
+    if start_on  < today 
+      errors.add(:start_on, "通知開始日は本日以降に設定してください")
     end
   end
+
 
   def anniversary_date_not_after_today
     return if anniversary_date.blank?
@@ -37,7 +64,7 @@ class AnniversaryNotificationSettingForm
       errors.add(:anniversary_date, "記念日は未来には設定できません")
     end
   end
-
+# １年後に変えてもいいんじゃない？
   def not_accept_ten_years_later_start_on
     return if start_on.blank?
 
@@ -49,6 +76,12 @@ class AnniversaryNotificationSettingForm
     end
 
   end
+
+  # validation:() 記念日　通知いる　　開始時刻
+
+  # 通知いらない　：開始時刻は入れられない
+
+  # last_sent_on 通知OFFなら削除
 
 
   def initialize( anniversary: nil,**attrs)
@@ -95,5 +128,42 @@ class AnniversaryNotificationSettingForm
     notification_setting.frequency_days = frequency_days
     notification_setting.start_on = start_on
     notification_setting.notification_time = notification_time
+
+    # sent_last
+    #   end_on =  calculate(anniversary_date) 通知OFFなら　削除
+    if is_enabled && anniversary
+      notification_setting.end_on = calc_end_on(anniversary.anniversary_date)
+
+    else
+      notification_setting.start_on = nil
+      notification_setting.end_on = nil
+      notification_setting.last_sent_on = nil
+    end
   end
+  # 今年の記念日に変換
+  def calc_end_on(anniversary_date)
+    today = Date.current
+    year = today.year
+    mon = anniversary_date.month 
+    da = anniversary_date.day
+
+    if mon == 2 && da == 29 && !Date.leap?(year)
+      this_year = Date.new(year,2,28)
+    else
+      this_year =  Date.new(year,mon,da)
+    end
+
+    if this_year < today
+      year += 1
+      if mon == 2 && da == 29 && !Date.leap?(year)
+         this_year = Date.new(year,2,28)
+      else
+        this_year = Date.new(year,mon,da)
+      end
+    end
+      this_year
+  end
+
+  # 閏年の記念日
+
 end

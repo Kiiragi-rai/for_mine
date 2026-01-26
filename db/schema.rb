@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.2].define(version: 2026_01_18_164847) do
+ActiveRecord::Schema[7.2].define(version: 2026_01_25_133625) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -43,6 +43,7 @@ ActiveRecord::Schema[7.2].define(version: 2026_01_18_164847) do
     t.date "last_sent_on"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.date "end_on"
     t.index ["anniversary_id"], name: "index_notification_settings_on_anniversary_id", unique: true
   end
 

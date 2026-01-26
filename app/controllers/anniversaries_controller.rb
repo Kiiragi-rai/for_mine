@@ -40,6 +40,7 @@ class AnniversariesController < ApplicationController
 
     def update
         @anniversary = current_user.anniversaries.find_by_hashid(params[:id])
+        Rails.logger.debug params[:anniversary_notification_setting_form].inspect
         @form = AnniversaryNotificationSettingForm.new(
             # user: current_user,
             anniversary: @anniversary,

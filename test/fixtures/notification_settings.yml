@@ -3,7 +3,8 @@
 # Table name: notification_settings
 #
 #  id                :bigint           not null, primary key
-#  frequency_days    :integer          default(1), not null
+#  end_on            :date
+#  frequency_days    :integer          default("everyday"), not null
 #  is_enabled        :boolean          default(FALSE), not null
 #  last_sent_on      :date
 #  notification_time :time

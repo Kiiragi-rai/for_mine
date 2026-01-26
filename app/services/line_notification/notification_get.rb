@@ -6,39 +6,26 @@ module LineNotification
       SELECT 
         u.id AS user_id,
         u.uid,
-        ns.id 
-        FROM anniversaries a
-
-        ns.notificaiton_time,
-        ns.notification_date,
+        ns.id,
+        ns.notification_time,
         ns.start_on,
         ns.end_on
-
-        今日の通知の組み立てはtarget側でやる
-
-
+        FROM anniversaries a
         INNER JOIN users u 
         ON a.user_id = u.id
         INNER JOIN notification_settings ns 
         ON a.id = ns.anniversary_id
-
-        # leftjoin
         WHERE 
           ns.is_enabled = true
-      
           AND
           CURRENT_DATE  BETWEEN ns.start_on and ns.end_on
-
-        
           AND
           EXTRACT(HOUR FROM ns.notification_time) = EXTRACT(HOUR FROM CURRENT_TIME + INTERVAL '1 hour')
-
           AND 
           (ns.last_sent_on IS NULL 
           OR 
           ns.frequency_days <= ( CURRENT_DATE - ns.last_sent_on )
           )
-
           ORDER BY ns.id, u.id
         
       SQL
@@ -51,9 +38,55 @@ module LineNotification
 
 
       result.map do |row|
-        NotificationScheduleTartget.new(row.to_h)
+        NotificationScheduleTartget.new(**row.to_h)
       end
 
+
+
+
+      #      sql= <<~SQL
+    #   SELECT 
+    #   u.id AS user_id,
+    #   u.uid,
+    #   ns.id 
+    #   FROM anniversaries a
+
+    #   ns.notificaiton_time,
+    #   ns.notification_date,
+    #   ns.start_on,
+    #   ns.end_on
+
+    #   今日の通知の組み立てはtarget側でやる
+
+
+    #   INNER JOIN users u 
+    #   ON a.user_id = u.id
+    #   INNER JOIN notification_settings ns 
+    #   ON a.id = ns.anniversary_id
+
+    #   # leftjoin
+    #   WHERE 
+    #     ns.is_enabled = true
+    
+    #     AND
+    #     CURRENT_DATE  BETWEEN ns.start_on and ns.end_on
+
+      
+    #     AND
+    #     EXTRACT(HOUR FROM ns.notification_time) = EXTRACT(HOUR FROM CURRENT_TIME + INTERVAL '1 hour')
+
+    #     AND 
+    #     (ns.last_sent_on IS NULL 
+    #     OR 
+    #     ns.frequency_days <= ( CURRENT_DATE - ns.last_sent_on )
+    #     )
+
+    #     ORDER BY ns.id, u.id
+      
+    # SQL
+
+
+      
 # 閏年だけ書く
 
 

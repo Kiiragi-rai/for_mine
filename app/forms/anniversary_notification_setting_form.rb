@@ -24,6 +24,7 @@ class AnniversaryNotificationSettingForm
   validate :start_on_not_before_today
   validate :anniversary_date_not_after_today
   validate :start_on_not_work_when_disable
+  validate :start_on_required_when_enable
   
 # today に変更
 # 通知開始日は今日より前には追加できない
@@ -35,6 +36,13 @@ def start_on_not_work_when_disable
 
   errors.add(:start_on, "通知OFFのときは通知開始日は設定できません")
 end
+
+ def start_on_required_when_enable
+  return unless is_enabled
+  return if start_on.present?
+
+  errors.add(:start_on, "通知ONの時は通知開始日が必要です")
+ end
 
 
   def start_on_not_before_today 

@@ -3,6 +3,16 @@ require "json"
 class GiftSuggestionsController < ApplicationController
   before_action :authenticate_user!
 
+  def index
+    @results = current_user.gift_suggestions.map do |gs|
+      # [] 入れた方がいいらしい
+      { names: gs.result_json&.dig("presentSuggestions")&.map { |h| h["name"] }&.first(3) || []}
+    end
+    
+  end
+  
+
+
 
   def new
         @contents = session.delete(:gift_contents)
@@ -50,7 +60,6 @@ class GiftSuggestionsController < ApplicationController
         prompt << "\n #{names.to_json}は避けてください" 
         end
 
-        # names = last_result["presentSuggestions"]&.map { ["name"] }&.join(", ")
         prompt << "\n 次のプレゼント名は避けてください: #{names}" if names.present?
 
         # @contents = GiftSuggestions::Generate.new(prompt).call

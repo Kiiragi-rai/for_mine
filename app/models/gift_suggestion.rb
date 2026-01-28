@@ -20,5 +20,7 @@
 #  fk_rails_...  (user_id => users.id)
 #
 class GiftSuggestion < ApplicationRecord
-  belongs_to :user
+  include Hashid::Rails
+  belongs_to :user , dependent: :destroy
+
 end

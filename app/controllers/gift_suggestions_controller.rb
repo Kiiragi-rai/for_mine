@@ -4,15 +4,13 @@ class GiftSuggestionsController < ApplicationController
   before_action :authenticate_user!
 
   def index
-    @results = current_user.gift_suggestions.map do |gs|
+    @gift_suggestio = 
+    @results = current_user.gift_suggestions.where.not(result_json:nil).map do |gs|
       # [] 入れた方がいいらしい
-      { names: gs.result_json&.dig("presentSuggestions")&.map { |h| h["name"] }&.first(3) || []}
+      { id:gs.id,
+      names: gs.result_json&.dig("presentSuggestions")&.map { |h| h["name"] }&.first(3) || []}
     end
-    
   end
-  
-
-
 
   def new
         @contents = session.delete(:gift_contents)
@@ -60,7 +58,7 @@ class GiftSuggestionsController < ApplicationController
         prompt << "\n #{names.to_json}は避けてください" 
         end
 
-        prompt << "\n 次のプレゼント名は避けてください: #{names}" if names.present?
+        # prompt << "\n 次のプレゼント名は避けてください: #{names}" if names.present?
 
         # @contents = GiftSuggestions::Generate.new(prompt).call
 
@@ -81,5 +79,11 @@ class GiftSuggestionsController < ApplicationController
       render :new, status: :unprocessable_entity
     end
     # end
+  end
+
+  def destroy 
+    gs = current_user.gift_suggestions.find(params[:id])
+    gs.update!(result_json: nil) 
+    redirect_to gift_suggestions_path
   end
 end

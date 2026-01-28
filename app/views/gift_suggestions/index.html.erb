@@ -7,6 +7,7 @@
         <th scope="col">1</th>
         <th scope="col">2</th>
         <th scope="col">3</th>
+        <th scope="col">削除</th>
       </tr>
     </thead>
   
@@ -17,6 +18,10 @@
           <td><%= result[:names][0] %></td>
           <td><%= result[:names][1] %></td>
           <td><%= result[:names][2] %></td>
+          <td><%= button_to "削除" ,gift_suggestion_path(result[:id]),
+                           method: :delete %>
+          </td>
+      
         </tr>
       <% end %>
     </tbody>

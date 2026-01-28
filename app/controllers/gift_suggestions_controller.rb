@@ -5,7 +5,7 @@ class GiftSuggestionsController < ApplicationController
 
   def index
     @gift_suggestio = 
-    @results = current_user.gift_suggestions.where.not(result_json:nil).map do |gs|
+    @results = current_user.gift_suggestions.where.not(result_json: nil).map do |gs|
       # [] 入れた方がいいらしい
       { id:gs.id,
        names: gs.result_json&.dig("presentSuggestions")&.map { |h| h["name"] }&.first(3) || []}

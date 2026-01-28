@@ -38,7 +38,7 @@ Rails.application.routes.draw do
   resources :anniversaries, only: %i[index show new create edit update destroy]
   # has_oneなのでresorce
   resource :partner
-  resources :gift_suggestions, only: %i[new create]
+  resources :gift_suggestions, only: %i[ index new create destroy]
 
   mount LetterOpenerWeb::Engine, at: "/letter_opener" if Rails.env.development?
 

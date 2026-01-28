@@ -131,7 +131,7 @@ end
 
     # sent_last
     #   end_on =  calculate(anniversary_date) 通知OFFなら　削除
-    if is_enabled && anniversary
+    if is_enabled 
       notification_setting.end_on = calc_end_on(anniversary.anniversary_date)
 
     else
@@ -140,7 +140,10 @@ end
       notification_setting.last_sent_on = nil
     end
   end
-  # 今年の記念日に変換
+
+  private 
+
+  # 今年の記念日に変換　後できりわけお
   def calc_end_on(anniversary_date)
     today = Date.current
     year = today.year

@@ -1,6 +1,6 @@
 module LineNotification
   class NotificationGet
-  
+  # transaction入れる
     def setting
       sql= <<~SQL
       SELECT 

@@ -4,7 +4,6 @@ class GiftSuggestionsController < ApplicationController
   before_action :authenticate_user!
 
   def index
-    @gift_suggestio = 
     @results = current_user.gift_suggestions.where.not(result_json: nil).map do |gs|
       # [] 入れた方がいいらしい
       { id:gs.id,

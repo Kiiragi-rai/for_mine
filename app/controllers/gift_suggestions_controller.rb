@@ -5,6 +5,7 @@ class GiftSuggestionsController < ApplicationController
 
   def index
     @results = current_user.gift_suggestions.where.not(result_json: nil).map do |gs|
+    # @results = current_user.gift_suggestions.map do |gs|
       # [] 入れた方がいいらしい
       { id:gs.id,
        names: gs.result_json&.dig("presentSuggestions")&.map { |h| h["name"] }&.first(3) || []}
@@ -70,7 +71,7 @@ class GiftSuggestionsController < ApplicationController
       ]
     }
 
-    target = current_user.gift_suggestions.build(input_json: partner_info,result_json: @contents)
+    target = current_user.gift_suggestions.build(result_json: @contents)
     if target.save
    session[:gift_contents] = @contents
     redirect_to new_gift_suggestion_path, notice: "提案を生成しました"
@@ -83,6 +84,7 @@ class GiftSuggestionsController < ApplicationController
   def destroy 
     gs = current_user.gift_suggestions.find(params[:id])
     gs.update!(result_json: nil) 
+    # gs.destroy!
     redirect_to gift_suggestions_path
   end
 end

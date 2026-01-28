@@ -21,6 +21,6 @@
 #
 class GiftSuggestion < ApplicationRecord
   include Hashid::Rails
-  belongs_to :user , dependent: :destroy
+  belongs_to :user
 
 end

@@ -8,7 +8,7 @@ class GiftSuggestionsController < ApplicationController
     @results = current_user.gift_suggestions.where.not(result_json:nil).map do |gs|
       # [] 入れた方がいいらしい
       { id:gs.id,
-      names: gs.result_json&.dig("presentSuggestions")&.map { |h| h["name"] }&.first(3) || []}
+       names: gs.result_json&.dig("presentSuggestions")&.map { |h| h["name"] }&.first(3) || []}
     end
   end
 

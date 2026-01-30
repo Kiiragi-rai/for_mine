@@ -5,11 +5,13 @@ module LineNotification
       sql= <<~SQL
       SELECT 
         u.id AS user_id,
+        #削除
         u.uid,
         ns.id,
         ns.notification_time,
         ns.start_on,
         ns.end_on
+        ここで加工しないと渡してエラーの流れになるここで止める必要あり（通知時間を計算）
         FROM anniversaries a
         INNER JOIN users u 
         ON a.user_id = u.id

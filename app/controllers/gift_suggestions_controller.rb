@@ -8,7 +8,7 @@ class GiftSuggestionsController < ApplicationController
     # @results = current_user.gift_suggestions.map do |gs|
       # [] 入れた方がいいらしい
       { id:gs.id,
-       names: gs.result_json&.dig("presentSuggestions")&.map { |h| h["name"] }&.first(3) || []}
+       names: gs.result_json&.dig("presentSuggestions")&.map { |h| h["name"] } || []}
     end
   end
 
@@ -52,6 +52,7 @@ class GiftSuggestionsController < ApplicationController
         PROMPT
 
         last_result =  current_user.gift_suggestions&.last&.result_json  
+        # ハッシュにして渡そうかな、配列＝＞JSONだし
         names = last_result&.dig("presentSuggestions")&.map { |h| h["name"] }
 
         if last_result.present?
@@ -83,6 +84,7 @@ class GiftSuggestionsController < ApplicationController
 
   def destroy 
     gs = current_user.gift_suggestions.find(params[:id])
+    # adminでerror確認ができるように＋　定期的にjobで消去してもいいかも
     gs.update!(result_json: nil) 
     # gs.destroy!
     redirect_to gift_suggestions_path

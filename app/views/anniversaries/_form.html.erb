@@ -21,11 +21,11 @@
             <p>通知設定</p>
           </div>
           <div class="col">
-            <%= f.radio_button :is_enabled, "1", checked: @form.is_enabled %>
+            <%= f.radio_button :is_enabled, true, checked: @form.is_enabled %>
             <%= f.label :is_enabled, "ON" %>
           </div>
           <div class="col">
-            <%= f.radio_button :is_enabled, "0", checked: !@form.is_enabled %>
+            <%= f.radio_button :is_enabled, false, checked: !@form.is_enabled %>
             <%= f.label :is_enabled, "OFF" %>
           </div>
         </div>

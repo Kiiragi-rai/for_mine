@@ -98,7 +98,7 @@ end
       start_on: @notification_setting.start_on,
       frequency_days: @notification_setting.frequency_days
     }
-
+    
     super(defaults.merge(attrs))
   end
 
@@ -136,7 +136,8 @@ end
 
     else
       notification_setting.start_on = nil
-      notification_setting.end_on = nil
+      notification_setting.end_on = 
+      # JOB内で追加するようにする　　
       notification_setting.last_sent_on = nil
     end
   end

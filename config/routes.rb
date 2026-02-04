@@ -49,6 +49,6 @@ Rails.application.routes.draw do
 
   if Rails.env.development?
     # viewでいるのはindexのみ
-    resources :notification_managements, only: %i[ index new create edit update destroy ]
+    resources :notification_managements, only: %i[  new create edit update destroy ]
   end
 end

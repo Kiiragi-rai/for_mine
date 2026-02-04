@@ -8,7 +8,6 @@ module LineNotification
       @title = title
     end
 
-    # start_on date型、 last_sent_on date型、schedule_for通知する日　date型 ,title string型
     def build_message
       #通知日が対象記念日と同じなら
       if @schedule_for == @last_sent_on
@@ -18,8 +17,7 @@ module LineNotification
         "#{@title}記念日まであと#{days_difference_calculator}日"
         # 通知日は通知開始日と同じなら
        elsif @schedule_for == @start_on
-        "#{@title}記念日まであと#{days_difference_calculator}日 \n
-        プレゼントは決まったかな？？"
+        "#{@title}記念日まであと#{days_difference_calculator}日\nプレゼントは決まったかな？？"
       end 
     end
 
@@ -30,3 +28,16 @@ module LineNotification
   end
 end
 
+
+    # start_on date型、 last_sent_on date型、schedule_for通知する日　date型 ,title string型
+    # message service作成
+    # message分岐 ここでmessage =下の中分岐から獲得
+
+    # if schedule_for = last_sent_on
+    #   今日がtitle記念日です
+    #  elsif start_on < schedule_for && schedule_for < last_sent_on
+    #   title記念日まであとOO日
+    #  elsif schedule_for = start_on
+    #   title記念日まで後OO日
+    #   プレゼントは決まったかな？？
+    # end

@@ -10,20 +10,27 @@ module LineNotification
 
     def build_message
       #通知日が対象記念日と同じなら
-      if @schedule_for == @last_sent_on
-        "今日ilが#{@title}記念日です"
+      # schedule_forはdatetime型
+      if schedule_date == @last_sent_on
+        "今日が#{@title}記念日です"
         #通知日は通知開始日より後で、対象記念日より前
-       elsif @start_on < @schedule_for && @schedule_for < @last_sent_on
+       elsif @start_on < schedule_date && schedule_date < @last_sent_on
         "#{@title}記念日まであと#{days_difference_calculator}日"
         # 通知日は通知開始日と同じなら
-       elsif @schedule_for == @start_on
+       elsif schedule_date == @start_on
         "#{@title}記念日まであと#{days_difference_calculator}日\nプレゼントは決まったかな？？"
       end 
     end
 
   private 
+
+  def schedule_date
+    @schedule_for.to_date
+  end
+
+
   def days_difference_calculator
-    (@last_sent_on - @schedule_for).to_i
+    (@last_sent_on - schedule_date).to_i
   end
   end
 end

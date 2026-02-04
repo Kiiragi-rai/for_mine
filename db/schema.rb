@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.2].define(version: 2026_01_25_133625) do
+ActiveRecord::Schema[7.2].define(version: 2026_02_04_111554) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -32,6 +32,18 @@ ActiveRecord::Schema[7.2].define(version: 2026_01_25_133625) do
     t.string "status"
     t.text "error_message"
     t.index ["user_id"], name: "index_gift_suggestions_on_user_id"
+  end
+
+  create_table "notification_managements", force: :cascade do |t|
+    t.bigint "notification_setting_id", null: false
+    t.datetime "scheduled_for", null: false
+    t.string "status", null: false
+    t.datetime "sent_at"
+    t.string "error_message"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["notification_setting_id", "scheduled_for"], name: "index_notification_managements_unique_schedule", unique: true
+    t.index ["notification_setting_id"], name: "index_notification_managements_on_notification_setting_id"
   end
 
   create_table "notification_settings", force: :cascade do |t|
@@ -75,6 +87,7 @@ ActiveRecord::Schema[7.2].define(version: 2026_01_25_133625) do
 
   add_foreign_key "anniversaries", "users"
   add_foreign_key "gift_suggestions", "users"
+  add_foreign_key "notification_managements", "notification_settings"
   add_foreign_key "notification_settings", "anniversaries"
   add_foreign_key "partners", "users"
 end

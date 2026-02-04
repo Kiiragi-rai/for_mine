@@ -16,6 +16,7 @@ class GiftSuggestionsController < ApplicationController
         @contents = session.delete(:gift_contents)
   end
 
+  # パートナーがいないと　おかしくなるため、処理を変える必要あり　 viewを調整とcontrollerに処理追加
   def create
         # if Rails.env.production?
         partner = current_user.partner

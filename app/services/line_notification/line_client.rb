@@ -28,3 +28,4 @@ module LineNotification
       end
   end
 end
+

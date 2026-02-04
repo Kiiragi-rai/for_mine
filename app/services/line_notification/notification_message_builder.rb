@@ -11,7 +11,7 @@ module LineNotification
     def build_message
       #通知日が対象記念日と同じなら
       if @schedule_for == @last_sent_on
-        "今日が#{@title}記念日です"
+        "今日ilが#{@title}記念日です"
         #通知日は通知開始日より後で、対象記念日より前
        elsif @start_on < @schedule_for && @schedule_for < @last_sent_on
         "#{@title}記念日まであと#{days_difference_calculator}日"

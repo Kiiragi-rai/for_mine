@@ -46,4 +46,9 @@ Rails.application.routes.draw do
     post "/dev_login", to: "dev_sessions#create"
     delete "/dev_logout", to: "dev_sessions#destroy"
   end
+
+  if Rails.env.development?
+    # viewでいるのはindexのみ
+    resources :notification_managements, only: %i[  new create edit update destroy ]
+  end
 end

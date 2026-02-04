@@ -19,6 +19,49 @@ module LineNotification
       Rails.logger.info "[LINENOTICATION:LINECLIENT] status=#{status}"
       end
 
+
+      def self.send_line_message_with_button_to_home(uid:,start_on:, last_sent_on:, schedule_for:,current_date:,title:)
+
+           message service作成
+        message分岐 ここでmessage =下の中分岐から獲得
+
+        if schedule_for = last_sent_on
+          今日がtitle記念日です
+         elsif start_on < schedule_for && schedule_for < last_sent_on
+          title記念日まであとOO日
+         elsif schedule_for = start_on
+          title記念日まで後OO日
+          プレゼントは決まったかな？？
+        end
+   
+      def self.send_line_message_with_button_to_home(uid:,title:,message:)
+        # uid:じゃなくて、実際はuser_id, schedule_forはtdate ここでtimeとdate = time stamp 作成
+        # JOBではtime使うけどここじゃいらない　,notiication_time:　
+
+
+        button_template = Line::Bot::V2::MessagingApi::ButtonsTemplate.new(
+          text: message,
+          actions: [
+            Line::Bot::V2::MessagingApi::URIAction.new(
+              label: "for_mineへ",
+              uri: ENV["APP_BASE_URL"]
+            )
+          ]
+        )
+
+        template_message = Line::Bot::V2::MessagingApi::TemplateMessage.new(
+          alt_text: message,
+          template: button_template
+        )
+
+        push_request = Line::Bot::V2::MessagingApi::PushMessageRequest.new(
+          to: uid,
+          message: [ template_message ]
+        )
+
+        status_code == 200
+    end
+
       private
 
       def self.client

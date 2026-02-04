@@ -6,7 +6,7 @@
 #  error_message           :string
 #  scheduled_for           :datetime         not null
 #  sent_at                 :datetime
-#  status                  :string           not null
+#  status                  :string
 #  created_at              :datetime         not null
 #  updated_at              :datetime         not null
 #  notification_setting_id :bigint           not null

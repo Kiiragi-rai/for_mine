@@ -6,7 +6,7 @@
 #  error_message           :string
 #  scheduled_for           :datetime         not null
 #  sent_at                 :datetime
-#  status                  :string           not null
+#  status                  :string
 #  created_at              :datetime         not null
 #  updated_at              :datetime         not null
 #  notification_setting_id :bigint           not null
@@ -21,10 +21,10 @@
 #  fk_rails_...  (notification_setting_id => notification_settings.id)
 #
 class NotificationManagement < ApplicationRecord
-  belongs_to: notification_setting
+  belongs_to :notification_setting
 
   # status success, failure enumかな、それか直接入れる　
 
-  validates :schedule_for, presece: true
-  validates :status, presence: true
+  validates :scheduled_for, presence: true
+
 end

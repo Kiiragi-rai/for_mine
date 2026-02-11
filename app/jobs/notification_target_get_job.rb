@@ -13,6 +13,7 @@ class NotificationTargetGetJob < ApplicationJob
       NotificationManagement.create_for(target)
       # Rails.logger.info " これがターゲットの中身だよん#{target}"
       target_hash = target.attributes
+            Rails.logger.info " これがターゲットの中身だよん#{target_hash}"
       # SendNotificationJob.set(wait_until: target.scheduled_for).perform_later(target_hash)
     end
   end

@@ -14,12 +14,12 @@ module LineNotification
         )
       SELECT 
         u.id AS user_id,
-        ns.id,
+        ns.id AS notification_setting_id,
         ns.notification_time,
         ns.start_on,
         ns.end_on,
         a.title,
-        b.next_hour AS schedule_for
+        b.next_hour AS scheduled_for
 
         FROM anniversaries a
         INNER JOIN users u 
@@ -28,7 +28,7 @@ module LineNotification
         ON a.id = ns.anniversary_id
 
         CROSS JOIN base b
-        
+
         LEFT JOIN notification_managements nm 
         ON ns.id = nm.notification_setting_id
         AND nm.scheduled_for = b.next_hour

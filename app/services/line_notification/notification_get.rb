@@ -2,6 +2,16 @@ module LineNotification
   class NotificationGet
     def setting
         sql= <<~SQL
+
+        WITH base AS (
+          SELECT 
+            now()  AS just_now,
+            now()::date AS just_today,
+            date_trunc(
+              'hour',
+              now() + interval '1 hour' 
+            )AS next_hour
+        )
       SELECT 
         u.id AS user_id,
         ns.id,
@@ -9,28 +19,33 @@ module LineNotification
         ns.start_on,
         ns.end_on,
         a.title,
-        date_trunc('hour', now() + interval '1 hour' )AS scheduled_for
+        b.next_hour AS schedule_for
+
         FROM anniversaries a
         INNER JOIN users u 
         ON a.user_id = u.id
         INNER JOIN notification_settings ns 
         ON a.id = ns.anniversary_id
-        LEFT JOIN Notification_managements nm 
+
+        CROSS JOIN base b
+        
+        LEFT JOIN notification_managements nm 
         ON ns.id = nm.notification_setting_id
-        AND nm.scheduled_for = date_trunc('hour',now() + interval '1 hour')
+        AND nm.scheduled_for = b.next_hour
+ 
         WHERE 
           ns.is_enabled = true
           AND
           nm.id IS NULL 
           AND
-          CURRENT_DATE  BETWEEN ns.start_on and ns.end_on
+          b.just_today  BETWEEN ns.start_on and ns.end_on
           AND
-          ns.notification_time = date_trunc('hour', CURRENT_TIME + interval '1 hour')
+          EXTRACT(HOUR FROM ns.notification_time) =EXTRACT(HOUR FROM b.next_hour)
           AND 
           (ns.last_sent_on IS NULL 
           OR 
-          ns.frequency_days <= ( CURRENT_DATE - ns.last_sent_on )
-          )
+          ns.frequency_days <= b.just_today - ns.last_sent_on )
+          
           ORDER BY ns.id, u.id
         
       SQL
@@ -45,6 +60,8 @@ module LineNotification
       # result.map do |row|
       #   NotificationScheduleTartget.new(**row.to_h)
       # end
+
+      # ns.notification_time = date_trunc('hour', (now() AT TIME ZONE 'Asia/Tokyo') + interval '1 hour')::time
 
     end
   end
@@ -66,4 +83,4 @@ end
       #   ここで加工しないと渡してエラーの流れになるここで止める必要あり（通知時間を計算閏年は心配なし、日跨ぎと年跨ぎ不安検討）
 
 
-  
+          # date_trunc('hour', (now() AT TIME ZONE 'Asia/Tokyo') + interval '1 hour' )AS scheduled_for

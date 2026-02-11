@@ -15,7 +15,6 @@ module LineNotification
       SELECT 
         u.id AS user_id,
         ns.id AS notification_setting_id,
-        ns.notification_time,
         ns.start_on,
         ns.end_on,
         a.title,
@@ -57,19 +56,17 @@ module LineNotification
       )
 
 
-      # result.map do |row|
-      #   NotificationScheduleTartget.new(**row.to_h)
-      # end
-
-      # ns.notification_time = date_trunc('hour', (now() AT TIME ZONE 'Asia/Tokyo') + interval '1 hour')::time
-
+      result.map do |row|
+        AnniversaryNotificationTarget.new(row.to_h)
+      end
     end
   end
 end
 
   # transaction入れる
 
-  
+        # ns.notification_time = date_trunc('hour', (now() AT TIME ZONE 'Asia/Tokyo') + interval '1 hour')::time
+
 
       # EXTRACT(HOUR FROM ns.notification_time) = EXTRACT(HOUR FROM CURRENT_TIME + INTERVAL '1 hour')
 

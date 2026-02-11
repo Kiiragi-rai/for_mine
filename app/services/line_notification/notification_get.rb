@@ -7,18 +7,25 @@ module LineNotification
         ns.id,
         ns.notification_time,
         ns.start_on,
-        ns.end_on
+        ns.end_on,
+        a.title,
+        date_trunc('hour', now() + interval '1 hour' )AS scheduled_for
         FROM anniversaries a
         INNER JOIN users u 
         ON a.user_id = u.id
         INNER JOIN notification_settings ns 
         ON a.id = ns.anniversary_id
+        LEFT JOIN Notification_managements nm 
+        ON ns.id = nm.notification_setting_id
+        AND nm.scheduled_for = date_trunc('hour',now() + interval '1 hour')
         WHERE 
           ns.is_enabled = true
           AND
+          nm.id IS NULL 
+          AND
           CURRENT_DATE  BETWEEN ns.start_on and ns.end_on
           AND
-          EXTRACT(HOUR FROM ns.notification_time) = EXTRACT(HOUR FROM CURRENT_TIME + INTERVAL '1 hour')
+          ns.notification_time = date_trunc('hour', CURRENT_TIME + interval '1 hour')
           AND 
           (ns.last_sent_on IS NULL 
           OR 
@@ -47,6 +54,7 @@ end
 
   
 
+      # EXTRACT(HOUR FROM ns.notification_time) = EXTRACT(HOUR FROM CURRENT_TIME + INTERVAL '1 hour')
 
 
       # SELECT 

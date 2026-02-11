@@ -5,15 +5,23 @@ class SendNotificationLineJob < ApplicationJob
 # target_hashを渡す
 #messageのservice
 # 送信service
-  def perform(target_hash)
-    # Do something later
-    notification_target = AnniversaryNotificationTarget.new(target_hash)
+  def perform(management_id:)
 
-      user = User.find_by(id:notification_target.user_id)
-      return if user.blank? || user.uid.blank?
+  Rails.logger.info "ここからsend notificaitonline jobだよん"    # Do something later
+    notification_management = NotificationManagement.find(management_id)
 
-      message = LineNotification::NotificationMessageBuilder.new(start_on: notification_target.start_on, end_on:  notification_target.end_on, schedule_for:  notification_target.schedule_for, title:  notification_target.title)
+    notification_setting = notification_management.notification_setting
+    user = User.find_by(id: notification_setting.anniversary.user_id)
+    # uid = user.uid
+    uid = ENV["UID"]
+    
+      return if uid.blank?
+
+      message = LineNotification::NotificationMessageBuilder.new(start_on: notification_setting.start_on,
+       end_on:  notification_setting.end_on, scheduled_for:  notification_management.scheduled_for, title:  notification_management.schedule_title)
       message_content = message.build_message
-      LineNotification::LineClient.send_line_message_with_button_to_home(uid: user.uid, text_messages: message_content)
-    end
+      Rails.logger.info "#{message_content} これメッセージ"
+      # LineNotification::LineClient.send_line_message_with_button_to_home(uid: user.uid, text_messages: message_content)
+      LineNotification::LineClient.send_line_message_with_button_to_home(uid: uid, messages: message_content)
+      end
 end

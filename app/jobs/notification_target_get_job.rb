@@ -10,11 +10,13 @@ class NotificationTargetGetJob < ApplicationJob
 
     # ここはNotification_Managementのmodelでこの処理を書いていいのでは？
     notification_targets.each do |target|
-      NotificationManagement.create_for(target)
-      # Rails.logger.info " これがターゲットの中身だよん#{target}"
-      target_hash = target.attributes
-            Rails.logger.info " これがターゲットの中身だよん#{target_hash}"
-      # SendNotificationJob.set(wait_until: target.scheduled_for).perform_later(target_hash)
+      managed = NotificationManagement.create_for(target)
+      Rails.logger.info " これがターゲットの中身だよん いまからLINEに渡すy#{managed.scheduled_for.in_time_zone}"
+      management_id = managed.id 
+    
+      # SendNotificationLineJob.set(wait_until: managed.scheduled_for).perform_later(management_id:management_id)
+      SendNotificationLineJob.perform_now(management_id: management_id)
+
     end
   end
 end

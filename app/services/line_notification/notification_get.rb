@@ -36,9 +36,8 @@ module LineNotification
           ns.is_enabled = true
           AND
           nm.id IS NULL 
-          AND
-          -- (b.next_hour AT TIME ZONE 'Asia/Tokyo')::date  BETWEEN ns.start_on and ns.end_on
-          ns.notification_time = b.next_hour::time
+          -- AND
+          -- ns.notification_time = b.next_hour::time
   
           AND 
           (ns.last_sent_on IS NULL 
@@ -46,9 +45,11 @@ module LineNotification
           ns.frequency_days <= (b.next_hour AT TIME ZONE 'Asia/Tokyo')::date - ns.last_sent_on )
           
           ORDER BY ns.id, u.id
-                  -- EXTRACT(HOUR FROM ns.notification_time) =EXTRACT(HOUR FROM (b.next_hour AT TIME ZONE 'Asia/Tokyo'))
 
       SQL
+                # -- (b.next_hour AT TIME ZONE 'Asia/Tokyo')::date  BETWEEN ns.start_on and ns.end_on
+                  # -- EXTRACT(HOUR FROM ns.notification_time) =EXTRACT(HOUR FROM (b.next_hour AT TIME ZONE 'Asia/Tokyo'))
+
       result = ActiveRecord::Base.connection.exec_query(
         sql,
         "notification_date"

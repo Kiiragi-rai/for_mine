@@ -35,5 +35,6 @@ class NotificationManagement < ApplicationRecord
       ) do |management| 
         management.schedule_title = target.title
       end
+      
   end
 end

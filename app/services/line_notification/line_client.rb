@@ -2,11 +2,11 @@ module LineNotification
   class LineClient
       DEFAULT_TEXT = "今日が記念日だぜ"
 
-      def self.send_line_message_with_button_to_home(uid:,message:)
+      def self.send_line_message_with_button_to_home(uid:,messages:)
         # uid:じゃなくて、実際はuser_id, schedule_forはtdate ここでtimeとdate = time stamp 作成
         # JOBではtime使うけどここじゃいらない　,notiication_time:　
         button_template = Line::Bot::V2::MessagingApi::ButtonsTemplate.new(
-          text: message,
+          text: messages,
           actions: [
             Line::Bot::V2::MessagingApi::URIAction.new(
               label: "for_mineへ",
@@ -15,7 +15,7 @@ module LineNotification
           ]
         )
         template_message = Line::Bot::V2::MessagingApi::TemplateMessage.new(
-          alt_text: message,
+          alt_text: messages,
           template: button_template
         )
 

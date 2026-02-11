@@ -1,6 +1,8 @@
 module LineNotification
   class NotificationGet
-    def setting
+    def self.setting
+      ActiveRecord::Base.transaction do
+        ActiveRecord::Base.connection.execute("SET LOCAL TIME ZONE 'Asia/Tokyo'")
         sql= <<~SQL
 
         WITH base AS (
@@ -37,13 +39,13 @@ module LineNotification
           AND
           nm.id IS NULL 
           AND
-          b.just_today  BETWEEN ns.start_on and ns.end_on
+          b.next_hour::date  BETWEEN ns.start_on and ns.end_on
           AND
           EXTRACT(HOUR FROM ns.notification_time) =EXTRACT(HOUR FROM b.next_hour)
           AND 
           (ns.last_sent_on IS NULL 
           OR 
-          ns.frequency_days <= b.just_today - ns.last_sent_on )
+          ns.frequency_days <= b.next_hour::date - ns.last_sent_on )
           
           ORDER BY ns.id, u.id
         
@@ -54,10 +56,11 @@ module LineNotification
         sql,
         "notification_date"
       )
-
+      Rails.logger.info "#{result} これresultだよおーーん"
 
       result.map do |row|
         AnniversaryNotificationTarget.new(row.to_h)
+      end
       end
     end
   end

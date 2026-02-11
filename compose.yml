@@ -3,7 +3,7 @@ services:
     image: postgres
     restart: always
     environment:
-      TZ: Asia/Tokyo
+      TZ: UTC
       POSTGRES_PASSWORD: password
     volumes:
       - postgresql_data:/var/lib/postgresql

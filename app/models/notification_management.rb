@@ -4,6 +4,7 @@
 #
 #  id                      :bigint           not null, primary key
 #  error_message           :string
+#  schedule_title          :string
 #  scheduled_for           :datetime         not null
 #  sent_at                 :datetime
 #  status                  :string

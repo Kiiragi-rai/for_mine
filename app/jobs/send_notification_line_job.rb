@@ -2,7 +2,9 @@ class SendNotificationLineJob < ApplicationJob
  queue_as :default
 
  DEFAULT_TEXT = "今日が記念日!"
-
+# target_hashを渡す
+#messageのservice
+# 送信service
   def perform(text_messages: DEFAULT_TEXT)
     # Do something later
     target_today = Date.today

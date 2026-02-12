@@ -13,10 +13,12 @@ class NotificationTargetGetJob < ApplicationJob
       managed = NotificationManagement.create_for(target)
       Rails.logger.info " これがターゲットの中身だよん いまからLINEに渡すy#{managed.scheduled_for.in_time_zone}"
       management_id = managed.id 
-    
-      # SendNotificationLineJob.set(wait_until: managed.scheduled_for).perform_later(management_id:management_id)
-      SendNotificationLineJob.perform_now(management_id: management_id)
 
+      if Rails.env.development?
+      SendNotificationLineJob.perform_now(management_id: management_id)  
+      else
+      SendNotificationLineJob.set(wait_until: managed.scheduled_for).perform_later(management_id:management_id)
+      end
     end
   end
 end

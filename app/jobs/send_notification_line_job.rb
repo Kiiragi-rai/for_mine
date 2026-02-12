@@ -1,24 +1,27 @@
 class SendNotificationLineJob < ApplicationJob
  queue_as :default
 
- DEFAULT_TEXT = "今日が記念日!"
+ 
+# target_hashを渡す
+#messageのservice
+# 送信service
+  def perform(management_id:)
 
-  def perform(text_messages: DEFAULT_TEXT)
-    # Do something later
-    target_today = Date.today
-    anniversaries = Anniversary.notification_target_get(target_today)
-    Rails.logger.info "@annversariesの中身 #{anniversaries}"
+  Rails.logger.info "ここからsend notificaitonline jobだよん"    # Do something later
+    notification_management = NotificationManagement.find(management_id)
 
-    return if anniversaries.blank?
+    notification_setting = notification_management.notification_setting
+    user = User.find_by(id: notification_setting.anniversary.user_id)
+    # uid = user.uid
+    uid = ENV["UID"]
+    
+      return if uid.blank?
 
-    anniversaries.each do |anniversary|
-      uid = anniversary.user.uid
-
-      next if uid.blank?
-
-      message = LineNotification::NotificationMessageBuilder.new(start_on: start_on, last_sent_on: last_sent_on, schedule_for: schedule_for, title: title)
+      message = LineNotification::NotificationMessageBuilder.new(start_on: notification_setting.start_on,
+       end_on:  notification_setting.end_on, scheduled_for:  notification_management.scheduled_for, title:  notification_management.schedule_title)
       message_content = message.build_message
-      LineNotification::LineClient.send_line_message_with_button_to_home(uid: uid, text_messages: message)
-    end
-  end
+      Rails.logger.info "#{message_content} これメッセージ"
+      # LineNotification::LineClient.send_line_message_with_button_to_home(uid: user.uid, text_messages: message_content)
+      LineNotification::LineClient.send_line_message_with_button_to_home(uid: uid, messages: message_content)
+      end
 end

@@ -1,36 +1,37 @@
 module LineNotification
   class NotificationMessageBuilder
 
-    def initialize(start_on:, schedule_for:,title:,end_on:)
+    def initialize(start_on:, scheduled_for:,title:,end_on:)
       @start_on = start_on
-      @schedule_for = schedule_for
+      @scheduled_for = scheduled_for
       @end_on = end_on
       @title = title
     end
 
     def build_message
+      Rails.logger.info "これから messe-ge つくるよ"
       #通知日が対象記念日と同じなら
       # schedule_forはdatetime型
-      if schedule_date == @end_on
+      if scheduled_date == @end_on
         "今日が#{@title}記念日です"
         #通知日は通知開始日より後で、対象記念日より前
-       elsif @start_on < schedule_date && schedule_date < @end_on
+       elsif @start_on < scheduled_date && scheduled_date < @end_on
         "#{@title}記念日まであと#{days_difference_calculator}日"
         # 通知日は通知開始日と同じなら
-       elsif schedule_date == @start_on
+       elsif scheduled_date == @start_on
         "#{@title}記念日まであと#{days_difference_calculator}日\nプレゼントは決まったかな？？"
       end 
     end
 
   private 
 
-  def schedule_date
-    @schedule_for.to_date
+  def scheduled_date
+    @scheduled_for.to_date
   end
 
 
   def days_difference_calculator
-    (@end_on - schedule_date).to_i
+    (@end_on - scheduled_date).to_i
   end
   end
 end

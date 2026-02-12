@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.2].define(version: 2026_02_04_115917) do
+ActiveRecord::Schema[7.2].define(version: 2026_02_11_141026) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -42,6 +42,7 @@ ActiveRecord::Schema[7.2].define(version: 2026_02_04_115917) do
     t.string "error_message"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "schedule_title"
     t.index ["notification_setting_id", "scheduled_for"], name: "index_notification_managements_unique_schedule", unique: true
     t.index ["notification_setting_id"], name: "index_notification_managements_on_notification_setting_id"
   end

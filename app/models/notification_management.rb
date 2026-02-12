@@ -4,6 +4,7 @@
 #
 #  id                      :bigint           not null, primary key
 #  error_message           :string
+#  schedule_title          :string
 #  scheduled_for           :datetime         not null
 #  sent_at                 :datetime
 #  status                  :string
@@ -27,4 +28,13 @@ class NotificationManagement < ApplicationRecord
 
   validates :scheduled_for, presence: true
 
+  def self.create_for(target)
+    find_or_create_by(
+        notification_setting_id: target.notification_setting_id,
+        scheduled_for: target.scheduled_for
+      ) do |management| 
+        management.schedule_title = target.title
+      end
+      
+  end
 end

@@ -4,8 +4,7 @@
 :scheduler:
   :schedule:
     get_notification_targets:
-      # cron: '*/50 * * * *'
       class: NotificationTargetGetJob
       queue: default
       description: '1分毎に通知対象を取得'
-      every: '2m' #一旦2分に一回送る
+      every: '30s' 

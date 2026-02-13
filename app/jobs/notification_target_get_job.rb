@@ -1,5 +1,6 @@
 class NotificationTargetGetJob < ApplicationJob
   queue_as :default
+  sidekiq_options retry: false
 # target取得
 # management保存
 # waituntilでjobに渡す

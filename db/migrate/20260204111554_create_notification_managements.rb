@@ -9,7 +9,6 @@ class CreateNotificationManagements < ActiveRecord::Migration[7.2]
 
       t.timestamps
     end
-    add_index :notification_managements, [:notification_setting_id, :scheduled_for], unique: true, name: "index_notification_managements_unique_schedule"
-
+    add_index :notification_managements, [ :notification_setting_id, :scheduled_for ], unique: true, name: "index_notification_managements_unique_schedule"
   end
 end

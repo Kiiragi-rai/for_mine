@@ -24,7 +24,7 @@
 class NotificationManagement < ApplicationRecord
   belongs_to :notification_setting
 
-  # status success, failure enumかな、それか直接入れる　
+  # status success, failure enumかな、それか直接入れる
 
   validates :scheduled_for, presence: true
 
@@ -32,9 +32,8 @@ class NotificationManagement < ApplicationRecord
     find_or_create_by(
         notification_setting_id: target.notification_setting_id,
         scheduled_for: target.scheduled_for
-      ) do |management| 
+      ) do |management|
         management.schedule_title = target.title
       end
-      
   end
 end

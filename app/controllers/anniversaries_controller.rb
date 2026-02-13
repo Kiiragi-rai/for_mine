@@ -12,7 +12,7 @@ class AnniversariesController < ApplicationController
 
     def new
         @anniversary = current_user.anniversaries.build
-        @form = AnniversaryNotificationSettingForm.new( anniversary: @anniversary)
+        @form = AnniversaryNotificationSettingForm.new(anniversary: @anniversary)
       end
 
     def create

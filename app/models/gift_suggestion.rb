@@ -23,5 +23,4 @@ class GiftSuggestion < ApplicationRecord
   # いらないかな
   include Hashid::Rails
   belongs_to :user
-
 end

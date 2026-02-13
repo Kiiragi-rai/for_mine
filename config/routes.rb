@@ -1,5 +1,5 @@
-require 'sidekiq/web'
-require 'sidekiq-scheduler/web'
+require "sidekiq/web"
+require "sidekiq-scheduler/web"
 
 Rails.application.routes.draw do
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
@@ -57,10 +57,8 @@ Rails.application.routes.draw do
 
   if Rails.env.development?
   Sidekiq::Web.use(Rack::Auth::Basic) do |user_id, password|
-    [user_id, password] == [ENV['USER_ID'], ENV['USER_PASSWORD']]
+    [ user_id, password ] == [ ENV["USER_ID"], ENV["USER_PASSWORD"] ]
   end
-  mount Sidekiq::Web, at: '/sidekiq'    
+  mount Sidekiq::Web, at: "/sidekiq"
   end
-
-
 end

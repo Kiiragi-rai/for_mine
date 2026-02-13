@@ -7,5 +7,5 @@ class AnniversaryNotificationTarget
   attribute :scheduled_for, :datetime
   attribute :start_on, :date
   attribute :end_on, :date
-  attribute :title, :string  
+  attribute :title, :string
 end

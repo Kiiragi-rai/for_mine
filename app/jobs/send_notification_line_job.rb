@@ -1,12 +1,11 @@
 class SendNotificationLineJob < ApplicationJob
  queue_as :default
+ sidekiq_options retry: false
 
- 
-# target_hashを渡す
-#messageのservice
-# 送信service
+  # target_hashを渡す
+  # messageのservice
+  # 送信service
   def perform(management_id:)
-
   Rails.logger.info "ここからsend notificaitonline jobだよん"    # Do something later
     notification_management = NotificationManagement.find(management_id)
 
@@ -14,7 +13,7 @@ class SendNotificationLineJob < ApplicationJob
     user = User.find_by(id: notification_setting.anniversary.user_id)
     # uid = user.uid
     uid = ENV["UID"]
-    
+
       return if uid.blank?
 
       message = LineNotification::NotificationMessageBuilder.new(start_on: notification_setting.start_on,

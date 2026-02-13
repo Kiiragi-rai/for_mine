@@ -30,22 +30,22 @@ class Anniversary < ApplicationRecord
     scope :notification_target_get, ->(date) { where(notification_on: true).where(anniversary_date: date) }
 
 
-    scope :notification_enabled , ->{ joins(:notification_setting).where(notification_settings: {is_enabled: true})}
-   #  scope :notification_enables , ->{ joins(:notification_setting).where('notification_settings.is_enabled = ?','true')}
-   #  scope :notification_target_in_range, -> { joins(:notification_setting).where('notification_settings.start_on <= ?', Date.current).where('anniversary.anniversary_date >= ?', Date.current) }
-   #  scope :notification_target_in_range, -> { joins(:notification_setting).where(notification_settings: {start_on: ..Date.current}) }
+    scope :notification_enabled, -> { joins(:notification_setting).where(notification_settings: { is_enabled: true }) }
+    #  scope :notification_enables , ->{ joins(:notification_setting).where('notification_settings.is_enabled = ?','true')}
+    #  scope :notification_target_in_range, -> { joins(:notification_setting).where('notification_settings.start_on <= ?', Date.current).where('anniversary.anniversary_date >= ?', Date.current) }
+    #  scope :notification_target_in_range, -> { joins(:notification_setting).where(notification_settings: {start_on: ..Date.current}) }
 
 
 
     def anniversary_calculate
       # ゴーr 記念日からどれくらいったか
       today = Date.current
-     diff =  (anniversary_date - today ).to_i
+     diff =  (anniversary_date - today).to_i
      if diff == 0
         "今日が記念日"
-     else diff < 0 
+     else diff < 0
         "記念日から#{diff.abs}日経ちました"
-        # 今日より後ならダメ　何にも出ないよ
+       # 今日より後ならダメ　何にも出ないよ
      end
     end
 end

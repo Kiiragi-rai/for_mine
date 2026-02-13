@@ -45,6 +45,10 @@ gem "line-bot-api"
 
 gem "ruby-openai"
 
+gem "sidekiq"
+gem "sidekiq-scheduler"
+gem "redis"
+
 
 
 group :development, :test do

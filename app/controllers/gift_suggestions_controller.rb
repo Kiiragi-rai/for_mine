@@ -5,10 +5,10 @@ class GiftSuggestionsController < ApplicationController
 
   def index
     @results = current_user.gift_suggestions.where.not(result_json: nil).map do |gs|
-    # @results = current_user.gift_suggestions.map do |gs|
+      # @results = current_user.gift_suggestions.map do |gs|
       # [] 入れた方がいいらしい
-      { id:gs.id,
-       names: gs.result_json&.dig("presentSuggestions")&.map { |h| h["name"] } || []}
+      { id: gs.id,
+       names: gs.result_json&.dig("presentSuggestions")&.map { |h| h["name"] } || [] }
     end
   end
 
@@ -52,19 +52,19 @@ class GiftSuggestionsController < ApplicationController
         }
         PROMPT
 
-        last_result =  current_user.gift_suggestions&.last&.result_json  
+        last_result =  current_user.gift_suggestions&.last&.result_json
         # ハッシュにして渡そうかな、配列＝＞JSONだし
         names = last_result&.dig("presentSuggestions")&.map { |h| h["name"] }
 
         if last_result.present?
-        prompt << "\n #{names.to_json}は避けてください" 
+        prompt << "\n #{names.to_json}は避けてください"
         end
 
         # prompt << "\n 次のプレゼント名は避けてください: #{names}" if names.present?
 
         # @contents = GiftSuggestions::Generate.new(prompt).call
 
-        # elsif Rails.env.development?  
+        # elsif Rails.env.development?
         @contents = {
       "presentSuggestions" => [
         { "name" => "文房具セット", "reason" => "..." },
@@ -83,10 +83,10 @@ class GiftSuggestionsController < ApplicationController
     # end
   end
 
-  def destroy 
+  def destroy
     gs = current_user.gift_suggestions.find(params[:id])
     # adminでerror確認ができるように＋　定期的にjobで消去してもいいかも
-    gs.update!(result_json: nil) 
+    gs.update!(result_json: nil)
     # gs.destroy!
     redirect_to gift_suggestions_path
   end

@@ -50,6 +50,8 @@ gem "sidekiq-scheduler"
 gem "redis"
 
 gem "simple_calendar"
+gem 'ransack', '~> 4.2'
+
 
 
 

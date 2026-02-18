@@ -4,7 +4,7 @@ class AnniversariesController < ApplicationController
     def index
         @anniversaries = current_user.anniversaries
     end
-    
+
     def calendar
       @anniversaries = current_user.anniversaries
     end

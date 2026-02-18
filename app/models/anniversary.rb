@@ -48,4 +48,8 @@ class Anniversary < ApplicationRecord
        # 今日より後ならダメ　何にも出ないよ
      end
     end
+
+    def start_time
+      self.anniversary_date
+    end
 end

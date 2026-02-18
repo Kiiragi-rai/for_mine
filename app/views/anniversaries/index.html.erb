@@ -58,8 +58,16 @@
   </div>
   
   
+  <%= month_calendar events: @anniversaries do |date, anniversaries| %>
+    <%= date.day %>
 
-    
+    <% anniversaries.each do |anniversary| %>
+      <div>
+        <%= link_to anniversary.title, anniversary_path(anniversary) %>
+      </div>
+    <% end %>
+
+  <% end %>
 
   <!-- <p class="card-text mb-0">
     通知設定： anniversary.notification_settings.notifiation_on ? "ON" : "OFF" %>

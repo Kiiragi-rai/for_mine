@@ -1,15 +1,5 @@
+<%= render "search", q:@q %>
 
-<%= search_form_for @q ,url: anniversaries_path, method: :get do |f| %>
-<%= f.label :anniversary_date_during_month, "期間"%>
-<%= raw sprintf(
-    f.date_select(
-      :anniversary_date_during_month,
-      discard_day: true,
-      use_month_numbers: true,
-      date_separator: '%s'),
-    '年 ') + '月' %>
-<div class="actions ransack-submit"><%= f.submit "検索" %></div>
-<% end %>
 
 <h1>記念日一覧</h1>
 <div class="container py-3">
@@ -26,7 +16,7 @@
                   記念日：<%= anniversary.anniversary_date %>
                 </p>
                 <p class="card-text mb-2">
-                  通知日：<%= anniversary.notification_setting.start_on %>
+                  通知日：<%= anniversary.notification_setting&.start_on %>
                 </p>
                 <p class="card-text mb-0">
                   通知設定：<%= anniversary.notification_setting.is_enabled ? "ON" : "OFF" %>

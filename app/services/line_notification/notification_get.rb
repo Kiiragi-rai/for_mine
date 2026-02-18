@@ -32,7 +32,7 @@ module LineNotification
           ON ns.id = nm.notification_setting_id
           AND nm.scheduled_for = b.next_hour
 
-          
+        #{'  '}
 
           WHERE
             ns.is_enabled = true
@@ -50,7 +50,7 @@ module LineNotification
             (ns.last_sent_on IS NULL
             OR
             ns.frequency_days <= (b.next_hour AT TIME ZONE 'Asia/Tokyo')::date - ns.last_sent_on )
-       
+
             ORDER BY ns.id, u.id
 
       SQL

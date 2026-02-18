@@ -5,6 +5,10 @@ class AnniversariesController < ApplicationController
         @anniversaries = current_user.anniversaries
     end
 
+    def calendar
+      @anniversaries = current_user.anniversaries
+    end
+
     def show
         @anniversary = current_user.anniversaries.find_by_hashid(params[:id])
     end

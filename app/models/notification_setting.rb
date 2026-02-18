@@ -23,7 +23,7 @@
 #
 class NotificationSetting < ApplicationRecord
   belongs_to :anniversary
-  has_many :notification_managements
+  has_many :notification_managements, dependent: :destroy
 
   enum :frequency_days, {
        everyday: 1, every_other_day: 2, every_5_days: 5, weekly: 7

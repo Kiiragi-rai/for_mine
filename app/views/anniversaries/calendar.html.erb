@@ -1,0 +1,13 @@
+<h1>次回の記念日</h1>
+<%= month_calendar events: @anniversaries do |date,anniversaries| %>
+<%= date.day %>
+
+<% anniversaries.each do |anniversary| %>
+  <div>
+    <%= link_to anniversary.title, anniversary_path(anniversary) %>
+  </div>
+<% end %>
+
+<% end %>
+
+<%= link_to "back_to_index",anniversaries_path %>

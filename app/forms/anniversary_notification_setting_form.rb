@@ -131,7 +131,8 @@ end
     # sent_last
     #   end_on =  calculate(anniversary_date) 通知OFFなら　削除
     if is_enabled
-      notification_setting.end_on = calc_end_on(anniversary.anniversary_date)
+      # notification_setting.end_on = calc_end_on(anniversary.anniversary_date)
+      notification_setting.end_on = anniversary.next_anniversary
 
     else
       notification_setting.start_on = nil
@@ -144,28 +145,28 @@ end
   private
 
   # 今年の記念日に変換　後できりわけお
-  def calc_end_on(anniversary_date)
-    today = Date.current
-    year = today.year
-    mon = anniversary_date.month
-    da = anniversary_date.day
+  # def calc_end_on(anniversary_date)
+  #   today = Date.current
+  #   year = today.year
+  #   mon = anniversary_date.month
+  #   da = anniversary_date.day
 
-    if mon == 2 && da == 29 && !Date.leap?(year)
-      this_year = Date.new(year, 2, 28)
-    else
-      this_year =  Date.new(year, mon, da)
-    end
+  #   if mon == 2 && da == 29 && !Date.leap?(year)
+  #     this_year = Date.new(year, 2, 28)
+  #   else
+  #     this_year =  Date.new(year, mon, da)
+  #   end
 
-    if this_year < today
-      year += 1
-      if mon == 2 && da == 29 && !Date.leap?(year)
-         this_year = Date.new(year, 2, 28)
-      else
-        this_year = Date.new(year, mon, da)
-      end
-    end
-      this_year
-  end
+  #   if this_year < today
+  #     year += 1
+  #     if mon == 2 && da == 29 && !Date.leap?(year)
+  #        this_year = Date.new(year, 2, 28)
+  #     else
+  #       this_year = Date.new(year, mon, da)
+  #     end
+  #   end
+  #     this_year
+  # end
 
   # 閏年の記念日
 end

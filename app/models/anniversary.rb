@@ -47,9 +47,37 @@ class Anniversary < ApplicationRecord
         "記念日から#{diff.abs}日経ちました"
        # 今日より後ならダメ　何にも出ないよ
      end
+
     end
 
-    def start_time
-      self.anniversary_date
+    def next_anniversary
+      today = Date.current
+      year = today.year
+      mon = anniversary_date.month
+      da = anniversary_date.day
+  
+      if mon == 2 && da == 29 && !Date.leap?(year)
+        this_year = Date.new(year, 2, 28)
+      else
+        this_year =  Date.new(year, mon, da)
+      end
+  
+      if this_year < today
+        year += 1
+        if mon == 2 && da == 29 && !Date.leap?(year)
+           this_year = Date.new(year, 2, 28)
+        else
+          this_year = Date.new(year, mon, da)
+        end
+      end
+        this_year
     end
+  
+
+   #  def start_time
+   #    self.anniversary_date
+   #  end
+
+
+
 end

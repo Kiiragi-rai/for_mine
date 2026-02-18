@@ -49,6 +49,8 @@ gem "sidekiq"
 gem "sidekiq-scheduler"
 gem "redis"
 
+gem "simple_calendar"
+
 
 
 group :development, :test do

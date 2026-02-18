@@ -382,6 +382,8 @@ GEM
     sidekiq-scheduler (6.0.1)
       rufus-scheduler (~> 3.2)
       sidekiq (>= 7.3, < 9)
+    simple_calendar (3.1.0)
+      rails (>= 6.1)
     snaky_hash (2.0.3)
       hashie (>= 0.1.0, < 6)
       version_gem (>= 1.1.8, < 3)
@@ -463,6 +465,7 @@ DEPENDENCIES
   selenium-webdriver
   sidekiq
   sidekiq-scheduler
+  simple_calendar
   sprockets-rails
   stimulus-rails
   turbo-rails
@@ -608,6 +611,7 @@ CHECKSUMS
   selenium-webdriver (4.39.0) sha256=984a1e63d39472eaf286bac3c6f1822fa7eea6eed9c07a66ce7b3bc5417ba826
   sidekiq (8.1.0) sha256=6bde5eaee9e4d7b1121e97ebd585273627fb32b1f870a47893723572479ad1e4
   sidekiq-scheduler (6.0.1) sha256=e1fc04e851a3e2d9896bc6ab00f03d790fef8923bb56915e5b141804bca34062
+  simple_calendar (3.1.0) sha256=56764606c3804c70e6facb47b6571ec79d7ce941e77b6bd3678869c1350a720c
   snaky_hash (2.0.3) sha256=25a3d299566e8153fb02fa23fd9a9358845950f7a523ddbbe1fa1e0d79a6d456
   sprockets (4.2.2) sha256=761e5a49f1c288704763f73139763564c845a8f856d52fba013458f8af1b59b1
   sprockets-rails (3.5.2) sha256=a9e88e6ce9f8c912d349aa5401509165ec42326baf9e942a85de4b76dbc4119e

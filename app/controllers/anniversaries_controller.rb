@@ -2,7 +2,9 @@ class AnniversariesController < ApplicationController
     before_action :authenticate_user!
 
     def index
-        @anniversaries = current_user.anniversaries
+        # @anniversaries = current_user.anniversaries
+        @q = current_user.anniversaries.ransack(params[:q])
+        @anniversaries = @q.result.includes(:notification_setting)
     end
 
     def calendar

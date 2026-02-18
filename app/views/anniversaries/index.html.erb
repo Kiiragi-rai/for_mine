@@ -58,12 +58,12 @@
   </div>
   
   
-  <%= month_calendar events: @events do |date, events| %>
+  <%= month_calendar events: @anniversaries do |date,anniversaries| %>
     <%= date.day %>
 
-    <% events.each do |event| %>
+    <% anniversaries.each do |anniversary| %>
       <div>
-        <%= link_to event.title, anniversary_path(event) %>
+        <%= link_to anniversary.title, anniversary_path(anniversary) %>
       </div>
     <% end %>
 

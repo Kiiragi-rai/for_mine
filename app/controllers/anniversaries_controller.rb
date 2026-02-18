@@ -3,22 +3,10 @@ class AnniversariesController < ApplicationController
 
     def index
         @anniversaries = current_user.anniversaries
-
-        @events = []
-
-        @anniversaries.each do |anniversary|
-          if anniversary.notification_setting && anniversary.notification_setting.end_on
-          @events << CalendarEvent.new(
-            target_date: anniversary.notification_setting.end_on,
-            title: anniversary.title
-          )
-          else
-            @events << CalendarEvent.new(
-              target_date: anniversary.anniversary_date,
-              title: anniversary.title
-            )
-          end
-        end
+    end
+    
+    def calendar
+      @anniversaries = current_user.anniversaries
     end
 
     def show

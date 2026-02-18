@@ -74,9 +74,9 @@ class Anniversary < ApplicationRecord
     end
   
 
-   #  def start_time
-   #    self.anniversary_date
-   #  end
+    def start_time
+      next_anniversary
+    end
 
 
 

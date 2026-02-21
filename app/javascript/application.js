@@ -21,7 +21,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
 // how_toshowのselect-optionの画面遷移用
-  document.addEventListener("turbo:load", () => {
+  document.addEventListener("DOMContentLoaded", () => {
     const selectbox = document.querySelector(".how_to_items");
     const searchKey = "itemId";
   

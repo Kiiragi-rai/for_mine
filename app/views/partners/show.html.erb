@@ -2,11 +2,23 @@
     <h1><%= "パートナーについて" %></h1>
 </div>
 
+
 <div class="container pt-5">
     <div class="row mb-3">
       <div class="col-lg-8 offset-lg-2">
   
         <% if @partner.present? %>
+        <div class="progress"> 
+          <div class="progress-bar <%= @partner.progress_bar_color %>" 
+               role="progressbar" 
+               style="width:<%= @partnercount %>%;"  
+               aria-valuenow=<%= @partnercount %> 
+               aria-valuemin="0" 
+               aria-valuemax="100">
+               <%= @partnercount%>%
+              </div>
+        </div> 
+        
           <article class="card">
             <div class="card-body">
               <div class="col">

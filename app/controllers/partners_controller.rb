@@ -3,6 +3,8 @@ class PartnersController < ApplicationController
     # has one はpartner s付かない
     def show
         @partner = current_user.partner
+        @partnercount = @partner.change_to_progress_bar_value if @partner.present?
+            @partnercount = @partner.change_to_progress_bar_value
     end
     #  newとcreate だと入らなかった
     def new

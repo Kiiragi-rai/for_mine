@@ -64,6 +64,26 @@ class Partner < ApplicationRecord
         "#{object}円"
       end
 
+      def change_to_progress_bar_value
+        # attributes.delete_if { |k, v| v.blank? }.count
+        attrs = attributes.except("id", "created_at", "updated_at", "user_id")
+        attrssize = attrs.size 
+
+        attrs2 = attrs.delete_if { |k, v| v.blank? }
+        attrs2size = attrs2.size
+      
+        ((attrs2size.to_f / attrssize) * 100).round
+
+      end
+
+      def progress_bar_color 
+        value = change_to_progress_bar_value
+
+        return "text-bg-success" if value >= 80
+        return "text-bg-warning" if value >= 50
+        "text-bg-danger"
+      end
+
 
     private
     # 予算（下限）が予算（上限）を超えないように
@@ -84,4 +104,8 @@ class Partner < ApplicationRecord
              .map(&:strip)
              .reject(&:blank?)
       end
+
+      # def change_to_progress_bar_value
+      #   attributes.delete_if { |k, v| v.blank? }
+      # end
 end

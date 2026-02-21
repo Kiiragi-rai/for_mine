@@ -1,5 +1,5 @@
 class HowToController < ApplicationController
   def show
-    @section = params[item:ID] || "1"
+    @section = params[:itemId] || "1"
   end
 end

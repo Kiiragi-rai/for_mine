@@ -1,0 +1,23 @@
+<h1>HowTo#show</h1>
+<p>Find me in app/views/how_to/show.html.erb</p>
+
+
+<h2>使い方</h2>
+
+<select name="items" id="items" class="how_to_items">
+    <option value="1">anniversary</option>
+    <option value="2">partner</option>
+    <option value="3">present</option>
+    <option value="4">present history</option>
+</select>
+
+<% case @section%>
+<% when "1"%>
+    <%= render "anniversary"%>
+<% when "2"%>
+    <%= render "partner"%>
+<% when "3"%>
+    <%= render "gift_suggestion"%>
+<% when "4"%>
+    <%= render "gift_suggestion_history"%>
+<% end %>

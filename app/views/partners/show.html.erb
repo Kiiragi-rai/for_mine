@@ -40,18 +40,22 @@
   
               <div class="mt-3">
                 <%= link_to "編集", edit_partner_path %>
-                <%= link_to "削除", partner_path, data: { turbo_method: :delete } %>
+                <!-- <button id="delete-btn">削除</button> -->
+                <%= link_to "削除", "#", id: "delete-btn" %>
               </div>
             </div>
           </article>
+            <!-- 確認ポップアップ用のモーダル -->
+            <%= render "shared/confirm_delete_modal"%>
+
         <% else %>
           <div>
             <p>相手が見つかっていません</p>
             <%= link_to "見つけた", new_partner_path %>
           </div>
         <% end %>
-  
       </div>
     </div>
   </div>
   
+

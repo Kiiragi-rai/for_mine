@@ -65,18 +65,16 @@ class Partner < ApplicationRecord
       end
 
       def change_to_progress_bar_value
-        # attributes.delete_if { |k, v| v.blank? }.count
         attrs = attributes.except("id", "created_at", "updated_at", "user_id")
-        attrssize = attrs.size 
+        attrssize = attrs.size
 
         attrs2 = attrs.delete_if { |k, v| v.blank? }
         attrs2size = attrs2.size
-      
-        ((attrs2size.to_f / attrssize) * 100).round
 
+        ((attrs2size.to_f / attrssize) * 100).round
       end
 
-      def progress_bar_color 
+      def progress_bar_color
         value = change_to_progress_bar_value
 
         return "text-bg-success" if value >= 80
@@ -105,7 +103,7 @@ class Partner < ApplicationRecord
              .reject(&:blank?)
       end
 
-      # def change_to_progress_bar_value
-      #   attributes.delete_if { |k, v| v.blank? }
-      # end
+  # def change_to_progress_bar_value
+  #   attributes.delete_if { |k, v| v.blank? }
+  # end
 end

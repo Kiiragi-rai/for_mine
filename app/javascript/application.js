@@ -21,7 +21,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
 // how_toshowのselect-optionの画面遷移用
-  document.addEventListener("DOMContentLoaded", () => {
+  document.addEventListener("turbo:load", () => {
     const selectbox = document.querySelector(".how_to_items");
     const searchKey = "itemId";
   
@@ -82,3 +82,21 @@ const showElements = () => {
 
 window.addEventListener("load", showElements);
 window.addEventListener("scroll", showElements);
+
+
+
+// モーダル
+   document.addEventListener("turbo:load", function() {
+    const deleteBtn = document.getElementById("delete-btn");
+    const modal = document.getElementById("confirmation-modal");
+    const confirmNoBtn = document.getElementById("confirm-no");
+  
+    deleteBtn.addEventListener("click", function(e) {
+      e.preventDefault();
+      modal.style.display = "block";
+    });
+  
+    confirmNoBtn.addEventListener("click", function() {
+      modal.style.display = "none";
+    });
+  }); 

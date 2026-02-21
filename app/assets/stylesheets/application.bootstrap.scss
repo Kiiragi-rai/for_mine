@@ -145,3 +145,61 @@ section {
     opacity: 1;
     transform: translateX(0) translateY(0);
   }
+
+
+  // progress bar color 
+  // progress {
+  //   -webkit-appearance: none; /* プログレスバーのスタイルをリセット */
+  //   -moz-appearance: none; /* プログレスバーのスタイルをリセット */
+  //   background-color: #fff; /* プログレスバーの背景色/-moz- 用 */
+  // }
+  // ::-webkit-progress-bar {
+  //   background-color: #fff; /* プログレスバーの背景色/-webkit- 用 */
+  // }
+  // ::-webkit-progress-value {
+  //   background-color: red; /* プログレスバーの進捗部分色/-webkit- 用 */
+  // }
+  // ::-moz-progress-bar {
+  //   background-color: red; /* プログレスバーの進捗部分色/-moz- 用 */
+  // }
+  // .progress {
+  //   width: 100%;
+  //   height: 20px;
+  //   background-color: grey;
+  //   border-radius: 15px;
+  // }
+  
+  // .progressBar {
+  //   width: 25%;
+  //   height: 20px;
+  //   background-color: red;
+  //   border-radius: 15px;
+  // }
+
+  // progress {
+  //   accent-color: hsla(180,30%,30%,.5);
+  // }
+
+    /* モーダルのスタイル */
+    .modal {
+      display: none;
+      position: fixed;
+      z-index: 999;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0, 0, 0, 0.5);
+    }
+  
+    .modal-content {
+      background-color: #fff;
+      margin: 200px auto;
+      padding: 20px;
+      width: 300px;
+      text-align: center;
+    }
+  
+    .modal-buttons {
+      margin-top: 20px;
+    }

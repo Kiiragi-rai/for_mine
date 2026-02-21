@@ -8,7 +8,8 @@
       <div class="col-lg-8 offset-lg-2">
   
         <% if @partner.present? %>
-        <div class="progress"> 
+        <label for="file">登録率</label>
+        <div class="progress "> 
           <div class="progress-bar <%= @partner.progress_bar_color %>" 
                role="progressbar" 
                style="width:<%= @partnercount %>%;"  

@@ -4,12 +4,12 @@ class PartnersController < ApplicationController
     def show
         @partner = current_user.partner
         @partnercount = @partner.change_to_progress_bar_value if @partner.present?
-            @partnercount = @partner.change_to_progress_bar_value
     end
     #  newとcreate だと入らなかった
     def new
         @partner = current_user.build_partner
     end
+
     def create
         @partner = current_user.build_partner(partner_params)
         if @partner.save

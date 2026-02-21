@@ -45,7 +45,7 @@ Rails.application.routes.draw do
     end
   end
   # has_oneなのでresorce
-  resource :partner
+  resource :partner 
   resources :gift_suggestions, only: %i[ index new create destroy]
 
   mount LetterOpenerWeb::Engine, at: "/letter_opener" if Rails.env.development?

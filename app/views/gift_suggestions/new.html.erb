@@ -1,16 +1,17 @@
-<div class="container">
-    <h1 class="text-center">プレゼント提案</h1>
+<div class="container" data-controller="gift-loading">
+    <h1 class="text-center" >プレゼント提案</h1>
   
-    <%= form_with url: gift_suggestions_path, data: { turbo: false } do |form| %>
+    <%= form_with url: gift_suggestions_path, data: { turbo: false ,action: "submit->gift-loading#submit"} do |form| %>
   
       <div class="flex mb-5 mt-5 text-center">
-        <%= form.submit "提案", id: "gift-submit-button",class: "rounded" %>
+        <%= form.submit "提案",class: "rounded", data: {gift_loading_target: "submitButton"} %>
       </div>
     <% end %>
+    <div data-gift-loading-target= "loadingIndicator" style="display:none" class="">
+      <p class="">AIが考えています...</p>
+    </div>
   </div>
-  <div id="loading-indicator" style="display:none" class="">
-    <p class="">AIがレシピを考えています...</p>
-  </div>
+
 
   <% if @contents %>
   <div class="container border mt-5">

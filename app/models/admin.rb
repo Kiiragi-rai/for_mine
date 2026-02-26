@@ -24,11 +24,17 @@ class Admin < ApplicationRecord
 
    validate :accept_only_one_admin, on: :create
 
+   before_update :prevent_update
+
    private 
 
    def accept_only_one_admin
     if Admin.exists?
       error.add(:base, "Adminは1人だけですよ")
     end
+   end
+
+   def prevent_update
+    errors.add(:base, "Adminは更新できません")
    end
 end

@@ -14,8 +14,6 @@ class AnniversariesController < ApplicationController
 
     def calendar
       @anniversaries = current_user.anniversaries
-    
-
     end
 
     def show

@@ -1,14 +1,14 @@
 module ApplicationHelper
   def default_meta_tags
     {
-      site: 'for mine',
-      title: 'トップ',
+      site: "for mine",
+      title: "トップ",
       reverse: true,
-      charset: 'utf-8',
-      description: '記念日管理アプリ',
-      keywords: '記念日 通知 プレゼント提案',
+      charset: "utf-8",
+      description: "記念日管理アプリ",
+      keywords: "記念日 通知 プレゼント提案",
       # canonical: request.original_url,
-      separator: '|'
+      separator: "|"
       # icon: [
       #   { href: image_url('logo.png') },
       #   { href: image_url('top_image.png'), rel: 'apple-touch-icon', sizes: '180x180', type: 'image/png' },

@@ -2,6 +2,9 @@ require "sidekiq/web"
 require "sidekiq-scheduler/web"
 
 Rails.application.routes.draw do
+  namespace :admin do
+    get "dashboard/index"
+  end
   devise_for :admins
   namespace :adimin do
     root "dashboard#index"

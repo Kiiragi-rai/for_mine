@@ -2,10 +2,152 @@
 import "@hotwired/turbo-rails"
 import "./controllers"
 import * as bootstrap from "bootstrap"
-import Swiper from 'swiper'
-import 'swiper/css'
 
 
+document.addEventListener("turbo:load", ()=> {
+  const slide = document.getElementById('slide');
+  const prev = document.getElementById('prev');
+  const next = document.getElementById('next');
+  const indicator = document.getElementById('indicator');
+  const lists = document.querySelectorAll('.list');
+  const totalSlides = lists.length;
+  let count = 0;
+  let autoPlayInterval;
+  function updateListBackground() {
+    for (let i = 0; i < lists.length; i++) {
+      lists[i].style.backgroundColor = i === count % totalSlides ? '#000' : '#fff';
+    }
+  }
+  function nextClick() {
+    slide.classList.remove(`slide${count % totalSlides + 1}`);
+    count++;
+    slide.classList.add(`slide${count % totalSlides + 1}`);
+    updateListBackground();
+  }
+  function prevClick() {
+    slide.classList.remove(`slide${count % totalSlides + 1}`);
+    count--;
+    if (count < 0) count = totalSlides - 1;
+    slide.classList.add(`slide${count % totalSlides + 1}`);
+    updateListBackground();
+  }
+  function startAutoPlay() {
+    autoPlayInterval = setInterval(nextClick, 3000);
+  }
+  function resetAutoPlayInterval() {
+    clearInterval(autoPlayInterval);
+    startAutoPlay();
+  }
+  next.addEventListener('click', () => {
+    nextClick();
+    resetAutoPlayInterval();
+  });
+  prev.addEventListener('click', () => {
+    prevClick();
+    resetAutoPlayInterval();
+  });
+  indicator.addEventListener('click', (event) => {
+    if (event.target.classList.contains('list')) {
+      const index = Array.from(lists).indexOf(event.target);
+      slide.classList.remove(`slide${count % totalSlides + 1}`);
+      count = index;
+      slide.classList.add(`slide${count % totalSlides + 1}`);
+      updateListBackground();
+      resetAutoPlayInterval();
+    }
+  });
+  startAutoPlay();
+})
+
+// document.addEventListener("turbo:load", () => {
+//   const swiper = new Swiper(".js-mvSlider", {
+//     speed: 400,
+//     spaceBetween: 30,
+//     slidesPerView: 3,
+//     autoplay: {
+//       delay: 1000,
+//     },
+
+//     pagination: {
+//       el: ".js-mvSlider .swiper-pagination",
+//       clickable: true,
+//     },
+
+//     navigation: {
+//       nextEl: ".js-mvSlider .swiper-button-next",
+//       prevEl: ".js-mvSlider .swiper-button-prev",
+//     },
+//   });
+// });
+
+  // Swiper
+//初期設定
+// document.addEventListener('turbo:load', function() {
+//   const swiper = new Swiper('.swiper-container', {
+//     slidesPerView: 1,
+//     spaceBetween: 10,
+//     pagination: {
+//       el: '.swiper-pagination',
+//       clickable: true,
+//     },
+//     navigation: {
+//       nextEl: '.swiper-button-next',
+//       prevEl: '.swiper-button-prev',
+//     },
+//   });
+// // });
+// const slide = document.getElementById('slide');
+// const prev = document.getElementById('prev');
+// const next = document.getElementById('next');
+// const indicator = document.getElementById('indicator');
+// const lists = document.querySelectorAll('.list');
+// const totalSlides = lists.length;
+// let count = 0;
+// let autoPlayInterval;
+// function updateListBackground() {
+//   for (let i = 0; i < lists.length; i++) {
+//     lists[i].style.backgroundColor = i === count % totalSlides ? '#000' : '#fff';
+//   }
+// }
+// function nextClick() {
+//   slide.classList.remove(`slide${count % totalSlides + 1}`);
+//   count++;
+//   slide.classList.add(`slide${count % totalSlides + 1}`);
+//   updateListBackground();
+// }
+// function prevClick() {
+//   slide.classList.remove(`slide${count % totalSlides + 1}`);
+//   count--;
+//   if (count < 0) count = totalSlides - 1;
+//   slide.classList.add(`slide${count % totalSlides + 1}`);
+//   updateListBackground();
+// }
+// function startAutoPlay() {
+//   autoPlayInterval = setInterval(nextClick, 3000);
+// }
+// function resetAutoPlayInterval() {
+//   clearInterval(autoPlayInterval);
+//   startAutoPlay();
+// }
+// next.addEventListener('click', () => {
+//   nextClick();
+//   resetAutoPlayInterval();
+// });
+// prev.addEventListener('click', () => {
+//   prevClick();
+//   resetAutoPlayInterval();
+// });
+// indicator.addEventListener('click', (event) => {
+//   if (event.target.classList.contains('list')) {
+//     const index = Array.from(lists).indexOf(event.target);
+//     slide.classList.remove(`slide${count % totalSlides + 1}`);
+//     count = index;
+//     slide.classList.add(`slide${count % totalSlides + 1}`);
+//     updateListBackground();
+//     resetAutoPlayInterval();
+//   }
+// });
+// startAutoPlay();
 
 // // プレゼント提案の結果が出るまでの間
 // document.addEventListener("DOMContentLoaded", () => {
@@ -106,5 +248,3 @@ import 'swiper/css'
   // }); 
 
 
-  // Swiper
-//初期設定

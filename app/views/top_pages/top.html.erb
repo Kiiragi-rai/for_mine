@@ -28,19 +28,27 @@
       </div>
     </div>
 
-    <div class="swiper-container">
-      <div class="swiper-wrapper">
-        <div class="swiper-slide">Slide 1</div>
-        <div class="swiper-slide">Slide 2</div>
-        <div class="swiper-slide">Slide 3</div>
-        <!-- 他のスライドを追加できます -->
+    <div data-controller="slider" class="slide-wrapper">
+  
+      <div data-slider-target="slide" class="slide slide1">
+        <div><p>スライド1</p></div>
+        <div><p>スライド2</p></div>
+        <div><p>スライド3</p></div>
       </div>
-      <!-- Add Pagination -->
-      <div class="swiper-pagination"></div>
-      <!-- Add Navigation -->
-      <div class="swiper-button-next"></div>
-      <div class="swiper-button-prev"></div>
+    
+      <span data-action="click->slider#prev" class="prev"></span>
+      <span data-action="click->slider#next" class="next"></span>
+    
+      <ul data-slider-target="indicator"
+          data-action="click->slider#select"
+          class="indicator">
+        <li class="list"></li>
+        <li class="list"></li>
+        <li class="list"></li>
+      </ul>
+    
     </div>
+
 </div>
 
     

@@ -18,3 +18,6 @@ application.register("how-to-select", HowToSelectController)
 
 import ModalController from "./modal_controller"
 application.register("modal", ModalController)
+
+import SliderController from "./slider_controller"
+application.register("slider", SliderController)

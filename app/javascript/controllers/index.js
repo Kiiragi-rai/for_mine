@@ -4,6 +4,9 @@
 
 import { application } from "./application"
 
+import FadeController from "./fade_controller"
+application.register("fade", FadeController)
+
 import GiftLoadingController from "./gift_loading_controller"
 application.register("gift-loading", GiftLoadingController)
 

@@ -36,9 +36,13 @@ section {
   }
   
   .ef {
+    opacity: 0;
     transition: opacity 1s;
   }
 
+  .ef.show {
+    opacity: 1;
+  }
 
 
 
@@ -203,3 +207,5 @@ section {
     .modal-buttons {
       margin-top: 20px;
     }
+
+   

@@ -2,10 +2,8 @@ require "sidekiq/web"
 require "sidekiq-scheduler/web"
 
 Rails.application.routes.draw do
-  namespace :admin do
-    get "dashboard/index"
-  end
-  devise_for :admins
+ 
+  devise_for :admins, skip: [:registrations]
   namespace :adimin do
     root "dashboard#index"
     resources :users, only: [:index]

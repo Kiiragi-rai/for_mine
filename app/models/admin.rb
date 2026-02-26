@@ -21,4 +21,14 @@ class Admin < ApplicationRecord
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
+
+   validate :accept_only_one_admin, on: :create
+
+   private 
+
+   def accept_only_one_admin
+    if Admin.exsits?
+      error.add(:base, "Adminは1人だけですよ")
+    end
+   end
 end

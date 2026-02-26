@@ -2,6 +2,12 @@ require "sidekiq/web"
 require "sidekiq-scheduler/web"
 
 Rails.application.routes.draw do
+  devise_for :admins
+  namespace :adimin do
+    root "dashboard#index"
+    resources :users, only: [:index]
+    resources :notification_managements, only: [:index]
+  end
   get "how_to/show"
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 

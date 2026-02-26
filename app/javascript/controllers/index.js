@@ -15,3 +15,6 @@ application.register("hello", HelloController)
 
 import HowToSelectController from "./how_to_select_controller"
 application.register("how-to-select", HowToSelectController)
+
+import ModalController from "./modal_controller"
+application.register("modal", ModalController)

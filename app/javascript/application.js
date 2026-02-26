@@ -2,6 +2,8 @@
 import "@hotwired/turbo-rails"
 import "./controllers"
 import * as bootstrap from "bootstrap"
+import Swiper from 'swiper'
+import 'swiper/css'
 
 
 // プレゼント提案の結果が出るまでの間
@@ -24,6 +26,7 @@ document.addEventListener("DOMContentLoaded", () => {
   document.addEventListener("turbo:load", () => {
     const selectbox = document.querySelector(".how_to_items");
     const searchKey = "itemId";
+
   
     const url = new URL(window.location.href);
     /** セレクトボックス初期値を検索クエリに合わせてセット */
@@ -100,3 +103,7 @@ window.addEventListener("scroll", showElements);
       modal.style.display = "none";
     });
   }); 
+
+
+  // Swiper
+//初期設定

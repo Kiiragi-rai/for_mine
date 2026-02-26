@@ -1,6 +1,7 @@
 module LineNotification
   class NotificationGet
     def self.setting
+      # transaction必要ないかも、user_id, start_on, end_on , いらない
       ActiveRecord::Base.transaction do
         sql= <<~SQL
 

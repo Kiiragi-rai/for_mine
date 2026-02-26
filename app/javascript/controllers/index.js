@@ -12,3 +12,6 @@ application.register("gift-loading", GiftLoadingController)
 
 import HelloController from "./hello_controller"
 application.register("hello", HelloController)
+
+import HowToSelectController from "./how_to_select_controller"
+application.register("how-to-select", HowToSelectController)

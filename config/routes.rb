@@ -3,12 +3,19 @@ require "sidekiq-scheduler/web"
 
 Rails.application.routes.draw do
  
-  devise_for :admins, skip: [:registrations]
-  namespace :adimin do
+  namespace :admin do
     root "dashboard#index"
     resources :users, only: [:index]
     resources :notification_managements, only: [:index]
   end
+
+  devise_for :admins,
+    controllers: {
+      sessions: "admin/sessions",
+      registrations: "admin/registrations"
+    }
+
+  
   get "how_to/show"
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 

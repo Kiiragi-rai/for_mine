@@ -1,7 +1,6 @@
 class NotificationManagementsController < ApplicationController
+  # コントローラー内いらない　destroyいる？admin
 
-  # コントローラー内いらない　destroyいる？admin 
-  
   def new
     @notification_management = NotificationManagement.new
   end

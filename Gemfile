@@ -52,6 +52,9 @@ gem "redis"
 gem "simple_calendar"
 gem "ransack", "~> 4.2"
 
+gem "meta-tags"
+
+
 
 
 

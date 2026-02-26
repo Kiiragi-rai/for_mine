@@ -74,7 +74,8 @@ class Anniversary < ApplicationRecord
 
 
     def start_time
-      next_anniversary
+      # next_anniversary
+      anniversary_date
     end
 
     def self.ransackable_attributes(auth_object = nil)

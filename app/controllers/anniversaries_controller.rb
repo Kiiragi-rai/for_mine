@@ -6,10 +6,16 @@ class AnniversariesController < ApplicationController
         # 記念日もカレンダーででるようにしてもいいかも
         @q = current_user.anniversaries.ransack(params[:q])
         @anniversaries = @q.result.includes(:notification_setting)
+
+        set_meta_tags(
+          title: "記念日一覧"
+        )
     end
 
     def calendar
       @anniversaries = current_user.anniversaries
+    
+
     end
 
     def show

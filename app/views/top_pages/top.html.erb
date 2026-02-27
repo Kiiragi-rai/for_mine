@@ -29,9 +29,9 @@
     </div>
 
 <!-- スライドの外枠 -->
-<div class="slide-wrapper">
+<div class="slide-wrapper" data-controller="slider">
   <!-- スライド（コンテンツ） -->
-  <div id="slide" class="slide">
+  <div id="slide" class="slide" data-slider-target="slide">
     <div>
       <p>スライド１</p>
     </div>
@@ -43,13 +43,13 @@
     </div>
   </div>
   <!-- 左右のボタン -->
-  <span id="prev" class="prev"></span>
-  <span id="next" class="next"></span>
+  <span id="prev" class="prev" data-slider-target="prev"></span>
+  <span id="next" class="next" data-slider-target="next"></span>
   <!-- インジケーター -->
-  <ul class="indicator" id="indicator">
-    <li class="list"></li>
-    <li class="list"></li>
-    <li class="list"></li>
+  <ul class="indicator" id="indicator" data-slider-target="indicator">
+    <li class="list" data-slider-target="list"></li>
+    <li class="list" data-slider-target="list"></li>
+    <li class="list" data-slider-target="list"></li>
   </ul>
 </div>
 

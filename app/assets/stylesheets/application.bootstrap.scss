@@ -272,3 +272,30 @@ section {
     .indicator li:first-of-type {
       background-color: #000;
     }
+
+
+    // admin sidebar
+    body {
+      font-family: 'Montserrat', sans-serif;
+    }
+
+    header form .btn {
+      background-color:#8c68cd;
+    }
+
+
+    header from .btn:hover{
+      background-color: #a88ae0;
+      color: #ffff;
+    }
+
+    // admin navbar
+
+    .sidebar .nav-link {
+      color: #212529;
+    }
+    .sidebar .nav-link:hover,
+    .sidebar .nav-link:focus {
+      background-color: #f0f0f0;
+      font-weight: 600;
+    }

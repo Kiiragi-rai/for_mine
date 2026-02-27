@@ -1,0 +1,21 @@
+<h2>通知管理</h2>
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>id</th>
+            <th>neme</th>
+            <th>date</th>
+        </tr>
+    </thead>
+    <tbody>
+
+        <% @notification_managements.each do |nm| %>
+        <tr>
+            <td><%= nm.title %></td>
+            <td><%= nm.scheduled_for %></td>
+            <td><%= nm.status %></td>
+            <td><%= nm.created_at %></td>
+        </tr>
+        <% end %>
+    </tbody>
+</table>

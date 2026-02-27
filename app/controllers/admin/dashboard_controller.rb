@@ -3,5 +3,6 @@ class Admin::DashboardController < Admin::BaseController
 
   def index
     @users = User.all.count
+    @notification_managements = NotificationManagement.all.count
   end
 end

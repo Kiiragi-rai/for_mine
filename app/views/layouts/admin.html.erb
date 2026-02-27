@@ -16,10 +16,17 @@
     <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
     <%= javascript_include_tag "application", "data-turbo-track": "reload", type: "module" %>
     <%= display_meta_tags(default_meta_tags) %>
-
   </head>
+      <body class="d-flex flex-column min-vh-100">
+        <%= render "shared/admin_header" %>
+        <div class="container-fluid">
+          <div class="row">
+              <%= render "shared/admin_sidebar" %> 
+            <%= yield %>
+          </div>
+        </div>
+        
+    
+      </body>  
 
-  <body class="d-flex flex-column min-vh-100">
-    <%= yield %>
-  </body>
 </html>

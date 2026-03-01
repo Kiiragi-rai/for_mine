@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.2].define(version: 2026_03_01_110256) do
+ActiveRecord::Schema[7.2].define(version: 2026_03_01_134156) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -96,6 +96,7 @@ ActiveRecord::Schema[7.2].define(version: 2026_03_01_110256) do
     t.string "provider", default: "", null: false
     t.string "uid", default: "", null: false
     t.boolean "is_deleted"
+    t.boolean "first_login_flag", default: false, null: false
     t.index ["provider", "uid"], name: "index_users_on_provider_and_uid", unique: true
   end
 

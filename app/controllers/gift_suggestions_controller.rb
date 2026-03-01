@@ -2,6 +2,7 @@ require "json"
 
 class GiftSuggestionsController < ApplicationController
   before_action :authenticate_user!
+  # before_action :confirm_partner_present
 
   def index
     @results = current_user.gift_suggestions.where.not(result_json: nil).map do |gs|
@@ -20,6 +21,8 @@ class GiftSuggestionsController < ApplicationController
   def create
         # if Rails.env.production?
         partner = current_user.partner
+
+        return redirect_to gift_suggestions_path unless partner
 
          partner_info = {
           sex: partner.sex.presence || "未入力",
@@ -90,4 +93,11 @@ class GiftSuggestionsController < ApplicationController
     # gs.destroy!
     redirect_to gift_suggestions_path
   end
+
+  # private 
+  # def confirm_partner_present
+  #   return if current_user.partner.present?
+
+  #   redirect_to partner_path , alert: "先にpartnerを登録してください"
+  # end
 end

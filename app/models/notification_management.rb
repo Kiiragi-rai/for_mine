@@ -25,6 +25,11 @@ class NotificationManagement < ApplicationRecord
   belongs_to :notification_setting
 
   # status success, failure enumかな、それか直接入れる
+  enum  status: {
+    pending: 0,
+    success: 1,
+    failure: 2
+  }
 
   validates :scheduled_for, presence: true
 

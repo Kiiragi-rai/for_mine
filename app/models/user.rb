@@ -33,4 +33,19 @@ class User < ApplicationRecord
       user.name = auth.info.name
     end
   end
+# 論理削除あり
+  # def self.from_line(auth)
+  #   user = find_by(provider: auth.provider, uid: auth.uid)
+
+  #   if user
+  #     user.update!(is_deleted: false) if user.is_deleted?
+  #     user
+  #   else 
+  #     create!(
+  #       provider: auth.provider, 
+  #       uid: auth.uid,
+  #       name: auth.info.name
+  #     )
+  #   end
+  # end
 end

@@ -4,7 +4,8 @@ require "sidekiq-scheduler/web"
 Rails.application.routes.draw do
   resource :my_page, only: [:show] do
     get :confirm 
-    patch :withdraw
+    # patch :withdraw
+    delete :withdraw
   end
  
   namespace :admin do

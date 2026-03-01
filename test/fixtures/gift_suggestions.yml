@@ -6,7 +6,7 @@
 #  error_message :text
 #  input_json    :jsonb
 #  result_json   :jsonb
-#  status        :integer          default(0), not null
+#  status        :integer          default("pending"), not null
 #  created_at    :datetime         not null
 #  updated_at    :datetime         not null
 #  user_id       :bigint           not null

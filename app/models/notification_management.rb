@@ -7,7 +7,7 @@
 #  schedule_title          :string
 #  scheduled_for           :datetime         not null
 #  sent_at                 :datetime
-#  status                  :integer          default(0), not null
+#  status                  :integer          default("pending"), not null
 #  created_at              :datetime         not null
 #  updated_at              :datetime         not null
 #  notification_setting_id :bigint           not null
@@ -41,4 +41,13 @@ class NotificationManagement < ApplicationRecord
         management.schedule_title = target.title
       end
   end
+
+  def self.ransackable_attributes(auth_object = nil)
+    ["status"]
+  end
+
+  def self.ransackable_associations(auth_object = nil)
+    ["notification_setting"]
+  end
+
 end

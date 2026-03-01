@@ -2,7 +2,10 @@ require "sidekiq/web"
 require "sidekiq-scheduler/web"
 
 Rails.application.routes.draw do
-  get "my_pages/show"
+  resource :my_page, only: [:show] do
+    get :confirm 
+    patch :withdraw
+  end
  
   namespace :admin do
     root "dashboard#index"

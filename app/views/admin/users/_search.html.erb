@@ -1,6 +1,8 @@
 <%= search_form_for q ,url: admin_users_path, method: :get do |f| %>
 <%= f.label :name_cont, "名前" %>
 <%= f.search_field :name_cont %>
+<%= f.label :id_eq, "id" %>
+<%= f.search_field :id_eq %>
 <div class="actions ransack-submit"><%= f.submit "検索" %></div>
 <%= link_to "リセット", admin_users_path %>
 <% end %>

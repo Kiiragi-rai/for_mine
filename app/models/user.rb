@@ -50,6 +50,6 @@ class User < ApplicationRecord
   # end
 
   def self.ransackable_attributes(auth_object = nil)
-    ["created_at", "id", "is_deleted", "name", "provider", "uid", "updated_at"]
+    ["created_at", "id", "name"]
   end
 end

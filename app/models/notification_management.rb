@@ -41,4 +41,13 @@ class NotificationManagement < ApplicationRecord
         management.schedule_title = target.title
       end
   end
+
+  def self.ransackable_attributes(auth_object = nil)
+    ["status"]
+  end
+
+  def self.ransackable_associations(auth_object = nil)
+    ["notification_setting"]
+  end
+
 end

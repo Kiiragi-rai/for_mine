@@ -88,9 +88,10 @@ class GiftSuggestionsController < ApplicationController
 
   def destroy
     gs = current_user.gift_suggestions.find(params[:id])
+
     # adminでerror確認ができるように＋　定期的にjobで消去してもいいかも
-    gs.update!(result_json: nil)
-    # gs.destroy!
+    # gs.update!(result_json: nil)
+    gs.destroy!
     redirect_to gift_suggestions_path
   end
 

@@ -1,4 +1,5 @@
-<div class="container" data-controller="gift-loading">
+<% if current_user.partner.present? %>
+  <div class="container" data-controller="gift-loading">
     <h1 class="text-center" >プレゼント提案</h1>
   
     <%= form_with url: gift_suggestions_path, data: { turbo: false ,action: "submit->gift-loading#submit"} do |form| %>
@@ -25,6 +26,9 @@
       </div>
     </div>
   <% end %>
+  <% else %>
+  パートナー登録ひっつよー
+  <%= link_to "パートナー登録画面へ",new_partner_path %>
+  <% end %>
 
-  
-  
+ 

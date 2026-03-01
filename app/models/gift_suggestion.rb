@@ -6,7 +6,7 @@
 #  error_message :text
 #  input_json    :jsonb
 #  result_json   :jsonb
-#  status        :string
+#  status        :integer          default(0), not null
 #  created_at    :datetime         not null
 #  updated_at    :datetime         not null
 #  user_id       :bigint           not null
@@ -23,4 +23,10 @@ class GiftSuggestion < ApplicationRecord
   # いらないかな
   include Hashid::Rails
   belongs_to :user
+
+  enum  status: {
+    pending: 0,
+    success: 1,
+    failure: 2
+  }
 end

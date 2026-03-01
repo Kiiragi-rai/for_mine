@@ -309,12 +309,11 @@ Devise.setup do |config|
   config.responder.error_status = :unprocessable_content
   config.responder.redirect_status = :see_other
 
-  config.omniauth :line, ENV["LINE_CHANNEL_ID"], ENV["LINE_CHANNEL_SECRET"]
+  config.omniauth :line, ENV["LINE_CHANNEL_ID"], ENV["LINE_CHANNEL_SECRET"],
   {
     scope: "profile openid",
     prompt: "consent",
     bot_prompt: "aggressive"
-
   }
   # 開発用
 

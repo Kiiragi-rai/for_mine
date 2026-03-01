@@ -7,7 +7,7 @@
 #  schedule_title          :string
 #  scheduled_for           :datetime         not null
 #  sent_at                 :datetime
-#  status                  :string
+#  status                  :integer          default(0), not null
 #  created_at              :datetime         not null
 #  updated_at              :datetime         not null
 #  notification_setting_id :bigint           not null
@@ -25,6 +25,11 @@ class NotificationManagement < ApplicationRecord
   belongs_to :notification_setting
 
   # status success, failure enumかな、それか直接入れる
+  enum  status: {
+    pending: 0,
+    success: 1,
+    failure: 2
+  }
 
   validates :scheduled_for, presence: true
 

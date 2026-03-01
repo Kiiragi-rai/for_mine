@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.2].define(version: 2026_02_26_172234) do
+ActiveRecord::Schema[7.2].define(version: 2026_03_01_110256) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -41,7 +41,7 @@ ActiveRecord::Schema[7.2].define(version: 2026_02_26_172234) do
     t.datetime "updated_at", null: false
     t.jsonb "input_json"
     t.jsonb "result_json"
-    t.string "status"
+    t.integer "status", default: 0, null: false
     t.text "error_message"
     t.index ["user_id"], name: "index_gift_suggestions_on_user_id"
   end
@@ -49,7 +49,7 @@ ActiveRecord::Schema[7.2].define(version: 2026_02_26_172234) do
   create_table "notification_managements", force: :cascade do |t|
     t.bigint "notification_setting_id", null: false
     t.datetime "scheduled_for", null: false
-    t.string "status"
+    t.integer "status", default: 0, null: false
     t.datetime "sent_at"
     t.string "error_message"
     t.datetime "created_at", null: false
@@ -95,6 +95,7 @@ ActiveRecord::Schema[7.2].define(version: 2026_02_26_172234) do
     t.datetime "updated_at", null: false
     t.string "provider", default: "", null: false
     t.string "uid", default: "", null: false
+    t.boolean "is_deleted"
     t.index ["provider", "uid"], name: "index_users_on_provider_and_uid", unique: true
   end
 

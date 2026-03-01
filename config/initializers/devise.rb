@@ -314,7 +314,6 @@ Devise.setup do |config|
     scope: "profile openid",
     prompt: "consent",
     bot_prompt: "aggressive"
-
   }
   # 開発用
 

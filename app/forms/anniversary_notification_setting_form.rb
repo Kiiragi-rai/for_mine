@@ -136,7 +136,7 @@ end
 
     else
       notification_setting.start_on = nil
-      notification_setting.end_on =
+      notification_setting.end_on = nil
       # JOB内で追加するようにする
       notification_setting.last_sent_on = nil
     end

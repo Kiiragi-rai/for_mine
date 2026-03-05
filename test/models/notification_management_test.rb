@@ -11,15 +11,18 @@
 #  created_at              :datetime         not null
 #  updated_at              :datetime         not null
 #  notification_setting_id :bigint           not null
+#  user_id                 :bigint
 #
 # Indexes
 #
 #  index_notification_managements_on_notification_setting_id  (notification_setting_id)
+#  index_notification_managements_on_user_id                  (user_id)
 #  index_notification_managements_unique_schedule             (notification_setting_id,scheduled_for) UNIQUE
 #
 # Foreign Keys
 #
 #  fk_rails_...  (notification_setting_id => notification_settings.id)
+#  fk_rails_...  (user_id => users.id)
 #
 require "test_helper"
 

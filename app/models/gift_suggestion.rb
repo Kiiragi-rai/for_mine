@@ -24,7 +24,7 @@ class GiftSuggestion < ApplicationRecord
   include Hashid::Rails
   belongs_to :user
 
-  enum  status: {
+  enum status: {
     pending: 0,
     success: 1,
     failure: 2

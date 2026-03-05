@@ -319,7 +319,7 @@ Devise.setup do |config|
   config.omniauth :line, ENV["LINE_CHANNEL_ID"], ENV["LINE_CHANNEL_SECRET"],
   {
     scope: "profile openid",
-    #毎回出ちゃう
+    # 毎回出ちゃう
     # prompt: "consent",
     bot_prompt: "aggressive"
   }

@@ -11,21 +11,25 @@
 #  created_at              :datetime         not null
 #  updated_at              :datetime         not null
 #  notification_setting_id :bigint           not null
+#  user_id                 :bigint
 #
 # Indexes
 #
 #  index_notification_managements_on_notification_setting_id  (notification_setting_id)
+#  index_notification_managements_on_user_id                  (user_id)
 #  index_notification_managements_unique_schedule             (notification_setting_id,scheduled_for) UNIQUE
 #
 # Foreign Keys
 #
 #  fk_rails_...  (notification_setting_id => notification_settings.id)
+#  fk_rails_...  (user_id => users.id)
 #
 class NotificationManagement < ApplicationRecord
   belongs_to :notification_setting
+  belongs_to :user
 
   # status success, failure enumかな、それか直接入れる
-  enum  status: {
+  enum status: {
     pending: 0,
     success: 1,
     failure: 2
@@ -39,15 +43,15 @@ class NotificationManagement < ApplicationRecord
         scheduled_for: target.scheduled_for
       ) do |management|
         management.schedule_title = target.title
+        management.user_id = target.user_id
       end
   end
 
   def self.ransackable_attributes(auth_object = nil)
-    ["status"]
+    [ "status" ]
   end
 
   def self.ransackable_associations(auth_object = nil)
-    ["notification_setting"]
+    [ "notification_setting" ]
   end
-
 end

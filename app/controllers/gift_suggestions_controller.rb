@@ -95,7 +95,7 @@ class GiftSuggestionsController < ApplicationController
     redirect_to gift_suggestions_path
   end
 
-  # private 
+  # private
   # def confirm_partner_present
   #   return if current_user.partner.present?
 

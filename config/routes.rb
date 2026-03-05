@@ -2,6 +2,9 @@ require "sidekiq/web"
 require "sidekiq-scheduler/web"
 
 Rails.application.routes.draw do
+  get "pages/contact"
+  get "pages/privacy"
+  get "pages/terms"
   resource :my_page, only: [ :show ] do
     get :confirm
     # patch :withdraw

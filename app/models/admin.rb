@@ -25,15 +25,15 @@
 class Admin < ApplicationRecord
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
-  devise :database_authenticatable, 
+  devise :database_authenticatable,
         :validatable, :lockable,
-        :timeoutable,:trackable
+        :timeoutable, :trackable
 
    validate :accept_only_one_admin, on: :create
 
-  #  before_update :prevent_update
+   #  before_update :prevent_update
 
-   private 
+   private
 
    def accept_only_one_admin
     if Admin.exists?

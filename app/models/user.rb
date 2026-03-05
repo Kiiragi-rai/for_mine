@@ -21,7 +21,7 @@ class User < ApplicationRecord
   validates :provider, uniqueness: { scope: :uid }
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
-  devise :omniauthable,:timeoutable, omniauth_providers: [ :line ]
+  devise :omniauthable, :timeoutable, omniauth_providers: [ :line ]
 
   has_many :anniversaries, dependent: :destroy
   has_one :partner, dependent: :destroy
@@ -35,16 +35,16 @@ class User < ApplicationRecord
       user.name = auth.info.name
     end
   end
-# 論理削除あり
+  # 論理削除あり
   # def self.from_line(auth)
   #   user = find_by(provider: auth.provider, uid: auth.uid)
 
   #   if user
   #     user.update!(is_deleted: false) if user.is_deleted?
   #     user
-  #   else 
+  #   else
   #     create!(
-  #       provider: auth.provider, 
+  #       provider: auth.provider,
   #       uid: auth.uid,
   #       name: auth.info.name
   #     )
@@ -52,6 +52,6 @@ class User < ApplicationRecord
   # end
 
   def self.ransackable_attributes(auth_object = nil)
-    ["created_at", "id", "name"]
+    [ "created_at", "id", "name" ]
   end
 end

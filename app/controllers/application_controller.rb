@@ -10,7 +10,7 @@ class ApplicationController < ActionController::Base
     case resource
     when Admin
       admin_root_path
-    when User 
+    when User
       if !resource.first_login_flag?
         resource.update_column(:first_login_flag, true)
         # how_to_show_path
@@ -18,7 +18,7 @@ class ApplicationController < ActionController::Base
         root_path
       else
         flash[:notice] = "ログイン成功"
-        root_path       
+        root_path
       end
     end
   end

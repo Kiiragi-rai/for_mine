@@ -29,7 +29,7 @@ class NotificationManagement < ApplicationRecord
   belongs_to :user
 
   # status success, failure enumかな、それか直接入れる
-  enum  status: {
+  enum status: {
     pending: 0,
     success: 1,
     failure: 2
@@ -48,11 +48,10 @@ class NotificationManagement < ApplicationRecord
   end
 
   def self.ransackable_attributes(auth_object = nil)
-    ["status"]
+    [ "status" ]
   end
 
   def self.ransackable_associations(auth_object = nil)
-    ["notification_setting"]
+    [ "notification_setting" ]
   end
-
 end

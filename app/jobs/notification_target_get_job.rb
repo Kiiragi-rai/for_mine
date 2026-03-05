@@ -13,6 +13,10 @@ class NotificationTargetGetJob < ApplicationJob
     notification_targets.each do |target|
       managed = NotificationManagement.create_for(target)
       Rails.logger.info " これがターゲットの中身だよん いまからLINEに渡すy#{managed.scheduled_for.in_time_zone}"
+
+    # nil がsmanaged に入ることもあるため、スキップいるよな
+      next unless managed
+
       management_id = managed.id
 
       if Rails.env.development?

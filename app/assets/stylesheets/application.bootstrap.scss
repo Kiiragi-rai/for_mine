@@ -181,6 +181,11 @@ section {
     li {
       list-style: none;
     }
+
+
+
+
+
     /* ↓ スライドの外枠 */
     .slide-wrapper {
       width: 100%;
@@ -218,16 +223,16 @@ section {
       transform: translateX(-75%);
     }
     .slide div:nth-of-type(1){ /* 背景色 */
-      background-color: #E1F3FC;
+      background-color: #FFF7ED;
     }
     .slide div:nth-of-type(2){ /* 背景色 */
-      background-color: #FCE8F0;
+      background-color: #F0FDF4;
     }
     .slide div:nth-of-type(3){ /* 背景色 */
-      background-color: #E3F1E4;
+      background-color: #EFF6FF; 
     }
     .slide div:nth-of-type(4){
-      background-color: #FFF4E3;
+      background-color: #FAF5FF;
     }
     /* ↓ 左右のボタン */
     .next {

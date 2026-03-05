@@ -271,6 +271,8 @@ Devise.setup do |config|
 
   # The default HTTP method used to sign out a resource. Default is :delete.
   config.sign_out_via = :delete
+  # セッションタイムアウト
+  config.timeout_in = 30.minutes
 
   # ==> OmniAuth
   # Add a new OmniAuth provider. Check the wiki for more information on setting
@@ -312,7 +314,8 @@ Devise.setup do |config|
   config.omniauth :line, ENV["LINE_CHANNEL_ID"], ENV["LINE_CHANNEL_SECRET"],
   {
     scope: "profile openid",
-    prompt: "consent",
+    #毎回出ちゃう
+    # prompt: "consent",
     bot_prompt: "aggressive"
   }
   # 開発用

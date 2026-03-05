@@ -19,6 +19,11 @@ Devise.setup do |config|
   # Devise will use the `secret_key_base` as its `secret_key`
   # by default. You can change it below and use your own secret key.
   # config.secret_key = 'bfee3c5f4873db009cf39ec5b453b6a0cd00be860ce9c0fb228a7cef297c1ecf98b52ab4713495799174740b35036d929faa3b3002aac918856d83d217d2fb98'
+  # ブルートフォース対策
+  config.maximum_attempts = 5
+
+  config.unlock_strategy = :time
+  config.unlock_in = 1.hour
 
   # ==> Controller configuration
   # Configure the parent class to the devise controllers.
@@ -195,9 +200,9 @@ Devise.setup do |config|
   # config.timeout_in = 30.minutes
 
   # ==> Configuration for :lockable
-  # Defines which strategy will be used to lock an account.
+  # Defines which strategy will be used to  an account.
   # :failed_attempts = Locks an account after a number of failed attempts to sign in.
-  # :none            = No lock strategy. You should handle locking by yourself.
+  # :none            = No  strategy. You should handle locking by yourself.
   # config.lock_strategy = :failed_attempts
 
   # Defines which key will be used when locking and unlocking an account

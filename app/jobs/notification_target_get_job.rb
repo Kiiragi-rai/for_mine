@@ -1,6 +1,5 @@
 class NotificationTargetGetJob < ApplicationJob
   queue_as :default
-  sidekiq_options retry: false
   # target取得
   # management保存
   # waituntilでjobに渡す
@@ -21,7 +20,7 @@ class NotificationTargetGetJob < ApplicationJob
       management_id = managed.id
 
       if Rails.env.development?
-      # SendNotificationLineJob.perform_now(management_id: management_id)
+      SendNotificationLineJob.perform_now(management_id: management_id)
       p "missionコンプリート"
       else
       SendNotificationLineJob.set(wait_until: managed.scheduled_for).perform_later(management_id: management_id)

@@ -46,7 +46,8 @@ gem "line-bot-api"
 gem "ruby-openai"
 
 gem "sidekiq"
-gem "sidekiq-scheduler"
+# gem "sidekiq-scheduler"
+gem "sidekiq-cron"
 gem "redis"
 
 gem "simple_calendar"

@@ -40,7 +40,7 @@ class NotificationManagement < ApplicationRecord
   def self.create_for(target)
     # findの方がすでにあるの渡しちゃわない？　通知
     # create_or_find_by　こっちの方がいい？？　記事s参照
-    management = find_or_create_by!(
+    management = create_or_find_by!(
         notification_setting_id: target.notification_setting_id,
         scheduled_for: target.scheduled_for
       ) do |management|
@@ -49,6 +49,8 @@ class NotificationManagement < ApplicationRecord
       end
       # 登録したばかりのみ通過させたい
       return management if management.previously_new_record?
+    rescue ActiveRecord::RecordNotUnique => e 
+      Rails.logger.info("create_forでエラーが発生しましたNM: #{e.message}")
       nil
   end
 

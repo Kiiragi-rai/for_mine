@@ -39,7 +39,7 @@
  
   <div>
     <%= f.select :notification_hour,
-    options_for_select((0..23).map { |h| ["%02d:00" % h, "%02d:00" % h] },f.object.notification_hour&.strftime("%H:00")),
+    (0..23).map { |h| ["%02d:00" % h,h] },
     { include_blank: true }%>
   </div>
   <div>

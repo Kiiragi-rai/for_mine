@@ -28,6 +28,10 @@ module LineNotification
         push_message_request: push_request
       )
         status == 200
+
+      rescue StandardError => e
+        Rails.logger.error("[LINE PUSH ERROR] #{e.full_message}")
+        false
     end
 
       private

@@ -40,7 +40,7 @@ class NotificationManagement < ApplicationRecord
   def self.create_for(target)
     # findの方がすでにあるの渡しちゃわない？　通知
     # create_or_find_by　こっちの方がいい？？　記事s参照
-    find_or_create_by!(
+    management = find_or_create_by!(
         notification_setting_id: target.notification_setting_id,
         scheduled_for: target.scheduled_for
       ) do |management|

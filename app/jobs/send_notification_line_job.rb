@@ -1,5 +1,6 @@
 class SendNotificationLineJob < ApplicationJob
  queue_as :default
+ sidekiq_options retry: false
 
   # target_hashを渡す
   # messageのservice

@@ -1,5 +1,6 @@
 class AnniversariesController < ApplicationController
     before_action :authenticate_user!
+    before_action :set_anniversary, only: [:show, :edit, :update, :destroy]
 
     def index
         # @anniversaries = current_user.anniversaries
@@ -17,7 +18,6 @@ class AnniversariesController < ApplicationController
     end
 
     def show
-        @anniversary = current_user.anniversaries.find_by_hashid(params[:id])
     end
 
 
@@ -42,7 +42,6 @@ class AnniversariesController < ApplicationController
 
 
     def edit
-        @anniversary = current_user.anniversaries.find_by_hashid(params[:id])
         @form = AnniversaryNotificationSettingForm.new(
             # user: current_user,
             anniversary: @anniversary
@@ -50,7 +49,6 @@ class AnniversariesController < ApplicationController
     end
 
     def update
-        @anniversary = current_user.anniversaries.find_by_hashid(params[:id])
         Rails.logger.debug params[:anniversary_notification_setting_form].inspect
         @form = AnniversaryNotificationSettingForm.new(
             # user: current_user,
@@ -65,8 +63,7 @@ class AnniversariesController < ApplicationController
         end
     end
     def destroy
-        anniversary = current_user.anniversaries.find_by_hashid(params[:id])
-        anniversary.destroy!
+        @anniversary.destroy!
         redirect_to anniversaries_path, success: "記念日を削除しました"
     end
 
@@ -74,9 +71,14 @@ class AnniversariesController < ApplicationController
 
     private
 
+    def set_anniversary
+      @anniversary = current_user.anniversaries.find_by_hashid!(params[:id])
+    end
 
     def anniversary_notification_setting_params
         params.require(:anniversary_notification_setting_form).permit(:title, :anniversary_date, :is_enabled, :frequency_days,
         :notification_time, :start_on)
     end
+
+    
 end

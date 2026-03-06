@@ -1,4 +1,4 @@
-module GiftSuggestions 
+module GiftSuggestions
   class PromptBuilder
     def initialize(partner_info:, last_result:)
       @partner_info = partner_info
@@ -19,7 +19,7 @@ module GiftSuggestions
          ]
       }
       PROMPT
-  
+
       # ハッシュにして渡そうかな、配列＝＞JSONだし
       names = @last_result&.dig("presentSuggestions")&.map { |h| h["name"] }
 

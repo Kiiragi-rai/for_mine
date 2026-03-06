@@ -28,7 +28,7 @@ module GiftSuggestions
 
       rescue StandardError => e
         Rails.logger.error(" プレゼント提案 #{e.full_message}")
-        { error: e.message}
+        { error: e.message }
       end
     end
   end

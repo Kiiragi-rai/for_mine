@@ -17,7 +17,7 @@ class SendNotificationLineJob < ApplicationJob
      uid = user.uid
     end
 
-  
+
 
       return if uid.blank?
 
@@ -33,14 +33,14 @@ class SendNotificationLineJob < ApplicationJob
 
       # LineNotification::LineClient.send_line_message_with_button_to_home(uid: user.uid, text_messages: message_content)
       success = LineNotification::LineClient.send_line_message_with_button_to_home(uid: uid, messages: message_content)
-      
-      if success 
+
+      if success
         notification_management.update!(status: :success, sent_at: Time.current)
       else
         notification_management.update!(status: :failure)
       end
 
-    rescue StandardError => e 
+    rescue StandardError => e
       notification_management.update!(status: :failure, error_message: e.message) if notification_management
       Rails.logger.error("LINE SEND ERROR #{e.full_message}")
     end

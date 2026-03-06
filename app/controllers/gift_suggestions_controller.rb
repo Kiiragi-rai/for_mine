@@ -2,7 +2,7 @@ require "json"
 
 class GiftSuggestionsController < ApplicationController
   before_action :authenticate_user!
-  before_action :ensure_partner!, only: [:create]
+  before_action :ensure_partner!, only: [ :create ]
 
   def index
     @results = current_user.gift_suggestions.where.not(result_json: nil).map do |gs|
@@ -33,8 +33,8 @@ class GiftSuggestionsController < ApplicationController
           status: :pending
         )
 
-        
-        begin 
+
+        begin
         result = GiftSuggestions::Generate.new(prompt).call
 
         if result[:error]
@@ -62,18 +62,16 @@ class GiftSuggestionsController < ApplicationController
 
         redirect_to gift_suggestions_path, alert: "エラーが発生しました"
     end
-
-
   end
 
-        # elsif Rails.env.development?
-    #     @contents = {
-    #   "presentSuggestions" => [
-    #     { "name" => "文房具セット", "reason" => "..." },
-    #     { "name" => "ポケットサイズのゲーム", "reason" => "..." },
-    #     { "name" => "オリジナルのメッセージカード", "reason" => "..." }
-    #   ]
-    # }
+  # elsif Rails.env.development?
+  #     @contents = {
+  #   "presentSuggestions" => [
+  #     { "name" => "文房具セット", "reason" => "..." },
+  #     { "name" => "ポケットサイズのゲーム", "reason" => "..." },
+  #     { "name" => "オリジナルのメッセージカード", "reason" => "..." }
+  #   ]
+  # }
 
   #   target = current_user.gift_suggestions.build(result_json: @contents)
   #   if target.save
@@ -82,7 +80,7 @@ class GiftSuggestionsController < ApplicationController
   #   else
   #     render :new, status: :unprocessable_entity
   #   end
-    # end
+  # end
 
 
   def destroy
@@ -94,7 +92,7 @@ class GiftSuggestionsController < ApplicationController
     redirect_to gift_suggestions_path
   end
 
-  private 
+  private
   def ensure_partner!
     return if  current_user.partner.present?
     redirect_to gift_suggestions_path, alert: "先にパートナー情報を登録してください"

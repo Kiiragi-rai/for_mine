@@ -47,9 +47,8 @@ class NotificationManagement < ApplicationRecord
         management.schedule_title = target.title
         management.user_id = target.user_id
       end
-# 登録したばかりのみ通過させたい
+      # 登録したばかりのみ通過させたい
       return management if management.previously_new_record?
-
       nil
   end
 

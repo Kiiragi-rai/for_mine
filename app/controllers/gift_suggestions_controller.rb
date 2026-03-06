@@ -50,6 +50,8 @@ class GiftSuggestionsController < ApplicationController
               else
                 render :new, status: :unprocessable_entity
               end
+
+              # 本番
         else
           begin
             result = GiftSuggestions::Generate.new(prompt).call
@@ -86,23 +88,7 @@ class GiftSuggestionsController < ApplicationController
        
   end
 
-  # elsif Rails.env.development?
-  #     @contents = {
-  #   "presentSuggestions" => [
-  #     { "name" => "文房具セット", "reason" => "..." },
-  #     { "name" => "ポケットサイズのゲーム", "reason" => "..." },
-  #     { "name" => "オリジナルのメッセージカード", "reason" => "..." }
-  #   ]
-  # }
 
-  #   target = current_user.gift_suggestions.build(result_json: @contents)
-  #   if target.save
-  #  session[:gift_contents] = @contents
-  #   redirect_to new_gift_suggestion_path, notice: "提案を生成しました"
-  #   else
-  #     render :new, status: :unprocessable_entity
-  #   end
-  # end
 
 
   def destroy
@@ -135,11 +121,4 @@ class GiftSuggestionsController < ApplicationController
      hobbies: partner.turn_to_string(partner.hobbies)
    }
   end
-
-  # private
-  # def confirm_partner_present
-  #   return if current_user.partner.present?
-
-  #   redirect_to partner_path , alert: "先にpartnerを登録してください"
-  # end
 end

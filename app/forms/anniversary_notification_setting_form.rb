@@ -8,7 +8,7 @@ class AnniversaryNotificationSettingForm
   attribute :anniversary_date, :date
   attribute :is_enabled, :boolean
   attribute :frequency_days, :integer
-  attribute :notification_time, :time
+  attribute :notification_hour, :integer
   attribute :start_on, :date
 
   attribute :end_on, :date
@@ -96,7 +96,7 @@ end
       title: @anniversary.title,
       anniversary_date: @anniversary.anniversary_date,
       is_enabled: @notification_setting.is_enabled,
-      notification_time: @notification_setting.notification_time,
+      notification_hour: @notification_setting.notification_hour,
       start_on: @notification_setting.start_on,
       frequency_days: @notification_setting.frequency_days
     }
@@ -129,7 +129,7 @@ end
     notification_setting.is_enabled = is_enabled
     notification_setting.frequency_days = frequency_days
     notification_setting.start_on = start_on
-    notification_setting.notification_time = notification_time
+    notification_setting.notification_hour = notification_hour
 
     # sent_last
     #   end_on =  calculate(anniversary_date) 通知OFFなら　削除

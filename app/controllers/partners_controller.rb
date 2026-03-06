@@ -1,8 +1,9 @@
 class PartnersController < ApplicationController
     before_action :authenticate_user!
+    before_action :set_partner, only: %i[show edit update destroy]
+
     # has one はpartner s付かない
     def show
-        @partner = current_user.partner
         @partnercount = @partner&.change_to_progress_bar_value if @partner.present?
     end
     #  newとcreate だと入らなかった
@@ -21,12 +22,10 @@ class PartnersController < ApplicationController
     end
 
     def edit
-        @partner = current_user.partner
+
     end
 
     def update
-        @partner = current_user.partner
-        p @partner
         if @partner.update(partner_params)
             redirect_to partner_path, success: "更新に成功しました"
         else
@@ -37,8 +36,7 @@ class PartnersController < ApplicationController
 
 
         def destroy
-            partner = current_user.partner
-            partner.destroy!
+            @partner.destroy!
             redirect_to root_path, success: "削除しました"
         end
 
@@ -46,8 +44,11 @@ class PartnersController < ApplicationController
 
 
     private
+    def set_partner
+        @partner = current_user.partner
+      end
+    
 
-    # モデルに移動にする？
     def partner_params
         params.require(:partner).permit(:name, :sex, :age, :relation, :job, :favorites, :avoidances, :hobbies,
         :budget_min, :budget_max)

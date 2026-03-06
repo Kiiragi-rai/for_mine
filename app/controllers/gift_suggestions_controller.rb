@@ -33,54 +33,62 @@ class GiftSuggestionsController < ApplicationController
           status: :pending
         )
 
+        if Rails.env.development?
 
-        begin
-        result = GiftSuggestions::Generate.new(prompt).call
+          result = {
+              "presentSuggestions" => [
+                { "name" => "文房具セット", "reason" => "..." },
+                { "name" => "ポケットサイズのゲーム", "reason" => "..." },
+                { "name" => "オリジナルのメッセージカード", "reason" => "..." }
+              ]
+            }
+          
+              target = current_user.gift_suggestions.build(result_json: result)
+              if target.save
+             session[:gift_contents] = result
+              redirect_to new_gift_suggestion_path, notice: "提案を生成しました"
+              else
+                render :new, status: :unprocessable_entity
+              end
 
-        if result[:error]
-          target.update!(
-            status: :failure,
-            error_message: result[:error]
-          )
-          redirect_to gift_suggestions_path, alert: "AI生成の失敗"
-          return
+              # 本番
+        else
+          begin
+            result = GiftSuggestions::Generate.new(prompt).call
+    
+            if result[:error]
+              target.update!(
+                status: :failure,
+                error_message: result[:error]
+              )
+              redirect_to gift_suggestions_path, alert: "AI生成の失敗"
+              return
+            end
+    
+            target.update!(
+              status: :success,
+              result_json: result
+            )
+    
+            session[:gift_contents] = result
+            redirect_to new_gift_suggestion_path, notice: "提案を生成しました"
+    
+          rescue StandardError => e
+            target.update!(
+              status: :failure,
+              error_message: e.message
+            )
+    
+            redirect_to gift_suggestions_path, alert: "エラーが発生しました"
         end
 
-        target.update!(
-          status: :success,
-          result_json: result
-        )
 
-        session[:gift_contents] = result
-        redirect_to new_gift_suggestion_path, notice: "提案を生成しました"
+        end
 
-      rescue StandardError => e
-        target.update!(
-          status: :failure,
-          error_message: e.message
-        )
-
-        redirect_to gift_suggestions_path, alert: "エラーが発生しました"
-    end
+       
   end
 
-  # elsif Rails.env.development?
-  #     @contents = {
-  #   "presentSuggestions" => [
-  #     { "name" => "文房具セット", "reason" => "..." },
-  #     { "name" => "ポケットサイズのゲーム", "reason" => "..." },
-  #     { "name" => "オリジナルのメッセージカード", "reason" => "..." }
-  #   ]
-  # }
 
-  #   target = current_user.gift_suggestions.build(result_json: @contents)
-  #   if target.save
-  #  session[:gift_contents] = @contents
-  #   redirect_to new_gift_suggestion_path, notice: "提案を生成しました"
-  #   else
-  #     render :new, status: :unprocessable_entity
-  #   end
-  # end
 
 
   def destroy
@@ -113,11 +121,4 @@ class GiftSuggestionsController < ApplicationController
      hobbies: partner.turn_to_string(partner.hobbies)
    }
   end
-
-  # private
-  # def confirm_partner_present
-  #   return if current_user.partner.present?
-
-  #   redirect_to partner_path , alert: "先にpartnerを登録してください"
-  # end
 end

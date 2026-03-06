@@ -14,11 +14,13 @@ class SendNotificationLineJob < ApplicationJob
     return if notification_setting.blank?
 
     user = User.find_by(id: notification_management.user_id)
+
     if Rails.env.development?
         uid = ENV["UID"]
     else
      uid = user.uid
     end
+
       return if uid.blank?
 
       message = LineNotification::NotificationMessageBuilder.new(
@@ -29,20 +31,24 @@ class SendNotificationLineJob < ApplicationJob
 
       message_content = message.build_message
       Rails.logger.info "#{message_content} これメッセージ"
-
-
-      # LineNotification::LineClient.send_line_message_with_button_to_home(uid: user.uid, text_messages: message_content)
+    begin 
+      if Rails.env.development?
+      Rails.logger.info "ためしーーー"
+      else
       success = LineNotification::LineClient.send_line_message_with_button_to_home(uid: uid, messages: message_content)
 
       if success
         notification_management.update!(status: :success, sent_at: Time.current)
+        notification_setting.update!(last_sent_on: Date.current)
       else
         notification_management.update!(status: :failure)
       end
-      notification_setting.reset_notification! if notification_setting.finished?
 
+      notification_setting.reset_notification! if notification_setting.finished?
+    end
     rescue StandardError => e
       notification_management&.update(status: :failure,sent_at: Time.current ,error_message: e.message) 
       Rails.logger.error("LINE SEND ERROR #{e.full_message}")
-    end
+    end   
+   end
 end

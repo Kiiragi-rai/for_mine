@@ -2,7 +2,7 @@ require "json"
 
 class GiftSuggestionsController < ApplicationController
   before_action :authenticate_user!
-  # before_action :confirm_partner_present
+  before_action :ensure_partner!, only: [:create]
 
   def index
     @results = current_user.gift_suggestions.where.not(result_json: nil).map do |gs|
@@ -19,55 +19,21 @@ class GiftSuggestionsController < ApplicationController
 
   # パートナーがいないと　おかしくなるため、処理を変える必要あり　 viewを調整とcontrollerに処理追加
   def create
-        # if Rails.env.production?
-        partner = current_user.partner
-        return redirect_to gift_suggestions_path unless partner
+    partner_info = build_partner_info
+    last_result =  current_user.gift_suggestions.success.last&.result_json
 
-         partner_info = {
-          sex: partner.sex.presence || "未入力",
-          age: partner.age.presence || "未入力",
-          job: partner.job.presence || "未入力",
-          relation: partner.relation.presence || "未入力",
-          budget_min: partner.with_yen(partner.budget_min),
-          budget_max: partner.with_yen(partner.budget_max),
-          favorites: partner.turn_to_string(partner.favorites),
-          avoidances: partner.turn_to_string(partner.avoidances),
-          hobbies: partner.turn_to_string(partner.hobbies)
-        }
+    prompt = GiftSuggestions::PromptBuilder.new(
+      partner_info: partner_info,
+      last_result: last_result
+    ).call
 
-        # ここでinfo を保存と渡す
-        # prompt分岐
-
-        # Rails.logger.info "#{target.input_json}"
-
-        prompt = <<~PROMPT
-
-        #{partner_info.to_json}を元におすすめのプレゼント3つとその理由を教えてください。
-        以下のJSON形式で、キーや値の型も完全に守って応答してください。
-
-        {
-          "presentSuggestions": [
-            { "name": "プレゼント提案1", "reason": "プレゼント提案１の理由"},
-            { "name": "プレゼント提案2", "reason": "プレゼント提案2の理由"},
-            { "name": "プレゼント提案3", "reason": "プレゼント提案3の理由"}
-           ]
-        }
-        PROMPT
-    
-        last_result =  current_user.gift_suggestions.success.last&.result_json
-        # ハッシュにして渡そうかな、配列＝＞JSONだし
-        names = last_result&.dig("presentSuggestions")&.map { |h| h["name"] }
-
-        if names.present?
-        prompt << "\n #{names.to_json}は避けてください"
-        end
 
         target = current_user.gift_suggestions.create!(
           input_json: partner_info,
           status: :pending
         )
 
-        # prompt << "\n 次のプレゼント名は避けてください: #{names}" if names.present?
+        
         begin 
         result = GiftSuggestions::Generate.new(prompt).call
 
@@ -95,9 +61,10 @@ class GiftSuggestionsController < ApplicationController
         )
 
         redirect_to gift_suggestions_path, alert: "エラーが発生しました"
-      end
     end
 
+
+  end
 
         # elsif Rails.env.development?
     #     @contents = {
@@ -116,7 +83,7 @@ class GiftSuggestionsController < ApplicationController
   #     render :new, status: :unprocessable_entity
   #   end
     # end
-  end
+
 
   def destroy
     gs = current_user.gift_suggestions.find(params[:id])
@@ -125,6 +92,28 @@ class GiftSuggestionsController < ApplicationController
     # gs.update!(result_json: nil)
     gs.destroy!
     redirect_to gift_suggestions_path
+  end
+
+  private 
+  def ensure_partner!
+    return if  current_user.partner.present?
+    redirect_to gift_suggestions_path, alert: "先にパートナー情報を登録してください"
+  end
+
+  def build_partner_info
+    partner = current_user.partner
+
+    partner_info = {
+     sex: partner.sex.presence || "未入力",
+     age: partner.age.presence || "未入力",
+     job: partner.job.presence || "未入力",
+     relation: partner.relation.presence || "未入力",
+     budget_min: partner.with_yen(partner.budget_min),
+     budget_max: partner.with_yen(partner.budget_max),
+     favorites: partner.turn_to_string(partner.favorites),
+     avoidances: partner.turn_to_string(partner.avoidances),
+     hobbies: partner.turn_to_string(partner.hobbies)
+   }
   end
 
   # private

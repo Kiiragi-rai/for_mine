@@ -39,9 +39,10 @@ class SendNotificationLineJob < ApplicationJob
       else
         notification_management.update!(status: :failure)
       end
+      notification_setting.reset_notification! if notification_setting.finished?
 
     rescue StandardError => e
-      notification_management.update!(status: :failure, error_message: e.message) if notification_management
+      notification_management&.update(status: :failure,sent_at: Time.current ,error_message: e.message) if notification_management
       Rails.logger.error("LINE SEND ERROR #{e.full_message}")
     end
 end

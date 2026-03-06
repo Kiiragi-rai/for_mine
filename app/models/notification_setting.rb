@@ -43,4 +43,17 @@ class NotificationSetting < ApplicationRecord
       errors.add(:start_on, "通知開始日は次の記念日以前に設定してください")
     end
   end
+
+  def notification_finish_day?
+    end_on.present? && end_on < Date.current
+  end
+
+  def reset_notification!
+    update!(
+      is_enabled: false,
+      start_on: nil,
+      end_on: nil,
+      last_sent_on: nil
+    )
+  end
 end

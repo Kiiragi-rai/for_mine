@@ -39,6 +39,7 @@ class SendNotificationLineJob < ApplicationJob
 
       if success
         notification_management.update!(status: :success, sent_at: Time.current)
+        notification_setting.update!(last_sent_on: Date.current)
       else
         notification_management.update!(status: :failure)
       end

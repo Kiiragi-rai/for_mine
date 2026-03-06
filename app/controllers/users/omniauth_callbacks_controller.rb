@@ -9,6 +9,9 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
     else
       not_success_login(auth)
     end
+  rescue StandardError => e
+    Rails.logger.error(" LINE LOGIN ERROR 発生 #{e.full_message}")
+    redirect_to root_path, alert: "LINEログイン中にエラーが発生しました。"
   end
 
   def failure

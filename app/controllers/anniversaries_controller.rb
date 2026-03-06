@@ -1,6 +1,6 @@
 class AnniversariesController < ApplicationController
     before_action :authenticate_user!
-    before_action :set_anniversary, only: [:show, :edit, :update, :destroy]
+    before_action :set_anniversary, only: [ :show, :edit, :update, :destroy ]
 
     def index
         # @anniversaries = current_user.anniversaries
@@ -79,6 +79,4 @@ class AnniversariesController < ApplicationController
         params.require(:anniversary_notification_setting_form).permit(:title, :anniversary_date, :is_enabled, :frequency_days,
         :notification_time, :start_on)
     end
-
-    
 end

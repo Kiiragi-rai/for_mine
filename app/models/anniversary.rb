@@ -50,7 +50,7 @@ class Anniversary < ApplicationRecord
      end
     end
 
-  
+
 
 
 
@@ -74,19 +74,18 @@ class Anniversary < ApplicationRecord
       mon = anniversary_date.month
       da = anniversary_date.day
 
-      this_year = anniversary_date_for_year(year: year,month: mon,day: da)
+      this_year = anniversary_date_for_year(year: year, month: mon, day: da)
 
-      if this_year < today 
-        anniversary_date_for_year(year: year + 1,month: mon, day: da)
+      if this_year < today
+        anniversary_date_for_year(year: year + 1, month: mon, day: da)
       else
         this_year
       end
     end
 
-private 
+private
 
-    def anniversary_date_for_year(year:,month:,day:)
-
+    def anniversary_date_for_year(year:, month:, day:)
       if month == 2 && day == 29 && !Date.leap?(year)
          Date.new(year, 2, 28)
       else

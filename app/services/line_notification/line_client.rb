@@ -31,6 +31,7 @@ module LineNotification
     end
 
       private
+      # initializeにしようかな
       def self.client
         @client ||= Line::Bot::V2::MessagingApi::ApiClient.new(
           channel_access_token: ENV.fetch("LINE_MESSAGING_CHANNEL_ACCESS_TOKEN")

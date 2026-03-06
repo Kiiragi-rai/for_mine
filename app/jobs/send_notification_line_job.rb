@@ -14,6 +14,7 @@ class SendNotificationLineJob < ApplicationJob
     return if notification_setting.blank?
 
     user = User.find_by(id: notification_management.user_id)
+    return if user.blank?
 
     if Rails.env.development?
         uid = ENV["UID"]
@@ -31,7 +32,7 @@ class SendNotificationLineJob < ApplicationJob
 
       message_content = message.build_message
       Rails.logger.info "#{message_content} これメッセージ"
-    begin 
+    # begin 
       if Rails.env.development?
       Rails.logger.info "ためしーーー"
       else
@@ -50,6 +51,6 @@ class SendNotificationLineJob < ApplicationJob
     # rescue StandardError => e
     #   notification_management&.update(status: :failure,sent_at: Time.current ,error_message: e.message) 
     #   Rails.logger.error("LINE SEND ERROR #{e.full_message}")
-    # end   
+    end   
    end
 end

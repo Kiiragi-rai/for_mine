@@ -8,6 +8,7 @@ module GiftSuggestions
     def call
       client = OpenAI::Client.new
 
+      begin
       response = client.chat(
         parameters: {
           model: "gpt-4o-mini",
@@ -24,6 +25,11 @@ module GiftSuggestions
       raw_response = response.dig("choices", 0, "message", "content")
       # Rails.logger.info " raw_responseの中身だよ#{raw_response}"
       JSON.parse(raw_response)
+
+      rescue StandardError => e
+        Rails.logger.error(" GiftSuggestions #{e.full_message}")
+        { error: e.message}
+      end
     end
   end
 end

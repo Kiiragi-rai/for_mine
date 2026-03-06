@@ -21,7 +21,6 @@ class GiftSuggestionsController < ApplicationController
   def create
         # if Rails.env.production?
         partner = current_user.partner
-
         return redirect_to gift_suggestions_path unless partner
 
          partner_info = {
@@ -41,7 +40,7 @@ class GiftSuggestionsController < ApplicationController
 
         # Rails.logger.info "#{target.input_json}"
 
-        prompt = <<-PROMPT
+        prompt = <<~PROMPT
 
         #{partner_info.to_json}を元におすすめのプレゼント3つとその理由を教えてください。
         以下のJSON形式で、キーや値の型も完全に守って応答してください。
@@ -54,35 +53,68 @@ class GiftSuggestionsController < ApplicationController
            ]
         }
         PROMPT
-
-        last_result =  current_user.gift_suggestions&.last&.result_json
+    
+        last_result =  current_user.gift_suggestions.success.last&.result_json
         # ハッシュにして渡そうかな、配列＝＞JSONだし
         names = last_result&.dig("presentSuggestions")&.map { |h| h["name"] }
 
-        if last_result.present?
+        if names.present?
         prompt << "\n #{names.to_json}は避けてください"
         end
 
-        # prompt << "\n 次のプレゼント名は避けてください: #{names}" if names.present?
+        target = current_user.gift_suggestions.create!(
+          input_json: partner_info,
+          status: :pending
+        )
 
-        # @contents = GiftSuggestions::Generate.new(prompt).call
+        # prompt << "\n 次のプレゼント名は避けてください: #{names}" if names.present?
+        begin 
+        result = GiftSuggestions::Generate.new(prompt).call
+
+        if result[:error]
+          target.update!(
+            status: :failure,
+            error_message: result[:error]
+          )
+          redirect_to gift_suggestions_path, alert: "AI生成の失敗"
+          return
+        end
+
+        target.update!(
+          status: :success,
+          result_json: result
+        )
+
+        session[:gift_contents] = result
+        redirect_to new_gift_suggestion_path, notice: "提案を生成しました"
+
+      rescue StandardError => e
+        target.update!(
+          status: :failure,
+          error_message: e.message
+        )
+
+        redirect_to gift_suggestions_path, alert: "エラーが発生しました"
+      end
+    end
+
 
         # elsif Rails.env.development?
-        @contents = {
-      "presentSuggestions" => [
-        { "name" => "文房具セット", "reason" => "..." },
-        { "name" => "ポケットサイズのゲーム", "reason" => "..." },
-        { "name" => "オリジナルのメッセージカード", "reason" => "..." }
-      ]
-    }
+    #     @contents = {
+    #   "presentSuggestions" => [
+    #     { "name" => "文房具セット", "reason" => "..." },
+    #     { "name" => "ポケットサイズのゲーム", "reason" => "..." },
+    #     { "name" => "オリジナルのメッセージカード", "reason" => "..." }
+    #   ]
+    # }
 
-    target = current_user.gift_suggestions.build(result_json: @contents)
-    if target.save
-   session[:gift_contents] = @contents
-    redirect_to new_gift_suggestion_path, notice: "提案を生成しました"
-    else
-      render :new, status: :unprocessable_entity
-    end
+  #   target = current_user.gift_suggestions.build(result_json: @contents)
+  #   if target.save
+  #  session[:gift_contents] = @contents
+  #   redirect_to new_gift_suggestion_path, notice: "提案を生成しました"
+  #   else
+  #     render :new, status: :unprocessable_entity
+  #   end
     # end
   end
 

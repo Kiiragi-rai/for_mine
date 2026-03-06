@@ -77,6 +77,6 @@ class AnniversariesController < ApplicationController
 
     def anniversary_notification_setting_params
         params.require(:anniversary_notification_setting_form).permit(:title, :anniversary_date, :is_enabled, :frequency_days,
-        :notification_time, :start_on)
+        :notification_hour, :start_on)
     end
 end

@@ -7,7 +7,7 @@
 #  frequency_days    :integer          default("everyday"), not null
 #  is_enabled        :boolean          default(FALSE), not null
 #  last_sent_on      :date
-#  notification_time :time
+#  notification_hour :integer
 #  start_on          :date
 #  created_at        :datetime         not null
 #  updated_at        :datetime         not null

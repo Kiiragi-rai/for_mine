@@ -43,7 +43,7 @@ module LineNotification
             (b.next_hour AT TIME ZONE 'Asia/Tokyo')::date between ns.start_on and ns.end_on
 
             AND
-            ns.notification_time = b.next_hour::time
+            ns.notification_hour = b.next_hour::time
 
             AND
             (ns.last_sent_on IS NULL

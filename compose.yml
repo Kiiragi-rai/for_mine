@@ -27,7 +27,6 @@ services:
       - bundle_data:/usr/local/bundle:cached
       - node_modules:/myapp/node_modules
     environment:
-      TZ: Asia/Tokyo
       PGHOST: db
       PGUSER: postgres
       PGPASSWORD: password
@@ -58,7 +57,6 @@ services:
       - .:/myapp
       - bundle_data:/usr/local/bundle:cached
     environment:
-      TZ: Asia/Tokyo
       PGHOST: db
       PGUSER: postgres
       PGPASSWORD: password

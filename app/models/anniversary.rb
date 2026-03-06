@@ -27,6 +27,7 @@ class Anniversary < ApplicationRecord
     validates :title, presence:  { message: "を入力してね" }
     validates :anniversary_date, presence:  { message: "を入力してね" }
 
+
     scope :notification_target_get, ->(date) { where(notification_on: true).where(anniversary_date: date) }
 
 
@@ -49,28 +50,9 @@ class Anniversary < ApplicationRecord
      end
     end
 
-    def next_anniversary
-      today = Date.current
-      year = today.year
-      mon = anniversary_date.month
-      da = anniversary_date.day
 
-      if mon == 2 && da == 29 && !Date.leap?(year)
-        this_year = Date.new(year, 2, 28)
-      else
-        this_year =  Date.new(year, mon, da)
-      end
 
-      if this_year < today
-        year += 1
-        if mon == 2 && da == 29 && !Date.leap?(year)
-           this_year = Date.new(year, 2, 28)
-        else
-          this_year = Date.new(year, mon, da)
-        end
-      end
-        this_year
-    end
+
 
 
     def start_time
@@ -83,5 +65,31 @@ class Anniversary < ApplicationRecord
     end
     def self.ransackable_associations(auth_object = nil)
       [ "notification_setting", "user" ]
+    end
+
+
+    def next_anniversary
+      today = Date.current
+      year = today.year
+      mon = anniversary_date.month
+      da = anniversary_date.day
+
+      this_year = anniversary_date_for_year(year: year, month: mon, day: da)
+
+      if this_year < today
+        anniversary_date_for_year(year: year + 1, month: mon, day: da)
+      else
+        this_year
+      end
+    end
+
+private
+
+    def anniversary_date_for_year(year:, month:, day:)
+      if month == 2 && day == 29 && !Date.leap?(year)
+         Date.new(year, 2, 28)
+      else
+        Date.new(year, month, day)
+      end
     end
 end

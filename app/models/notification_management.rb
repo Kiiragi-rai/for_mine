@@ -38,13 +38,20 @@ class NotificationManagement < ApplicationRecord
   validates :scheduled_for, presence: true
 
   def self.create_for(target)
-    find_or_create_by(
+    # findの方がすでにあるの渡しちゃわない？　通知
+    # create_or_find_by　こっちの方がいい？？　記事s参照
+    management = create_or_find_by!(
         notification_setting_id: target.notification_setting_id,
         scheduled_for: target.scheduled_for
       ) do |management|
         management.schedule_title = target.title
         management.user_id = target.user_id
       end
+      # 登録したばかりのみ通過させたい
+      return management if management.previously_new_record?
+    rescue ActiveRecord::RecordNotUnique => e 
+      Rails.logger.info("create_forでエラーが発生しましたNM: #{e.message}")
+      nil
   end
 
   def self.ransackable_attributes(auth_object = nil)

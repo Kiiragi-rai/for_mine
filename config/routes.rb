@@ -1,5 +1,5 @@
 require "sidekiq/web"
-require "sidekiq-scheduler/web"
+# require "sidekiq-scheduler/web"
 
 Rails.application.routes.draw do
   get "pages/contact"

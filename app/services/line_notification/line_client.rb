@@ -28,9 +28,14 @@ module LineNotification
         push_message_request: push_request
       )
         status == 200
+
+      rescue StandardError => e
+        Rails.logger.error("[LINE PUSH ERROR] #{e.full_message}")
+        false
     end
 
       private
+      # initializeにしようかな
       def self.client
         @client ||= Line::Bot::V2::MessagingApi::ApiClient.new(
           channel_access_token: ENV.fetch("LINE_MESSAGING_CHANNEL_ACCESS_TOKEN")

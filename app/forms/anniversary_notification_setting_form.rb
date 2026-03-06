@@ -26,6 +26,7 @@ class AnniversaryNotificationSettingForm
   validate :start_on_not_work_when_disable
   validate :start_on_required_when_enable
 
+
 # today に変更
 # 通知開始日は今日より前には追加できない
 # 通知いらない　：開始時刻は入れられない
@@ -75,6 +76,8 @@ end
       errors.add(:start_on, "通知開始日は１０年後以降に設定はできません")
     end
   end
+
+
 
   # validation:() 記念日　通知いる　　開始時刻
 
@@ -142,7 +145,7 @@ end
     end
   end
 
-  private
+  # private
 
   # 今年の記念日に変換　後できりわけお
   # def calc_end_on(anniversary_date)

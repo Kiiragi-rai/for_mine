@@ -27,7 +27,7 @@ module GiftSuggestions
       JSON.parse(raw_response)
 
       rescue StandardError => e
-        Rails.logger.error(" GiftSuggestions #{e.full_message}")
+        Rails.logger.error(" プレゼント提案 #{e.full_message}")
         { error: e.message}
       end
     end

@@ -15,8 +15,6 @@ module LineNotification
         SELECT
           u.id AS user_id,
           ns.id AS notification_setting_id,
-          ns.start_on,
-          ns.end_on,
           a.title,
           b.next_hour AS scheduled_for
 

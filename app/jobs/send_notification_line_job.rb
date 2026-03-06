@@ -8,17 +8,17 @@ class SendNotificationLineJob < ApplicationJob
   def perform(management_id:)
   Rails.logger.info "ここからsend notificaitonline jobだよん"    # Do something later
     notification_management = NotificationManagement.find(management_id)
+    return if notification_management.success?
 
     notification_setting = notification_management.notification_setting
-    user = User.find_by(id: notification_setting.anniversary.user_id)
+    return if notification_setting.blank?
+
+    user = User.find_by(id: notification_management.user_id)
     if Rails.env.development?
         uid = ENV["UID"]
     else
      uid = user.uid
     end
-
-
-
       return if uid.blank?
 
       message = LineNotification::NotificationMessageBuilder.new(

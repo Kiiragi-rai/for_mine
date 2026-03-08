@@ -1,5 +1,4 @@
 class HealthController < ApplicationController
-  skip_before_action :require_login
   def show
     db_ok = ActiveRecord::Base.connection.active? rescue false
     redis_ok = Redis.new(url: ENV.fetch("REDIS_URL", "redis://redis:6379/1")).ping == "PONG" rescue false

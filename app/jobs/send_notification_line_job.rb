@@ -50,6 +50,9 @@ class SendNotificationLineJob < ApplicationJob
     # end
     # rescue StandardError => e
     #   notification_management&.update(status: :failure,sent_at: Time.current ,error_message: e.message) 
+    # どうしようかな
+        #  notification_setting.reset_notification! if notification_setting.finished?
+
     #   Rails.logger.error("LINE SEND ERROR #{e.full_message}")
     end   
    end

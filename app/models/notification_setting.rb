@@ -35,8 +35,7 @@ class NotificationSetting < ApplicationRecord
 
   def start_on_not_after_end_on
     return unless is_enabled
-    return if start_on.blank?
-    return if anniversary.anniversary_date.blank?
+    return if start_on.blank?  ||  anniversary.anniversary_date.blank?
 
     next_anniversary = anniversary.next_anniversary
     if start_on > next_anniversary

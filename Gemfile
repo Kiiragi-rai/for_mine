@@ -78,6 +78,7 @@ group :development do
   gem "letter_opener_web"
   gem "annotate"
   gem "rubocop", require: false
+  gem 'bullet'
 end
 
 group :test do

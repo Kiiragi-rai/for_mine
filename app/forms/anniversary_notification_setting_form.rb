@@ -25,6 +25,7 @@ class AnniversaryNotificationSettingForm
   validate :anniversary_date_not_after_today
   validate :start_on_not_work_when_disable
   validate :start_on_required_when_enable
+  # validate :start_on_not_after_next_anniversary
 
 
 # today に変更
@@ -48,11 +49,17 @@ end
 
   def start_on_not_before_today
     return unless is_enabled
-    return if start_on.blank?
-    today = Date.current
+    return if start_on.blank? || notification_hour.blank?
+    
+    start_time = Time.zone.local(
+      start_on.year,
+      start_on.month,
+      start_on.day,
+      notification_hour
+    )
 
-    if start_on  < today
-      errors.add(:start_on, "通知開始日は本日以降に設定してください")
+    if start_time  < Time.current + 1.hour
+      errors.add(:start_on, "通知開始は現在時刻から1時間以上先にしてください")
     end
   end
 
@@ -70,10 +77,10 @@ end
     return if start_on.blank?
 
     today = Date.current
-    ten_years_later = today + 10.year
+    six_month_later = today + 6.month
 
-    if start_on > ten_years_later
-      errors.add(:start_on, "通知開始日は１０年後以降に設定はできません")
+    if start_on > six_month_later
+      errors.add(:start_on, "通知開始日は半年以内に設定してください")
     end
   end
 

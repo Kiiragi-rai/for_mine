@@ -2,6 +2,9 @@ require_relative "boot"
 
 require "rails/all"
 
+require_relative "../app/middleware/metrics_logger"
+
+
 # Require the gems listed in Gemfile, including any gems
 # you've limited to :test, :development, or :production.
 Bundler.require(*Rails.groups)
@@ -12,6 +15,10 @@ module Myapp
     config.load_defaults 7.2
     config.time_zone = "Tokyo"
     config.active_record.default_timezone = :utc
+
+    config.middleware.use Rack::Attack
+    config.middleware.use MetricsLogger
+
 
 
     config.active_job.queue_adapter = :sidekiq

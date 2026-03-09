@@ -59,6 +59,9 @@ gem "meta-tags"
 gem 'rack-attack'
 gem 'faraday-retry'
 
+gem 'kaminari'
+gem "kaminari-bootstrap"
+
 
 
 

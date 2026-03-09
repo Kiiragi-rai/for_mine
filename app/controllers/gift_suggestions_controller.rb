@@ -43,7 +43,7 @@ class GiftSuggestionsController < ApplicationController
               ]
             }
           
-              target = current_user.gift_suggestions.build(result_json: result)
+              target = current_user.gift_suggestions.update!(result_json: result)
               if target.save
              session[:gift_contents] = result
               redirect_to new_gift_suggestion_path, notice: "提案を生成しました"

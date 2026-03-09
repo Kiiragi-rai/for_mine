@@ -57,6 +57,7 @@ gem "meta-tags"
 
 
 gem 'rack-attack'
+gem 'faraday-retry'
 
 
 

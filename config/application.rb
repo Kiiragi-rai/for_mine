@@ -13,6 +13,8 @@ module Myapp
     config.time_zone = "Tokyo"
     config.active_record.default_timezone = :utc
 
+    config.middleware.use Rack::Attack
+
 
     config.active_job.queue_adapter = :sidekiq
 

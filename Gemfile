@@ -56,6 +56,8 @@ gem "ransack", "~> 4.2"
 gem "meta-tags"
 
 
+gem 'rack-attack'
+
 
 
 

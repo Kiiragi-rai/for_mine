@@ -79,6 +79,7 @@ group :development do
   gem "annotate"
   gem "rubocop", require: false
   gem 'bullet'
+  gem 'bundler-audit'
 end
 
 group :test do

@@ -25,7 +25,7 @@ class AnniversaryNotificationSettingForm
   validate :anniversary_date_not_after_today
   validate :start_on_not_work_when_disable
   validate :start_on_required_when_enable
-  validate :start_on_not_after_next_anniversary
+  # validate :start_on_not_after_next_anniversary
 
 
 # today に変更
@@ -58,7 +58,7 @@ end
       notification_hour
     )
 
-    if start_on  < 1.hour.from_now
+    if start_time  < Time.current + 1.hour
       errors.add(:start_on, "通知開始は現在時刻から1時間以上先にしてください")
     end
   end

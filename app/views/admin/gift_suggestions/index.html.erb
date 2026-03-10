@@ -1,0 +1,28 @@
+<%= render "admin/gift_suggestions/search", q:@q %>
+
+
+<h2>gift_suggestions</h2>
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>id</th>
+            <th>name</th>
+            <th>status</th>
+            <th>date</th>
+
+        </tr>
+    </thead>
+    <tbody>
+        <% @gift_suggestions.each do |g| %>
+        <tr>
+          <td><%= g.id %></td>
+          <td><%= g.user_id %></td>
+          <td><%= g.status%></td>
+          <td><%= g.created_at %></td>
+        </tr>
+      <% end %>
+    </tbody>
+</table>
+<div class="d-flex justify-content-center mt-4">
+  <%= paginate @gift_suggestions %>
+</div>

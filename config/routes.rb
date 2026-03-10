@@ -15,6 +15,10 @@ Rails.application.routes.draw do
     root "dashboard#index"
     resources :users, only: [ :index ]
     resources :notification_managements, only: [ :index ]
+    resources :gift_suggestions, only: [:index]
+  end
+  authenticate :admin do
+    mount Sidekiq::Web => "/admin/sidekiq"
   end
 
   devise_for :admins,
@@ -81,15 +85,9 @@ Rails.application.routes.draw do
     delete "/dev_logout", to: "dev_sessions#destroy"
   end
 
-  if Rails.env.development?
-    # viewでいるのはindexのみ
-    resources :notification_managements, only: %i[  new create edit update destroy ]
-  end
+  # if Rails.env.development?
+  #   # viewでいるのはindexのみ
+  #   resources :notification_managements, only: %i[  new create edit update destroy ]
+  # end
 
-  if Rails.env.development?
-  Sidekiq::Web.use(Rack::Auth::Basic) do |user_id, password|
-    [ user_id, password ] == [ ENV["USER_ID"], ENV["USER_PASSWORD"] ]
-  end
-  mount Sidekiq::Web, at: "/sidekiq"
-  end
 end

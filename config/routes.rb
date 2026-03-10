@@ -16,7 +16,6 @@ Rails.application.routes.draw do
     resources :users, only: [ :index ]
     resources :notification_managements, only: [ :index ]
     resources :gift_suggestions, only: [:index]
-end
   end
   authenticate :admin do
     mount Sidekiq::Web => "/admin/sidekiq"

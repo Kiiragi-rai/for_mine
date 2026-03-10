@@ -14,8 +14,12 @@
         <tr>
           <td><%= g.id %></td>
           <td><%= g.user_id %></td>
+          <td><%= g.status%></td>
           <td><%= g.created_at %></td>
         </tr>
       <% end %>
     </tbody>
 </table>
+<div class="d-flex justify-content-center mt-4">
+  <%= paginate @gift_suggestions %>
+</div>

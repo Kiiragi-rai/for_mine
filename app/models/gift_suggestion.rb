@@ -29,4 +29,9 @@ class GiftSuggestion < ApplicationRecord
     success: 1,
     failure: 2
   }
+
+  def self.ransackable_attributes(auth_object = nil)
+    [ "status" ,"id"]
+  end
+
 end

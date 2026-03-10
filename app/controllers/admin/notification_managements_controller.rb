@@ -3,6 +3,6 @@ class Admin::NotificationManagementsController < Admin::BaseController
 
   def index
     @q= NotificationManagement.ransack(params[:q])
-    @notification_managements = @q.result(distince: true).page(params[:page]).per(10)
+    @notification_managements = @q.result(distinct: true).order(created_at: :asc).page(params[:page]).per(10)
   end
 end

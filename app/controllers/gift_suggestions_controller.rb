@@ -42,9 +42,9 @@ class GiftSuggestionsController < ApplicationController
                 { "name" => "オリジナルのメッセージカード", "reason" => "..." }
               ]
             }
-          
-              target = current_user.gift_suggestions.update!(result_json: result)
-              if target.save
+                        
+
+              if target.update!(result_json: result)
              session[:gift_contents] = result
               redirect_to new_gift_suggestion_path, notice: "提案を生成しました"
               else

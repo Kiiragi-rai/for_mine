@@ -19,6 +19,45 @@
               <h5 class="card-title">日付</h5>
               <p class="card-text"><%= @anniversary.anniversary_date %></p>
             </div>
+          </div>
+
+          <hr>
+
+          <h4 class="mb-3">通知設定</h4>
+
+          <div class="row mb-3">
+
+            <div class="col-md-6">
+              <h5>通知状態</h5>
+              <p>
+                <%= @anniversary.notification_setting&.is_enabled ? "ON" : "OFF" %>
+              </p>
+            </div>
+
+            <div class="col-md-6">
+              <h5>通知頻度</h5>
+              <p>
+                <%= @anniversary.notification_setting&.frequency_days %>
+              </p>
+            </div>
+
+          </div>
+
+          <div class="row mb-3">
+
+            <div class="col-md-6">
+              <h5>通知時間</h5>
+              <p>
+                <%= "%02d:00" % @anniversary.notification_setting.notification_hour if @anniversary.notification_setting&.notification_hour %>
+              </p>
+            </div>
+
+            <div class="col-md-6">
+              <h5>通知開始日</h5>
+              <p>
+                <%= @anniversary.notification_setting&.start_on %>
+              </p>
+            </div>
 
           </div>
 

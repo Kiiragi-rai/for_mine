@@ -1,33 +1,59 @@
-<% if current_user.partner.present? %>
-  <h2>プレゼント履歴</h2>
+<div class="container py-4">
 
-<table class="table">
-    <thead>
-      <tr>
-        <th scope="col"></th>
-        <th scope="col">1</th>
-        <th scope="col">2</th>
-        <th scope="col">3</th>
-        <th scope="col">削除</th>
-      </tr>
-    </thead>
+  <% if current_user.partner.present? %>
   
-    <tbody>
-      <% @results.each_with_index do |result,num| %>
+    <h2 class="mb-4">プレゼント履歴</h2>
+  
+    <table class="table table-striped">
+      <thead>
         <tr>
-          <th scope="row"><%= num + 1 %></th>
-          <td><%= result[:names][0] %></td>
-          <td><%= result[:names][1] %></td>
-          <td><%= result[:names][2] %></td>
-          <td><%= button_to "削除" ,gift_suggestion_path(result[:id]),
-                           method: :delete %>
-          </td>
-      
+          <th>#</th>
+          <th>1</th>
+          <th>2</th>
+          <th>3</th>
+          <th>削除</th>
         </tr>
-      <% end %>
-    </tbody>
-  </table>
+      </thead>
+  
+      <tbody>
+        <% @results.each_with_index do |result, num| %>
+          <tr>
+            <th scope="row"><%= num + 1 %></th>
+  
+            <td><%= result[:names][0] %></td>
+            <td><%= result[:names][1] %></td>
+            <td><%= result[:names][2] %></td>
+  
+            <td>
+              <%= button_to "削除",
+                  gift_suggestion_path(result[:id]),
+                  method: :delete,
+                  class: "btn btn-sm btn-danger" %>
+            </td>
+          </tr>
+        <% end %>
+      </tbody>
+  
+    </table>
+  
   <% else %>
-  <%= link_to "パートナーを登録して、プレゼント提案してみよう",new_partner_path%>
+  
+    <div class="card">
+      <div class="card-body text-center">
+  
+        <p>パートナーを登録してプレゼント提案してみよう</p>
+  
+        <%= link_to "パートナー登録",
+            new_partner_path,
+            class:"btn btn-primary" %>
+  
+      </div>
+    </div>
+  
   <% end %>
-  <%= paginate @gift_suggestions %>
+  
+  <div class="d-flex justify-content-center mt-4">
+    <%= paginate @gift_suggestions %>
+  </div>
+  
+  </div>

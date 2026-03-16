@@ -1,6 +1,26 @@
-<%= search_form_for q ,url: admin_notification_managements_path, method: :get do |f| %>
-<%= f.label :status_eq, "名前" %>
-<%= f.search_field :status_eq %>
-<div class="actions ransack-submit"><%= f.submit "検索" %></div>
-<%= link_to "リセット", admin_notification_managements_path %>
-<% end %>
+<div class="container mb-4">
+
+  <%= search_form_for q, url: admin_notification_managements_path, method: :get do |f| %>
+  
+  <div class="row g-3 align-items-end">
+  
+    <div class="col-md-4">
+      <%= f.label :status_eq, "ステータス", class:"form-label" %>
+      <%= f.search_field :status_eq, class:"form-control" %>
+    </div>
+  
+    <div class="col-md-4">
+      <%= f.label :user_id_eq, "userID", class:"form-label" %>
+      <%= f.search_field :user_id_eq, class:"form-control" %>
+    </div>
+  
+    <div class="col-md-4">
+      <%= f.submit "検索", class:"btn btn-primary me-2" %>
+      <%= link_to "リセット", admin_notification_managements_path, class:"btn btn-secondary" %>
+    </div>
+  
+  </div>
+  
+  <% end %>
+  
+  </div>

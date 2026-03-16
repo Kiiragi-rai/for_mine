@@ -5,16 +5,26 @@ class GiftSuggestionsController < ApplicationController
   before_action :ensure_partner!, only: [ :create ]
 
   def index
-    @results = current_user.gift_suggestions.where.not(result_json: nil).map do |gs|
+    gift_suggestions = current_user.gift_suggestions.where.not(result_json: nil).order(created_at: :asc).page(params[:page]).per(10)
+    @results = gift_suggestions.map do |gs|
       # @results = current_user.gift_suggestions.map do |gs|
       # [] 入れた方がいいらしい
       { id: gs.id,
        names: gs.result_json&.dig("presentSuggestions")&.map { |h| h["name"] } || [] }
     end
+
+    @gift_suggestions = gift_suggestions
+
+    set_meta_tags(
+      title: "プレゼント履歴"
+    )
   end
 
   def new
         @contents = session.delete(:gift_contents)
+        set_meta_tags(
+          title: "プレゼント提案"
+        )
   end
 
   # パートナーがいないと　おかしくなるため、処理を変える必要あり　 viewを調整とcontrollerに処理追加

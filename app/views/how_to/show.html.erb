@@ -1,21 +1,31 @@
-<div data-controller= "how-to-select">
+<div class="container my-5" data-controller= "how-to-select">
+    <div class="text-center mb-4">
+     <h2>使い方</h2>   
+    </div>
+  <div class="row justify-content-center mb-5">
+    <div class="col-md-6">
+        <select name="items"  class="how_to_items" data-how-to-select-target= "select" data-action="change->how-to-select#change">
+            <option value="1">記念日</option>
+            <option value="2">通知設定</option>
+            <option value="3">パートナー</option>
+            <option value="4">プレゼント提案</option>
+        </select>        
+    </div>
+  </div>
 
-<h2 class="mt-3">使い方</h2>
 
-<select name="items"  class="how_to_items" data-how-to-select-target= "select" data-action="change->how-to-select#change">
-    <option value="1">記念日</option>
-    <option value="2">パートナー</option>
-    <option value="3">プレゼント提案</option>
-    <option value="4">提案履歴</option>
-</select>
-</div>
+  <div class="row justify-content-center">
+    <div class="col-lg-8">
 <% case @section%>
 <% when "1"%>
     <%= render "anniversary"%>
 <% when "2"%>
-    <%= render "partner"%>
+    <%= render "notification_info"%>
 <% when "3"%>
-    <%= render "gift_suggestion"%>
+    <%= render "partner"%>
 <% when "4"%>
-    <%= render "gift_suggestion_history"%>
-<% end %> 
+    <%= render "gift_suggestion"%>
+<% end %>         
+    </div>
+  </div>
+</div>

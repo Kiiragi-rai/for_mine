@@ -3,9 +3,15 @@ class MyPagesController < ApplicationController
 
   def show
     @user = current_user
+    set_meta_tags(
+      title: "マイページ"
+    )
   end
 
   def confirm
+    set_meta_tags(
+      title: "削除確認"
+    )
   end
 
   def withdraw

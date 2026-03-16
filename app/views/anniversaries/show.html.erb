@@ -1,27 +1,87 @@
 <div class="container pt-5">
-    <div class="row mb-3">
-      <div class="col-lg-8 offset-lg-2">
-        <h1><%= "記念日詳細" %></h1>
-  
-        <article class="card">
-          <div class="card-body">
-            <div class="row">
-              <div class="col-md-6">
-                <h3>タイトル: <%= @anniversary.title %></h3>
-              </div>
-              <div class="col-md-6">
-                <h3>日: <%= @anniversary.anniversary_date %></h3>
-              </div>
+
+  <div class="row justify-content-center">
+    <div class="col-lg-8">
+
+      <h1 class="mb-4">記念日詳細</h1>
+
+      <article class="card shadow-sm">
+        <div class="card-body">
+
+          <div class="row mb-3">
+
+            <div class="col-md-6">
+              <h5 class="card-title">タイトル</h5>
+              <p class="card-text"><%= @anniversary.title %></p>
             </div>
-            <div>
-              <%= link_to "編集", edit_anniversary_path(@anniversary) %>
-              <%= link_to "削除", anniversary_path(@anniversary), data: { turbo_method: :delete } %>
+
+            <div class="col-md-6">
+              <h5 class="card-title">日付</h5>
+              <p class="card-text"><%= @anniversary.anniversary_date %></p>
             </div>
           </div>
-        </article>
+
+          <hr>
+
+          <h4 class="mb-3">通知設定</h4>
+
+          <div class="row mb-3">
+
+            <div class="col-md-6">
+              <h5>通知状態</h5>
+              <p>
+                <%= @anniversary.notification_setting&.is_enabled ? "ON" : "OFF" %>
+              </p>
+            </div>
+
+            <div class="col-md-6">
+              <h5>通知頻度</h5>
+              <p>
+                <%= @anniversary.notification_setting&.frequency_days %>
+              </p>
+            </div>
+
+          </div>
+
+          <div class="row mb-3">
+
+            <div class="col-md-6">
+              <h5>通知時間</h5>
+              <p>
+                <%= "%02d:00" % @anniversary.notification_setting.notification_hour if @anniversary.notification_setting&.notification_hour %>
+              </p>
+            </div>
+
+            <div class="col-md-6">
+              <h5>通知開始日</h5>
+              <p>
+                <%= @anniversary.notification_setting&.start_on %>
+              </p>
+            </div>
+
+          </div>
+
+          <div class="d-flex gap-2">
+            <%= link_to "編集",
+                edit_anniversary_path(@anniversary),
+                class: "btn btn-outline-primary" %>
+
+            <%= link_to "削除",
+                anniversary_path(@anniversary),
+                data: { turbo_method: :delete },
+                class: "btn btn-outline-danger" %>
+          </div>
+
+        </div>
+      </article>
+
+      <div class="mt-4">
+        <%= link_to "一覧へ",
+            anniversaries_path,
+            class: "btn btn-outline-secondary" %>
       </div>
+
     </div>
-    <div>
-      <%= link_to "一覧へ", anniversaries_path %>
-    </div>
+  </div>
+
 </div>

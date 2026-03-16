@@ -1,65 +1,80 @@
-<div class="mt-3">
-    <h1><%= "パートナーについて" %></h1>
-</div>
-
-
 <div class="container pt-5">
-    <div class="row mb-3">
-      <div class="col-lg-8 offset-lg-2">
+  <div class="row justify-content-center">
+    <div class="col-lg-8">
 
-        <div>
-          <img src="#" class="rounded-circle">
-        </div>
-  
-        <% if @partner.present? %>
-        <label for="file">登録率</label>
-        <div class="progress "> 
-          <div class="progress-bar <%= @partner.progress_bar_color %>" 
-               role="progressbar" 
-               style="width:<%= @partnercount %>%;"  
-               aria-valuenow=<%= @partnercount %> 
-               aria-valuemin="0" 
+      <h1 class="mb-4">パートナーについて</h1>
+
+      <% if @partner.present? %>
+
+
+
+        <label class="form-label">登録率</label>
+
+        <div class="progress mb-3"> 
+          <div class="progress-bar <%= @partner.progress_bar_color %>"
+               role="progressbar"
+               style="width:<%= @partnercount %>%"
+               aria-valuenow="<%= @partnercount %>"
+               aria-valuemin="0"
                aria-valuemax="100">
-               <%= @partnercount%>%
-              </div>
-        </div> 
-        
-          <article class="card">
-            <div class="card-body">
-              <div class="col">
-                <h3>タイトル: <%= @partner.name %></h3>
-              </div>
-  
-              <div class="col">
-                <h3>好きなこと: <%= @partner.favorites.join('、') %></h3>
-              </div>
-  
-              <div class="col">
-                <h3>嫌いなこと: <%= @partner.avoidances.join('、') %></h3>
-              </div>
-  
-              <div class="col">
-                <h3>趣味: <%= @partner.hobbies.join('、') %></h3>
-              </div>
-  
-              <div class="mt-3">
-                <%= link_to "編集", edit_partner_path %>
-                <!-- <button id="delete-btn">削除</button> -->
-                 
-              </div>
-            </div>
-          </article>
-            <!-- 確認ポップアップ用のモーダル -->
-            <%= render "shared/confirm_delete_modal"%>
-
-        <% else %>
-          <div>
-            <p>相手が見つかっていません</p>
-            <%= link_to "見つけた", new_partner_path %>
+            <%= @partnercount %>%
           </div>
-        <% end %>
-      </div>
+        </div>
+
+    
+        <article class="card shadow-sm">
+          <div class="card-body">
+
+          <div class="text-center mb-4">
+            <%= image_tag "27457_color.png",class:"rounded-circle", width:"120" %>
+          </div>
+    
+
+            <h5 class="card-title mb-3">
+              名前: <%= @partner.name %>
+            </h5>
+
+            <p class="card-text">
+              好きなこと: <%= @partner.favorites.join('、') %>
+            </p>
+
+            <p class="card-text">
+              嫌いなこと: <%= @partner.avoidances.join('、') %>
+            </p>
+
+            <p class="card-text">
+              趣味: <%= @partner.hobbies.join('、') %>
+            </p>
+
+            <div class="mt-3 d-flex gap-2">
+
+              <%= link_to "編集",
+                  edit_partner_path(@partner),
+                  class: "btn btn-outline-primary" %>
+
+              <%= render "shared/confirm_delete_modal" %>
+
+            </div>
+
+          </div>
+        </article>
+
+      <% else %>
+
+        <div class="card">
+          <div class="card-body text-center">
+
+            <p class="mb-3">相手が見つかっていません</p>
+
+            <%= link_to "見つけた",
+                new_partner_path,
+                class:"btn btn-primary" %>
+
+          </div>
+        </div>
+
+      <% end %>
+
     </div>
   </div>
-  
-
+</div>

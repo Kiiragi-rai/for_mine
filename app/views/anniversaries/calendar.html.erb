@@ -1,13 +1,33 @@
-<h1>記念日</h1>
-<%= month_calendar events: @anniversaries do |date,anniversaries| %>
-<%= date.day %>
+<div class="container py-4">
 
-<% anniversaries.each do |anniversary| %>
-  <div>
-    <%= link_to anniversary.title, anniversary_path(anniversary) %>
+  <h1 class="mb-4">記念日カレンダー</h1>
+
+  <div class="card shadow-sm">
+    <div class="card-body">
+
+      <%= month_calendar events: @anniversaries do |date, anniversaries| %>
+
+        <div class="mb-2 fw-bold">
+          <%= date.day %>
+        </div>
+
+        <% anniversaries.each do |anniversary| %>
+          <div class="small">
+            <%= link_to anniversary.title,
+                anniversary_path(anniversary),
+                class: "text-decoration-none" %>
+          </div>
+        <% end %>
+
+      <% end %>
+
+    </div>
   </div>
-<% end %>
 
-<% end %>
+  <div class="mt-4">
+    <%= link_to "一覧へ",
+        anniversaries_path,
+        class: "btn btn-outline-secondary" %>
+  </div>
 
-<%= link_to "back_to_index",anniversaries_path %>
+</div>

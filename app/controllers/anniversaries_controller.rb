@@ -14,6 +14,9 @@ class AnniversariesController < ApplicationController
 
     def calendar
       @anniversaries = current_user.anniversaries
+      set_meta_tags(
+        title: "記念日かレンダー"
+      )
     end
 
     def show
@@ -23,6 +26,9 @@ class AnniversariesController < ApplicationController
     def new
         @anniversary = current_user.anniversaries.build
         @form = AnniversaryNotificationSettingForm.new(anniversary: @anniversary)
+        set_meta_tags(
+          title: "記念日作成"
+        )
       end
 
     def create
@@ -44,6 +50,9 @@ class AnniversariesController < ApplicationController
         @form = AnniversaryNotificationSettingForm.new(
             # user: current_user,
             anniversary: @anniversary
+          )
+          set_meta_tags(
+            title: "記念日編集"
           )
     end
 

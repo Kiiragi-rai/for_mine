@@ -14,10 +14,17 @@ class GiftSuggestionsController < ApplicationController
     end
 
     @gift_suggestions = gift_suggestions
+
+    set_meta_tags(
+      title: "プレゼント履歴"
+    )
   end
 
   def new
         @contents = session.delete(:gift_contents)
+        set_meta_tags(
+          title: "プレゼント提案"
+        )
   end
 
   # パートナーがいないと　おかしくなるため、処理を変える必要あり　 viewを調整とcontrollerに処理追加

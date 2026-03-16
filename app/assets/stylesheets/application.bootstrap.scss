@@ -311,3 +311,71 @@ section {
       background-color: #f0f0f0;
       font-weight: 600;
     }
+
+
+
+
+
+    // simply
+    // .simple-calendar td {
+    //   height: 120px;
+    //   vertical-align: top;
+    //   padding: 6px;
+    // }
+    
+    // .simple-calendar .today {
+    //   background: #f8f9fa;
+    // }
+    
+    // .simple-calendar a {
+    //   display: block;
+    //   font-size: 0.85rem;
+    // }
+//     .simple-calendar {
+//   .day {
+//     background: #fff9ee;
+//   }
+//   .wday-0 {
+//     background: #ffeaea;
+//     color: #ff505c;
+//   }
+//   .wday-1 {}
+//   .wday-2 {}
+//   .wday-3 {}
+//   .wday-4 {}
+//   .wday-5 {}
+//   .wday-6 {
+//     background: #d4ebff;
+//     color: #5984dc;
+//   }
+//   .today {
+//     background: #FFA0A0;
+//   }
+//   .past {}
+//   .future {}
+//   .start-date {}
+//   .prev-month {}
+//   .next-month {}
+//   .current-month {}
+//   .has-events {}
+// }
+// /* ホバーした際の背景色 tableタグにcalender_tableクラスを追記しています*/
+// .calendar-table tr td:hover {
+//   background-color: #FFFF8c;    
+
+.simple-calendar .wday-6 {
+  background: #d4ebff;
+  color: #5984dc;
+}
+.simple-calendar .wday-0 {
+  background: #e9a2a2;
+  color: red;
+}
+
+.simple-calendar .today {
+  background: #f4f439;
+}
+
+.simple-calendar td:hover {
+  background-color: #30d92d;
+}

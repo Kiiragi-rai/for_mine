@@ -55,7 +55,7 @@ class NotificationManagement < ApplicationRecord
   end
 
   def self.ransackable_attributes(auth_object = nil)
-    [ "status" ]
+    [ "status" ,"user_id"]
   end
 
   def self.ransackable_associations(auth_object = nil)

@@ -6,13 +6,11 @@
 
       <% if @partner.present? %>
 
-        <div class="text-center mb-4">
-          <img src="#" class="rounded-circle" width="120">
-        </div>
+
 
         <label class="form-label">登録率</label>
 
-        <div class="progress mb-4"> 
+        <div class="progress mb-3"> 
           <div class="progress-bar <%= @partner.progress_bar_color %>"
                role="progressbar"
                style="width:<%= @partnercount %>%"
@@ -23,8 +21,14 @@
           </div>
         </div>
 
+    
         <article class="card shadow-sm">
           <div class="card-body">
+
+            <div class="text-center mb-4">
+              <img src="#" class="rounded-circle" width="120">
+            </div>
+    
 
             <h5 class="card-title mb-3">
               名前: <%= @partner.name %>

@@ -3,17 +3,18 @@
     <div class="col-md-4 d-flex align-items-center">
        <span class="mb-6 mb-md-0 ext-body-secondary">© 2025 for_mine</span>
     </div>
-    <ul class="nav col-md--4 justify-content-end list-unstyled d-flex">
+
+    <ul class="nav col-md-4 justify-content-end list-unstyled d-flex">
         <li class="ms-3">
-            <%= link_to "利用規約","#", {class: "navbar-brand"}%>
+            <%= link_to "利用規約",pages_terms_path, class: "text-decoration-none text-body-secondary" %>
         </li>
     <ul class="nav col-md--4 justify-content-end list-unstyled d-flex">
         <li class="ms-3">
-            <%= link_to "お問い合わせ","#", {class: "navbar-brand"}%>
+            <%= link_to "お問い合わせ", pages_contact_path,  class: "text-decoration-none text-body-secondary"%>
         </li>
     <ul class="nav col-md--4 justify-content-end list-unstyled d-flex">
         <li class="ms-3">
-            <%= link_to "プライベートポリシー","#", {class: "navbar-brand"}%>
+            <%= link_to "プライベートポリシー",pages_privacy_path,  class: "text-decoration-none text-body-secondary"%>
         </li>
     </ul>
 </footer>    

@@ -9,7 +9,7 @@ class AddNotificationHourToNotificationSettings < ActiveRecord::Migration[7.2]
     SQL
   end
 
-  def down 
+  def down
     remove_column :notification_settings, :notification_hour
   end
 end

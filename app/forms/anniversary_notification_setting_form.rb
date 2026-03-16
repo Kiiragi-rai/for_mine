@@ -25,7 +25,7 @@ class AnniversaryNotificationSettingForm
   validate :anniversary_date_not_after_today
   validate :start_on_not_work_when_disable
   validate :start_on_required_when_enable
-  # validate :start_on_not_after_next_anniversary
+# validate :start_on_not_after_next_anniversary
 
 
 # today に変更
@@ -50,7 +50,7 @@ end
   def start_on_not_before_today
     return unless is_enabled
     return if start_on.blank? || notification_hour.blank?
-    
+
     start_time = Time.zone.local(
       start_on.year,
       start_on.month,

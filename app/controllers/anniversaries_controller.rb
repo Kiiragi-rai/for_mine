@@ -64,7 +64,7 @@ class AnniversariesController < ApplicationController
             **anniversary_notification_setting_params
           )
         if @form.save
-            redirect_to anniversaries_path, success: "記念日を更新しました"
+            redirect_to anniversaries_path, notice: "記念日を更新しました"
         else
             flash.now[:danger] = "記念日更新に失敗しました"
             render :edit, status: :unprocessable_content
@@ -72,7 +72,7 @@ class AnniversariesController < ApplicationController
     end
     def destroy
         @anniversary.destroy!
-        redirect_to anniversaries_path, success: "記念日を削除しました"
+        redirect_to anniversaries_path, notice: "記念日を削除しました"
     end
 
 

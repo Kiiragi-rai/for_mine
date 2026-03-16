@@ -1,17 +1,16 @@
-require 'faraday'
-require 'faraday/retry'
+require "faraday"
+require "faraday/retry"
 
 
 
 module GiftSuggestions
   class Generate
-
     RETRY_OPTIONS = {
   max: 2,
   interval: 0.05,
   interval_randomness: 0.5,
   backoff_factor: 2,
-  retry_statuses: [429, 500, 502, 503, 504]
+  retry_statuses: [ 429, 500, 502, 503, 504 ]
 }
 
 

@@ -48,14 +48,14 @@ class NotificationManagement < ApplicationRecord
         management.user_id = target.user_id
       end
       # 登録したばかりのみ通過させたい
-      return management if management.previously_new_record?
-    rescue ActiveRecord::RecordNotUnique => e 
+      management if management.previously_new_record?
+    rescue ActiveRecord::RecordNotUnique => e
       Rails.logger.info("create_forでエラーが発生しましたNM: #{e.message}")
       nil
   end
 
   def self.ransackable_attributes(auth_object = nil)
-    [ "status" ,"user_id"]
+    [ "status", "user_id" ]
   end
 
   def self.ransackable_associations(auth_object = nil)

@@ -15,7 +15,7 @@ Rails.application.routes.draw do
     root "dashboard#index"
     resources :users, only: [ :index ]
     resources :notification_managements, only: [ :index ]
-    resources :gift_suggestions, only: [:index]
+    resources :gift_suggestions, only: [ :index ]
   end
   authenticate :admin do
     mount Sidekiq::Web => "/admin/sidekiq"
@@ -36,7 +36,7 @@ Rails.application.routes.draw do
   # get "up" => "rails/health#show", as: :rails_health_check
 
 
-# ヘルスチェック
+  # ヘルスチェック
   get "/healthz", to: "health#show"
 
   # Render dynamic PWA files from app/views/pwa/*
@@ -89,5 +89,4 @@ Rails.application.routes.draw do
   #   # viewでいるのはindexのみ
   #   resources :notification_managements, only: %i[  new create edit update destroy ]
   # end
-
 end

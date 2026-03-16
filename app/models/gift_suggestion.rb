@@ -31,7 +31,6 @@ class GiftSuggestion < ApplicationRecord
   }
 
   def self.ransackable_attributes(auth_object = nil)
-    [ "status" ,"id"]
+    [ "status", "id" ]
   end
-
 end

@@ -56,10 +56,10 @@ gem "ransack", "~> 4.2"
 gem "meta-tags"
 
 
-gem 'rack-attack'
-gem 'faraday-retry'
+gem "rack-attack"
+gem "faraday-retry"
 
-gem 'kaminari'
+gem "kaminari"
 gem "kaminari-bootstrap"
 
 
@@ -84,8 +84,8 @@ group :development do
   gem "letter_opener_web"
   gem "annotate"
   gem "rubocop", require: false
-  gem 'bullet'
-  gem 'bundler-audit'
+  gem "bullet"
+  gem "bundler-audit"
 end
 
 group :test do

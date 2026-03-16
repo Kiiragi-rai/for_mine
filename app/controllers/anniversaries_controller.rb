@@ -15,7 +15,7 @@ class AnniversariesController < ApplicationController
     def calendar
       @anniversaries = current_user.anniversaries
       set_meta_tags(
-        title: "記念日かレンダー"
+        title: "記念日カレンダー"
       )
     end
 

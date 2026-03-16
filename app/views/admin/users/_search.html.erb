@@ -7,18 +7,7 @@
     <%= f.search_field :id_eq, class:"form-control" %>
   </div>
 
-  <div class="col-md-3">
-    <%= f.label :user_id_eq, "User ID" %>
-    <%= f.search_field :user_id_eq, class:"form-control" %>
-  </div>
 
-  <div class="col-md-3">
-    <%= f.label :status_eq, "Status" %>
-    <%= f.select :status_eq,
-        GiftSuggestion.statuses.keys,
-        { include_blank: true },
-        class:"form-control" %>
-  </div>
 
   <div class="col-md-3 d-flex align-items-end">
 

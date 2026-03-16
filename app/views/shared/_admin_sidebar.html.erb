@@ -1,57 +1,77 @@
-        <div class="sidebar border border-right col-md-3 col-lg-2 p-0 bg-body-teritary shadow">
-            <div class="offcanvas-md offcanvas-end bg-body-tertiary" tabindex="-1" id="sidebarMenu" aria-labelledby="sidebarMenuLabel">
-                <div class="offcanvas-header">
-                    <h5 class="offcanvas-title fw-semibold" id="sidebarMenuLabel">bootstrap 5 dashboard</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="offcanvas" data-bs-target="#sidebarMenu" aria-label="Close"></button>
-                </div>
+<div class="sidebar border border-right col-md-3 col-lg-2 p-0 bg-body-tertiary shadow">
 
-                <div class="offcanvas-body d-md-flex flex-column p-0 pt-lg-3 overflow-y-auto">
-                    <ul class="nav flex-column">
-                        <li class="nav-item">
-                            <a class="nav-link d-flex align-items-center fw-semibold gap-2" aria-current="page"  href="#">
-                                <i class="bi bi-house-ffill"></i>
-                                <%= link_to "Dashbard", admin_root_path%>
-                            </a>
-                        </li>
-                    <ul class="nav flex-column">
-                        <li class="nav-item">
-                            <a class="nav-link d-flex align-items-center  gap-2">
-                                <%= link_to "users",admin_users_path %>
-                            </a>
-                        </li>
-                    <ul class="nav flex-column">
-                        <li class="nav-item">
-                            <a class="nav-link d-flex align-items-center gap-2"  href="#">
-                                <i class="bi bi-people"></i>
-                                <%= link_to "notificaiton_managements", admin_notification_managements_path %>
-                            </a>
-                        </li>
-                    <ul class="nav flex-column">
-                        <li class="nav-item">
-                            <a class="nav-link d-flex align-items-center gap-2" aria-current="page"  href="#">
-                                <i class="bi bi-graph-up"></i>
-                                <%= link_to "sidekiq", sidekiq_web_path%>
-                            </a>
-                        </li>
-                    </ul>
-
-                    <hr class="my-3">
-
-                    <ul class="nav flex-column mb-auto">
-                        <li class="nav-item">
-                            <a class="nav-link d-flex align-items-center gap-2" href="#">
-                                <i class="bi bi-gear-wide-connected"></i>
-                                <%= link_to "プレゼント提案", admin_gift_suggestions_path%>
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link d-flex align-items-center gap-2" href="#">
-                                <i class="bi bi-door-closed"></i>
-                                sign <output></output>
-                            </a>
-                        </li>
-                    </ul>
-
-                </div>
-            </div>
-        </div>
+    <div class="offcanvas-md offcanvas-end bg-body-tertiary"
+         tabindex="-1"
+         id="sidebarMenu"
+         aria-labelledby="sidebarMenuLabel">
+  
+      <div class="offcanvas-header">
+        <h5 class="offcanvas-title fw-semibold" id="sidebarMenuLabel">
+          Dashboard
+        </h5>
+  
+        <button type="button"
+                class="btn-close"
+                data-bs-dismiss="offcanvas"
+                data-bs-target="#sidebarMenu">
+        </button>
+      </div>
+  
+  
+      <div class="offcanvas-body d-md-flex flex-column p-0 pt-lg-3 overflow-y-auto">
+  
+        <ul class="nav flex-column">
+  
+          <li class="nav-item">
+            <%= link_to admin_root_path,
+                class: "nav-link d-flex align-items-center gap-2 fw-semibold" do %>
+              <i class="bi bi-house"></i>
+              Dashboard
+            <% end %>
+          </li>
+  
+          <li class="nav-item">
+            <%= link_to admin_users_path,
+                class: "nav-link d-flex align-items-center gap-2" do %>
+              <i class="bi bi-people"></i>
+              Users
+            <% end %>
+          </li>
+  
+          <li class="nav-item">
+            <%= link_to admin_notification_managements_path,
+                class: "nav-link d-flex align-items-center gap-2" do %>
+              <i class="bi bi-bell"></i>
+              Notifications
+            <% end %>
+          </li>
+  
+          <li class="nav-item">
+            <%= link_to sidekiq_web_path,
+                class: "nav-link d-flex align-items-center gap-2" do %>
+              <i class="bi bi-graph-up"></i>
+              Sidekiq
+            <% end %>
+          </li>
+  
+        </ul>
+  
+        <hr class="my-3">
+  
+        <ul class="nav flex-column">
+  
+          <li class="nav-item">
+            <%= link_to admin_gift_suggestions_path,
+                class: "nav-link d-flex align-items-center gap-2" do %>
+              <i class="bi bi-gift"></i>
+              プレゼント提案
+            <% end %>
+          </li>
+  
+        </ul>
+  
+      </div>
+  
+    </div>
+  
+  </div>

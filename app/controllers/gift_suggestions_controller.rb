@@ -52,7 +52,7 @@ class GiftSuggestionsController < ApplicationController
                 { "name" => "オリジナルのメッセージカード", "reason" => "..." }
               ]
             }
-                        
+
 
               if target.update!(result_json: result)
              session[:gift_contents] = result
@@ -61,11 +61,11 @@ class GiftSuggestionsController < ApplicationController
                 render :new, status: :unprocessable_entity
               end
 
-              # 本番
+        # 本番
         else
         #   begin
         #     result = GiftSuggestions::Generate.new(prompt).call
-    
+
         #     if result[:error]
         #       target.update!(
         #         status: :failure,
@@ -74,21 +74,21 @@ class GiftSuggestionsController < ApplicationController
         #       redirect_to gift_suggestions_path, alert: "AI生成の失敗"
         #       return
         #     end
-    
+
         #     target.update!(
         #       status: :success,
         #       result_json: result
         #     )
-    
+
         #     session[:gift_contents] = result
         #     redirect_to new_gift_suggestion_path, notice: "提案を生成しました"
-    
+
         #   rescue StandardError => e
         #     target.update!(
         #       status: :failure,
         #       error_message: e.message
         #     )
-    
+
         #     redirect_to gift_suggestions_path, alert: "エラーが発生しました"
         # end
         result = {
@@ -98,7 +98,7 @@ class GiftSuggestionsController < ApplicationController
             { "name" => "オリジナルのメッセージカード", "reason" => "..." }
           ]
         }
-      
+
           target = current_user.gift_suggestions.build(result_json: result)
           if target.save
          session[:gift_contents] = result
@@ -110,8 +110,6 @@ class GiftSuggestionsController < ApplicationController
 
 
         end
-
-       
   end
 
 

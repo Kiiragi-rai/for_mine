@@ -32,28 +32,28 @@ class SendNotificationLineJob < ApplicationJob
 
       message_content = message.build_message
       Rails.logger.info "#{message_content} これメッセージ"
-    # begin 
+      # begin
       if Rails.env.development?
       Rails.logger.info "ためしーーー"
       else
            Rails.logger.info "ためしーーー"
-    #   success = LineNotification::LineClient.send_line_message_with_button_to_home(uid: uid, messages: message_content)
+        #   success = LineNotification::LineClient.send_line_message_with_button_to_home(uid: uid, messages: message_content)
 
-    #   if success
-    #     notification_management.update!(status: :success, sent_at: Time.current)
-    #     notification_setting.update!(last_sent_on: Date.current)
-    #   else
-    #     notification_management.update!(status: :failure)
-    #   end
+        #   if success
+        #     notification_management.update!(status: :success, sent_at: Time.current)
+        #     notification_setting.update!(last_sent_on: Date.current)
+        #   else
+        #     notification_management.update!(status: :failure)
+        #   end
 
-    #   notification_setting.reset_notification! if notification_setting.finished?
-    # end
-    # rescue StandardError => e
-    #   notification_management&.update(status: :failure,sent_at: Time.current ,error_message: e.message) 
-    # どうしようかな
+        #   notification_setting.reset_notification! if notification_setting.finished?
+        # end
+        # rescue StandardError => e
+        #   notification_management&.update(status: :failure,sent_at: Time.current ,error_message: e.message)
+        # どうしようかな
         #  notification_setting.reset_notification! if notification_setting.finished?
 
-    #   Rails.logger.error("LINE SEND ERROR #{e.full_message}")
-    end   
+        #   Rails.logger.error("LINE SEND ERROR #{e.full_message}")
+      end
    end
 end

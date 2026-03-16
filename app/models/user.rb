@@ -60,6 +60,6 @@ class User < ApplicationRecord
   end
 
   def self.ransackable_associations(auth_object = nil)
-    ["anniversaries", "gift_suggestions", "notification_managements", "partner"]
+    [ "anniversaries", "gift_suggestions", "notification_managements", "partner" ]
   end
 end

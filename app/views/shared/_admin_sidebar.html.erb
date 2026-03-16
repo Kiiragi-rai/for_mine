@@ -1,77 +1,87 @@
 <div class="sidebar border border-right col-md-3 col-lg-2 p-0 bg-body-tertiary shadow">
 
-    <div class="offcanvas-md offcanvas-end bg-body-tertiary"
-         tabindex="-1"
-         id="sidebarMenu"
-         aria-labelledby="sidebarMenuLabel">
-  
-      <div class="offcanvas-header">
-        <h5 class="offcanvas-title fw-semibold" id="sidebarMenuLabel">
-          Dashboard
-        </h5>
-  
-        <button type="button"
-                class="btn-close"
-                data-bs-dismiss="offcanvas"
-                data-bs-target="#sidebarMenu">
-        </button>
-      </div>
-  
-  
-      <div class="offcanvas-body d-md-flex flex-column p-0 pt-lg-3 overflow-y-auto">
-  
-        <ul class="nav flex-column">
-  
-          <li class="nav-item">
-            <%= link_to admin_root_path,
-                class: "nav-link d-flex align-items-center gap-2 fw-semibold" do %>
-              <i class="bi bi-house"></i>
-              Dashboard
-            <% end %>
-          </li>
-  
-          <li class="nav-item">
-            <%= link_to admin_users_path,
-                class: "nav-link d-flex align-items-center gap-2" do %>
-              <i class="bi bi-people"></i>
-              Users
-            <% end %>
-          </li>
-  
-          <li class="nav-item">
-            <%= link_to admin_notification_managements_path,
-                class: "nav-link d-flex align-items-center gap-2" do %>
-              <i class="bi bi-bell"></i>
-              Notifications
-            <% end %>
-          </li>
-  
-          <li class="nav-item">
-            <%= link_to sidekiq_web_path,
-                class: "nav-link d-flex align-items-center gap-2" do %>
-              <i class="bi bi-graph-up"></i>
-              Sidekiq
-            <% end %>
-          </li>
-  
-        </ul>
-  
-        <hr class="my-3">
-  
-        <ul class="nav flex-column">
-  
-          <li class="nav-item">
-            <%= link_to admin_gift_suggestions_path,
-                class: "nav-link d-flex align-items-center gap-2" do %>
-              <i class="bi bi-gift"></i>
-              プレゼント提案
-            <% end %>
-          </li>
-  
-        </ul>
-  
-      </div>
-  
+  <div class="offcanvas-md offcanvas-end bg-body-tertiary"
+       tabindex="-1"
+       id="sidebarMenu"
+       aria-labelledby="sidebarMenuLabel">
+
+    <div class="offcanvas-header">
+      <h5 class="offcanvas-title fw-semibold" id="sidebarMenuLabel">
+        Dashboard
+      </h5>
+
+      <button type="button"
+              class="btn-close"
+              data-bs-dismiss="offcanvas"
+              data-bs-target="#sidebarMenu">
+      </button>
     </div>
-  
+
+    <div class="offcanvas-body d-md-flex flex-column p-0 pt-lg-3 overflow-y-auto">
+
+      <!-- main menu -->
+      <ul class="nav flex-column">
+
+        <li class="nav-item">
+          <%= link_to admin_root_path,
+              class: "nav-link d-flex align-items-center gap-2 fw-semibold" do %>
+            <i class="bi bi-house"></i>
+            Dashboard
+          <% end %>
+        </li>
+
+        <li class="nav-item">
+          <%= link_to admin_users_path,
+              class: "nav-link d-flex align-items-center gap-2" do %>
+            <i class="bi bi-people"></i>
+            Users
+          <% end %>
+        </li>
+
+        <li class="nav-item">
+          <%= link_to admin_notification_managements_path,
+              class: "nav-link d-flex align-items-center gap-2" do %>
+            <i class="bi bi-bell"></i>
+            Notifications
+          <% end %>
+        </li>
+
+        <li class="nav-item">
+          <%= link_to sidekiq_web_path,
+              class: "nav-link d-flex align-items-center gap-2" do %>
+            <i class="bi bi-graph-up"></i>
+            Sidekiq
+          <% end %>
+        </li>
+
+        <li class="nav-item">
+          <%= link_to admin_gift_suggestions_path,
+              class: "nav-link d-flex align-items-center gap-2" do %>
+            <i class="bi bi-gift"></i>
+            プレゼント提案
+          <% end %>
+        </li>
+
+      </ul>
+
+      <hr class="my-3">
+
+      <!-- logout -->
+      <ul class="nav flex-column mb-auto">
+
+        <li class="nav-item">
+          <%= link_to destroy_admin_session_path,
+              data: { turbo_method: :delete },
+              class: "nav-link d-flex align-items-center gap-2 text-danger" do %>
+            <i class="bi bi-box-arrow-right"></i>
+            Logout
+          <% end %>
+        </li>
+
+      </ul>
+
+    </div>
+
   </div>
+
+</div>

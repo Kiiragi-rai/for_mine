@@ -2,47 +2,6 @@
 @import 'bootstrap-icons/font/bootstrap-icons';
 
 
-section {
-    width: 100%;
-    height: 100vh;
-    background: #e7e7e7;
-    padding: 3.75rem 0.625rem;
-  }
-  
-  section:nth-child(even) {
-    background: #d3d3d3;
-  }
-  
-  .section-conts {
-    max-width: 1000px;
-    margin: auto;
-  }
-  
-  #mv {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-  }
-  
-  #mv h1 {
-    font-size: 3rem;
-    text-align: center;
-    line-height: 1.8;
-  }
-  
-  .section-conts h2 {
-    margin: 0 0 1.25rem;
-    text-align: center;
-  }
-  
-  .ef {
-    opacity: 0;
-    transition: opacity 1s;
-  }
-
-  .ef.show {
-    opacity: 1;
-  }
 
 // home
 .square-btn {
@@ -52,109 +11,17 @@ section {
   justify-content: center;
 }
 
+// fadein
+.fadein {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: 0.6s;
+}
 
-  
-//   fade in 2
-*{
-    padding: 0;
-    margin: 0;
-    box-sizing: border-box;
-  }
-  
-  // .header {
-  //   width: 100%;
-  //   height: 70px;
-  //   background-color: rgba(255, 255, 255, 0.5);
-  //   position: absolute;
-  //   top: 0;
-  //   left: 0;
-  //   text-align: center;
-  // }
-  
-  // .header h1{
-  //   line-height: 70px;
-  // }
-  
-  // .mainvisual {
-  //   background-image: url("ここに表示したい画像のパスを入力してください");
-  //   background-position: center;
-  //   background-repeat: no-repeat;
-  //   background-size: cover;
-  //   height: 100vh;
-  // }
-  
-  .container {
-    max-width: 1200px;
-    padding: 0 30px;
-    margin: 0 auto;
-    margin-top: 120px;
-  }
-  
-  .content-title {
-    margin-bottom: 90px;
-    text-align: center;
-    transition: 0.5s;
-    transform: translateY(-20px);
-    opacity: 0;
-  }
-  
-  .content-title.show {
-    transform: translateY(0);
-    opacity: 1;
-  }
-  
-  .content {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 60px;
-    opacity: 0;
-    transition: 0.5s;
-    visibility: hidden;
-  }
-  
-  .content:nth-of-type(odd) {
-    transform: translateX(-20px);
-  }
-  
-  .content:nth-of-type(even) {
-    flex-direction: row-reverse;
-    transform: translateX(20px);
-  }
-  
-  .content:nth-of-type(odd).show,
-  .content:nth-of-type(even).show
-  {
-    transform: translateX(0);
-    opacity: 1;
-    visibility: visible;
-  }
-  
-  
-  .content img{
-    width: 25%;
-    aspect-ratio: 1/1;
-    object-fit: cover;
-  }
-  
-  .content p {
-    width: 70%;
-  }
-  
-  // .footer {
-  //   background-color: #DDD;
-  //   padding: 20px;
-  //   text-align: center;
-  // }
-  .fadein {
-    opacity: 0;
-    transition: 0.5s;
-  }
-  
-  .fadein.show {
-    opacity: 1;
-    transform: translateX(0) translateY(0);
-  }
+.fadein.show {
+  opacity: 1;
+  transform: translateY(0);
+}
 
     /* モーダルのスタイル */
     .modal {
@@ -322,52 +189,6 @@ section {
 
 
 
-    // simply
-    // .simple-calendar td {
-    //   height: 120px;
-    //   vertical-align: top;
-    //   padding: 6px;
-    // }
-    
-    // .simple-calendar .today {
-    //   background: #f8f9fa;
-    // }
-    
-    // .simple-calendar a {
-    //   display: block;
-    //   font-size: 0.85rem;
-    // }
-//     .simple-calendar {
-//   .day {
-//     background: #fff9ee;
-//   }
-//   .wday-0 {
-//     background: #ffeaea;
-//     color: #ff505c;
-//   }
-//   .wday-1 {}
-//   .wday-2 {}
-//   .wday-3 {}
-//   .wday-4 {}
-//   .wday-5 {}
-//   .wday-6 {
-//     background: #d4ebff;
-//     color: #5984dc;
-//   }
-//   .today {
-//     background: #FFA0A0;
-//   }
-//   .past {}
-//   .future {}
-//   .start-date {}
-//   .prev-month {}
-//   .next-month {}
-//   .current-month {}
-//   .has-events {}
-// }
-// /* ホバーした際の背景色 tableタグにcalender_tableクラスを追記しています*/
-// .calendar-table tr td:hover {
-//   background-color: #FFFF8c;    
 
 .simple-calendar .wday-6 {
   background: #d4ebff;

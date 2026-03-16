@@ -3,11 +3,19 @@ import { Controller } from "@hotwired/stimulus"
 // Connects to data-controller="fade"
 export default class extends Controller {
   connect() {
+    const elements = this.element.querySelectorAll(".fadein")
+    
+    elements.forEach((el, index) => {
+      setTimeout(() => {
+        el.classList.add("show")
+      }, index * 300)
+    })
     // this.scrollFade()
-    this.showElements()
+    // this.showElements()
 
-    window.addEventListener("scroll",this.handleScroll)
+    // window.addEventListener("scroll",this.handleScroll)
   }
+}
   
   // disconnect(){
   //   window.removeEventListener("scroll", this.handleScroll)
@@ -33,19 +41,19 @@ export default class extends Controller {
   //   })
   // }
   
-  showElements() {
-    const elements = this.element.querySelectorAll(".fadein")
-    const displayPos = window.innerHeight * 0.8
+//   showElements() {
+//     const elements = this.element.querySelectorAll(".fadein")
+//     const displayPos = window.innerHeight * 0.8
 
-    elements.forEach((element) => {
-      const elementPos = element.getBoundingClientRect().top
+//     elements.forEach((element) => {
+//       const elementPos = element.getBoundingClientRect().top
 
-      if (displayPos > elementPos) {
-        element.classList.add("show")
-      }
-    })
-  }
-}
+//       if (displayPos > elementPos) {
+//         element.classList.add("show")
+//       }
+//     })
+//   }
+// }
 // const scrollFade = () => {
 
 //   const fadeElem = document.querySelectorAll(".ef");

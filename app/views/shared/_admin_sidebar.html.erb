@@ -46,13 +46,7 @@
           <% end %>
         </li>
 
-        <li class="nav-item">
-          <%= link_to sidekiq_web_path,
-              class: "nav-link d-flex align-items-center gap-2" do %>
-            <i class="bi bi-graph-up"></i>
-            Sidekiq
-          <% end %>
-        </li>
+
 
         <li class="nav-item">
           <%= link_to admin_gift_suggestions_path,
@@ -61,6 +55,15 @@
             プレゼント提案
           <% end %>
         </li>
+
+        <li class="nav-item">
+          <%= link_to sidekiq_web_path,
+              class: "nav-link d-flex align-items-center gap-2" do %>
+            <i class="bi bi-graph-up"></i>
+            Sidekiq
+          <% end %>
+        </li>
+
 
       </ul>
 

@@ -10,6 +10,15 @@ abort("The Rails environment is running in production mode!") if Rails.env.produ
 # return unless Rails.env.test?
 require 'rspec/rails'
 # Add additional requires below this line. Rails is not loaded until this point!
+require 'capybara/rspec'
+require 'selenium/webdriver'
+
+# Capybara.register_driver :selenium_chrome_headless do |app|
+#   Capybara::Selenium::Driver.new(app, browser: :chrome, options: Selenium::WebDriver::Chrome::Options.new(args: %w[headless disable-gpu window-size=1920,1080]))
+# end
+
+# Capybara.javascript_driver = :selenium_chrome_headless
+
 
 # Requires supporting ruby files with custom matchers and macros, etc, in
 # spec/support/ and its subdirectories. Files matching `spec/**/*_spec.rb` are
@@ -41,6 +50,19 @@ RSpec.configure do |config|
     Rails.root.join('spec/fixtures')
   ]
 
+
+  Rails.root.glob('spec/support/**/*.rb').each { |f| require f }
+
+
+  config.before(:each, type: :system) do
+    driven_by :remote_chrome
+  
+    Capybara.server_host = IPSocket.getaddress(Socket.gethostname)
+    Capybara.server_port = 3001
+    Capybara.app_host = "http://#{Capybara.server_host}:3001"
+  end
+
+  
   # If you're not using ActiveRecord, or you'd prefer not to run each of your
   # examples within a transaction, remove the following line or assign false
   # instead of true.
@@ -52,6 +74,7 @@ RSpec.configure do |config|
   # You can uncomment this line to turn off ActiveRecord support entirely.
   # config.use_active_record = false
   OmniAuth.config.test_mode = true
+
   # RSpec Rails uses metadata to mix in different behaviours to your tests,
   # for example enabling you to call `get` and `post` in request specs. e.g.:
   #

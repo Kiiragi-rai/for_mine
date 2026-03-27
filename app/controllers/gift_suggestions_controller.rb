@@ -100,21 +100,21 @@ class GiftSuggestionsController < ApplicationController
 
         #     redirect_to gift_suggestions_path, alert: "エラーが発生しました"
         # end
-        result = {
-          "presentSuggestions" => [
-            { "name" => "文房具セット", "reason" => "..." },
-            { "name" => "ポケットサイズのゲーム", "reason" => "..." },
-            { "name" => "オリジナルのメッセージカード", "reason" => "..." }
-          ]
-        }
+        # result = {
+        #   "presentSuggestions" => [
+        #     { "name" => "文房具セット", "reason" => "..." },
+        #     { "name" => "ポケットサイズのゲーム", "reason" => "..." },
+        #     { "name" => "オリジナルのメッセージカード", "reason" => "..." }
+        #   ]
+        # }
 
-          target = current_user.gift_suggestions.build(result_json: result)
-          if target.save
-         session[:gift_contents] = result
-          redirect_to new_gift_suggestion_path, notice: "提案を生成しました"
-          else
-            render :new, status: :unprocessable_entity
-          end
+        #   target = current_user.gift_suggestions.build(result_json: result)
+        #   if target.save
+        #  session[:gift_contents] = result
+        #   redirect_to new_gift_suggestion_path, notice: "提案を生成しました"
+        #   else
+        #     render :new, status: :unprocessable_entity
+        #   end
         end
   end
 

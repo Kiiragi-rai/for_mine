@@ -42,7 +42,7 @@ jobs:
           bundler-cache: true
 
       - name: Lint code for consistent style
-        run: bin/rubocop -f github
+        run:  bundle exec rubocop
 
   test:
     runs-on: ubuntu-latest
@@ -67,8 +67,6 @@ jobs:
         image: seleniarm/standalone-chromium
         ports:
           - 4444:4444
-
-
     steps:
       # - name: Install packages
       #   run: sudo apt-get update && sudo apt-get install --no-install-recommends -y google-chrome-stable curl libjemalloc2 libvips postgresql-client
@@ -111,3 +109,6 @@ jobs:
           name: screenshots
           path: ${{ github.workspace }}/tmp/screenshots
           if-no-files-found: ignore
+
+      - name:  bundler-audit
+        run: bundle exec bundler-audit check --update

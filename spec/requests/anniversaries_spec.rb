@@ -1,9 +1,9 @@
 require 'rails_helper'
 
 RSpec.describe "AnniversariesNotificationSettingsForm", type: :request do
-  let(:user) { create(:user)}
+  let(:user) { create(:user) }
 
-  before do 
+  before do
     sign_in user
   end
 

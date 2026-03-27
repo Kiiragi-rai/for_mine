@@ -4,7 +4,7 @@ RSpec.describe "Partners", type: :request do
   let(:user) { create(:user) }
   let!(:partner) { create(:partner, user: user) }
 
-  before do 
+  before do
     sign_in user
     allow(GiftSuggestions::PromptBuilder).to receive(:new).and_return(double(call: "dummy"))
   end

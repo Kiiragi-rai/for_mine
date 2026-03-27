@@ -31,6 +31,7 @@ services:
       PGUSER: postgres
       PGPASSWORD: password
       REDIS_URL: redis://redis:6379/0
+      SELENIUM_DRIVER_URL: http://chrome:4444/wd/hub
 
     ports:
       - "3000:3000"
@@ -39,6 +40,9 @@ services:
         condition: service_healthy
       redis:
         condition: service_started
+      chrome:
+        condition: service_started  
+
 
   redis:
     image: "redis:7.0-alpine"
@@ -64,7 +68,11 @@ services:
     depends_on:
       - db
       - redis
-  
+
+  chrome: 
+    image: seleniarm/standalone-chromium:latest
+    ports:
+      - "4444:4444"
 
 volumes:
   bundle_data:

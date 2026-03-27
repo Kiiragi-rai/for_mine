@@ -26,9 +26,16 @@ class GiftSuggestionsController < ApplicationController
           title: "プレゼント提案"
         )
   end
-
+# 今月五回使っていたら停止
   # パートナーがいないと　おかしくなるため、処理を変える必要あり　 viewを調整とcontrollerに処理追加
   def create
+
+    if GiftSuggestion.monthly_success_count(current_user) >= 5
+      redirect_to new_gift_suggestion_path, alert: "今月の上限です"
+      return
+    end
+
+    # need limit fileter ( make it in model?? undef)
     partner_info = build_partner_info
     last_result =  current_user.gift_suggestions.success.last&.result_json
 
@@ -36,6 +43,8 @@ class GiftSuggestionsController < ApplicationController
       partner_info: partner_info,
       last_result: last_result
     ).call
+
+
 
 
         target = current_user.gift_suggestions.create!(
@@ -54,7 +63,7 @@ class GiftSuggestionsController < ApplicationController
             }
 
 
-              if target.update!(result_json: result)
+              if target.update!(result_json: result, status: :success)
              session[:gift_contents] = result
               redirect_to new_gift_suggestion_path, notice: "提案を生成しました"
               else
@@ -91,24 +100,21 @@ class GiftSuggestionsController < ApplicationController
 
         #     redirect_to gift_suggestions_path, alert: "エラーが発生しました"
         # end
-        result = {
-          "presentSuggestions" => [
-            { "name" => "文房具セット", "reason" => "..." },
-            { "name" => "ポケットサイズのゲーム", "reason" => "..." },
-            { "name" => "オリジナルのメッセージカード", "reason" => "..." }
-          ]
-        }
+        # result = {
+        #   "presentSuggestions" => [
+        #     { "name" => "文房具セット", "reason" => "..." },
+        #     { "name" => "ポケットサイズのゲーム", "reason" => "..." },
+        #     { "name" => "オリジナルのメッセージカード", "reason" => "..." }
+        #   ]
+        # }
 
-          target = current_user.gift_suggestions.build(result_json: result)
-          if target.save
-         session[:gift_contents] = result
-          redirect_to new_gift_suggestion_path, notice: "提案を生成しました"
-          else
-            render :new, status: :unprocessable_entity
-          end
-
-
-
+        #   target = current_user.gift_suggestions.build(result_json: result)
+        #   if target.save
+        #  session[:gift_contents] = result
+        #   redirect_to new_gift_suggestion_path, notice: "提案を生成しました"
+        #   else
+        #     render :new, status: :unprocessable_entity
+        #   end
         end
   end
 
@@ -119,9 +125,12 @@ class GiftSuggestionsController < ApplicationController
     gs = current_user.gift_suggestions.find(params[:id])
 
     # adminでerror確認ができるように＋　定期的にjobで消去してもいいかも
-    # gs.update!(result_json: nil)
-    gs.destroy!
-    redirect_to gift_suggestions_path
+    gs.update!(result_json: nil,
+              status: :deleted,
+              deleted_at: Time.current
+    )
+    # gs.destroy!
+    redirect_to gift_suggestions_path, notice: "削除しました"
   end
 
   private

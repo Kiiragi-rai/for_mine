@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.2].define(version: 2026_03_06_133602) do
+ActiveRecord::Schema[7.2].define(version: 2026_03_27_101016) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -49,6 +49,7 @@ ActiveRecord::Schema[7.2].define(version: 2026_03_06_133602) do
     t.jsonb "result_json"
     t.integer "status", default: 0, null: false
     t.text "error_message"
+    t.datetime "deleted_at"
     t.index ["user_id"], name: "index_gift_suggestions_on_user_id"
   end
 

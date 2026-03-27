@@ -3,6 +3,7 @@
 # Table name: gift_suggestions
 #
 #  id            :bigint           not null, primary key
+#  deleted_at    :datetime
 #  error_message :text
 #  input_json    :jsonb
 #  result_json   :jsonb

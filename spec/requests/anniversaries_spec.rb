@@ -1,14 +1,14 @@
 require 'rails_helper'
 
-RSpec.describe "Anniversaries", type: :request do
+RSpec.describe "AnniversariesNotificationSettingsForm", type: :request do
   let(:user) { create(:user)}
 
   before do 
     sign_in user
   end
 
-  describe "POST /anniversaries" do
-    it "作成できる（通知設定なし）" do
+  describe "記念日登録のみ" do
+    it "正常に" do
       expect {
         post anniversaries_path, params: {
           anniversary_notification_setting_form: {
@@ -20,8 +20,8 @@ RSpec.describe "Anniversaries", type: :request do
       }.to change(Anniversary, :count).by(1)
     end
   end
-  describe "POST /anniversaries" do
-    it "作成できる（通知設定あり）" do
+  describe "記念日と通知設定登録" do
+    it "正常" do
       expect {
         post anniversaries_path, params: {
           anniversary_notification_setting_form: {

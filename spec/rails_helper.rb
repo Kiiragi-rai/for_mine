@@ -62,7 +62,7 @@ RSpec.configure do |config|
     Capybara.app_host = "http://#{Capybara.server_host}:3001"
   end
 
-  
+
   # If you're not using ActiveRecord, or you'd prefer not to run each of your
   # examples within a transaction, remove the following line or assign false
   # instead of true.

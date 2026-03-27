@@ -126,10 +126,11 @@ class GiftSuggestionsController < ApplicationController
 
     # adminでerror確認ができるように＋　定期的にjobで消去してもいいかも
     gs.update!(result_json: nil,
-              status: :deleted
+              status: :deleted,
+              deleted_at: Time.current
     )
     # gs.destroy!
-    redirect_to gift_suggestions_path
+    redirect_to gift_suggestions_path, notice: "削除しました"
   end
 
   private

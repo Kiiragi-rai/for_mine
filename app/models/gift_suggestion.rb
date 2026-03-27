@@ -37,7 +37,7 @@ class GiftSuggestion < ApplicationRecord
 
   def self.monthly_success_count(user)
     where(user: user)
-      .where(status: :success)
+      .where(status: [:success, :deleted, :pending])
       .where(created_at: Time.current.beginning_of_day..Time.current.end_of_day)
       .count
   end

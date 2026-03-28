@@ -16,18 +16,19 @@
       </thead>
   
       <tbody>
-        <% @results.each_with_index do |result, num| %>
+        <% @gift_suggestions.each_with_index do |gs, num| %>
           <tr>
             <th scope="row"><%= num + 1 %></th>
   
-            <td><%= result[:names][0] %></td>
-            <td><%= result[:names][1] %></td>
-            <td><%= result[:names][2] %></td>
-  
+            <td><%= gs.suggestion_names[0] %></td>
+            <td><%= gs.suggestion_names[1] %></td>
+            <td><%= gs.suggestion_names[2] %></td>
+
             <td>
               <%= button_to "削除",
-                  gift_suggestion_path(result[:id]),
+                  gift_suggestion_path(gs),
                   method: :delete,
+                  data: { turbo: false},
                   class: "btn btn-sm btn-danger" %>
             </td>
           </tr>

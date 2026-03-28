@@ -4,20 +4,25 @@ class GiftSuggestionsController < ApplicationController
   before_action :authenticate_user!
   before_action :ensure_partner!, only: [ :create ]
 
+  # def index
+  #   gift_suggestions = current_user.gift_suggestions.where.not(result_json: nil).order(created_at: :asc).page(params[:page]).per(10)
+  #   @results = gift_suggestions.map do |gs|
+  #     # @results = current_user.gift_suggestions.map do |gs|
+  #     # [] 入れた方がいいらしい
+  #     { id: gs.id,
+  #      names: gs.result_json&.dig("presentSuggestions")&.map { |h| h["name"] } || [] }
+  #   end
+
+  #   @gift_suggestions = gift_suggestions
+
+  #   set_meta_tags(
+  #     title: "プレゼント履歴"
+  #   )
+  # end
   def index
-    gift_suggestions = current_user.gift_suggestions.where.not(result_json: nil).order(created_at: :asc).page(params[:page]).per(10)
-    @results = gift_suggestions.map do |gs|
-      # @results = current_user.gift_suggestions.map do |gs|
-      # [] 入れた方がいいらしい
-      { id: gs.id,
-       names: gs.result_json&.dig("presentSuggestions")&.map { |h| h["name"] } || [] }
-    end
-
-    @gift_suggestions = gift_suggestions
-
-    set_meta_tags(
-      title: "プレゼント履歴"
-    )
+    @gift_suggestions = current_user.gift_suggestions.where.not(result_json: nil).order(created_at: :asc).page(params[:page]).per(10)
+  
+    set_meta_tags(title: "プレゼント履歴")
   end
 
   def new
@@ -121,7 +126,7 @@ class GiftSuggestionsController < ApplicationController
 
 
   def destroy
-    gs = current_user.gift_suggestions.find(params[:id])
+    gs = current_user.gift_suggestions.find_by_hashid!(params[:id])
 
     # adminでerror確認ができるように＋　定期的にjobで消去してもいいかも
     gs.update!(result_json: nil,

@@ -52,6 +52,10 @@ class GiftSuggestion < ApplicationRecord
     end
   end
 
+  def suggestion_names
+    result_json&.dig("presentSuggestions")&.map { |h| h["name"] } || []
+  end
+
   def self.ransackable_attributes(auth_object = nil)
     [ "status", "id" ]
   end

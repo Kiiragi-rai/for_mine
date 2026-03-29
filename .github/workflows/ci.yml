@@ -50,13 +50,18 @@ jobs:
   test:
     runs-on: ubuntu-latest
 
+    env:
+      RAILS_ENV: test
+      PGHOST: localhost
+      PGUSER: postgres
+      PGPASSWORD: postgres
+      REDIS_URL: redis://localhost:6379/0
+      SELENIUM_DRIVER_URL: http://localhost:4444/wd/hub
+      
+
     services:
       postgres:
         image: postgres:15
-        env:
-          POSTGRES_USER: postgres
-          POSTGRES_PASSWORD: postgres
-          POSTGRES_DB: myapp_test
         ports:
           - 5432:5432
         options: --health-cmd="pg_isready -U postgres -d myapp_test" --health-interval=10s --health-timeout=5s --health-retries=10
@@ -98,13 +103,7 @@ jobs:
         run: bundle exec rails db:prepare
 
       - name: Run RSpec
-        env:
-          RAILS_ENV: test
-          PGHOST: localhost
-          PGUSER: postgres
-          PGPASSWORD: postgres
-          REDIS_URL: redis://localhost:6379/0
-          SELENIUM_DRIVER_URL: http://localhost:4444/wd/hub
+
 
         run: bundle exec rspec
 

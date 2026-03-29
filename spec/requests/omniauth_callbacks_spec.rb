@@ -1,8 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe "LINEログイン", type: :request do
-  before do 
-
+  before do
     OmniAuth.config.test_mode = true
 
 

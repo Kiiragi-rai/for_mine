@@ -36,7 +36,7 @@ class GiftSuggestion < ApplicationRecord
   }
 
   def self.monthly_success_count(user)
-    where(user: user).where(status: [:success, :deleted, :pending]).where(created_at: Time.current.beginning_of_day..Time.current.end_of_day).count
+    where(user: user).where(status: [ :success, :deleted, :pending ]).where(created_at: Time.current.beginning_of_month..Time.current.end_of_month).count
   end
   # def monthly_success_count
 
@@ -44,13 +44,16 @@ class GiftSuggestion < ApplicationRecord
   # end
   # # for fileter method , 今月最初から今月末までcreated_atの数が５より多ければ、提案できないように、あとstatusでsuccess, created_atはnum > 5を満たす
   def monthly_limit
-    count = user.gift_suggestions.where(created_at: Time.current.beginning_of_day..Time.current.end_of_day).count
+    count = user.gift_suggestions.where(created_at: Time.current.beginning_of_month..Time.current.end_of_month).count
     # where(status: :success).where(created_at: Time.current.beginning_of_month..Time.current.end_of_day).count
 
     if count >= 5
       errors.add(:base, "今月の上限に達しています")
     end
+  end
 
+  def suggestion_names
+    result_json&.dig("presentSuggestions")&.map { |h| h["name"] } || []
   end
 
   def self.ransackable_attributes(auth_object = nil)

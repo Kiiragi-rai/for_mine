@@ -1,15 +1,15 @@
 require 'rails_helper'
 
-RSpec.describe "Partners", type: :request do
+RSpec.describe "Partnes", type: :request do
   let(:user) { create(:user) }
 
-  before do 
+  before do
     sign_in user
   end
 
-
-  describe "POST /partner" do
-    it "作成できる（通知設定なし）" do
+  describe "パートナー登録" do
+    context "名前入力"
+    it "登録できる" do
       expect {
         post partner_path, params: {
           partner: {
@@ -17,6 +17,17 @@ RSpec.describe "Partners", type: :request do
           }
         }
       }.to change(Partner, :count).by(1)
+    end
+  end
+    context "名前未入力" do
+    it "登録できない" do
+      expect {
+        post partner_path, params: {
+          partner: {
+            name: nil
+          }
+        }
+      }.not_to change(Partner, :count)
     end
   end
 end

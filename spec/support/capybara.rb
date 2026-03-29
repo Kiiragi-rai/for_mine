@@ -1,7 +1,7 @@
 Capybara.register_driver :remote_chrome do |app|
-  # Chromeの設定をまとめる箱  
+  # Chromeの設定をまとめる箱
   options = Selenium::WebDriver::Chrome::Options.new
-  # Docker用　ないとChrome起動できないことある
+    # Docker用　ないとChrome起動できないことある
     options.add_argument('no-sandbox')
     # 画面表示しない　裏でブラウザ動く
     options.add_argument('headless')

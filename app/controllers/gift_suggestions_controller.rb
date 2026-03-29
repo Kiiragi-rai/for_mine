@@ -4,20 +4,25 @@ class GiftSuggestionsController < ApplicationController
   before_action :authenticate_user!
   before_action :ensure_partner!, only: [ :create ]
 
+  # def index
+  #   gift_suggestions = current_user.gift_suggestions.where.not(result_json: nil).order(created_at: :asc).page(params[:page]).per(10)
+  #   @results = gift_suggestions.map do |gs|
+  #     # @results = current_user.gift_suggestions.map do |gs|
+  #     # [] 入れた方がいいらしい
+  #     { id: gs.id,
+  #      names: gs.result_json&.dig("presentSuggestions")&.map { |h| h["name"] } || [] }
+  #   end
+
+  #   @gift_suggestions = gift_suggestions
+
+  #   set_meta_tags(
+  #     title: "プレゼント履歴"
+  #   )
+  # end
   def index
-    gift_suggestions = current_user.gift_suggestions.where.not(result_json: nil).order(created_at: :asc).page(params[:page]).per(10)
-    @results = gift_suggestions.map do |gs|
-      # @results = current_user.gift_suggestions.map do |gs|
-      # [] 入れた方がいいらしい
-      { id: gs.id,
-       names: gs.result_json&.dig("presentSuggestions")&.map { |h| h["name"] } || [] }
-    end
+    @gift_suggestions = current_user.gift_suggestions.where.not(result_json: nil).order(created_at: :asc).page(params[:page]).per(10)
 
-    @gift_suggestions = gift_suggestions
-
-    set_meta_tags(
-      title: "プレゼント履歴"
-    )
+    set_meta_tags(title: "プレゼント履歴")
   end
 
   def new
@@ -26,10 +31,9 @@ class GiftSuggestionsController < ApplicationController
           title: "プレゼント提案"
         )
   end
-# 今月五回使っていたら停止
+  # 今月五回使っていたら停止
   # パートナーがいないと　おかしくなるため、処理を変える必要あり　 viewを調整とcontrollerに処理追加
   def create
-
     if GiftSuggestion.monthly_success_count(current_user) >= 5
       redirect_to new_gift_suggestion_path, alert: "今月の上限です"
       return
@@ -72,49 +76,49 @@ class GiftSuggestionsController < ApplicationController
 
         # 本番
         else
-        #   begin
-        #     result = GiftSuggestions::Generate.new(prompt).call
+            begin
+              result = GiftSuggestions::Generate.new(prompt).call
 
-        #     if result[:error]
-        #       target.update!(
-        #         status: :failure,
-        #         error_message: result[:error]
-        #       )
-        #       redirect_to gift_suggestions_path, alert: "AI生成の失敗"
-        #       return
-        #     end
+              if result[:error]
+                target.update!(
+                  status: :failure,
+                  error_message: result[:error]
+                )
+                redirect_to gift_suggestions_path, alert: "AI生成の失敗"
+                return
+              end
 
-        #     target.update!(
-        #       status: :success,
-        #       result_json: result
-        #     )
+              target.update!(
+                status: :success,
+                result_json: result
+              )
 
-        #     session[:gift_contents] = result
-        #     redirect_to new_gift_suggestion_path, notice: "提案を生成しました"
+              session[:gift_contents] = result
+              redirect_to new_gift_suggestion_path, notice: "提案を生成しました"
 
-        #   rescue StandardError => e
-        #     target.update!(
-        #       status: :failure,
-        #       error_message: e.message
-        #     )
+            rescue StandardError => e
+              target.update!(
+                status: :failure,
+                error_message: e.message
+              )
 
-        #     redirect_to gift_suggestions_path, alert: "エラーが発生しました"
-        # end
-        # result = {
-        #   "presentSuggestions" => [
-        #     { "name" => "文房具セット", "reason" => "..." },
-        #     { "name" => "ポケットサイズのゲーム", "reason" => "..." },
-        #     { "name" => "オリジナルのメッセージカード", "reason" => "..." }
-        #   ]
-        # }
+              redirect_to gift_suggestions_path, alert: "エラーが発生しました"
+          end
+          # result = {
+          #   "presentSuggestions" => [
+          #     { "name" => "文房具セット", "reason" => "..." },
+          #     { "name" => "ポケットサイズのゲーム", "reason" => "..." },
+          #     { "name" => "オリジナルのメッセージカード", "reason" => "..." }
+          #   ]
+          # }
 
-        #   target = current_user.gift_suggestions.build(result_json: result)
-        #   if target.save
-        #  session[:gift_contents] = result
-        #   redirect_to new_gift_suggestion_path, notice: "提案を生成しました"
-        #   else
-        #     render :new, status: :unprocessable_entity
-        #   end
+          #   target = current_user.gift_suggestions.build(result_json: result)
+          #   if target.save
+          #  session[:gift_contents] = result
+          #   redirect_to new_gift_suggestion_path, notice: "提案を生成しました"
+          #   else
+          #     render :new, status: :unprocessable_entity
+          #   end
         end
   end
 
@@ -122,7 +126,7 @@ class GiftSuggestionsController < ApplicationController
 
 
   def destroy
-    gs = current_user.gift_suggestions.find(params[:id])
+    gs = current_user.gift_suggestions.find_by_hashid!(params[:id])
 
     # adminでerror確認ができるように＋　定期的にjobで消去してもいいかも
     gs.update!(result_json: nil,

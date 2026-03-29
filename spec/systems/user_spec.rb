@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe "Users", type: :system do
-  describe 'Login処理-> 記念日作成' do
+  describe 'ログイン後' do
     before do
       visit root_path
       click_on 'ログイン'

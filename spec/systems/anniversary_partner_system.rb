@@ -36,16 +36,16 @@ RSpec.describe "Users", type: :system do
   describe 'ログイン後' do
     before do
       sign_in user
-      # visit root_path
+      visit root_path
       # click_on 'ログイン'
-      # expect(page).to have_link 'anniversary'
+      expect(page).to have_link 'anniversary'
       # driven_by(:rack_test)
       # Rails.application.env_config["devise.mapping"] = Devise.mappings[:user]
       # Rails.application.env_config["omniauth.auth"] = OmniAuth.config.mock_auth[:line]
     end
-    context '正しい情報を入力した場合' do
-      it '記念日作成できる' do
-          visit root_path
+    describe '記念日登録' do
+    context '記念日情報を入力' do
+      it '登録できる' do
         click_on 'anniversary'
         click_on '記念日作成'
 
@@ -57,9 +57,11 @@ RSpec.describe "Users", type: :system do
         expect(page).to have_content 'サイコーの日'
       end
     end
-    context '正しい情報を入力した場合' do
-      it 'できる' do
-        visit root_path
+    end
+    describe 'パートナー登録' do
+   context 'パートナー情報入力' do
+      it '登録できる' do
+        # visit root_path
         click_link 'partner'
         click_on '見つけた'
 
@@ -70,6 +72,6 @@ RSpec.describe "Users", type: :system do
         expect(page).to have_content 'test_name'
       end
     end
-
+    end
   end
 end

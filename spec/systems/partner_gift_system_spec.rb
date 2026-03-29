@@ -39,17 +39,17 @@ RSpec.describe "Users", type: :system do
     before do
       sign_in user
       create(:partner, user: user)
+      visit root_path
       # visit root_path
       # click_on 'ログイン'
-      # expect(page).to have_link 'anniversary'
+      expect(page).to have_link 'anniversary'
       # driven_by(:rack_test)
       # Rails.application.env_config["devise.mapping"] = Devise.mappings[:user]
       # Rails.application.env_config["omniauth.auth"] = OmniAuth.config.mock_auth[:line]
     end
-
-    context 'プレゼント提案' do
+  describe 'プレゼント提案' do
+    context '提案ボタンをクリック' do
       it '提案できる' do
-        visit root_path
         puts user.partner.present?
         puts "==== current_path ===="
         puts current_path
@@ -67,9 +67,11 @@ RSpec.describe "Users", type: :system do
         expect(current_path).to eq new_gift_suggestion_path
       end
     end
-    context 'プレゼント提案履歴' do
-      it '提案できる' do
-        visit root_path
+    end
+
+  describe 'プレゼント履歴' do
+    context 'プレゼント提案履歴ページ遷移' do
+      it '遷移成功' do
         puts user.partner.present?
         puts "==== current_path ===="
         puts current_path
@@ -88,6 +90,7 @@ RSpec.describe "Users", type: :system do
         expect(current_path).to eq gift_suggestions_path
         expect(page).to have_content("1")
       end
+    end
     end
   end
 end

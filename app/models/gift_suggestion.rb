@@ -44,7 +44,7 @@ class GiftSuggestion < ApplicationRecord
   # end
   # # for fileter method , 今月最初から今月末までcreated_atの数が５より多ければ、提案できないように、あとstatusでsuccess, created_atはnum > 5を満たす
   def monthly_limit
-    count = user.gift_suggestions.where(created_at: Time.current.beginning_of_day..Time.current.end_of_day).count
+    count = user.gift_suggestions.where(created_at: Time.current.beginning_of_month..Time.current.end_of_month).count
     # where(status: :success).where(created_at: Time.current.beginning_of_month..Time.current.end_of_day).count
 
     if count >= 5

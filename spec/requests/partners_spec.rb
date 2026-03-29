@@ -9,7 +9,7 @@ RSpec.describe "Partners", type: :request do
 
 
   describe "POST /partner" do
-    it "作成できる（通知設定なし）" do
+    it "正常に" do
       expect {
         post partner_path, params: {
           partner: {

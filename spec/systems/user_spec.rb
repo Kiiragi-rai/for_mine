@@ -2,8 +2,6 @@ require 'rails_helper'
 
 RSpec.describe "Users", type: :system do
   let!(:user) { create(:user) }
-  # let!(:partner) { create(:partner, user: user) }
-
 
   describe 'ログイン前' do
     context "記念日ページへ遷移" do
@@ -38,7 +36,6 @@ RSpec.describe "Users", type: :system do
   describe 'ログイン後' do
     before do
       sign_in user
-
       # visit root_path
       # click_on 'ログイン'
       # expect(page).to have_link 'anniversary'
@@ -73,20 +70,6 @@ RSpec.describe "Users", type: :system do
         expect(page).to have_content 'test_name'
       end
     end
-    # context 'プレゼント提案' do
-    #   it '提案できる' do
-    #     #  expect(page).to have_link("プレゼント提案")
-    #     visit root_path
-    #      click_link 'プレゼント提案'
 
-    #     expect(current_path).to eq new_gift_suggestion_path
-
-
-    #     expect(page).to have_button("提案")
-    #     click_on '提案'
-
-    #     expect(page).to have_content '提案を生成しました'
-    #   end
-    # end
   end
 end

@@ -7,7 +7,7 @@ class SendNotificationLineJob < ApplicationJob
   # 送信service
   def perform(management_id:)
   Rails.logger.info "ここからsend notificaitonline jobだよん"    # Do something later
-    notification_management = NotificationManagement.find(management_id)
+    notification_management = NotificationManagement.find_by(id:management_id)
     return if notification_management.success?
 
     notification_setting = notification_management.notification_setting
@@ -32,7 +32,7 @@ class SendNotificationLineJob < ApplicationJob
 
       message_content = message.build_message
       Rails.logger.info "#{message_content} これメッセージ"
-      # begin
+      begin
       if Rails.env.development?
       Rails.logger.info "ためしーーー"
       else
@@ -47,10 +47,10 @@ class SendNotificationLineJob < ApplicationJob
           end
 
           notification_setting.reset_notification! if notification_setting.finished?
-        end
+      end
         rescue StandardError => e
-          notification_management&.update(status: :failure,sent_at: Time.current ,error_message: e.message)
-        # どうしようかな
+          notification_management&.update(status: :failure, sent_at: Time.current, error_message: e.message)
+         # どうしようかな
          notification_setting.reset_notification! if notification_setting.finished?
 
           Rails.logger.error("LINE SEND ERROR #{e.full_message}")

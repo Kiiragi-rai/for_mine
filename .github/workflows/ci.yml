@@ -54,6 +54,7 @@ jobs:
       postgres:
         image: postgres
         env:
+          PGHOST: db
           POSTGRES_USER: postgres
           POSTGRES_PASSWORD: postgres
         ports:
@@ -92,14 +93,15 @@ jobs:
         run: |
           bundle install
           yarn install
-          
+
       - name: Setup DB
         run: bundle exec rails db:prepare
 
       - name: Run RSpec
         env:
           RAILS_ENV: test
-          DATABASE_URL: postgres://postgres:postgres@localhost:5432/myapp_test
+          PGUSER: postgres
+          PGPASSWORD: postgres
           REDIS_URL: redis://localhost:6379/0
           SELENIUM_DRIVER_URL: http://localhost:4444/wd/hub
 

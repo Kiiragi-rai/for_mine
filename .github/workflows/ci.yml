@@ -49,12 +49,17 @@ jobs:
 
   test:
     runs-on: ubuntu-latest
-
+    env:
+      RAILS_ENV: test
+      PGHOST: 127.0.0.1
+      PGUSER: postgres
+      PGPASSWORD: postgres
+      REDIS_URL: redis://localhost:6379/0
+      SELENIUM_DRIVER_URL: http://localhost:4444/wd/hub
     services:
       postgres:
         image: postgres:15
         env:
-          PGHOST: 127.0.0.1
           POSTGRES_USER: postgres
           POSTGRES_PASSWORD: postgres
           POSTGRES_DB: myapp_test
@@ -99,6 +104,11 @@ jobs:
           until pg_isready -h localhost -U postgres; do
            sleep 1
           done
+      - name: Build CSS
+        run: yarn build:css
+      - name: Build JS
+        run: yarn build         
+        
       - name: Setup DB
         run: bundle exec rails db:prepare
 

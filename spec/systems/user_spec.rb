@@ -15,8 +15,8 @@ RSpec.describe "Users", type: :system do
         click_on 'anniversary'
         click_on '記念日作成'
 
-        fill_in 'タイトル', with: 'サイコーの日'
-        fill_in '記念日', with: '2020-03-01'
+        fill_in 'anniversary_notification_setting_form_title', with: 'サイコーの日'
+        fill_in 'anniversary_notification_setting_form_anniversary_date', with: '2020-03-01'
 
         click_button '作成'
         # 今表示されているWebページ

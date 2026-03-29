@@ -52,7 +52,7 @@ jobs:
 
     services:
       postgres:
-        image: postgres
+        image: postgres 15
         env:
           PGHOST: db
           POSTGRES_USER: postgres

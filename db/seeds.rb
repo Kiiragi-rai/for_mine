@@ -7,11 +7,16 @@
 #   ["Action", "Comedy", "Drama", "Horror"].each do |genre_name|
 #     MovieGenre.find_or_create_by!(name: genre_name)
 #   end
+
+email = ENV.fetch("ADMIN_EMAIL", "test@example.com")
+password = ENV.fetch("ADMIN_PASSWORD", "password")
+
+
 if Admin.count.zero?
   Admin.create!(
-    email: ENV.fetch("ADMIN_EMAIL"),
-    password: ENV.fetch("ADMIN_PASSWORD"),
-    password_confirmation: ENV.fetch("ADMIN_PASSWORD")
+    email: email,
+    password: password,
+    password_confirmation: password
   )
   puts "Adminつくったよ"
 else

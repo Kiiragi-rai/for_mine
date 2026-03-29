@@ -106,7 +106,9 @@ jobs:
           done
       - name: Build CSS
         run: yarn build:css
-         
+      - name: Build JS
+        run: yarn build         
+        
       - name: Setup DB
         run: bundle exec rails db:prepare
 

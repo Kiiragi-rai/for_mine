@@ -104,6 +104,9 @@ jobs:
           until pg_isready -h localhost -U postgres; do
            sleep 1
           done
+      - name: Build CSS
+        run: yarn build:css
+         
       - name: Setup DB
         run: bundle exec rails db:prepare
 

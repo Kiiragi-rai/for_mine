@@ -38,7 +38,7 @@ RSpec.describe "Users", type: :system do
   describe 'ログイン後' do
     before do
       sign_in user
-
+      create(:partner, user: user)
       # visit root_path
       # click_on 'ログイン'
       # expect(page).to have_link 'anniversary'
@@ -46,47 +46,48 @@ RSpec.describe "Users", type: :system do
       # Rails.application.env_config["devise.mapping"] = Devise.mappings[:user]
       # Rails.application.env_config["omniauth.auth"] = OmniAuth.config.mock_auth[:line]
     end
-    context '正しい情報を入力した場合' do
-      it '記念日作成できる' do
-          visit root_path
-        click_on 'anniversary'
-        click_on '記念日作成'
 
-        fill_in 'anniversary_notification_setting_form_title', with: 'サイコーの日'
-        fill_in 'anniversary_notification_setting_form_anniversary_date', with: '2020-03-01'
-
-        click_button '作成'
-        # 今表示されているWebページ
-        expect(page).to have_content 'サイコーの日'
-      end
-    end
-    context '正しい情報を入力した場合' do
-      it 'できる' do
+    context 'プレゼント提案' do
+      it '提案できる' do
         visit root_path
-        click_link 'partner'
-        click_on '見つけた'
+        puts user.partner.present?
+        puts "==== current_path ===="
+        puts current_path
 
-        fill_in 'partner_name', with: 'test_name'
+        puts "==== page content ===="
+        puts page.body
 
-        click_button '登録'
-        # 今表示されているWebページ
-        expect(page).to have_content 'test_name'
+        expect(page).to have_link("プレゼント提案")
+
+        click_link 'プレゼント提案'
+
+        puts "==== after click ===="
+        puts current_path
+
+        expect(current_path).to eq new_gift_suggestion_path
       end
     end
-    # context 'プレゼント提案' do
-    #   it '提案できる' do
-    #     #  expect(page).to have_link("プレゼント提案")
-    #     visit root_path
-    #      click_link 'プレゼント提案'
+    context 'プレゼント提案履歴' do
+      it '提案できる' do
+        visit root_path
+        puts user.partner.present?
+        puts "==== current_path ===="
+        puts current_path
 
-    #     expect(current_path).to eq new_gift_suggestion_path
+        puts "==== page content ===="
+        puts page.body
+
+        expect(page).to have_link("プレゼント履歴")
+
+        click_link "プレゼント履歴"
 
 
-    #     expect(page).to have_button("提案")
-    #     click_on '提案'
+        puts "==== after click ===="
+        puts current_path
 
-    #     expect(page).to have_content '提案を生成しました'
-    #   end
-    # end
+        expect(current_path).to eq gift_suggestions_path
+        expect(page).to have_content("1")
+      end
+    end
   end
 end

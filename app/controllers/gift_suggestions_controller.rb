@@ -21,7 +21,7 @@ class GiftSuggestionsController < ApplicationController
   # end
   def index
     @gift_suggestions = current_user.gift_suggestions.where.not(result_json: nil).order(created_at: :asc).page(params[:page]).per(10)
-  
+
     set_meta_tags(title: "プレゼント履歴")
   end
 

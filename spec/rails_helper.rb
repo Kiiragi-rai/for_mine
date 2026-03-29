@@ -55,7 +55,8 @@ RSpec.configure do |config|
 
 
   config.before(:each, type: :system) do
-    driven_by :remote_chrome
+    # driven_by :remote_chrome
+    driven_by :rack_test
 
     Capybara.server_host = IPSocket.getaddress(Socket.gethostname)
     Capybara.server_port = 3001
@@ -69,6 +70,7 @@ RSpec.configure do |config|
   config.use_transactional_fixtures = true
 
   config.include Devise::Test::IntegrationHelpers, type: :request
+  config.include Devise::Test::IntegrationHelpers, type: :system
 
   config.include FactoryBot::Syntax::Methods
   # You can uncomment this line to turn off ActiveRecord support entirely.

@@ -19,7 +19,7 @@ RSpec.describe "AnniversariesNotificationSettingsForm", type: :request do
           }
         }
       }.to change(Anniversary, :count).by(1)
-     end   
+     end
    end
 
    context "titleを入力しない" do
@@ -46,11 +46,10 @@ RSpec.describe "AnniversariesNotificationSettingsForm", type: :request do
           }
         }
       }.not_to change(Anniversary, :count)
-    end    
+    end
    end
   context "anniversary_dateを未来の時間で登録" do
     it "登録できない" do
-
         post anniversaries_path, params: {
           anniversary_notification_setting_form: {
             title: "てスト",
@@ -59,11 +58,11 @@ RSpec.describe "AnniversariesNotificationSettingsForm", type: :request do
           }
         }
         expect(Anniversary.count).to eq 0
-        expect(response.body).to include("記念日は未来には設定できません") 
-    end    
+        expect(response.body).to include("記念日は未来には設定できません")
+    end
    end
   end
-  
+
   describe "記念日と通知設定登録" do
    context "記念日と通知設定を入力" do
     it "登録できる" do
@@ -80,7 +79,7 @@ RSpec.describe "AnniversariesNotificationSettingsForm", type: :request do
           }
         }
       }.to change(Anniversary, :count).by(1)
-    end      
+    end
    end
    context "is_enabledをfalse, start_onを入力" do
     it "登録できない" do
@@ -96,7 +95,7 @@ RSpec.describe "AnniversariesNotificationSettingsForm", type: :request do
           }
         }
         expect(Anniversary.count).to eq 0
-        expect(response.body).to include("知OFFのときは通知開始日は設定できません") 
+        expect(response.body).to include("知OFFのときは通知開始日は設定できません")
     end
    end
    context "is_enableをtrue, start_onを入力しない" do
@@ -112,7 +111,7 @@ RSpec.describe "AnniversariesNotificationSettingsForm", type: :request do
           }
         }
         expect(Anniversary.count).to eq 0
-        expect(response.body).to include("通知ONの時は通知開始日が必要です") 
+        expect(response.body).to include("通知ONの時は通知開始日が必要です")
     end
    end
    context "start_onを現在の時刻から30分後を入力" do
@@ -128,7 +127,7 @@ RSpec.describe "AnniversariesNotificationSettingsForm", type: :request do
           }
         }
         expect(Anniversary.count).to eq 0
-        expect(response.body).to include("通知開始は現在時刻から1時間以上先にしてください") 
+        expect(response.body).to include("通知開始は現在時刻から1時間以上先にしてください")
     end
    end
    context "start_onを半年後以降の日付を入力" do
@@ -144,7 +143,7 @@ RSpec.describe "AnniversariesNotificationSettingsForm", type: :request do
           }
         }
         expect(Anniversary.count).to eq 0
-        expect(response.body).to include("通知開始日は半年以内に設定してください") 
+        expect(response.body).to include("通知開始日は半年以内に設定してください")
     end
    end
   end

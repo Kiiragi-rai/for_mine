@@ -14,27 +14,27 @@ RSpec.describe "Partners", type: :request do
     end
 
     it "partnerのsexカラムは30文字以上は登録できない" do
-      partner = Partner.new(name: "test",sex: "1234890123456789012345678901234567890" )
+      partner = Partner.new(name: "test", sex: "1234890123456789012345678901234567890")
       expect(partner).to be_invalid
     end
     it "partnerのjobカラムは100文字以上は登録できない" do
-      partner = Partner.new(name: "test",job: "会社員、警察官、消防士、不動産、社員、警察官、消防士、不動産、社員、警察官、消防士、不動産、社員、警察官、消防士、
+      partner = Partner.new(name: "test", job: "会社員、警察官、消防士、不動産、社員、警察官、消防士、不動産、社員、警察官、消防士、不動産、社員、警察官、消防士、
       不動産、社員、警察官、消防士、不動産、社員、警察官、消防士、不動産、社員、警察官、消防士、不動産、社員、警察官、消防士、不動産、社員、警察官、消防士、不動産、社員、
       警察官、消防士、不動産、社員、警察官、消防士、不動産、社員、警察官、消防士、不動産、社員、警察官、消防士、不動産、社員、警察官、消防士、不動産、社員、警察官、消防士、
       不動産、社員、警察官、消防士、不動産、社員、警察官、消防士、不動産、社員、警察官、消防士、不動産、社員、警察官、消防士、不動産、社員、警察官、消防士、不動産、社員、警察官、
-      消防士、不動産、社員、警察官、消防士、不動産、社員、警察官、消防士、不動産、" )
+      消防士、不動産、社員、警察官、消防士、不動産、社員、警察官、消防士、不動産、")
       expect(partner).to be_invalid
     end
     it "partnerのbudget_maxカラムは0円以上で登録できない" do
-      partner = Partner.new(name: "test",budget_max: -1 )
+      partner = Partner.new(name: "test", budget_max: -1)
       expect(partner).to be_invalid
     end
     it "partnerのbudget_minカラムは0円以上で登録できない" do
-      partner = Partner.new(name: "test",budget_max: -1 )
+      partner = Partner.new(name: "test", budget_max: -1)
       expect(partner).to be_invalid
     end
     it "partnerのbudget_minカラムはbudget_maxより多い金額は登録できない" do
-      partner = Partner.new(name: "test",budget_max: 100, budget_min: 200 )
+      partner = Partner.new(name: "test", budget_max: 100, budget_min: 200)
       expect(partner).to be_invalid
     end
   end

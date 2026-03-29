@@ -2,7 +2,7 @@ require 'rails_helper'
 
 RSpec.describe "Partners", type: :request do
   let(:user) { create(:user) }
-  
+
 
   before do
     sign_in user
@@ -17,7 +17,7 @@ RSpec.describe "Partners", type: :request do
       expect {
         post gift_suggestions_path
       }.to change(GiftSuggestion, :count).by(1)
-    end      
+    end
     end
   end
 
@@ -27,7 +27,7 @@ RSpec.describe "Partners", type: :request do
       expect {
         post gift_suggestions_path
       }.not_to change(GiftSuggestion, :count)
-    end      
+    end
     end
   end
 end

@@ -5,5 +5,6 @@ class HomePagesController < ApplicationController
         set_meta_tags(
             title: "ホーム"
           )
+    
     end
 end

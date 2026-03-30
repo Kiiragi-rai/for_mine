@@ -76,12 +76,13 @@
       まずは、ひとつだけでも登録してみませんか？
     </p>
     
-
-    <%= link_to "LINEでログイン",
-      "/auth/line",
-      class: "btn btn-success btn-lg px-5" %>
-
-
+    <%= button_to "LINEでログイン",
+    user_line_omniauth_authorize_path,
+    method: :post,
+    form: { data: { turbo: false } },
+    class: "btn btn-success btn-lg px-5" %>
   </div>
 
 </div>
+
+

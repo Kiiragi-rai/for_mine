@@ -20,6 +20,9 @@ class AnniversariesController < ApplicationController
     end
 
     def show
+      set_meta_tags(
+        title: "記念日詳細"
+      )
     end
 
 

@@ -1,11 +1,14 @@
-<div class=" d-flex flex-column align-items-center pt-5" style="margin-top: 100px;">
+<div class=" d-flex flex-column align-items-center pt-5 position-relative" style="margin-top: 100px;">
 
   <div class="container text-center" style="max-width:700px">
 
     <h1 class="display-4 fw-semibold title-shadow mb-4">
       for mine
     </h1>
-
+    <div class="hero-illustration">
+      <%= image_tag "right-hand.png", class: "hand right-hand" %>
+      <%= image_tag "left-hand.png", class: "hand left-hand" %>
+    </div>
     <p class="text-muted mb-5">
       大切な記念日、ちゃんと覚えていたいよね。
     </p>
@@ -80,7 +83,7 @@
     user_line_omniauth_authorize_path,
     method: :post,
     form: { data: { turbo: false } },
-    class: "btn btn-success btn-lg px-5" %>
+    class: "btn btn-success btn-lg px-5 mb-5" %>
   </div>
 
 </div>

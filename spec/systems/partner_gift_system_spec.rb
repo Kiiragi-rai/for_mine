@@ -9,28 +9,28 @@ RSpec.describe "Users", type: :system do
     context "記念日ページへ遷移" do
       it "記念日ページアクセス失敗" do
         visit anniversaries_path
-        expect(page). to have_content("You need to sign in or sign up before continuing.")
+        expect(page). to have_content("ログインすると続きが見れるよ😊")
         expect(current_path).to eq root_path
       end
     end
     context "パートナーページへ遷移" do
       it "パートナーページアクセス失敗" do
         visit partner_path
-        expect(page). to have_content("You need to sign in or sign up before continuing.")
+        expect(page). to have_content("ログインすると続きが見れるよ😊")
         expect(current_path).to eq root_path
       end
     end
     context "プレゼント提案ページへ遷移" do
       it "プレゼント提案ページアクセス失敗" do
         visit new_gift_suggestion_path
-        expect(page). to have_content("You need to sign in or sign up before continuing.")
+        expect(page). to have_content("ログインすると続きが見れるよ😊")
         expect(current_path).to eq root_path
       end
     end
     context "プレゼント履歴ページへ遷移" do
       it "プレゼント履歴ページアクセス失敗" do
         visit gift_suggestions_path
-        expect(page). to have_content("You need to sign in or sign up before continuing.")
+        expect(page). to have_content("ログインすると続きが見れるよ😊")
         expect(current_path).to eq root_path
       end
     end
@@ -42,7 +42,7 @@ RSpec.describe "Users", type: :system do
       visit root_path
       # visit root_path
       # click_on 'ログイン'
-      expect(page).to have_link 'anniversary'
+      expect(page).to have_link '記念日を見る'
       # driven_by(:rack_test)
       # Rails.application.env_config["devise.mapping"] = Devise.mappings[:user]
       # Rails.application.env_config["omniauth.auth"] = OmniAuth.config.mock_auth[:line]
@@ -57,9 +57,9 @@ RSpec.describe "Users", type: :system do
         puts "==== page content ===="
         puts page.body
 
-        expect(page).to have_link("プレゼント提案")
+        expect(page).to have_link("プレゼントを考える")
 
-        click_link 'プレゼント提案'
+        click_link 'プレゼントを考える'
 
         puts "==== after click ===="
         puts current_path
@@ -79,16 +79,16 @@ RSpec.describe "Users", type: :system do
         puts "==== page content ===="
         puts page.body
 
-        expect(page).to have_link("プレゼント履歴")
+        expect(page).to have_link("プレゼントの記録")
 
-        click_link "プレゼント履歴"
+        click_link "プレゼントの記録"
 
 
         puts "==== after click ===="
         puts current_path
 
         expect(current_path).to eq gift_suggestions_path
-        expect(page).to have_content("1")
+        expect(page).to have_content("まだプレゼントの記録がありません")
       end
     end
     end

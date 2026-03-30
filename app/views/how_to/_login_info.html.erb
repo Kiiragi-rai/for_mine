@@ -1,0 +1,29 @@
+<div data-controller="fade">
+
+    <div class="card shadow-sm mb-4 fadein">
+      <div class="card-body">
+        <h5 class="card-title">① LINEでログイン</h5>
+        <p class="card-text">
+          for mineは、LINEアカウントでかんたんに始められます。<br>
+        <small>※現在はLINEログインのみ対応しています。</small>
+        </p>
+      </div>
+    </div>
+  
+    <div class="card shadow-sm mb-4 fadein">
+      <div class="card-body">
+        <h5 class="card-title">② すぐに使い始められる</h5>
+        <p class="card-text">
+          新しい登録は不要で、LINEログインするだけですぐに利用できます。
+        </p>
+      </div>
+    </div>
+  
+
+    <div class="mt-4 fadein">
+      <%= link_to "LINEでログイン",
+          user_line_omniauth_authorize_path,
+          class: "btn btn-success w-100 fs-5" %>
+    </div>
+  
+  </div>

@@ -243,3 +243,32 @@
 .simple-calendar td:hover {
   background-color: #30d92d;
 }
+
+
+// koko
+
+.hero-illustration {
+  position: absolute;
+  top: 120px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 100%;
+  max-width: 900px;
+  pointer-events: none;
+}
+
+.hand {
+  position: absolute;
+  width: 260px;
+  opacity: 0.09;
+}
+
+.right-hand {
+  left: 0;
+  transform: rotate(10deg);
+}
+
+.left-hand {
+  right: 0;
+  transform: rotate(-10deg);
+}

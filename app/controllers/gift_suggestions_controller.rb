@@ -69,7 +69,7 @@ class GiftSuggestionsController < ApplicationController
 
               if target.update!(result_json: result, status: :success)
              session[:gift_contents] = result
-              redirect_to new_gift_suggestion_path, notice: "今月はここまでだよ😊\nまた来月、一緒に考えようね"
+              redirect_to new_gift_suggestion_path, notice: "プレゼント、一緒に考えてみたよ🎁\nいいものが見つかるといいね"
               else
                 render :new, status: :unprocessable_entity
               end

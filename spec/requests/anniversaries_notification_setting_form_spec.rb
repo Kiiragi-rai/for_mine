@@ -114,16 +114,17 @@ RSpec.describe "AnniversariesNotificationSettingsForm", type: :request do
         expect(response.body).to include("通知ONの時は通知開始日が必要です")
     end
    end
-   context "start_onを現在の時刻から30分後を入力" do
+   context "start_onを現在の時刻から一時間後を入力" do
     it "登録できない" do
+      time = 1.hours.from_now
         post anniversaries_path, params: {
           anniversary_notification_setting_form: {
             title: "記念日",
             anniversary_date: "2025-01-01",
             is_enabled: true,
             frequency_days: "1",
-            start_on: Date.current,
-            notification_hour: (Time.current.hour - 2) % 24
+            start_on: time.to_date,
+            notification_hour: time.hour
           }
         }
         expect(Anniversary.count).to eq 0

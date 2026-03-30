@@ -10,7 +10,7 @@ class MyPagesController < ApplicationController
 
   def confirm
     set_meta_tags(
-      title: "削除確認"
+      title: "退会確認"
     )
   end
 
@@ -20,6 +20,6 @@ class MyPagesController < ApplicationController
     current_user.destroy!
 
     reset_session
-    redirect_to root_path, notice: "退会処理", status: :see_other
+    redirect_to root_path, notice: "これまで使ってくれてありがとう😊\nまたいつでも戻ってきてね", status: :see_other
   end
 end

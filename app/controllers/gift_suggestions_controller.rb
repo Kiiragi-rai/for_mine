@@ -56,7 +56,7 @@ class GiftSuggestionsController < ApplicationController
           status: :pending
         )
 
-        if Rails.env.development?
+        if Rails.env.development? || Rails.env.test?
 
           result = {
               "presentSuggestions" => [

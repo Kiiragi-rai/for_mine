@@ -50,42 +50,77 @@ RSpec.describe "Users", type: :system do
   describe 'プレゼント提案' do
     context '提案ボタンをクリック' do
       it '提案できる' do
-        puts user.partner.present?
-        puts "==== current_path ===="
-        puts current_path
+        # puts user.partner.present?
+        # puts "==== current_path ===="
+        # puts current_path
 
-        puts "==== page content ===="
-        puts page.body
+        # puts "==== page content ===="
+        # puts page.body
 
         expect(page).to have_link("プレゼントを考える")
 
         click_link 'プレゼントを考える'
 
-        puts "==== after click ===="
-        puts current_path
+        # puts "==== after click ===="
+        # puts current_path
 
         expect(current_path).to eq new_gift_suggestion_path
       end
     end
+  end
+  describe 'プレゼント提案-> プレゼント履歴' do
+    context '提案ボタンをクリック' do
+      it '提案できる' do
+        # puts user.partner.present?
+        # puts "==== current_path ===="
+        # puts current_path
+
+        # puts "==== page content ===="
+        # puts page.body
+
+        expect(page).to have_link("プレゼントを考える")
+
+        click_link 'プレゼントを考える'
+
+        # puts "==== after click ===="
+        # puts current_path
+
+        click_button 'プレゼントを考える'
+
+
+        expect(current_path).to eq new_gift_suggestion_path
+        puts "ここであるか確認"
+        # puts user.partner.gift_suggestion.present?
+        visit root_path
+
+        expect(page).to have_link("プレゼントの記録")
+        click_link "プレゼントの記録"
+     
+        expect(current_path).to eq gift_suggestions_path
+      puts "==== ここみってええ===="
+        puts page.body
+        expect(page).to have_content "提案①"
+      end
     end
+  end
 
   describe 'プレゼント履歴' do
     context 'プレゼント提案履歴ページ遷移' do
       it '遷移成功' do
-        puts user.partner.present?
-        puts "==== current_path ===="
-        puts current_path
+        # puts user.partner.present?
+        # puts "==== current_path ===="
+        # puts current_path
 
-        puts "==== page content ===="
-        puts page.body
+        # puts "==== page content ===="
+        # puts page.body
 
         expect(page).to have_link("プレゼントの記録")
 
         click_link "プレゼントの記録"
 
 
-        puts "==== after click ===="
-        puts current_path
+        # puts "==== after click ===="
+        # puts current_path
 
         expect(current_path).to eq gift_suggestions_path
         expect(page).to have_content("まだプレゼントの記録がありません")

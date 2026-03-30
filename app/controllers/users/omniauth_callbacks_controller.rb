@@ -31,6 +31,7 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
       else 
         @user.update_column(:first_login_flag, true)
         redirect_to user_root_path, notice: "ようこそ😊\nまずは使い方を見てみようか"
+      end
   end
 
   def not_success_login(auth)

@@ -21,7 +21,7 @@ RSpec.describe "Partners", type: :request do
     end
   end
 
-  describe "プレゼント提案（パートナー登録あり）" do
+  describe "プレゼント提案（パートナー登録なし）" do
     context "パートナー未登録" do
     it "提案できない" do
       expect {

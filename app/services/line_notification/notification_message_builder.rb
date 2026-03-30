@@ -12,13 +12,13 @@ module LineNotification
       # 通知日が対象記念日と同じなら
       # schedule_forはdatetime型
       if scheduled_date == @end_on
-        "今日が#{@title}記念日です"
+        "今日は#{@title}だね🎉\n大切な時間になりますように"
       # 通知日は通知開始日より後で、対象記念日より前
       elsif @start_on < scheduled_date && scheduled_date < @end_on
-        "#{@title}記念日まであと#{days_difference_calculator}日"
+        "#{@title}まで、あと#{days_difference_calculator}日\n少しずつ楽しみだね😊"
       # 通知日は通知開始日と同じなら
       elsif scheduled_date == @start_on
-        "#{@title}記念日まであと#{days_difference_calculator}日\nプレゼントは決まったかな？？"
+        "#{@title}まで、あと#{days_difference_calculator}日\nそろそろ準備、始めてみる？🎁"
       end
     end
 

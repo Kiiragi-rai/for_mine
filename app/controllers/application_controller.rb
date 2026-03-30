@@ -14,10 +14,10 @@ class ApplicationController < ActionController::Base
       if !resource.first_login_flag?
         resource.update_column(:first_login_flag, true)
         # how_to_show_path
-        flash[:notice] = "使い方ページ読んでね！"
+        flash[:notice] = "ようこそ😊\nまずは使い方を見てみようか"
         root_path
       else
-        flash[:notice] = "ログイン成功"
+        flash[:notice] = "おかえりなさい😊"
         root_path
       end
     end

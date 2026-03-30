@@ -35,7 +35,7 @@ class GiftSuggestionsController < ApplicationController
   # パートナーがいないと　おかしくなるため、処理を変える必要あり　 viewを調整とcontrollerに処理追加
   def create
     if GiftSuggestion.monthly_success_count(current_user) >= 5
-      redirect_to new_gift_suggestion_path, alert: "今月の上限です"
+      redirect_to new_gift_suggestion_path, alert: "今月はここまでだよ😊\nまた来月、一緒に考えようね"
       return
     end
 
@@ -69,7 +69,7 @@ class GiftSuggestionsController < ApplicationController
 
               if target.update!(result_json: result, status: :success)
              session[:gift_contents] = result
-              redirect_to new_gift_suggestion_path, notice: "提案を生成しました"
+              redirect_to new_gift_suggestion_path, notice: "プレゼント、一緒に考えてみたよ🎁\nいいものが見つかるといいね"
               else
                 render :new, status: :unprocessable_entity
               end
@@ -84,7 +84,7 @@ class GiftSuggestionsController < ApplicationController
                   status: :failure,
                   error_message: result[:error]
                 )
-                redirect_to gift_suggestions_path, alert: "AI生成の失敗"
+                redirect_to gift_suggestions_path, alert: "うまく提案できなかったみたい…\nもう一度試してみよう🙏"
                 return
               end
 
@@ -94,7 +94,7 @@ class GiftSuggestionsController < ApplicationController
               )
 
               session[:gift_contents] = result
-              redirect_to new_gift_suggestion_path, notice: "提案を生成しました"
+              redirect_to new_gift_suggestion_path, notice: "プレゼント、一緒に考えてみたよ🎁\nいいものが見つかるといいね"
 
             rescue StandardError => e
               target.update!(
@@ -102,7 +102,7 @@ class GiftSuggestionsController < ApplicationController
                 error_message: e.message
               )
 
-              redirect_to gift_suggestions_path, alert: "エラーが発生しました"
+              redirect_to gift_suggestions_path, alert: "少し問題が起きたみたい…\n時間をおいて試してみてね🙏"
           end
           # result = {
           #   "presentSuggestions" => [
@@ -134,13 +134,13 @@ class GiftSuggestionsController < ApplicationController
               deleted_at: Time.current
     )
     # gs.destroy!
-    redirect_to gift_suggestions_path, notice: "削除しました"
+    redirect_to gift_suggestions_path, notice: "この提案はいったんおやすみだね🌙"
   end
 
   private
   def ensure_partner!
     return if  current_user.partner.present?
-    redirect_to gift_suggestions_path, alert: "先にパートナー情報を登録してください"
+    redirect_to gift_suggestions_path, alert: "まずは大切な人のこと、教えてくれる？😊"
   end
 
   def build_partner_info

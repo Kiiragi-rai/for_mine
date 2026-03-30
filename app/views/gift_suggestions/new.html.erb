@@ -2,14 +2,14 @@
 
 <div class="container py-4" data-controller="gift-loading">
 
-  <h1 class="text-center mb-4">プレゼント提案</h1>
+
 
 
 
       <%= form_with url: gift_suggestions_path,
         data: { turbo: false , action: "submit->gift-loading#submit"} do |form| %>
     <div class="text-center py-4">
-        <%= form.submit "提案",
+        <%= form.submit "プレゼントを考える",
             class: "btn btn-primary",
             data: { gift_loading_target: "submitButton"} %>
 
@@ -19,7 +19,7 @@
            style="display:none"
            class="mt-3">
 
-        <p>AIが考えています...</p>
+        <p>あなたの気持ちに合うプレゼントを考えています…</p>
 
       </div>
 
@@ -30,7 +30,7 @@
     <div class="card mt-4">
       <div class="card-body">
 
-        <h3 class="mb-3">おすすめ</h3>
+        <h3 class="mb-3">こんなプレゼントはどうかな？</h3>
 
         <ul>
           <% @contents['presentSuggestions'].each do |presentSuggestion| %>
@@ -52,12 +52,13 @@
 
 <div class="container py-4 text-center">
 
-  <p>パートナー登録が必要です</p>
+  <p class="mb-3">まだパートナーの情報がありません😊</p>
+  <p class="text-muted small mb-4">
+    大切な人のことを教えてくれると、ぴったりなプレゼントを考えられるよ
+  </p>
 
-  <%= link_to "パートナー登録画面へ",
+  <%= link_to "パートナーを登録する",
       new_partner_path,
       class:"btn btn-primary" %>
-
 </div>
-
 <% end %>

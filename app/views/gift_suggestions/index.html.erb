@@ -1,17 +1,16 @@
 <div class="container py-4">
 
   <% if current_user.partner.present? %>
-  
-    <h2 class="mb-4">プレゼント履歴</h2>
+  <% if @gift_suggestions.present? %>
   
     <table class="table table-striped">
       <thead>
         <tr>
           <th>#</th>
-          <th>1</th>
-          <th>2</th>
-          <th>3</th>
-          <th>削除</th>
+          <th>提案①</th>
+          <th>提案②</th>
+          <th>提案③</th>
+          <th>提案をしまう</th>
         </tr>
       </thead>
   
@@ -35,15 +34,38 @@
       </tbody>
   
     </table>
-  
+    <% else %>
+
+      <!-- ここが0件のとき -->
+      <div class="card shadow-sm">
+        <div class="card-body text-center">
+
+          <p class="mb-3">
+            まだプレゼントの記録がありません🎁
+          </p>
+
+          <p class="text-muted small mb-4">
+            最初のプレゼント、一緒に考えてみようか😊
+          </p>
+
+          <%= link_to "プレゼントを考える",
+              new_gift_suggestion_path,
+              class: "btn btn-primary" %>
+        </div>
+      </div>
+    <% end %>
   <% else %>
   
     <div class="card">
       <div class="card-body text-center">
   
-        <p>パートナーを登録してプレゼント提案してみよう</p>
+        <p class="mb-3">まだプレゼントの提案ができません</p>
+        <p class="text-muted small mb-4">
+          パートナーのことを教えてくれると、
+          ぴったりなプレゼントを考えられるよ
+        </p>
   
-        <%= link_to "パートナー登録",
+        <%= link_to "パートナー登録する",
             new_partner_path,
             class:"btn btn-primary" %>
   
@@ -55,5 +77,4 @@
   <div class="d-flex justify-content-center mt-4">
     <%= paginate @gift_suggestions %>
   </div>
-  
   </div>

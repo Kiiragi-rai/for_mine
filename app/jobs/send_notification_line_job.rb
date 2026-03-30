@@ -33,7 +33,7 @@ class SendNotificationLineJob < ApplicationJob
       message_content = message.build_message
       Rails.logger.info "#{message_content} これメッセージ"
       begin
-      if Rails.env.development?
+      if Rails.env.development? ||Rails.env.test?
       Rails.logger.info "ためしーーー"
       else
            Rails.logger.info "本番通知だよー"

@@ -9,7 +9,7 @@
 # application spends waiting for IO operations and on how much you wish to
 # to prioritize throughput over latency.
 #
-# As a rule of thumb, increasing the number of threads will increase how much
+# As a rule of thumb, increasing the number of  will increase how much
 # traffic a given process can handle (throughput), but due to CRuby's
 # Global VM Lock (GVL) it has diminishing returns and will degrade the
 # response time (latency) of the application.
@@ -33,13 +33,13 @@
 # In other environments, only set the PID file if requested.
 # pidfile ENV["PIDFILE"] if ENV["PIDFILE"]
 
-max_threads_count = Integer(ENV.fetch("RAILS_MAX_THREADS", 2))
+max_threads_count = Integer(ENV.fetch("RAILS_MAX_THREADS", 1))
 min_threads_count = Integer(ENV.fetch("RAILS_MIN_THREADS", max_threads_count))
 threads min_threads_count, max_threads_count
 
 workers Integer(ENV.fetch("WEB_CONCURRENCY", 1)) # CPUコア数に近づける
 
-preload_app!
+# preload_app!
 
 port ENV.fetch("PORT", 3000)
 environment ENV.fetch("RAILS_ENV", "production")

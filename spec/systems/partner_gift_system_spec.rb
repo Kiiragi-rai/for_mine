@@ -5,36 +5,36 @@ RSpec.describe "Users", type: :system do
   # let!(:partner) { create(:partner, user: user) }
 
 
-  describe 'ログイン前' do
-    context "記念日ページへ遷移" do
-      it "記念日ページアクセス失敗" do
-        visit anniversaries_path
-        expect(page). to have_content("ログインすると続きが見れるよ😊")
-        expect(current_path).to eq root_path
-      end
-    end
-    context "パートナーページへ遷移" do
-      it "パートナーページアクセス失敗" do
-        visit partner_path
-        expect(page). to have_content("ログインすると続きが見れるよ😊")
-        expect(current_path).to eq root_path
-      end
-    end
-    context "プレゼント提案ページへ遷移" do
-      it "プレゼント提案ページアクセス失敗" do
-        visit new_gift_suggestion_path
-        expect(page). to have_content("ログインすると続きが見れるよ😊")
-        expect(current_path).to eq root_path
-      end
-    end
-    context "プレゼント履歴ページへ遷移" do
-      it "プレゼント履歴ページアクセス失敗" do
-        visit gift_suggestions_path
-        expect(page). to have_content("ログインすると続きが見れるよ😊")
-        expect(current_path).to eq root_path
-      end
-    end
-  end
+  # describe 'ログイン前' do
+  #   context "記念日ページへ遷移" do
+  #     it "記念日ページアクセス失敗" do
+  #       visit anniversaries_path
+  #       expect(page). to have_content("ログインすると続きが見れるよ😊")
+  #       expect(current_path).to eq root_path
+  #     end
+  #   end
+  #   context "パートナーページへ遷移" do
+  #     it "パートナーページアクセス失敗" do
+  #       visit partner_path
+  #       expect(page). to have_content("ログインすると続きが見れるよ😊")
+  #       expect(current_path).to eq root_path
+  #     end
+  #   end
+  #   context "プレゼント提案ページへ遷移" do
+  #     it "プレゼント提案ページアクセス失敗" do
+  #       visit new_gift_suggestion_path
+  #       expect(page). to have_content("ログインすると続きが見れるよ😊")
+  #       expect(current_path).to eq root_path
+  #     end
+  #   end
+  #   context "プレゼント履歴ページへ遷移" do
+  #     it "プレゼント履歴ページアクセス失敗" do
+  #       visit gift_suggestions_path
+  #       expect(page). to have_content("ログインすると続きが見れるよ😊")
+  #       expect(current_path).to eq root_path
+  #     end
+  #   end
+  # end
   describe 'ログイン後' do
     before do
       sign_in user

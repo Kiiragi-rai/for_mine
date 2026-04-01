@@ -44,7 +44,7 @@ class NotificationSetting < ApplicationRecord
   end
 
   def notification_finish_day?
-    end_on.present? && end_on < Date.current
+    end_on.present? && end_on <= Date.current
   end
 
   def reset_notification!

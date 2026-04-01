@@ -1,6 +1,6 @@
 FactoryBot.define do
   factory :partner do
     name { "testpartner" }
-    association :user
+    association :user, factory: :user
   end
 end

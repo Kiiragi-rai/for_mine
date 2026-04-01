@@ -43,7 +43,7 @@ class NotificationSetting < ApplicationRecord
     end
   end
 
-  def notification_finish_day?
+  def finished?
     end_on.present? && end_on <= Date.current
   end
 

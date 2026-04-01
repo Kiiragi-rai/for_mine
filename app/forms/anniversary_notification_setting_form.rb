@@ -20,7 +20,7 @@ class AnniversaryNotificationSettingForm
 
   # validate :start_on_not_before_anniversary
   # validate :anniversary_date_not_after_today
-  validate :not_accept_ten_years_later_start_on
+  validate :not_accept_one_years_later_start_on
   validate :start_on_not_before_today
   validate :anniversary_date_not_after_today
   validate :start_on_not_work_when_disable
@@ -72,15 +72,15 @@ end
       errors.add(:anniversary_date, "記念日は未来には設定できません")
     end
   end
-  # １年後に変えてもいいんじゃない？
-  def not_accept_ten_years_later_start_on
+  # １年後に変えてもいいんじゃない？　１１ヶ月後？　１年後ー１day?とか？　　　　来年の記念日よりあとはダメとかも入れてもいいかも
+  def not_accept_one_years_later_start_on
     return if start_on.blank?
 
     today = Date.current
-    six_month_later = today + 6.month
+    one_year_later = today + 1.year
 
-    if start_on > six_month_later
-      errors.add(:start_on, "通知開始日は半年以内に設定してください")
+    if start_on >  one_year_later
+      errors.add(:start_on, "通知開始日は一年以内に設定してください")
     end
   end
 

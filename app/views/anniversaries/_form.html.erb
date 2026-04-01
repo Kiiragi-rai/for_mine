@@ -32,16 +32,11 @@
       <%= f.label :is_enabled, "OFF", class:"form-check-label" %>
     </div>
   </div>
-
   <div class="mb-3">
-    <%= f.label :frequency_days, "通知頻度", class:"form-label" %>
-
-    <%= f.select :frequency_days,
-      options_for_select(NotificationSetting.frequency_days.map {|k,v| [k,v]}, f.object.frequency_days),
-      {},
-      class:"form-select" %>
+    <%= f.label :start_on, "通知開始日", class:"form-label" %>
+    <%= f.date_field :start_on, class:"form-control" %>
   </div>
-
+  
   <div class="mb-3">
     <%= f.label :notification_hour, "通知時間", class:"form-label" %>
 
@@ -52,9 +47,16 @@
   </div>
 
   <div class="mb-3">
-    <%= f.label :start_on, "通知開始日", class:"form-label" %>
-    <%= f.date_field :start_on, class:"form-control" %>
+    <%= f.label :frequency_days, "通知頻度", class:"form-label" %>
+
+    <%= f.select :frequency_days,
+      options_for_select(NotificationSetting.frequency_days.map {|k,v| [k,v]}, f.object.frequency_days),
+      {},
+      class:"form-select" %>
   </div>
+
+
+
 
   <div class="text-end">
     <%= f.submit submit_label, class:"btn btn-primary" %>

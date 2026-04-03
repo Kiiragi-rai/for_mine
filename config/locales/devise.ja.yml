@@ -1,0 +1,53 @@
+ja:
+  devise:
+    confirmations:
+      confirmed: 'メールアドレスが確認されました。'
+      send_instructions: '確認メールを送信しました。メールをご確認ください。'
+      send_paranoid_instructions: 'もし登録されたメールアドレスがあれば、確認メールを送信しました。メールをご確認ください。'
+    failure:
+      already_authenticated: 'すでにログインしているよ😊'
+      inactive: 'アカウントが有効ではありません。'
+      invalid: 'ログイン情報が違うみたい…もう一度試してみてね🙏'
+      last_attempt: '最後のログイン試行に失敗しました。'
+      locked: 'アカウントがロックされています。'
+      not_found_in_database: '無効な認証情報です。'
+      timeout: 'セッションが切れちゃったみたい…\nもう一度ログインしてね😊'
+      unauthenticated: 'ログインすると続きが見れるよ😊'
+      unconfirmed: '確認メールを確認してください。'
+      unknown_format: '無効なリクエストフォーマットです。'
+      unverified: 'アカウントが確認されていません。'
+      user_locked: 'アカウントがロックされています。'
+    mailer:
+      confirmation_instructions:
+        subject: 'アカウントの確認メール'
+      reset_password_instructions:
+        subject: 'パスワードの再設定手順'
+      unlock_instructions:
+        subject: 'アカウントのロック解除手順'
+    omniauth_callbacks:
+      failure: 'OAuthの認証に失敗しました。'
+    passwords:
+      no_token: 'パスワード再設定トークンが見つかりません。'
+      send_instructions: 'パスワードの再設定手順をメールで送信しました。メールをご確認ください。'
+      send_paranoid_instructions: 'もし登録されたメールアドレスがあれば、パスワードの再設定手順をメールで送信しました。メールをご確認ください。'
+      updated: 'パスワードが変更されました。ログインしてください。'
+      updated_not_active: 'パスワードが変更されました。'
+    registrations:
+      signed_up: 'ユーザー登録が完了しました。'
+      signed_up_but_inactive: 'ユーザー登録が完了しました。アカウントが有効ではありません。'
+      signed_up_but_locked: 'ユーザー登録が完了しました。アカウントはロックされています。'
+      signed_up_but_unconfirmed: 'ユーザー登録が完了しました。確認メールを確認してください。'
+      signed_up_but_inactive: 'ユーザー登録が完了しました。アカウントが有効ではありません。'
+      signed_up_but_unconfirmed: 'ユーザー登録が完了しました。確認メールを確認してください。'
+      updated: 'アカウント情報が変更されました。'
+      update_needs_confirmation: 'アカウント情報が変更されました。確認メールを確認してください。'
+      destroyed: 'アカウントが削除されました。'
+    sessions:
+      signed_in: 'おかえりなさい😊'
+      signed_out: 'またね😊'
+      already_signed_out: 'すでにログアウトしています。'
+      locked: 'アカウントがロックされています。'
+    unlocks:
+      unlocked: 'アカウントがロック解除されました。ログインしてください。'
+      send_instructions: 'アカウントのロック解除手順をメールで送信しました。メールをご確認ください。'
+      send_paranoid_instructions: 'もし登録されたメールアドレスがあれば、アカウントのロック解除手順をメールで送信しました。メールをご確認ください。'

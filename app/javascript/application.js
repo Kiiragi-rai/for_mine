@@ -3,6 +3,7 @@ import "@hotwired/turbo-rails"
 import "./controllers"
 import * as bootstrap from "bootstrap"
 
+
 // // CharacterData
 // const chart1 = document.getElementById('chart1').getContext('2d');
 // const myChart1 = new Chart(chart1, {

@@ -32,8 +32,11 @@ class User < ApplicationRecord
 
   def self.from_line(auth)
     # これもcreate_find_by の方が安全かも
-    where(provider: auth.provider, uid: auth.uid).first_or_create do |user|
-      user.name = auth.info.name
+    # where(provider: auth.provider, uid: auth.uid).first_or_create do |user|
+    #   user.name = auth.info.name
+      create_or_find_by!(provider: auth.provider, uid: auth.uid) do |user|
+        user.name = auth.info.name
+      end
     end
     # create_or_find_by!(provider: auth.provider, uid: auth.uid) do |user|
     #   user.name = auth.info.name

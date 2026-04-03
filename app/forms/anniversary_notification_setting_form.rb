@@ -7,7 +7,7 @@ class AnniversaryNotificationSettingForm
   attribute :title, :string
   attribute :anniversary_date, :date
   attribute :is_enabled, :boolean
-  attribute :frequency_days, :integer
+  attribute :frequency_days, :string
   attribute :notification_hour, :integer
   attribute :start_on, :date
 

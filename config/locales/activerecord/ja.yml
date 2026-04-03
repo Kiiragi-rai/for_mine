@@ -1,0 +1,9 @@
+ja:
+  activerecord:
+    attributes:
+      notification_setting:
+        frequency_days:
+          everyday: 毎日
+          every_other_day: 2日ごと
+          every_5_days: 5日ごと
+          weekly: 週1回

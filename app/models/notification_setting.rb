@@ -7,7 +7,7 @@
 #  frequency_days    :integer          default("everyday"), not null
 #  is_enabled        :boolean          default(FALSE), not null
 #  last_sent_on      :date
-#  notification_hour :integer
+#  notification_hour :integer          default(0), not null
 #  start_on          :date
 #  created_at        :datetime         not null
 #  updated_at        :datetime         not null
@@ -55,5 +55,11 @@ class NotificationSetting < ApplicationRecord
       end_on: nil,
       last_sent_on: nil
     )
+  end
+
+  def self.frequency_days_i18n
+    frequency_days.keys.map do |key|
+      [I18n.t("activerecord.attributes.notification_setting.frequency_days.#{key}"), key]
+    end
   end
 end

@@ -62,6 +62,8 @@ gem "faraday-retry"
 gem "kaminari"
 gem "kaminari-bootstrap"
 
+gem 'rails-i18n', '~> 7.0.0'
+
 
 
 

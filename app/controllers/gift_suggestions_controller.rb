@@ -67,7 +67,7 @@ class GiftSuggestionsController < ApplicationController
             }
 
 
-              if current_user.gift_suggestions.create!(input_json: partner_info,result_json: result, status: :success)
+              if current_user.gift_suggestions.create!(input_json: partner_info, result_json: result, status: :success)
              session[:gift_contents] = result
               redirect_to new_gift_suggestion_path, notice: "プレゼント、一緒に考えてみたよ🎁\nいいものが見つかるといいね"
               else
@@ -80,10 +80,10 @@ class GiftSuggestionsController < ApplicationController
               result = GiftSuggestions::Generate.new(prompt).call
 
               if result[:error]
-              #   target.update!(
-              #     status: :failure,
-              #     error_message: result[:error]
-              #   )
+                #   target.update!(
+                #     status: :failure,
+                #     error_message: result[:error]
+                #   )
 
                 # こっちでいいかな
                 current_user.gift_suggestions.create!(

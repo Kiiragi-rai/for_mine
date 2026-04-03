@@ -32,6 +32,7 @@ class AnniversariesController < ApplicationController
         set_meta_tags(
           title: "記念日作成"
         )
+        # ここに１００日後、
       end
 
     def create

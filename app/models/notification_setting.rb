@@ -38,6 +38,7 @@ class NotificationSetting < ApplicationRecord
     return if start_on.blank?  ||  anniversary.anniversary_date.blank?
 
     next_anniversary = anniversary.next_anniversary
+  # end onの方がいい？
     if start_on > next_anniversary
       errors.add(:start_on, "通知開始日は次の記念日以前に設定してください")
     end

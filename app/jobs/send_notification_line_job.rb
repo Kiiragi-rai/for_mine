@@ -7,6 +7,7 @@ class SendNotificationLineJob < ApplicationJob
   # 送信service
   def perform(management_id:)
   Rails.logger.info "ここからsend notificaitonline jobだよん"    # Do something later
+  # ここから
     notification_management = NotificationManagement.find_by(id: management_id)
     return if notification_management.success?
 
@@ -31,6 +32,7 @@ class SendNotificationLineJob < ApplicationJob
        title:  notification_management.schedule_title)
 
       message_content = message.build_message
+      # ここまで事前でいいかも
       Rails.logger.info "#{message_content} これメッセージ"
       begin
       if Rails.env.development? ||Rails.env.test?

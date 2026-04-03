@@ -1,4 +1,4 @@
-<div class="card shadow-sm">
+<div class="card shadow-sm" data-controller="notification">
   <div class="card-body">
 
 <% form_with_options = form.anniversary.persisted? ?
@@ -16,26 +16,31 @@
 
   <div class="mb-3">
     <%= f.label :anniversary_date, "記念日", class:"form-label" %>
-    <%= f.date_field :anniversary_date, class:"form-control" %>
+    <%= f.date_field :anniversary_date, class:"form-control" ,  data: {
+    notification_target: "date",
+    action: "change->notification#calculate"
+  } %>
   </div>
 
   <div class="mb-3">
     <label class="form-label">通知設定</label>
 
     <div class="form-check">
-      <%= f.radio_button :is_enabled, true, checked: @form.is_enabled, class:"form-check-input" %>
+      <%= f.radio_button :is_enabled, true, checked: @form.is_enabled, class:"form-check-input",data: { action: "change->notification#toggle" } %>
       <%= f.label :is_enabled, "ON", class:"form-check-label" %>
     </div>
-
     <div class="form-check">
-      <%= f.radio_button :is_enabled, false, checked: !@form.is_enabled, class:"form-check-input" %>
+      <%= f.radio_button :is_enabled, false, checked: !@form.is_enabled, class:"form-check-input",data: { action: "change->notification#toggle" } %>
       <%= f.label :is_enabled, "OFF", class:"form-check-label" %>
     </div>
   </div>
   <div class="mb-3">
     <%= f.label :start_on, "通知開始日", class:"form-label" %>
+
     <%= f.date_field :start_on, class:"form-control" %>
   </div>
+  <p data-notification-target="result" class="text-muted d-none"></p>
+
   
   <div class="mb-3">
     <%= f.label :notification_hour, "通知時間", class:"form-label" %>

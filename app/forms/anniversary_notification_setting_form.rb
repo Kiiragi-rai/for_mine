@@ -25,6 +25,7 @@ class AnniversaryNotificationSettingForm
   validate :anniversary_date_not_after_today
   validate :start_on_not_work_when_disable
   validate :start_on_required_when_enable
+  # validate :start_on_must_anniversary_date
 # validate :start_on_not_after_next_anniversary
 
 
@@ -84,9 +85,18 @@ end
     end
   end
 
+  #  def start_on_must_anniversary_date
+  #   # anniversary_dateはからならstart_onはONにできない
+  #   return unless is_enabled
+
+  #   if annviersary_date.blank?
+  #     errors.add(:anniversary_date, "記念日を入力してください")
+  #   end
+  #  end
 
 
-  # validation:() 記念日　通知いる　　開始時刻
+
+  # # validation:() 記念日　通知いる　　開始時刻
 
   # 通知いらない　：開始時刻は入れられない
 

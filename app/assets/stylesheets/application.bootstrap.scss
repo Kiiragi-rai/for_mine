@@ -272,3 +272,31 @@
   right: 0;
   transform: rotate(-10deg);
 }
+
+// 背景
+.background {
+  position: relative;
+}
+
+.background::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image: url("favicon.png");
+  background-size: cover;
+  background-position: center;
+  opacity: 0.2;
+  z-index: 0;
+}
+
+.background > * {
+  position: relative;
+  z-index: 1;
+}
+
+// 文字
+body {
+  font-family: 'Zen Maru Gothic', sans-serif;
+  color: #2f2f2f;
+}
+

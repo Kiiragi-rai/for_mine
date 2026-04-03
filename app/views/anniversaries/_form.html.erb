@@ -53,7 +53,7 @@
 
   <div class="mb-3">
     <%= f.label :frequency_days, "通知頻度", class:"form-label" %> <br>
-    <small>通知開始日から通知最終日まで指定した頻度で通知が届きます</small>
+    <p data-notification-target="frequency" class="text-muted d-none"></p>
     <%= f.select :frequency_days,NotificationSetting.frequency_days.keys.map { |k|[I18n.t("activerecord.attributes.notification_setting.frequency_days.#{k}"), k]},{},
   class:"form-select"%>
   </div>

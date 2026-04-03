@@ -28,7 +28,7 @@ class NotificationSetting < ApplicationRecord
   validate :start_on_not_after_end_on
 
   enum :frequency_days, {
-       everyday: 1, every_other_day: 2, every_5_days: 5, weekly: 7, two_week: 14, thirty_minutes: 30
+       everyday: 1, every_other_day: 2, every_5_days: 5, weekly: 7, bi_weekly: 14, thirty_days: 30
   }
 
   scope :is_enabled, -> { where(is_enabled: true) }

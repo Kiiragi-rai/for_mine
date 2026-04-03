@@ -4,8 +4,18 @@ ja:
       notification_setting:
         frequency_days:
           everyday: 毎日
-          every_other_day: 2日ごと
-          every_5_days: 5日ごと
-          weekly: 週1回
-          two_week: 2週間ごと
-          thirty_minutes: 30日ごと
+          every_other_day: 2日に1回
+          every_5_days: 5日に1回
+          weekly: 1週間に1回
+          bi_weekly: 2週間に1回
+          thirty_days: 約1ヶ月に1回
+  enums:
+    notification_setting:
+      frequency_days:
+        everyday: 毎日
+        every_other_day: 2日に1回
+        every_5_days: 5日に1回
+        weekly: 1週間に1回
+        bi_weekly: 2週間に回
+        thirty_days: 約1ヶ月に1回
+

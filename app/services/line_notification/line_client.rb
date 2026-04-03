@@ -27,7 +27,7 @@ module LineNotification
       _response, status, _headers = client.push_message_with_http_info(
         push_message_request: push_request
       )
-        status == 200
+      status.between?(200, 299)
 
       rescue StandardError => e
         Rails.logger.error("[LINE PUSH ERROR] #{e.full_message}")

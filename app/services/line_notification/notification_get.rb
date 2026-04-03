@@ -48,8 +48,10 @@ module LineNotification
             AND
             (ns.last_sent_on IS NULL
             OR
-            ns.frequency_days <= (b.next_hour AT TIME ZONE 'Asia/Tokyo')::date - ns.last_sent_on )
-
+            ns.frequency_days <= (b.next_hour AT TIME ZONE 'Asia/Tokyo')::date - ns.last_sent_on
+            OR#{' '}
+            (b.next_hour AT TIME ZONE 'Asia/Tokyo')::date = ns.end_on)
+        #{'    '}
             ORDER BY ns.id, u.id
 
       SQL

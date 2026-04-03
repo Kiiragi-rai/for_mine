@@ -16,6 +16,8 @@ class NotificationTargetGetJob < ApplicationJob
       next unless managed
       Rails.logger.info " これがターゲットの中身だよん いまからLINEに渡すy#{managed.scheduled_for.in_time_zone}"
 
+      # メッセージとグループ化やるならここ　マネジメントの前かな、登録できなくて一つにはなるけど　メッセージ作成ー＞グループ化が理想　ー＞　nm登録
+
 
       management_id = managed.id
 

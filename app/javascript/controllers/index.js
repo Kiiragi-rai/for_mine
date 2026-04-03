@@ -19,5 +19,8 @@ application.register("how-to-select", HowToSelectController)
 import ModalController from "./modal_controller"
 application.register("modal", ModalController)
 
+import NotificationController from "./notification_controller"
+application.register("notification", NotificationController)
+
 import SliderController from "./slider_controller"
 application.register("slider", SliderController)

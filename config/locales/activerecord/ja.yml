@@ -1,0 +1,21 @@
+ja:
+  activerecord:
+    attributes:
+      notification_setting:
+        frequency_days:
+          everyday: 毎日
+          every_other_day: 2日に1回
+          every_5_days: 5日に1回
+          weekly: 1週間に1回
+          bi_weekly: 2週間に1回
+          thirty_days: 約1ヶ月に1回
+  enums:
+    notification_setting:
+      frequency_days:
+        everyday: 毎日
+        every_other_day: 2日に1回
+        every_5_days: 5日に1回
+        weekly: 1週間に1回
+        bi_weekly: 2週間に回
+        thirty_days: 約1ヶ月に1回
+

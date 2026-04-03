@@ -50,11 +50,11 @@ class GiftSuggestionsController < ApplicationController
 
 
 
-
-        target = current_user.gift_suggestions.create!(
-          input_json: partner_info,
-          status: :pending
-        )
+        #  pendingつけたけどいらん
+        # target = current_user.gift_suggestions.create!(
+        #   input_json: partner_info,
+        #   status: :pending
+        # )
 
         if Rails.env.development? || Rails.env.test?
 
@@ -67,7 +67,7 @@ class GiftSuggestionsController < ApplicationController
             }
 
 
-              if target.update!(result_json: result, status: :success)
+              if current_user.gift_suggestions.create!(input_json: partner_info, result_json: result, status: :success)
              session[:gift_contents] = result
               redirect_to new_gift_suggestion_path, notice: "プレゼント、一緒に考えてみたよ🎁\nいいものが見つかるといいね"
               else
@@ -80,10 +80,16 @@ class GiftSuggestionsController < ApplicationController
               result = GiftSuggestions::Generate.new(prompt).call
 
               if result[:error]
-                target.update!(
-                  status: :failure,
-                  error_message: result[:error]
-                )
+                #   target.update!(
+                #     status: :failure,
+                #     error_message: result[:error]
+                #   )
+
+                # こっちでいいかな
+                current_user.gift_suggestions.create!(
+                  error_message: result[:error],
+                  status: :failure
+                  )
                 redirect_to gift_suggestions_path, alert: "うまく提案できなかったみたい…\nもう一度試してみよう🙏"
                 return
               end
@@ -92,12 +98,19 @@ class GiftSuggestionsController < ApplicationController
                 status: :success,
                 result_json: result
               )
+              # こっちでいいかな
+              current_user.gift_suggestions.create!(
+                  input_json: partner_info,
+                  result_json: result,
+                  status: :success)
 
               session[:gift_contents] = result
               redirect_to new_gift_suggestion_path, notice: "プレゼント、一緒に考えてみたよ🎁\nいいものが見つかるといいね"
 
             rescue StandardError => e
-              target.update!(
+              # こっちもcreateに
+              target.create!(
+                input_json: partner_info,
                 status: :failure,
                 error_message: e.message
               )

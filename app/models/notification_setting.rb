@@ -7,7 +7,7 @@
 #  frequency_days    :integer          default("everyday"), not null
 #  is_enabled        :boolean          default(FALSE), not null
 #  last_sent_on      :date
-#  notification_hour :integer
+#  notification_hour :integer          default(0), not null
 #  start_on          :date
 #  created_at        :datetime         not null
 #  updated_at        :datetime         not null
@@ -28,7 +28,7 @@ class NotificationSetting < ApplicationRecord
   validate :start_on_not_after_end_on
 
   enum :frequency_days, {
-       everyday: 1, every_other_day: 2, every_5_days: 5, weekly: 7
+       everyday: 1, every_other_day: 2, every_5_days: 5, weekly: 7, bi_weekly: 14, thirty_days: 30
   }
 
   scope :is_enabled, -> { where(is_enabled: true) }
@@ -38,13 +38,14 @@ class NotificationSetting < ApplicationRecord
     return if start_on.blank?  ||  anniversary.anniversary_date.blank?
 
     next_anniversary = anniversary.next_anniversary
+    # end onの方がいい？
     if start_on > next_anniversary
       errors.add(:start_on, "通知開始日は次の記念日以前に設定してください")
     end
   end
 
-  def notification_finish_day?
-    end_on.present? && end_on < Date.current
+  def finished?
+    end_on.present? && end_on <= Date.current
   end
 
   def reset_notification!
@@ -54,5 +55,11 @@ class NotificationSetting < ApplicationRecord
       end_on: nil,
       last_sent_on: nil
     )
+  end
+
+  def self.frequency_days_i18n
+    frequency_days.keys.map do |key|
+      [ I18n.t("activerecord.attributes.notification_setting.frequency_days.#{key}"), key ]
+    end
   end
 end

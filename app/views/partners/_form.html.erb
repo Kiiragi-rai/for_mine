@@ -7,39 +7,37 @@
   
     <div class="mb-3">
       <%= f.label :name, "名前:" %>
-      <%= f.text_field :name, class: "form-control" %>
+      <%= f.text_field :name, class: "form-control",placeholder:"for-mineくん" %>
     </div>
   
     <div class="row">
       <div class="col mb-3">
         <%= f.label :sex, "性別:" %>
-        <%= f.text_field :sex, class: "form-control" %>
+        <%= f.text_field :sex, class: "form-control" ,placeholder: "どんな方ですか？"%>
       </div>
   
       <div class="col mb-3">
         <%= f.label :age, "年齢:" %>
-        <%= f.number_field :age, class: "form-control" %>
+        <%= f.number_field :age, class: "form-control", placeholder:"例：20" %>
       </div>
     </div>
   
     <div class="row">
       <div class="col mb-3">
         <%= f.label :job, "職業：" %>
-        <%= f.text_field :job, class: "form-control" %>
+        <%= f.text_field :job, class: "form-control", placeholder:"例：会社員、学生" %>
       </div>
   
       <div class="col mb-3">
         <%= f.label :relation, "関係性:" %>
-        <%= f.text_field :relation, class: "form-control" %>
+        <%= f.text_field :relation, class: "form-control", placeholder:"例：恋人、友達" %>
       </div>
     </div>
   
     <div class="mb-3">
       <%= f.label :favorites, "好きなこと（、区切り）" %>
-      <%= f.text_area :favorites,
-        value: partner.favorites.join("、"),
-        class: "form-control",
-        rows: 2 %>
+      <%= f.text_area :favorites,value: partner.favorites.join("、"),
+        class: "form-control",rows: 2 ,placeholder: "読書、散歩"%>
     </div>
   
     <div class="mb-3">
@@ -47,7 +45,7 @@
       <%= f.text_area :avoidances,
         value: partner.avoidances.join("、"),
         class: "form-control",
-        rows: 2 %>
+        rows: 2 , placeholder: "例：辛いもの、人混み"%>
     </div>
   
     <div class="mb-3">
@@ -55,18 +53,18 @@
       <%= f.text_area :hobbies,
         value: partner.hobbies.join("、"),
         class: "form-control",
-        rows: 2 %>
+        rows: 2 , placeholder: "例：ゲーム、料理"%>
     </div>
   
     <div class="row">
       <div class="col mb-3">
         <%= f.label :budget_min, "予算（下限）" %>
-        <%= f.number_field :budget_min, class: "form-control" %>
+        <%= f.number_field :budget_min, class: "form-control" , placeholder:"例：3000"%>
       </div>
   
       <div class="col mb-3">
         <%= f.label :budget_max, "予算（上限）" %>
-        <%= f.number_field :budget_max, class: "form-control" %>
+        <%= f.number_field :budget_max, class: "form-control", placeholder:"例：10000" %>
       </div>
     </div>
   

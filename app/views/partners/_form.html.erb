@@ -35,7 +35,7 @@
     </div>
   
     <div class="mb-3">
-      <%= f.label :favorites, "好きなもの（、区切り）" %>
+      <%= f.label :favorites, "好きなこと（、区切り）" %>
       <%= f.text_area :favorites,
         value: partner.favorites.join("、"),
         class: "form-control",
@@ -43,7 +43,7 @@
     </div>
   
     <div class="mb-3">
-      <%= f.label :avoidances, "苦手なもの（、区切り）" %>
+      <%= f.label :avoidances, "苦手なこと（、区切り）" %>
       <%= f.text_area :avoidances,
         value: partner.avoidances.join("、"),
         class: "form-control",

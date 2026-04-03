@@ -8,7 +8,7 @@ export default class extends Controller {
 
     const checked = this.element.querySelector("input[value='true']:checked")
     if (checked) {
-      this.resultTarget.classLIst.remove('d-none')
+      this.resultTarget.classList.remove('d-none')
     }
   }
 
@@ -29,7 +29,7 @@ export default class extends Controller {
       return
     }
   
-    const [year, month, day] = dateValue.split("-").map(Number)
+    const [_year, month, day] = dateValue.split("-").map(Number)
   
     const today = new Date()
   

@@ -62,9 +62,9 @@ gem "faraday-retry"
 gem "kaminari"
 gem "kaminari-bootstrap"
 
-gem 'rails-i18n', '~> 7.0.0'
-gem 'devise-i18n'
-gem 'enum_help'
+gem "rails-i18n", "~> 7.0.0"
+gem "devise-i18n"
+gem "enum_help"
 
 
 

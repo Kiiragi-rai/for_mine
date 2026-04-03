@@ -28,7 +28,7 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
       sign_in(@user)
       if @user.first_login_flag?
       redirect_to user_root_path, notice: "おかえりなさい😊\n今日も大切な日を見てみようか"
-      else 
+      else
         @user.update_column(:first_login_flag, true)
         redirect_to user_root_path, notice: "ようこそ😊\nまずは使い方を見てみようか"
       end

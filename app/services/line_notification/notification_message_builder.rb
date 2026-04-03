@@ -14,8 +14,8 @@ module LineNotification
       if scheduled_date == @end_on
         # 通知設定が消えることも伝えたい
         "今日は#{@title}だね🎉\n大切な時間になりますように\n\nこの通知は今回でいったんおしまいだよ😊"
-        # また来年も通知する？😊
-        # この通知は今回でいったんおしまいだよ😊
+      # また来年も通知する？😊
+      # この通知は今回でいったんおしまいだよ😊
       # 通知日は通知開始日より後で、対象記念日より前
       elsif @start_on < scheduled_date && scheduled_date < @end_on
         "#{@title}まで、あと#{days_difference_calculator}日\n少しずつ楽しみだね😊"

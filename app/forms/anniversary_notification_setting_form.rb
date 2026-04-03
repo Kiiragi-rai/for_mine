@@ -25,7 +25,7 @@ class AnniversaryNotificationSettingForm
   validate :anniversary_date_not_after_today
   validate :start_on_not_work_when_disable
   validate :start_on_required_when_enable
-  # validate :start_on_must_anniversary_date
+# validate :start_on_must_anniversary_date
 # validate :start_on_not_after_next_anniversary
 
 

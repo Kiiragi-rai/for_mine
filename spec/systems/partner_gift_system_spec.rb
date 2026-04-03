@@ -95,7 +95,7 @@ RSpec.describe "Users", type: :system do
 
         expect(page).to have_link("プレゼントの記録")
         click_link "プレゼントの記録"
-     
+
         expect(current_path).to eq gift_suggestions_path
       puts "==== ここみってええ===="
         puts page.body

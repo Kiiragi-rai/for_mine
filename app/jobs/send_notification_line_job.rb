@@ -7,7 +7,7 @@ class SendNotificationLineJob < ApplicationJob
   # 送信service
   def perform(management_id:)
   Rails.logger.info "ここからsend notificaitonline jobだよん"    # Do something later
-  # ここから
+    # ここから
     notification_management = NotificationManagement.find_by(id: management_id)
     return if notification_management.success?
 

@@ -38,7 +38,7 @@ class NotificationSetting < ApplicationRecord
     return if start_on.blank?  ||  anniversary.anniversary_date.blank?
 
     next_anniversary = anniversary.next_anniversary
-  # end onの方がいい？
+    # end onの方がいい？
     if start_on > next_anniversary
       errors.add(:start_on, "通知開始日は次の記念日以前に設定してください")
     end
@@ -59,7 +59,7 @@ class NotificationSetting < ApplicationRecord
 
   def self.frequency_days_i18n
     frequency_days.keys.map do |key|
-      [I18n.t("activerecord.attributes.notification_setting.frequency_days.#{key}"), key]
+      [ I18n.t("activerecord.attributes.notification_setting.frequency_days.#{key}"), key ]
     end
   end
 end

@@ -36,10 +36,10 @@
   </div>
   <div class="mb-3">
     <%= f.label :start_on, "通知開始日", class:"form-label" %> <br>
-    <small>この日から通知が届きます</small>
+  <p data-notification-target="result" class="text-muted d-none"></p>
+   
     <%= f.date_field :start_on, class:"form-control" %>
   </div>
-  <p data-notification-target="result" class="text-muted d-none"></p>
 
   
   <div class="mb-3">
@@ -53,7 +53,7 @@
 
   <div class="mb-3">
     <%= f.label :frequency_days, "通知頻度", class:"form-label" %> <br>
-    <p data-notification-target="frequency" class="text-muted d-none"></p>
+    <p data-notification-target="frequency" class="text-muted d-none mt-0"></p>
     <%= f.select :frequency_days,NotificationSetting.frequency_days.keys.map { |k|[I18n.t("activerecord.attributes.notification_setting.frequency_days.#{k}"), k]},{},
   class:"form-select"%>
   </div>

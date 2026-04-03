@@ -51,7 +51,7 @@ export default class extends Controller {
     const mm = String(next.getMonth() + 1).padStart(2, "0")
     const dd = String(next.getDate()).padStart(2, "0")
   
-    this.resultTarget.textContent = `次の通知最終日：${yyyy}-${mm}-${dd}`
+    this.resultTarget.textContent = `通知最終日：${yyyy}-${mm}-${dd}`
   }
 }
 

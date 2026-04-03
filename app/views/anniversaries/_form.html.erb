@@ -35,8 +35,8 @@
     </div>
   </div>
   <div class="mb-3">
-    <%= f.label :start_on, "通知開始日", class:"form-label" %>
-
+    <%= f.label :start_on, "通知開始日", class:"form-label" %> <br>
+    <small>この日から通知が届きます</small>
     <%= f.date_field :start_on, class:"form-control" %>
   </div>
   <p data-notification-target="result" class="text-muted d-none"></p>
@@ -52,21 +52,17 @@
   </div>
 
   <div class="mb-3">
-    <%= f.label :frequency_days, "通知頻度", class:"form-label" %>
-
+    <%= f.label :frequency_days, "通知頻度", class:"form-label" %> <br>
+    <small>通知開始日から通知最終日まで指定した頻度で通知が届きます</small>
     <%= f.select :frequency_days,
       options_for_select(NotificationSetting.frequency_days.map {|k,v| [k,v]}, f.object.frequency_days),
       {},
       class:"form-select" %>
   </div>
 
-
-
-
   <div class="text-end">
     <%= f.submit submit_label, class:"btn btn-primary" %>
   </div>
-
 <% end %>
 
   </div>

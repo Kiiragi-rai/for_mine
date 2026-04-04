@@ -32,7 +32,6 @@ class Admin < ApplicationRecord
    validate :accept_only_one_admin, on: :create
 
    #  before_update :prevent_update
-
    private
 
    def accept_only_one_admin

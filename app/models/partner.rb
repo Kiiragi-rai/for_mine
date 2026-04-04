@@ -74,6 +74,7 @@ class Partner < ApplicationRecord
         ((attrs2size.to_f / attrssize) * 100).round
       end
 
+      # でこれーたーにしてもOK
       def progress_bar_color
         value = change_to_progress_bar_value
 

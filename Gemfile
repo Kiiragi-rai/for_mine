@@ -80,7 +80,7 @@ group :development, :test do
   gem "rubocop-rails-omakase", require: false
 
   gem "dotenv-rails"
-
+  gem "timecop"
   gem "rspec-rails"
   gem "factory_bot_rails"
 end

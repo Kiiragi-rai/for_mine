@@ -2,11 +2,9 @@ class SendNotificationLineJob < ApplicationJob
  queue_as :default
  sidekiq_options retry: false
 
-  # target_hashを渡す
-  # messageのservice
-  # 送信service
+
   def perform(management_id:)
-  Rails.logger.info "ここからsend notificaitonline jobだよん"    # Do something later
+  Rails.logger.info "ここからsend notificaitonline jobだよん"   
     # ここから
     notification_management = NotificationManagement.find_by(id: management_id)
     return if notification_management.success?
@@ -29,7 +27,8 @@ class SendNotificationLineJob < ApplicationJob
        start_on: notification_setting.start_on,
        end_on:  notification_setting.end_on,
        scheduled_for:  notification_management.scheduled_for,
-       title:  notification_management.schedule_title)
+       title:  notification_management.schedule_title
+       )
 
       message_content = message.build_message
       # ここまで事前でいいかも
@@ -51,7 +50,10 @@ class SendNotificationLineJob < ApplicationJob
           notification_setting.reset_notification! if notification_setting.finished?
       end
         rescue StandardError => e
-          notification_management&.update(status: :failure, sent_at: Time.current, error_message: e.message)
+          notification_management&.update(status: :failure, 
+          sent_at: Time.current, 
+          error_message: e.message
+          )
          # どうしようかな
          notification_setting.reset_notification! if notification_setting.finished?
 

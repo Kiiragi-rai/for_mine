@@ -74,7 +74,7 @@ class Partner < ApplicationRecord
         ((attrs2size.to_f / attrssize) * 100).round
       end
 
-      # でこれーたーにしてもOK
+      # でこれーたーにしてもOK、もう一色あってもいいかも
       def progress_bar_color
         value = change_to_progress_bar_value
 
@@ -103,8 +103,4 @@ class Partner < ApplicationRecord
              .map(&:strip)
              .reject(&:blank?)
       end
-
-  # def change_to_progress_bar_value
-  #   attributes.delete_if { |k, v| v.blank? }
-  # end
 end

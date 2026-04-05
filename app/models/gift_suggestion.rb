@@ -26,7 +26,7 @@ class GiftSuggestion < ApplicationRecord
   include Hashid::Rails
   belongs_to :user
 
-  validate :monthly_limit, on: :create
+  # validate :monthly_limit, on: :create
 
   enum status: {
     pending: 0,
@@ -36,21 +36,14 @@ class GiftSuggestion < ApplicationRecord
   }
 
   def self.monthly_success_count(user)
-    where(user: user).where(status: [ :success, :deleted, :pending ]).where(created_at: Time.current.beginning_of_month..Time.current.end_of_month).count
+    where(user: user).where(status: [ :success, :deleted ]).where(created_at: Time.current.beginning_of_month..Time.current.end_of_month).count
   end
-  # def monthly_success_count
-
-  #   gift_suggestions.where(created_at: Time.current.beginning_of_day..Time.current.end_of_day).count
+ 
+  # def monthly_limit
+  # if GiftSuggestion.monthly_success_count(user) >= 5
+  #     errors.add(:base, "今月の上限に達しています")
+  #   end
   # end
-  # # for fileter method , 今月最初から今月末までcreated_atの数が５より多ければ、提案できないように、あとstatusでsuccess, created_atはnum > 5を満たす
-  def monthly_limit
-    count = user.gift_suggestions.where(created_at: Time.current.beginning_of_month..Time.current.end_of_month).count
-    # where(status: :success).where(created_at: Time.current.beginning_of_month..Time.current.end_of_day).count
-
-    if count >= 5
-      errors.add(:base, "今月の上限に達しています")
-    end
-  end
 
   def suggestion_names
     result_json&.dig("presentSuggestions")&.map { |h| h["name"] } || []

@@ -29,7 +29,8 @@ class SendNotificationLineJob < ApplicationJob
        start_on: notification_setting.start_on,
        end_on:  notification_setting.end_on,
        scheduled_for:  notification_management.scheduled_for,
-       title:  notification_management.schedule_title)
+       title:  notification_management.schedule_title
+       )
 
       message_content = message.build_message
       # ここまで事前でいいかも

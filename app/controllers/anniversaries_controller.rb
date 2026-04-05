@@ -3,8 +3,6 @@ class AnniversariesController < ApplicationController
     before_action :set_anniversary, only: [ :show, :edit, :update, :destroy ]
 
     def index
-        # @anniversaries = current_user.anniversaries
-        # 記念日もカレンダーででるようにしてもいいかも
         @q = current_user.anniversaries.ransack(params[:q])
         @anniversaries = @q.result.includes(:notification_setting).page(params[:page]).per(10)
         set_meta_tags(

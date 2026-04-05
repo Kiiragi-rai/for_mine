@@ -2,14 +2,14 @@ class PartnersController < ApplicationController
     before_action :authenticate_user!
     before_action :set_partner, only: %i[show edit update destroy]
 
-    # has one はpartner s付かない
+
     def show
         @partnercount = @partner&.change_to_progress_bar_value if @partner.present?
         set_meta_tags(
             title: "パートナー詳細"
           )
     end
-    #  newとcreate だと入らなかった
+  
     def new
         @partner = current_user.build_partner
         set_meta_tags(

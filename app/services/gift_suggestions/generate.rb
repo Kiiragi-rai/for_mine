@@ -11,7 +11,7 @@ module GiftSuggestions
     interval_randomness: 0.5,
     backoff_factor: 2,
     retry_statuses: [ 429, 500, 502, 503, 504 ]
-    } 
+    }
 
 
     def initialize(prompt)

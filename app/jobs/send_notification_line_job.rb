@@ -4,7 +4,7 @@ class SendNotificationLineJob < ApplicationJob
 
 
   def perform(management_id:)
-  Rails.logger.info "ここからsend notificaitonline jobだよん"   
+  Rails.logger.info "ここからsend notificaitonline jobだよん"
     # ここから
     notification_management = NotificationManagement.find_by(id: management_id)
     return if notification_management.success?
@@ -51,8 +51,8 @@ class SendNotificationLineJob < ApplicationJob
           notification_setting.reset_notification! if notification_setting.finished?
       end
         rescue StandardError => e
-          notification_management&.update(status: :failure, 
-          sent_at: Time.current, 
+          notification_management&.update(status: :failure,
+          sent_at: Time.current,
           error_message: e.message
           )
          # どうしようかな

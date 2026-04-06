@@ -20,7 +20,7 @@ module GiftSuggestions
       }
       PROMPT
 
-      #通知履歴
+      # 通知履歴
       names = @last_result&.dig("presentSuggestions")&.map { |h| h["name"] }
 
       if names.present?

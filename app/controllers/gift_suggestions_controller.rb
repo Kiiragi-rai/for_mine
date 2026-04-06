@@ -35,7 +35,7 @@ class GiftSuggestionsController < ApplicationController
 
 
         if Rails.env.development? || Rails.env.test?
-        # if Rails.env.production?
+          # if Rails.env.production?
 
           result = {
               "presentSuggestions" => [
@@ -47,8 +47,8 @@ class GiftSuggestionsController < ApplicationController
 
 
               if current_user.gift_suggestions.create(
-                input_json: partner_info, 
-                result_json: result, 
+                input_json: partner_info,
+                result_json: result,
                 status: :success
                 )
              session[:gift_contents] = result
@@ -63,7 +63,7 @@ class GiftSuggestionsController < ApplicationController
               # プレゼント提案
               result = GiftSuggestions::Generate.new(prompt).call
 
-              
+
               if result[:error]
 
                 current_user.gift_suggestions.create!(
@@ -86,7 +86,7 @@ class GiftSuggestionsController < ApplicationController
 
             rescue StandardError => e
               # こっちもcreateに
-             # input いらんくない？
+              # input いらんくない？
 
               current_user.gift_suggestions.create!(
                 input_json: partner_info,
@@ -95,7 +95,7 @@ class GiftSuggestionsController < ApplicationController
               )
               redirect_to gift_suggestions_path, alert: "少し問題が起きたみたい…時間をおいて試してみてね🙏"
           end
- 
+
         end
   end
 
@@ -120,7 +120,7 @@ class GiftSuggestionsController < ApplicationController
     return if  current_user.partner.present?
     redirect_to gift_suggestions_path, alert: "まずは大切な人のこと、教えてくれる？😊"
   end
-# パートナー情報
+  # パートナー情報
   def build_partner_info
     partner = current_user.partner
 

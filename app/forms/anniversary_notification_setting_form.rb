@@ -38,7 +38,7 @@ def start_on_not_work_when_disable
 
   errors.add(:start_on, ": 通知がOFFのときは開始日は設定できないよ😊")
 end
-# 通知ONでは通知開始日が必要
+ # 通知ONでは通知開始日が必要
  def start_on_required_when_enable
   return unless is_enabled
   return if start_on.present?
@@ -46,7 +46,7 @@ end
   errors.add(:start_on, ": 通知をONにしたら開始日を選んでね😊")
  end
 
-#  通知開始日と時刻の設定が一時間以上空いている
+  #  通知開始日と時刻の設定が一時間以上空いている
   def start_on_not_before_today
     return unless is_enabled
     return if start_on.blank? || notification_hour.blank?

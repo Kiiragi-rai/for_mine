@@ -39,7 +39,7 @@ class GiftSuggestion < ApplicationRecord
   def self.monthly_success_count(user)
     where(user: user).where(status: [ :success, :deleted ]).where(created_at: Time.current.beginning_of_month..Time.current.end_of_month).count
   end
- 
+
   # def monthly_limit
   # if GiftSuggestion.monthly_success_count(user) >= 5
   #     errors.add(:base, "今月の上限に達しています")

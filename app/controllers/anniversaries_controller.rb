@@ -32,7 +32,7 @@ class AnniversariesController < ApplicationController
         )
         # ここに１００日後、
       end
- 
+
     def create
         @anniversary = current_user.anniversaries.build
         @form = AnniversaryNotificationSettingForm.new(

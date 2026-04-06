@@ -9,7 +9,7 @@ class PartnersController < ApplicationController
             title: "パートナー詳細"
           )
     end
-  
+
     def new
         @partner = current_user.build_partner
         set_meta_tags(

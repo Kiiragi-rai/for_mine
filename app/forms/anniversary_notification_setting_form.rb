@@ -151,6 +151,7 @@ end
     #   end_on =  calculate(anniversary_date) 通知OFFなら　削除
     if is_enabled
       # notification_setting.end_on = calc_end_on(anniversary.anniversary_date)
+      # 次の記念日
       notification_setting.end_on = anniversary.next_anniversary
 
     else

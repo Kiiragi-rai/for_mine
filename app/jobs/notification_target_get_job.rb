@@ -5,10 +5,12 @@ class NotificationTargetGetJob < ApplicationJob
   # waituntilでjobに渡す
   def perform
     # Do something later
+    # 通知対象を取得
     notification_targets = LineNotification::NotificationGet.setting
     # Rails.logger.info "#{notification_targets} これなかみ"
 
     # ここはNotification_Managementのmodelでこの処理を書いていいのでは？
+    # notification_managementへ登録
     notification_targets.each do |target|
       managed = NotificationManagement.create_for(target)
 
@@ -21,6 +23,7 @@ class NotificationTargetGetJob < ApplicationJob
 
       management_id = managed.id
 
+      # 通知＆メッセージ作成JOBへ
       if Rails.env.development?
       SendNotificationLineJob.perform_now(management_id: management_id)
       p "missionコンプリート"

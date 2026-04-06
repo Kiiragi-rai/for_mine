@@ -32,7 +32,7 @@ class NotificationSetting < ApplicationRecord
   }
 
   scope :is_enabled, -> { where(is_enabled: true) }
-
+# startonはendonよりあとの日付では登録できない
   def start_on_not_after_end_on
     return unless is_enabled
     return if start_on.blank?  ||  anniversary.anniversary_date.blank?
@@ -44,10 +44,11 @@ class NotificationSetting < ApplicationRecord
     end
   end
 
+  # 通知が届く最終日かどうか確認
   def finished?
     end_on.present? && end_on <= Date.current
   end
-
+# 通知が届く最終日にリセット
   def reset_notification!
     update!(
       is_enabled: false,
@@ -56,7 +57,7 @@ class NotificationSetting < ApplicationRecord
       last_sent_on: nil
     )
   end
-
+# 日本語表記に
   def self.frequency_days_i18n
     frequency_days.keys.map do |key|
       [ I18n.t("activerecord.attributes.notification_setting.frequency_days.#{key}"), key ]

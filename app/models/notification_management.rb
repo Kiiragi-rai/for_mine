@@ -37,8 +37,8 @@ class NotificationManagement < ApplicationRecord
 
   validates :scheduled_for, presence: true
 
+  # notificationmanagament登録用
   def self.create_for(target)
-    # findの方がすでにあるの渡しちゃわない？　通知
     management = create_or_find_by!(
         notification_setting_id: target.notification_setting_id,
         scheduled_for: target.scheduled_for

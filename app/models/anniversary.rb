@@ -29,15 +29,13 @@ class Anniversary < ApplicationRecord
 
 
     scope :notification_target_get, ->(date) { where(notification_on: true).where(anniversary_date: date) }
-
-
     scope :notification_enabled, -> { joins(:notification_setting).where(notification_settings: { is_enabled: true }) }
     #  scope :notification_enables , ->{ joins(:notification_setting).where('notification_settings.is_enabled = ?','true')}
     #  scope :notification_target_in_range, -> { joins(:notification_setting).where('notification_settings.start_on <= ?', Date.current).where('anniversary.anniversary_date >= ?', Date.current) }
     #  scope :notification_target_in_range, -> { joins(:notification_setting).where(notification_settings: {start_on: ..Date.current}) }
 
 
-
+    # 記念日経過
     def anniversary_calculate
       # ゴーr 記念日からどれくらいったか
       today = Date.current
@@ -51,10 +49,7 @@ class Anniversary < ApplicationRecord
     end
 
 
-
-
-
-
+    # カレンダー用
     def start_time
       # next_anniversary
       anniversary_date
@@ -67,7 +62,7 @@ class Anniversary < ApplicationRecord
       [ "notification_setting", "user" ]
     end
 
-
+    # 次に来る記念日計算
     def next_anniversary
       today = Date.current
       year = today.year
@@ -84,7 +79,7 @@ class Anniversary < ApplicationRecord
     end
 
 private
-
+    # 閏年確認
     def anniversary_date_for_year(year:, month:, day:)
       if month == 2 && day == 29 && !Date.leap?(year)
          Date.new(year, 2, 28)

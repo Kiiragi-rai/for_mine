@@ -63,7 +63,7 @@ module LineNotification
         "notification_date"
       )
       Rails.logger.info "#{results} これresultsだよおーーん"
-
+      # rails に寄せる
       results.map do |row|
         AnniversaryNotificationTarget.new(row.to_h)
       end

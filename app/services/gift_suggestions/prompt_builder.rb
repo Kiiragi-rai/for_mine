@@ -20,7 +20,7 @@ module GiftSuggestions
       }
       PROMPT
 
-      # ハッシュにして渡そうかな、配列＝＞JSONだし
+      #通知履歴
       names = @last_result&.dig("presentSuggestions")&.map { |h| h["name"] }
 
       if names.present?

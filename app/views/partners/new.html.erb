@@ -3,9 +3,12 @@
     <div class="col-lg-8">
 
       <%= render "form", partner: @partner, submit_label: "登録" %>
-    <div class="mt-3">
-      <%=link_to "詳細へ",partner_path %>
-    </div>      
+      <div class="mt-3">
+        <%= link_to "詳細へ",
+           partner_path,
+            class: "btn btn-outline-secondary" %>
+       </div>  
+           
     </div>
   </div>
 </div>

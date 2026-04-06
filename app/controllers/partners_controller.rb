@@ -13,7 +13,7 @@ class PartnersController < ApplicationController
     def new
         @partner = current_user.build_partner
         set_meta_tags(
-            title: "パートナー作成"
+            title: "パートナー登録"
           )
     end
 
@@ -22,6 +22,9 @@ class PartnersController < ApplicationController
         if @partner.save
             redirect_to partner_path, notice: "大切な人を登録したよ😊これで、もっと想いを形にできるね"
         else
+            set_meta_tags(
+                title: "パートナー登録"
+              )
             flash.now[:danger] = "うまく登録できなかったみたい…もう一度ゆっくり確認してみよう🙏"
             render :new, status: :unprocessable_content
         end
@@ -37,6 +40,9 @@ class PartnersController < ApplicationController
         if @partner.update(partner_params)
             redirect_to partner_path, notice: "パートナー情報を更新したよ✨\nよりぴったりな提案ができそうだね"
         else
+            set_meta_tags(
+                title: "パートナー編集"
+              )
             flash.now[:danger] = "更新できなかったみたい…入力内容をもう一度確認してみよう🙏"
             render :edit, status: :unprocessable_content
         end

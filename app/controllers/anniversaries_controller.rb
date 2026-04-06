@@ -11,6 +11,7 @@ class AnniversariesController < ApplicationController
     end
 
     def calendar
+      # struct使ってタイトル加工しようかな
       @anniversaries = current_user.anniversaries
       set_meta_tags(
         title: "記念日カレンダー"

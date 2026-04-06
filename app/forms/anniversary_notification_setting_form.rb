@@ -85,6 +85,7 @@ end
   end
 
   # startonはendonよりあとの日付では登録できない
+  # これいらんかもmodel側で十分？？
   def start_on_not_after_end_on
     return unless is_enabled
     return if start_on.blank?  ||  anniversary.anniversary_date.blank?
@@ -92,7 +93,7 @@ end
     next_anniversary = anniversary.next_anniversary
     # end onの方がいい？
     if start_on > next_anniversary
-      errors.add(:start_on, ": 通知開始日は次の記念日以前に設定してください")
+      errors.add(:start_on, ": 通知開始日は次にくる記念日以前に設定してね😊")
     end
   end
 
@@ -156,7 +157,7 @@ end
     anniversary.anniversary_date = anniversary_date
     notification_setting.is_enabled = is_enabled
     notification_setting.frequency_days = frequency_days
-   puts "DEBUG frequency_days: #{frequency_days.inspect} (#{frequency_days.class})"
+  #  puts "DEBUG frequency_days: #{frequency_days.inspect} (#{frequency_days.class})"
     notification_setting.start_on = start_on
     notification_setting.notification_hour = notification_hour
 

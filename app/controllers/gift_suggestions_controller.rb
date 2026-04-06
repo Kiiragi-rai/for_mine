@@ -70,6 +70,11 @@ class GiftSuggestionsController < ApplicationController
                   error_message: result[:error],
                   status: :failure
                   )
+
+                  set_meta_tags(
+                    title: "プレゼント提案"
+                  )
+                  
                 redirect_to gift_suggestions_path, alert: "うまく提案できなかったみたい…もう一度試してみよう🙏"
                 return
 

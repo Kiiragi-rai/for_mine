@@ -60,3 +60,10 @@ ja:
     previous: "先月"
     next: "来月"
     today: 今月
+
+  activemodel:
+    attributes:
+      anniversary_notification_setting_form:
+        start_on: 通知開始日
+        anniversary_date: 記念日
+        title: タイトル

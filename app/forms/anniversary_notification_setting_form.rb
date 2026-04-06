@@ -25,6 +25,7 @@ class AnniversaryNotificationSettingForm
   validate :anniversary_date_not_after_today
   validate :start_on_not_work_when_disable
   validate :start_on_required_when_enable
+  validate :start_on_not_after_end_on
 # validate :start_on_must_anniversary_date
 # validate :start_on_not_after_next_anniversary
 
@@ -35,14 +36,14 @@ def start_on_not_work_when_disable
   return if is_enabled
   return if start_on.blank?
 
-  errors.add(:start_on, "通知OFFのときは通知開始日は設定できません")
+  errors.add(:start_on, "通知がOFFのときは開始日は設定できないよ😊")
 end
 # 通知ONでは通知開始日が必要
  def start_on_required_when_enable
   return unless is_enabled
   return if start_on.present?
 
-  errors.add(:start_on, "通知ONの時は通知開始日が必要です")
+  errors.add(:start_on, ": 通知をONにしたら開始日を選んでね😊")
  end
 
 #  通知開始日と時刻の設定が一時間以上空いている
@@ -58,7 +59,7 @@ end
     )
 
     if start_time  < Time.current + 1.hour
-      errors.add(:start_on, "通知開始は現在時刻から1時間以上先にしてください")
+      errors.add(:start_on, "通知は今から1時間後以降に設定してね😊")
     end
   end
 
@@ -68,7 +69,7 @@ end
     today = Date.current
 
     if anniversary_date > today
-      errors.add(:anniversary_date, "記念日は未来には設定できません")
+      errors.add(:anniversary_date, "記念日は今日までの日付で設定してね😊")
     end
   end
   # 通知開始日は一年以内
@@ -79,7 +80,19 @@ end
     one_year_later = today + 1.year
 
     if start_on >  one_year_later
-      errors.add(:start_on, "通知開始日は一年以内に設定してください")
+      errors.add(:start_on, "通知開始日は1年以内で設定してね😊")
+    end
+  end
+
+  # startonはendonよりあとの日付では登録できない
+  def start_on_not_after_end_on
+    return unless is_enabled
+    return if start_on.blank?  ||  anniversary.anniversary_date.blank?
+
+    next_anniversary = anniversary.next_anniversary
+    # end onの方がいい？
+    if start_on > next_anniversary
+      errors.add(:start_on, "通知開始日は次の記念日以前に設定してください")
     end
   end
 

@@ -36,7 +36,7 @@ def start_on_not_work_when_disable
   return if is_enabled
   return if start_on.blank?
 
-  errors.add(:start_on, "通知がOFFのときは開始日は設定できないよ😊")
+  errors.add(:start_on, ": 通知がOFFのときは開始日は設定できないよ😊")
 end
 # 通知ONでは通知開始日が必要
  def start_on_required_when_enable
@@ -59,7 +59,7 @@ end
     )
 
     if start_time  < Time.current + 1.hour
-      errors.add(:start_on, "通知は今から1時間後以降に設定してね😊")
+      errors.add(:start_on, ": 通知は今から1時間後以降に設定してね😊")
     end
   end
 
@@ -69,7 +69,7 @@ end
     today = Date.current
 
     if anniversary_date > today
-      errors.add(:anniversary_date, "記念日は今日までの日付で設定してね😊")
+      errors.add(:anniversary_date, ": 記念日は今日までの日付で設定してね😊")
     end
   end
   # 通知開始日は一年以内
@@ -80,7 +80,7 @@ end
     one_year_later = today + 1.year
 
     if start_on >  one_year_later
-      errors.add(:start_on, "通知開始日は1年以内で設定してね😊")
+      errors.add(:start_on, ": 通知開始日は1年以内で設定してね😊")
     end
   end
 
@@ -92,7 +92,7 @@ end
     next_anniversary = anniversary.next_anniversary
     # end onの方がいい？
     if start_on > next_anniversary
-      errors.add(:start_on, "通知開始日は次の記念日以前に設定してください")
+      errors.add(:start_on, ": 通知開始日は次の記念日以前に設定してください")
     end
   end
 

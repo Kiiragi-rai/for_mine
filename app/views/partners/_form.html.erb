@@ -6,30 +6,30 @@
     <%= render 'shared/error_messages', object: f.object %>
   
     <div class="mb-3">
-      <%= f.label :name, "名前:" %>
+      <%= f.label :name, "名前（必須）" %>
       <%= f.text_field :name, class: "form-control",placeholder:"for-mineくん" %>
     </div>
   
     <div class="row">
       <div class="col mb-3">
-        <%= f.label :sex, "性別:" %>
+        <%= f.label :sex, "性別" %>
         <%= f.text_field :sex, class: "form-control" ,placeholder: "どんな方ですか？"%>
       </div>
   
       <div class="col mb-3">
-        <%= f.label :age, "年齢:" %>
+        <%= f.label :age, "年齢" %>
         <%= f.number_field :age, class: "form-control", placeholder:"例：20" %>
       </div>
     </div>
   
     <div class="row">
       <div class="col mb-3">
-        <%= f.label :job, "職業：" %>
+        <%= f.label :job, "職業" %>
         <%= f.text_field :job, class: "form-control", placeholder:"例：会社員、学生" %>
       </div>
   
       <div class="col mb-3">
-        <%= f.label :relation, "関係性:" %>
+        <%= f.label :relation, "関係性" %>
         <%= f.text_field :relation, class: "form-control", placeholder:"例：恋人、友達" %>
       </div>
     </div>

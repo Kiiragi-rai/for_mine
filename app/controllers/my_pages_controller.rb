@@ -20,6 +20,6 @@ class MyPagesController < ApplicationController
     current_user.destroy!
 
     reset_session
-    redirect_to root_path, notice: "これまで使ってくれてありがとう😊\nまたいつでも戻ってきてね", status: :see_other
+    redirect_to root_path, notice: "これまで使ってくれてありがとう😊またいつでも戻ってきてね", status: :see_other
   end
 end

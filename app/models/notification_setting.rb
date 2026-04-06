@@ -25,7 +25,7 @@ class NotificationSetting < ApplicationRecord
   belongs_to :anniversary
   has_many :notification_managements, dependent: :destroy
 
-  # validate :start_on_not_after_end_on
+  validate :start_on_not_after_end_on
 
   enum :frequency_days, {
        everyday: 1, every_other_day: 2, every_5_days: 5, weekly: 7, bi_weekly: 14, thirty_days: 30
@@ -33,16 +33,16 @@ class NotificationSetting < ApplicationRecord
 
   scope :is_enabled, -> { where(is_enabled: true) }
 # startonはendonよりあとの日付では登録できない
-  # def start_on_not_after_end_on
-  #   return unless is_enabled
-  #   return if start_on.blank?  ||  anniversary.anniversary_date.blank?
+  def start_on_not_after_end_on
+    return unless is_enabled
+    return if start_on.blank?  ||  anniversary.anniversary_date.blank?
 
-  #   next_anniversary = anniversary.next_anniversary
-  #   # end onの方がいい？
-  #   if start_on > next_anniversary
-  #     errors.add(:start_on, "通知開始日は次の記念日以前に設定してください")
-  #   end
-  # end
+    next_anniversary = anniversary.next_anniversary
+    # end onの方がいい？
+    if start_on > next_anniversary
+      errors.add(:start_on, "通知開始日は次の記念日以前に設定してください")
+    end
+  end
 
   # 通知が届く最終日かどうか確認
   def finished?

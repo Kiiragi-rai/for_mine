@@ -71,7 +71,7 @@ class Anniversary < ApplicationRecord
 
       this_year = anniversary_date_for_year(year: year, month: mon, day: da)
 
-      if this_year < today
+      if this_year <= today
         anniversary_date_for_year(year: year + 1, month: mon, day: da)
       else
         this_year

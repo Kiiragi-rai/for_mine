@@ -91,7 +91,7 @@ class Partner < ApplicationRecord
     def budget_max_is_greater_than_budget_min
         return if budget_min.blank? || budget_max.blank?
         if budget_min >= budget_max
-            errors.add(:budget_min, "予算（下限）が予算（上限）を超えることはできません")
+            errors.add(:budget_min, ": が予算（上限）を超えることはできません")
         end
     end
 

@@ -41,7 +41,7 @@ class AnniversariesController < ApplicationController
           **anniversary_notification_setting_params
         )
         if @form.save
-          redirect_to anniversaries_path, notice: "記念日を登録したよ😊\nこれで忘れずに大切にできるね"
+          redirect_to anniversaries_path, notice: "記念日を登録したよ😊これで忘れずに大切にできるね"
         else
           render :new, status: :unprocessable_entity
         end
@@ -50,7 +50,7 @@ class AnniversariesController < ApplicationController
 
     def edit
         @form = AnniversaryNotificationSettingForm.new(
-            # user: current_user,
+            # user: current_user.,
             anniversary: @anniversary
           )
           set_meta_tags(
@@ -66,15 +66,15 @@ class AnniversariesController < ApplicationController
             **anniversary_notification_setting_params
           )
         if @form.save
-            redirect_to anniversaries_path, notice: "記念日を更新したよ✨\nより良い形になったね"
+            redirect_to anniversaries_path, notice: "記念日を更新したよ✨より良い形になったね"
         else
-            flash.now[:danger] = "うまく更新できなかったみたい…\nもう一度だけ確認してみよう🙏"
+            flash.now[:danger] = "うまく更新できなかったみたい…もう一度だけ確認してみよう🙏"
             render :edit, status: :unprocessable_content
         end
     end
     def destroy
         @anniversary.destroy!
-        redirect_to anniversaries_path, notice: "記念日を削除したよ\nまた必要になったら、いつでも追加できるよ"
+        redirect_to anniversaries_path, notice: "記念日を削除したよ😊また必要になったら、いつでも追加できるよ"
     end
 
 

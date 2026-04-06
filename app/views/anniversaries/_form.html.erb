@@ -10,12 +10,12 @@
   <%= render 'shared/error_messages', object: f.object %>
 
   <div class="mb-3">
-    <%= f.label :title, "タイトル", class:"form-label" %>
+    <%= f.label :title, "タイトル（必須）", class:"form-label" %>
     <%= f.text_field :title, class:"form-control", placeholder:"例：誕生日" %>
   </div>
 
   <div class="mb-3">
-    <%= f.label :anniversary_date, "記念日", class:"form-label" %>
+    <%= f.label :anniversary_date, "記念日（必須）", class:"form-label" %>
     <%= f.date_field :anniversary_date, class:"form-control" ,  data: {
     notification_target: "date",action: "change->notification#calculate"
   } %>
@@ -25,18 +25,17 @@
     <label class="form-label">通知設定</label>
     <p  class="text-muted mt-0" style="font-size: 0.85rem;">ONにすると通知が届くようになります</p>
     <div class="form-check">
-      <%= f.radio_button :is_enabled, true, checked: @form.is_enabled, class:"form-check-input",data: { action: "change->notification#toggle" } %>
+      <%= f.radio_button :is_enabled, true, class:"form-check-input",data: { action: "change->notification#toggle" } %>
       <%= f.label :is_enabled, "ON", class:"form-check-label" %>
     </div>
     <div class="form-check">
-      <%= f.radio_button :is_enabled, false, checked: !@form.is_enabled, class:"form-check-input",data: { action: "change->notification#toggle" } %>
+      <%= f.radio_button :is_enabled, false,class:"form-check-input",data: { action: "change->notification#toggle" } %>
       <%= f.label :is_enabled, "OFF", class:"form-check-label" %>
     </div>
   </div>
   <div class="mb-3">
-    <%= f.label :start_on, "通知開始日", class:"form-label" %> <br>
-  <p data-notification-target="result" class="text-muted d-none" style="font-size: 0.85rem;"></p>
-   
+   <%= f.label :start_on, "通知開始日", class:"form-label" %>
+   <p data-notification-target="result" class="text-muted d-none mt-0" style="font-size: 0.85rem;"></p>
     <%= f.date_field :start_on, class:"form-control" %>
   </div>
 

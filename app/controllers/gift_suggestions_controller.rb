@@ -20,7 +20,7 @@ class GiftSuggestionsController < ApplicationController
   def create
     # 月５回制限
     if GiftSuggestion.monthly_success_count(current_user) >= 5
-      redirect_to new_gift_suggestion_path, alert: "今月はここまでだよ😊\nまた来月、一緒に考えようね"
+      redirect_to new_gift_suggestion_path, alert: "今月はここまでだよ😊また来月、一緒に考えようね"
       return
     end
 
@@ -35,7 +35,7 @@ class GiftSuggestionsController < ApplicationController
 
 
         if Rails.env.development? || Rails.env.test?
-        # if Rails.env.production?
+          # if Rails.env.production?
 
           result = {
               "presentSuggestions" => [
@@ -47,12 +47,12 @@ class GiftSuggestionsController < ApplicationController
 
 
               if current_user.gift_suggestions.create(
-                input_json: partner_info, 
-                result_json: result, 
+                input_json: partner_info,
+                result_json: result,
                 status: :success
                 )
              session[:gift_contents] = result
-              redirect_to new_gift_suggestion_path, notice: "プレゼント、一緒に考えてみたよ🎁\nいいものが見つかるといいね"
+              redirect_to new_gift_suggestion_path, notice: "プレゼント、一緒に考えてみたよ🎁いいものが見つかるといいね"
               else
                 render :new, status: :unprocessable_entity
               end
@@ -63,14 +63,14 @@ class GiftSuggestionsController < ApplicationController
               # プレゼント提案
               result = GiftSuggestions::Generate.new(prompt).call
 
-              
+
               if result[:error]
 
                 current_user.gift_suggestions.create!(
                   error_message: result[:error],
                   status: :failure
                   )
-                redirect_to gift_suggestions_path, alert: "うまく提案できなかったみたい…\nもう一度試してみよう🙏"
+                redirect_to gift_suggestions_path, alert: "うまく提案できなかったみたい…もう一度試してみよう🙏"
                 return
 
               end
@@ -82,20 +82,20 @@ class GiftSuggestionsController < ApplicationController
                   )
 
               session[:gift_contents] = result
-              redirect_to new_gift_suggestion_path, notice: "プレゼント、一緒に考えてみたよ🎁\nいいものが見つかるといいね"
+              redirect_to new_gift_suggestion_path, notice: "プレゼント、一緒に考えてみたよ🎁いいものが見つかるといいね"
 
             rescue StandardError => e
               # こっちもcreateに
-             # input いらんくない？
+              # input いらんくない？
 
               current_user.gift_suggestions.create!(
                 input_json: partner_info,
                 status: :failure,
                 error_message: e.message
               )
-              redirect_to gift_suggestions_path, alert: "少し問題が起きたみたい…\n時間をおいて試してみてね🙏"
+              redirect_to gift_suggestions_path, alert: "少し問題が起きたみたい…時間をおいて試してみてね🙏"
           end
- 
+
         end
   end
 
@@ -120,7 +120,7 @@ class GiftSuggestionsController < ApplicationController
     return if  current_user.partner.present?
     redirect_to gift_suggestions_path, alert: "まずは大切な人のこと、教えてくれる？😊"
   end
-# パートナー情報
+  # パートナー情報
   def build_partner_info
     partner = current_user.partner
 

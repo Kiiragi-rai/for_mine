@@ -7,7 +7,7 @@ class GiftSuggestionsController < ApplicationController
   def index
     @gift_suggestions = current_user.gift_suggestions.where.not(result_json: nil).order(created_at: :asc).page(params[:page]).per(10)
 
-    set_meta_tags(title: "プレゼント履歴")
+    set_meta_tags(title: "プレゼントの記録")
   end
 
   def new
@@ -18,6 +18,7 @@ class GiftSuggestionsController < ApplicationController
   end
   # 今月五回使っていたら停止
   def create
+    # 月５回制限
     if GiftSuggestion.monthly_success_count(current_user) >= 5
       redirect_to new_gift_suggestion_path, alert: "今月はここまでだよ😊\nまた来月、一緒に考えようね"
       return
@@ -26,6 +27,7 @@ class GiftSuggestionsController < ApplicationController
     partner_info = build_partner_info
     last_result =  current_user.gift_suggestions.success.last&.result_json
 
+    # プロンプト作成
     prompt = GiftSuggestions::PromptBuilder.new(
       partner_info: partner_info,
       last_result: last_result
@@ -58,8 +60,10 @@ class GiftSuggestionsController < ApplicationController
         # 本番
         else
             begin
+              # プレゼント提案
               result = GiftSuggestions::Generate.new(prompt).call
 
+              
               if result[:error]
 
                 current_user.gift_suggestions.create!(
@@ -70,7 +74,7 @@ class GiftSuggestionsController < ApplicationController
                 return
 
               end
-
+              # input いらんくない？
               current_user.gift_suggestions.create!(
                   input_json: partner_info,
                   result_json: result,
@@ -82,6 +86,8 @@ class GiftSuggestionsController < ApplicationController
 
             rescue StandardError => e
               # こっちもcreateに
+             # input いらんくない？
+
               current_user.gift_suggestions.create!(
                 input_json: partner_info,
                 status: :failure,
@@ -109,11 +115,12 @@ class GiftSuggestionsController < ApplicationController
   end
 
   private
+  # パートナーフィルター
   def ensure_partner!
     return if  current_user.partner.present?
     redirect_to gift_suggestions_path, alert: "まずは大切な人のこと、教えてくれる？😊"
   end
-
+# パートナー情報
   def build_partner_info
     partner = current_user.partner
 

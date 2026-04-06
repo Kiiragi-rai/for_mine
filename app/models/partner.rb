@@ -53,17 +53,18 @@ class Partner < ApplicationRecord
       end
 
 
-
+      # stringに
       def turn_to_string(object)
          object.join("、").presence || "未入力"
       end
-
+      # 縁を追加
       def with_yen(object)
         return "未入力" if object.blank?
 
         "#{object}円"
       end
 
+      # プログレスバーのパーセント計算
       def change_to_progress_bar_value
         attrs = attributes.except("id", "created_at", "updated_at", "user_id")
         attrssize = attrs.size
@@ -75,6 +76,7 @@ class Partner < ApplicationRecord
       end
 
       # でこれーたーにしてもOK、もう一色あってもいいかも
+      # プログレスバーの色変更
       def progress_bar_color
         value = change_to_progress_bar_value
 
@@ -94,7 +96,7 @@ class Partner < ApplicationRecord
     end
 
 
-      #  データ加工処理（配列）
+      #  データ加工処理（配列ー＞）
       def normalize_list(value)
         return [] if value.blank?
 

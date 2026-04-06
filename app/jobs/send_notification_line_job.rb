@@ -22,7 +22,7 @@ class SendNotificationLineJob < ApplicationJob
     end
 
       return if uid.blank?
-
+      # メッセージ作成
       message = LineNotification::NotificationMessageBuilder.new(
        start_on: notification_setting.start_on,
        end_on:  notification_setting.end_on,
@@ -33,6 +33,7 @@ class SendNotificationLineJob < ApplicationJob
       message_content = message.build_message
       # ここまで事前でいいかも
       Rails.logger.info "#{message_content} これメッセージ"
+      # 送信
       begin
       if Rails.env.development? ||Rails.env.test?
       Rails.logger.info "ためしーーー"

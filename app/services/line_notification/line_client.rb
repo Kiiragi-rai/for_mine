@@ -5,6 +5,7 @@ module LineNotification
       def self.send_line_message_with_button_to_home(uid:, messages:)
         # uid:じゃなくて、実際はuser_id, schedule_forはtdate ここでtimeとdate = time stamp 作成
         # JOBではtime使うけどここじゃいらない　,notiication_time:
+        # ボタン
         button_template = Line::Bot::V2::MessagingApi::ButtonsTemplate.new(
           text: messages,
           actions: [
@@ -14,10 +15,12 @@ module LineNotification
             )
           ]
         )
+        # メッセージ
         template_message = Line::Bot::V2::MessagingApi::TemplateMessage.new(
           alt_text: messages,
           template: button_template
         )
+        # リクエスト
 
         push_request = Line::Bot::V2::MessagingApi::PushMessageRequest.new(
           to: uid,
@@ -27,6 +30,7 @@ module LineNotification
       _response, status, _headers = client.push_message_with_http_info(
         push_message_request: push_request
       )
+      # ステータス判定
       status.between?(200, 299)
 
       rescue StandardError => e

@@ -35,6 +35,7 @@ class GiftSuggestion < ApplicationRecord
     deleted: 3
   }
 
+  # 月５回フィルター
   def self.monthly_success_count(user)
     where(user: user).where(status: [ :success, :deleted ]).where(created_at: Time.current.beginning_of_month..Time.current.end_of_month).count
   end
@@ -44,7 +45,7 @@ class GiftSuggestion < ApplicationRecord
   #     errors.add(:base, "今月の上限に達しています")
   #   end
   # end
-
+  # データ取り出し
   def suggestion_names
     result_json&.dig("presentSuggestions")&.map { |h| h["name"] } || []
   end

@@ -1,0 +1,63 @@
+# == Schema Information
+#
+# Table name: notification_managements
+#
+#  id                      :bigint           not null, primary key
+#  error_message           :string
+#  schedule_title          :string
+#  scheduled_for           :datetime         not null
+#  sent_at                 :datetime
+#  status                  :integer          default("pending"), not null
+#  created_at              :datetime         not null
+#  updated_at              :datetime         not null
+#  notification_setting_id :bigint           not null
+#  user_id                 :bigint
+#
+# Indexes
+#
+#  index_notification_managements_on_notification_setting_id  (notification_setting_id)
+#  index_notification_managements_on_user_id                  (user_id)
+#  index_notification_managements_unique_schedule             (notification_setting_id,scheduled_for) UNIQUE
+#
+# Foreign Keys
+#
+#  fk_rails_...  (notification_setting_id => notification_settings.id)
+#  fk_rails_...  (user_id => users.id)
+#
+class NotificationManagement < ApplicationRecord
+  belongs_to :notification_setting
+  belongs_to :user
+
+  # status success, failure enumかな、それか直接入れる
+  enum status: {
+    pending: 0,
+    success: 1,
+    failure: 2
+  }
+
+  validates :scheduled_for, presence: true
+
+  # notificationmanagament登録用
+  def self.create_for(target)
+    management = create_or_find_by!(
+        notification_setting_id: target.notification_setting_id,
+        scheduled_for: target.scheduled_for
+      ) do |management|
+        management.schedule_title = target.title
+        management.user_id = target.user_id
+      end
+      # 登録したばかりのみ通過させたい
+      management if management.previously_new_record?
+    rescue ActiveRecord::RecordNotUnique => e
+      Rails.logger.info("create_forでエラーが発生しましたNM: #{e.message}")
+      nil
+  end
+
+  def self.ransackable_attributes(auth_object = nil)
+    [ "status", "user_id" ]
+  end
+
+  def self.ransackable_associations(auth_object = nil)
+    [ "notification_setting" ]
+  end
+end

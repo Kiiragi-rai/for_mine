@@ -1,0 +1,117 @@
+# This file is auto-generated from the current state of the database. Instead
+# of editing this file, please use the migrations feature of Active Record to
+# incrementally modify your database, and then regenerate this schema definition.
+#
+# This file is the source Rails uses to define your schema when running `bin/rails
+# db:schema:load`. When creating a new database, `bin/rails db:schema:load` tends to
+# be faster and is potentially less error prone than running all of your
+# migrations from scratch. Old migrations may fail to apply correctly if those
+# migrations use external dependencies or application code.
+#
+# It's strongly recommended that you check this file into your version control system.
+
+ActiveRecord::Schema[7.2].define(version: 2026_04_03_104010) do
+  # These are extensions that must be enabled in order to support this database
+  enable_extension "plpgsql"
+
+  create_table "admins", force: :cascade do |t|
+    t.string "email", default: "", null: false
+    t.string "encrypted_password", default: "", null: false
+    t.string "reset_password_token"
+    t.datetime "reset_password_sent_at"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.integer "failed_attempts", default: 0, null: false
+    t.datetime "locked_at"
+    t.integer "sign_in_count", default: 0, null: false
+    t.datetime "current_sign_in_at"
+    t.datetime "last_sign_in_at"
+    t.string "current_sign_in_ip"
+    t.string "last_sign_in_ip"
+    t.index ["email"], name: "index_admins_on_email", unique: true
+    t.index ["reset_password_token"], name: "index_admins_on_reset_password_token", unique: true
+  end
+
+  create_table "anniversaries", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.string "title", null: false
+    t.date "anniversary_date", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_anniversaries_on_user_id"
+  end
+
+  create_table "gift_suggestions", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.jsonb "input_json"
+    t.jsonb "result_json"
+    t.integer "status", default: 0, null: false
+    t.text "error_message"
+    t.datetime "deleted_at"
+    t.index ["user_id"], name: "index_gift_suggestions_on_user_id"
+  end
+
+  create_table "notification_managements", force: :cascade do |t|
+    t.bigint "notification_setting_id", null: false
+    t.datetime "scheduled_for", null: false
+    t.integer "status", default: 0, null: false
+    t.datetime "sent_at"
+    t.string "error_message"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.string "schedule_title"
+    t.bigint "user_id"
+    t.index ["notification_setting_id", "scheduled_for"], name: "index_notification_managements_unique_schedule", unique: true
+    t.index ["notification_setting_id"], name: "index_notification_managements_on_notification_setting_id"
+    t.index ["user_id"], name: "index_notification_managements_on_user_id"
+  end
+
+  create_table "notification_settings", force: :cascade do |t|
+    t.bigint "anniversary_id", null: false
+    t.boolean "is_enabled", default: false, null: false
+    t.date "start_on"
+    t.integer "frequency_days", default: 1, null: false
+    t.date "last_sent_on"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.date "end_on"
+    t.integer "notification_hour", default: 0, null: false
+    t.index ["anniversary_id"], name: "index_notification_settings_on_anniversary_id", unique: true
+  end
+
+  create_table "partners", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.string "name"
+    t.string "sex"
+    t.string "relation"
+    t.string "job"
+    t.text "favorites", default: [], array: true
+    t.text "avoidances", default: [], array: true
+    t.text "hobbies", default: [], array: true
+    t.integer "budget_min"
+    t.integer "budget_max"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.integer "age"
+    t.index ["user_id"], name: "index_partners_on_user_id", unique: true
+  end
+
+  create_table "users", force: :cascade do |t|
+    t.string "name", default: "", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.string "provider", default: "", null: false
+    t.string "uid", default: "", null: false
+    t.boolean "first_login_flag", default: false, null: false
+    t.index ["provider", "uid"], name: "index_users_on_provider_and_uid", unique: true
+  end
+
+  add_foreign_key "anniversaries", "users"
+  add_foreign_key "gift_suggestions", "users"
+  add_foreign_key "notification_managements", "notification_settings"
+  add_foreign_key "notification_managements", "users"
+  add_foreign_key "notification_settings", "anniversaries"
+  add_foreign_key "partners", "users"
+end

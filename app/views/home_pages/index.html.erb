@@ -1,0 +1,31 @@
+<div class="container min-vh-100 d-flex align-items-center justify-content-center">
+
+  <div style="max-width:500px;" class="w-100">
+
+    <div class="row g-3">
+
+      <div class="col-6">
+        <%= link_to "記念日を見る", anniversaries_path,
+          class: "btn btn-primary w-100 square-btn fs-4" %>
+      </div>
+
+      <div class="col-6">
+        <%= link_to "パートナー情報", partner_path,
+          class: "btn btn-primary w-100 square-btn fs-4" %>
+      </div>
+
+      <div class="col-6">
+        <%= link_to "プレゼントを考える", new_gift_suggestion_path,
+          class: "btn btn-primary w-100 square-btn fs-4" %>
+      </div>
+
+      <div class="col-6">
+        <%= link_to "プレゼントの記録", gift_suggestions_path,
+          class: "btn btn-primary w-100 square-btn fs-4" %>
+      </div>
+
+    </div>
+
+  </div>
+
+</div>

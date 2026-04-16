@@ -1,0 +1,30 @@
+# == Schema Information
+#
+# Table name: notification_settings
+#
+#  id                :bigint           not null, primary key
+#  end_on            :date
+#  frequency_days    :integer          default("everyday"), not null
+#  is_enabled        :boolean          default(FALSE), not null
+#  last_sent_on      :date
+#  notification_hour :integer          default(0), not null
+#  start_on          :date
+#  created_at        :datetime         not null
+#  updated_at        :datetime         not null
+#  anniversary_id    :bigint           not null
+#
+# Indexes
+#
+#  index_notification_settings_on_anniversary_id  (anniversary_id) UNIQUE
+#
+# Foreign Keys
+#
+#  fk_rails_...  (anniversary_id => anniversaries.id)
+#
+require "test_helper"
+
+class NotificationSettingTest < ActiveSupport::TestCase
+  # test "the truth" do
+  #   assert true
+  # end
+end

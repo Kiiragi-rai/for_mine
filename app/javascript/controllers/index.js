@@ -4,5 +4,23 @@
 
 import { application } from "./application"
 
+import FadeController from "./fade_controller"
+application.register("fade", FadeController)
+
+import GiftLoadingController from "./gift_loading_controller"
+application.register("gift-loading", GiftLoadingController)
+
 import HelloController from "./hello_controller"
 application.register("hello", HelloController)
+
+import HowToSelectController from "./how_to_select_controller"
+application.register("how-to-select", HowToSelectController)
+
+import ModalController from "./modal_controller"
+application.register("modal", ModalController)
+
+import NotificationController from "./notification_controller"
+application.register("notification", NotificationController)
+
+import SliderController from "./slider_controller"
+application.register("slider", SliderController)

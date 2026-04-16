@@ -1,0 +1,34 @@
+<div data-controller="modal">
+
+  <%= link_to "削除",
+      "#",
+      class: "btn btn-danger",
+      data: { action: "click->modal#open"} %>
+
+  <div data-modal-target="modal" class="modal">
+
+    <div class="modal-content">
+
+      <p>大切な人の情報をなくしてもいいですか？</p>
+
+      <div class="modal-buttons">
+
+        <%= link_to "はい",
+            partner_path(@partner),
+            data: { turbo_method: :delete },
+            class: "btn btn-danger" %>
+
+        <button
+          type="button"
+          data-action="click->modal#close"
+          class="btn btn-secondary">
+          いいえ
+        </button>
+
+      </div>
+
+    </div>
+
+  </div>
+
+</div>

@@ -1,0 +1,45 @@
+<div class="container py-5">
+
+  <div class="row justify-content-center">
+
+    <div class="col-lg-8">
+
+      <div class="card shadow-sm">
+
+        <div class="card-body text-center">
+
+
+
+          <div class="text-center mb-4">
+            <%= image_tag "for_mine_logo.png",class:"rounded-circle", width:"120" %>
+          </div>
+
+          <p>
+            username:
+            <strong><%= @user.name %></strong>
+          </p>
+
+          <div class="mt-4">
+            <p>通知を受け取るには公式LINE登録が必要です</p>
+
+            <a href="https://lin.ee/XNdU8tj">
+              <img src="https://scdn.line-apps.com/n/line_add_friends/btn/ja.png"
+                   height="36">
+            </a>
+          </div>
+
+          <div class="mt-4">
+            <%= link_to "ユーザー削除",
+                confirm_my_page_path,
+                class: "btn btn-outline-danger" %>
+          </div>
+
+        </div>
+
+      </div>
+
+    </div>
+
+  </div>
+
+</div>

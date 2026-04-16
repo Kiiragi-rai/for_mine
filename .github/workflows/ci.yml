@@ -1,26 +1,36 @@
 name: CI
 
 on:
+# PRが作られた・更新されたときにCI実行
   pull_request:
+  # mainブランチにpushされたらCI実行
   push:
     branches: [ main ]
-
+# セキュリティチェック（Brakeman）を自動実行
+# Rubyコードの安全性チェック
 jobs:
   scan_ruby:
     runs-on: ubuntu-latest
-
+# 実行手順
     steps:
+    # コード取得
       - name: Checkout code
         uses: actions/checkout@v6
 
       - name: Set up Ruby
         uses: ruby/setup-ruby@v1
         with:
+        # プロジェクトと同じRuby
           ruby-version: .ruby-version
+          # Gemをキャッシュ
           bundler-cache: true
 
       - name: Scan for common Rails security vulnerabilities using static analysis
-        run: bin/brakeman --no-pager
+      # 出力をそのまま表示
+        run: bundle exec brakeman --no-pager
+
+      - name: bundler-audit
+        run: bundle exec bundler-audit check --update
 
   lint:
     runs-on: ubuntu-latest
@@ -35,30 +45,41 @@ jobs:
           bundler-cache: true
 
       - name: Lint code for consistent style
-        run: bin/rubocop -f github
+        run:  bundle exec rubocop
 
   test:
     runs-on: ubuntu-latest
-
+    env:
+      RAILS_ENV: test
+      PGHOST: 127.0.0.1
+      PGUSER: postgres
+      PGPASSWORD: postgres
+      REDIS_URL: redis://localhost:6379/0
+      SELENIUM_DRIVER_URL: http://localhost:4444/wd/hub
     services:
       postgres:
-        image: postgres
+        image: postgres:15
         env:
           POSTGRES_USER: postgres
           POSTGRES_PASSWORD: postgres
+          POSTGRES_DB: myapp_test
         ports:
           - 5432:5432
-        options: --health-cmd="pg_isready" --health-interval=10s --health-timeout=5s --health-retries=3
+        options: --health-cmd="pg_isready -U postgres -d myapp_test" --health-interval=10s --health-timeout=5s --health-retries=20
 
-      # redis:
-      #   image: redis
-      #   ports:
-      #     - 6379:6379
+      redis:
+        image: redis
+        ports:
+          - 6379:6379
       #   options: --health-cmd "redis-cli ping" --health-interval 10s --health-timeout 5s --health-retries 5
-
+      
+      chrome:
+        image: seleniarm/standalone-chromium
+        ports:
+          - 4444:4444
     steps:
-      - name: Install packages
-        run: sudo apt-get update && sudo apt-get install --no-install-recommends -y google-chrome-stable curl libjemalloc2 libvips postgresql-client
+      # - name: Install packages
+      #   run: sudo apt-get update && sudo apt-get install --no-install-recommends -y google-chrome-stable curl libjemalloc2 libvips postgresql-client
 
       - name: Checkout code
         uses: actions/checkout@v6
@@ -69,12 +90,37 @@ jobs:
           ruby-version: .ruby-version
           bundler-cache: true
 
-      - name: Run tests
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 18
+
+      - name: Install dependencies
+        run: |
+          bundle install
+          yarn install
+      - name: Wait for DB
+        run: |
+          until pg_isready -h localhost -U postgres; do
+           sleep 1
+          done
+      - name: Build CSS
+        run: yarn build:css
+      - name: Build JS
+        run: yarn build         
+        
+      - name: Setup DB
+        run: bundle exec rails db:prepare
+
+      - name: Run RSpec
         env:
           RAILS_ENV: test
-          DATABASE_URL: postgres://postgres:postgres@localhost:5432
-          # REDIS_URL: redis://localhost:6379/0
-        run: bin/rails db:test:prepare test test:system
+          PGUSER: postgres
+          PGPASSWORD: postgres
+          REDIS_URL: redis://localhost:6379/0
+          SELENIUM_DRIVER_URL: http://localhost:4444/wd/hub
+
+        run: bundle exec rspec
 
       - name: Keep screenshots from failed system tests
         uses: actions/upload-artifact@v4
@@ -83,3 +129,4 @@ jobs:
           name: screenshots
           path: ${{ github.workspace }}/tmp/screenshots
           if-no-files-found: ignore
+

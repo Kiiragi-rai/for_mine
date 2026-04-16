@@ -1,0 +1,65 @@
+# == Schema Information
+#
+# Table name: users
+#
+#  id               :bigint           not null, primary key
+#  first_login_flag :boolean          default(FALSE), not null
+#  name             :string           default(""), not null
+#  provider         :string           default(""), not null
+#  uid              :string           default(""), not null
+#  created_at       :datetime         not null
+#  updated_at       :datetime         not null
+#
+# Indexes
+#
+#  index_users_on_provider_and_uid  (provider,uid) UNIQUE
+#
+class User < ApplicationRecord
+  validates :name, presence: true, length: { maximum: 30 }
+  validates :provider, presence: true
+  validates :uid, presence: true
+  validates :provider, uniqueness: { scope: :uid }
+  # Include default devise modules. Others available are:
+  # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
+  devise :omniauthable, :timeoutable, omniauth_providers: [ :line ]
+
+  has_many :anniversaries, dependent: :destroy
+  has_one :partner, dependent: :destroy
+  has_many :gift_suggestions, dependent: :destroy
+  has_many :notification_managements, dependent: :destroy
+
+
+
+  def self.from_line(auth)
+    # これもcreate_find_by の方が安全かも
+    where(provider: auth.provider, uid: auth.uid).first_or_create do |user|
+      user.name = auth.info.name
+    end
+    # create_or_find_by!(provider: auth.provider, uid: auth.uid) do |user|
+    #   user.name = auth.info.name
+    # end
+  end
+  # 論理削除あり
+  # def self.from_line(auth)
+  #   user = find_by(provider: auth.provider, uid: auth.uid)
+
+  #   if user
+  #     user.update!(is_deleted: false) if user.is_deleted?
+  #     user
+  #   else
+  #     create!(
+  #       provider: auth.provider,
+  #       uid: auth.uid,
+  #       name: auth.info.name
+  #     )
+  #   end
+  # end
+
+  def self.ransackable_attributes(auth_object = nil)
+    [ "created_at", "id", "name" ]
+  end
+
+  def self.ransackable_associations(auth_object = nil)
+    [ "anniversaries", "gift_suggestions", "notification_managements", "partner" ]
+  end
+end

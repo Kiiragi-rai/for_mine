@@ -1,0 +1,5 @@
+notification_target_get_job:
+  # cron: "50 * * * *"
+  cron: "*/20 * * * *"
+  class: "NotificationTargetGetJob"
+  queue: default

@@ -1,0 +1,49 @@
+<div class="container">
+
+    <h2 class="mb-4">通知管理</h2>
+    
+    <%= render "admin/notification_managements/search", q: @q %>
+    
+    <table class="table table-striped table-hover">
+    
+    <thead>
+    <tr>
+    <th>Title</th>
+    <th>Scheduled</th>
+    <th>Status</th>
+    <th>Date</th>
+    </tr>
+    </thead>
+    
+    <tbody>
+    
+    <% @notification_managements.each do |nm| %>
+    
+    <tr>
+    <td><%= nm.schedule_title %></td>
+    
+    <td>
+    <%= l nm.scheduled_for, format: :short %>
+    </td>
+    
+    <td>
+    <%= nm.status %>
+    </td>
+    
+    <td>
+    <%= l nm.created_at, format: :short %>
+    </td>
+    
+    </tr>
+    
+    <% end %>
+    
+    </tbody>
+    
+    </table>
+    
+    <div class="d-flex justify-content-center mt-4">
+    <%= paginate @notification_managements %>
+    </div>
+    
+    </div>

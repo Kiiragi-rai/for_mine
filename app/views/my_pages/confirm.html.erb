@@ -1,0 +1,39 @@
+<div class="container py-5">
+
+  <div class="row justify-content-center">
+    <div class="col-lg-6">
+
+      <div class="card shadow-sm">
+
+        <div class="card-body text-center">
+
+          <h3 class="mb-4">本当に退会しますか？</h3>
+
+          <p class="mb-4">
+            これまでの大切な記録はすべて削除されます<br>
+            少しさみしいですが、またいつでも戻ってきてくださいね😊
+          </p>
+
+          <div class="d-flex justify-content-center gap-3">
+
+            <%= link_to "戻る",
+                my_page_path,
+                class: "btn btn-primary" %>
+
+            <%= link_to "退会する",
+                withdraw_my_page_path,
+                class: "btn btn-danger",
+                data: { turbo_method: :delete,
+                        turbo_confirm: "本当に退会しますか？" } %>
+      
+
+          </div>
+
+        </div>
+
+      </div>
+
+    </div>
+  </div>
+
+</div>

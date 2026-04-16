@@ -1,0 +1,84 @@
+<div class="container pt-5">
+
+  <div class="row justify-content-center ">
+    <div class="col-lg-8 ">
+      <article class="card shadow-sm ">
+        <div class="card-body background">
+
+          <div class="row mb-3">
+
+            <div class="col-md-6">
+              <h5 class="card-title">タイトル</h5>
+              <p class="card-text"><%= @anniversary.title %></p>
+            </div>
+
+            <div class="col-md-6">
+              <h5 class="card-title">日付</h5>
+              <p class="card-text"><%= @anniversary.anniversary_date %></p>
+            </div>
+          </div>
+
+          <hr>
+
+          <h4 class="mb-3">通知設定</h4>
+
+          <div class="row mb-3">
+
+            <div class="col-md-6">
+              <h5>通知状態</h5>
+              <p>
+                <%= @anniversary.notification_setting&.is_enabled ? "ON" : "OFF" %>
+              </p>
+            </div>
+
+            <div class="col-md-6">
+              <h5>通知頻度</h5>
+              <p>
+                <%= @anniversary.notification_setting&.frequency_days_i18n %>
+              </p>
+            </div>
+
+          </div>
+
+          <div class="row mb-3">
+
+            <div class="col-md-6">
+              <h5>通知時間</h5>
+              <p>
+                <%= "%02d:00" % @anniversary.notification_setting.notification_hour if @anniversary.notification_setting&.notification_hour %>
+              </p>
+            </div>
+
+            <div class="col-md-6">
+              <h5>通知開始日</h5>
+              <p>
+                <%= @anniversary.notification_setting&.start_on %>
+              </p>
+            </div>
+
+          </div>
+
+          <div class="d-flex gap-2">
+            <%= link_to "編集",
+                edit_anniversary_path(@anniversary),
+                class: "btn btn-outline-primary" %>
+
+            <%= link_to "削除",
+                anniversary_path(@anniversary),
+                data: { turbo_method: :delete },
+                class: "btn btn-outline-danger" %>
+          </div>
+
+        </div>
+      </article>
+
+      <div class="mt-4">
+        <%= link_to "一覧へ",
+            anniversaries_path,
+            class: "btn btn-outline-secondary" %>
+      </div>
+
+    </div>
+  </div>
+
+</div>

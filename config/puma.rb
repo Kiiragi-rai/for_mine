@@ -9,7 +9,7 @@
 # application spends waiting for IO operations and on how much you wish to
 # to prioritize throughput over latency.
 #
-# As a rule of thumb, increasing the number of threads will increase how much
+# As a rule of thumb, increasing the number of  will increase how much
 # traffic a given process can handle (throughput), but due to CRuby's
 # Global VM Lock (GVL) it has diminishing returns and will degrade the
 # response time (latency) of the application.
@@ -20,15 +20,29 @@
 # Any libraries that use a connection pool or another resource pool should
 # be configured to provide at least as many connections as the number of
 # threads. This includes Active Record's `pool` parameter in `database.yml`.
-threads_count = ENV.fetch("RAILS_MAX_THREADS", 3)
-threads threads_count, threads_count
+# threads_count = ENV.fetch("RAILS_MAX_THREADS", 3)
+# threads threads_count, threads_count
 
 # Specifies the `port` that Puma will listen on to receive requests; default is 3000.
-port ENV.fetch("PORT", 3000)
+# port ENV.fetch("PORT", 3000)
 
 # Allow puma to be restarted by `bin/rails restart` command.
-plugin :tmp_restart
+
 
 # Specify the PID file. Defaults to tmp/pids/server.pid in development.
 # In other environments, only set the PID file if requested.
-pidfile ENV["PIDFILE"] if ENV["PIDFILE"]
+# pidfile ENV["PIDFILE"] if ENV["PIDFILE"]
+
+max_threads_count = Integer(ENV.fetch("RAILS_MAX_THREADS", 1))
+min_threads_count = Integer(ENV.fetch("RAILS_MIN_THREADS", max_threads_count))
+threads min_threads_count, max_threads_count
+
+workers Integer(ENV.fetch("WEB_CONCURRENCY", 1)) # CPUコア数に近づける
+
+# preload_app!
+
+port ENV.fetch("PORT", 3000)
+environment ENV.fetch("RAILS_ENV", "production")
+
+
+plugin :tmp_restart

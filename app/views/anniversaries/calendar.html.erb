@@ -1,0 +1,33 @@
+<div class="container py-4">
+
+
+
+  <div class="card shadow-sm">
+    <div class="card-body">
+
+      <%= month_calendar events: @anniversaries do |date, anniversaries| %>
+
+        <div class="mb-2 fw-bold">
+          <%= date.day %>
+        </div>
+
+        <% anniversaries.each do |anniversary| %>
+          <div class="small">
+            <%= link_to anniversary.title,
+                anniversary_path(anniversary),
+                class: "text-decoration-none" %>
+          </div>
+        <% end %>
+
+      <% end %>
+
+    </div>
+  </div>
+
+  <div class="mt-4">
+    <%= link_to "一覧へ",
+        anniversaries_path,
+        class: "btn btn-outline-secondary" %>
+  </div>
+
+</div>

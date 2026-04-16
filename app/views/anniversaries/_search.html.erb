@@ -1,0 +1,38 @@
+<div class="card mb-4">
+  <div class="card-body">
+
+    <%= search_form_for q ,url: anniversaries_path, method: :get do |f| %>
+
+      <div class="row g-3 align-items-end">
+
+        <div class="col-md-4">
+          <%= f.label :title_cont, "タイトル", class:"form-label" %>
+          <%= f.search_field :title_cont, class:"form-control" %>
+        </div>
+
+        <div class="col-md-4">
+          <%= f.label :anniversary_date_during_month, "期間", class:"form-label"%>
+          <%= raw sprintf(
+            f.date_select(
+              :anniversary_date_during_month,
+              discard_day: true,
+              include_blank: true,
+              use_month_numbers: true,
+              date_separator: '%s'),
+            '年 ') + '月' %>
+        </div>
+
+        <div class="col-md-4">
+          
+          <%= button_tag type: "submit", class: "btn btn-primary me-2" do %>
+          <i class="bi bi-search"></i>検索
+          <% end %>
+          <%= link_to "リセット", anniversaries_path, class:"btn btn-outline-secondary" %>
+        </div>
+
+      </div>
+
+    <% end %>
+
+  </div>
+</div>

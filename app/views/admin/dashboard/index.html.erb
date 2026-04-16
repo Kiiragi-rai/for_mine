@@ -1,0 +1,93 @@
+<div class="container">
+
+  <!-- Top -->
+  <div class="row mt-4">
+
+    <!-- Info -->
+    <div class="col-md-4">
+      <div class="card">
+        <div class="card-header bg-info text-white">
+          Information
+        </div>
+
+        <div class="card-body text-center">
+          <h3 class="my-4">This is the Information</h3>
+        </div>
+      </div>
+    </div>
+
+
+    <!-- Stats -->
+    <div class="col-md-8">
+      <div class="card">
+        <div class="card-header bg-info text-white">
+          Statistics
+        </div>
+
+        <div class="card-body">
+
+          <div class="row">
+
+            <div class="col-md-4">
+              <%= link_to admin_users_path,
+              class:"text-decoration-none text-dark" do %>
+
+              <div class="card shadow text-center p-3">
+                <h4>Users</h4>
+                <h3><%= @users %></h3>
+              </div>
+
+              <% end %>
+            </div>
+
+            <div class="col-md-4">
+              <%= link_to admin_notification_managements_path,
+              class:"text-decoration-none text-dark" do %>
+
+              <div class="card shadow text-center p-3">
+                <h4>Notification Failures</h4>
+                <h3><%= @notification_managements %></h3>
+              </div>
+
+              <% end %>
+            </div>
+
+            <div class="col-md-4">
+              <%= link_to admin_gift_suggestions_path,
+              class:"text-decoration-none text-dark" do %>
+
+              <div class="card shadow text-center p-3">
+                <h4>Gift Failures</h4>
+                <h3><%= @gift_failures %></h3>
+              </div>
+
+              <% end %>
+            </div>
+
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+
+  <!-- Charts -->
+  <div class="row my-5">
+
+    <div class="col-md-6">
+      <div class="bg-white p-3">
+        <canvas id="myChart1"></canvas>
+      </div>
+    </div>
+
+    <div class="col-md-6">
+      <div class="bg-white p-3">
+        <canvas id="myChart"></canvas>
+      </div>
+    </div>
+
+  </div>
+
+</div>

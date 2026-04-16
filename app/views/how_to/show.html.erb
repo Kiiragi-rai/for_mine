@@ -1,0 +1,33 @@
+<div class="container my-5" data-controller= "how-to-select">
+
+  <div class="row justify-content-center mb-5">
+    <div class="col-md-6">
+        <small>※ここからページが切り替わります</small><br>
+        <select name="items"  class="how_to_items" data-how-to-select-target= "select" data-action="change->how-to-select#change">
+            <option value="1">ログイン</option>
+            <option value="2">記念日を見る</option>
+            <option value="3">通知設定</option>
+            <option value="4">パートナー情報</option>
+            <option value="5">プレゼント提案・履歴</option>
+        </select>        
+    </div>
+  </div>
+
+
+  <div class="row justify-content-center">
+    <div class="col-lg-8">
+<% case @section%>
+<% when "1"%>
+    <%= render "login_info"%>
+<% when "2"%>
+    <%= render "anniversary"%>
+<% when "3"%>
+    <%= render "notification_info"%>
+<% when "4"%>
+    <%= render "partner"%>
+<% when "5"%>
+    <%= render "gift_suggestion"%>
+<% end %>         
+    </div>
+  </div>
+</div>

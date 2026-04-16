@@ -1,2 +1,312 @@
 @import 'bootstrap/scss/bootstrap';
 @import 'bootstrap-icons/font/bootstrap-icons';
+
+
+
+// home
+.square-btn {
+  aspect-ratio: 1 / 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+// fadein
+.fadein {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: 0.6s;
+}
+
+.fadein.show {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+    /* モーダルのスタイル */
+    .modal {
+      display: none;
+      position: fixed;
+      z-index: 999;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0, 0, 0, 0.5);
+    }
+  
+    .modal-content {
+      background-color: #fff;
+      margin: 200px auto;
+      padding: 20px;
+      width: 300px;
+      text-align: center;
+    }
+  
+    .modal-buttons {
+      margin-top: 20px;
+    }
+
+    *,body,ul {
+      margin: 0;
+      padding: 0;
+    }
+    li {
+      list-style: none;
+    }
+
+
+
+
+    // /* ↓ スライドの外枠 */
+    .slide-wrapper {
+      width: 100%;
+      max-width: 700px;
+      height: 320px;
+      margin: 0 auto;
+      position: relative;
+      /* はみ出したスライドを隠す */
+      overflow: hidden; 
+    }
+
+    // /*  ↓ スライド（コンテンツ） */
+    .slide { /*スライド全体 */
+      width: 400%;
+      height: 100%;
+      display: flex;
+      transition: all 0.3s;
+    }
+
+    /* スライド */
+    .slide > div { 
+      width: 25%;
+      height: 100%;
+      display: flex;
+      flex-direction: column;   
+      justify-content: center;
+      align-items: center;
+    }
+
+    // card-inside
+    .card-inner {
+      width: 85%;
+      height: 85%;
+      background:#ffffff;
+      border-radius: 20px;
+      padding: 30px 20px;
+
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.06)
+    }
+
+    // card-text
+    .card-inner h2 {
+      font-size: 20px;
+      margin-bottom: 8px;
+      color: #6b5b55
+    }
+
+    .card-inner h3 {
+      font-size: 15px;
+      margin-bottom: 10px;
+      color: #E8A0A0
+    }
+
+
+    .card-inner p {
+      font-size: 14px;
+      color: #8C8C8C;
+      text-align: center;
+      line-height: 1.6;
+    }
+
+    // backgroundoutside
+    .slide div:nth-of-type(1){ /* 背景色 */
+      background-color: #FFF7ED;
+    }
+    .slide div:nth-of-type(2){ /* 背景色 */
+      background-color: #F0FDF4;
+    }
+    .slide div:nth-of-type(3){ /* 背景色 */
+      background-color: #EFF6FF; 
+    }
+    .slide div:nth-of-type(4){
+      background-color: #FAF5FF;
+    }
+
+
+
+    // slidetrans
+    .slide1 { transform: translateX(0); }
+    .slide2 { transform: translateX(-25%); }
+    .slide3 { transform: translateX(-50%); }
+    .slide4 { transform: translateX(-75%); }
+
+
+    // /* 左右のボタン */
+    .next, .prev {
+      position: absolute;
+      width: 14px;
+      height: 14px;
+      bottom: 50%;
+      z-index: 10;
+      cursor: pointer;
+      border-top: solid 2px #888;
+      border-right: solid 2px #888;
+    }
+
+    .next {
+      right: 15px;
+      transform: rotate(45deg);
+    }
+
+    .prev {
+      left: 15px;
+      transform: rotate(-135deg);
+    }
+
+
+
+    // slide-indicator
+    .indicator {
+      width: 100%;
+      position: absolute;
+      bottom: 15px;
+      display: flex;
+      gap: 10px;
+      justify-content: center;
+    }
+    .indicator li {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      list-style: none;
+      background-color: #ddd;
+      cursor: pointer;
+    }
+    .indicator li:first-of-type {
+      background-color: #E8A0A0;
+    }
+
+
+
+
+    // admin sidebar
+    body {
+      font-family: 'Montserrat', sans-serif;
+    }
+
+    header form .btn {
+      background-color:#8c68cd;
+    }
+
+
+    header from .btn:hover{
+      background-color: #a88ae0;
+      color: #ffff;
+    }
+
+
+
+    // admin navbar
+
+    .sidebar .nav-link {
+      color: #212529;
+    }
+    .sidebar .nav-link:hover,
+    .sidebar .nav-link:focus {
+      background-color: #f0f0f0;
+      font-weight: 600;
+    }
+
+
+
+
+
+
+.simple-calendar .wday-6 {
+  background: #d4ebff;
+  color: #5984dc;
+}
+.simple-calendar .wday-0 {
+  background: #e9a2a2;
+  color: red;
+}
+
+.simple-calendar .today {
+  background: #f4f439;
+}
+
+.simple-calendar td:hover {
+  background-color: #30d92d;
+}
+
+
+// koko
+
+.hero-illustration {
+  position: absolute;
+  top: 120px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 100%;
+  max-width: 900px;
+  pointer-events: none;
+}
+
+.hand {
+  position: absolute;
+  width: 265px;
+  opacity: 0.09;
+}
+
+.right-hand {
+  left: 0;
+  transform: rotate(10deg);
+}
+
+.left-hand {
+  right: 0;
+  transform: rotate(-10deg);
+}
+
+// 背景
+.background {
+  position: relative;
+}
+
+.background::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image: url("favicon.png");
+  background-size: cover;
+  background-position: center;
+  opacity: 0.2;
+  z-index: 0;
+}
+
+.background > * {
+  position: relative;
+  z-index: 1;
+}
+
+
+@font-face {
+  font-family: 'ZenMaru';
+  src: url('ZenMaruGothic-Regular.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+// 文字
+// body {
+//   font-family: 'Zen Maru Gothic', sans-serif;
+//   color: #2f2f2f;
+// }
+body {
+  font-family: 'ZenMaru', sans-serif;
+}
+

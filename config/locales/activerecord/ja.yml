@@ -1,0 +1,31 @@
+ja:
+  activerecord:
+    attributes:
+      notification_setting:
+        frequency_days:
+          everyday: 毎日
+          every_other_day: 2日に1回
+          every_5_days: 5日に1回
+          weekly: 1週間に1回
+          bi_weekly: 2週間に1回
+          thirty_days: 約1ヶ月に1回
+      partner:
+        budget_min: 予算（下限）
+        budget_max: 予算（上限）
+        name: 名前
+        sex: 性別
+        age: 年齢
+        job: 職業
+      anniversary:
+        title: タイトル
+        anniversary_date: 記念日
+  enums:
+    notification_setting:
+      frequency_days:
+        everyday: 毎日
+        every_other_day: 2日に1回
+        every_5_days: 5日に1回
+        weekly: 1週間に1回
+        bi_weekly: 2週間に回
+        thirty_days: 約1ヶ月に1回
+

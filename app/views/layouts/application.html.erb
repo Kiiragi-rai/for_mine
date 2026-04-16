@@ -1,23 +1,42 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title><%= content_for(:title) || "Myapp" %></title>
+    
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
 
     <%= yield :head %>
+    
 
     <link rel="manifest" href="/manifest.json">
-    <link rel="icon" href="/icon.png" type="image/png">
-    <link rel="icon" href="/icon.svg" type="image/svg+xml">
-    <link rel="apple-touch-icon" href="/icon.png">
+
+    <!-- <link rel="icon" href="/icon.png" type="image/png"> -->
+    <link rel="icon" href="<%= asset_path('favicon.png') %>" sizes="32x32">
+    <!-- <link rel="icon" href="/icon.svg" type="image/svg+xml"> -->
+    <!-- <link rel="apple-touch-icon" href="/icon.png"> -->
+    <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"> -->
+    <!-- <link href="https://fonts.googleapis.com/css2?family=Zen+Maru+Gothic&display=swap" rel="stylesheet"> -->
     <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
     <%= javascript_include_tag "application", "data-turbo-track": "reload", type: "module" %>
+    <%= display_meta_tags(default_meta_tags) %>
+
   </head>
 
-  <body>
+  <body class="d-flex flex-column min-vh-100">
+    <% if user_signed_in? %>
+    <%= render "shared/header" %>
+    <% end %>
+
+    <% if devise_controller? == false  && user_signed_in? == false  %>
+    <%= render 'shared/before_login_header' %>
+   <% end %>
+   <%= render "shared/flash_message"%>
+   
+   <main class="flex-grow-1">
     <%= yield %>
+   </main>
+    <%= render "shared/footer"%>
   </body>
 </html>

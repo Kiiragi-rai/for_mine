@@ -1,14 +1,92 @@
+require "sidekiq/web"
+# require "sidekiq-scheduler/web"
+
 Rails.application.routes.draw do
+  get "pages/contact"
+  get "pages/privacy"
+  get "pages/terms"
+  resource :my_page, only: [ :show ] do
+    get :confirm
+    # patch :withdraw
+    delete :withdraw
+  end
+
+  namespace :admin do
+    root "dashboard#index"
+    resources :users, only: [ :index ]
+    resources :notification_managements, only: [ :index ]
+    resources :gift_suggestions, only: [ :index ]
+  end
+  authenticate :admin do
+    mount Sidekiq::Web => "/admin/sidekiq"
+  end
+
+  devise_for :admins,
+    controllers: {
+      sessions: "admin/sessions",
+      registrations: "admin/registrations"
+    }
+
+
+  get "how_to/show"
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
   # Reveal health status on /up that returns 200 if the app boots with no exceptions, otherwise 500.
   # Can be used by load balancers and uptime monitors to verify that the app is live.
-  get "up" => "rails/health#show", as: :rails_health_check
+  # get "up" => "rails/health#show", as: :rails_health_check
+
+
+  # ヘルスチェック
+  get "/healthz", to: "health#show"
 
   # Render dynamic PWA files from app/views/pwa/*
   get "service-worker" => "rails/pwa#service_worker", as: :pwa_service_worker
   get "manifest" => "rails/pwa#manifest", as: :pwa_manifest
 
-  # Defines the root path route ("/")
-  # root "posts#index"
+  # lineログインの準備ができたらONに、
+  # devise_for :users, controllers: { omniauth_callbacks: 'users/omniauth_callbacks' }
+  authenticated :user do
+    root to: "home_pages#index", as: :user_root
+  end
+
+  # ログイン前のルートページ
+  unauthenticated do
+    root to: "top_pages#top"
+  end
+
+  # LINE ログインの準備ができたらOFFに
+  # devise_for :users, controllers: {omniauth_callbacks: "users/omniauth_callbacks"}
+
+
+  devise_for :users, controllers: {
+    sessions: "users/sessions",
+    omniauth_callbacks: "users/omniauth_callbacks"
+  }
+
+  devise_scope :user do
+    delete "logout", to: "devise/sessions#destroy", as: :logout
+  end
+
+  Rails.logger.info "===== ROUTES FILE LOADED ====="
+
+  resources :anniversaries, only: %i[index show new create edit update destroy] do
+    collection do
+      get :calendar
+    end
+  end
+  # has_oneなのでresorce
+  resource :partner
+  resources :gift_suggestions, only: %i[ index new create destroy]
+
+  mount LetterOpenerWeb::Engine, at: "/letter_opener" if Rails.env.development?
+
+  if Rails.env.development?
+    post "/dev_login", to: "dev_sessions#create"
+    delete "/dev_logout", to: "dev_sessions#destroy"
+  end
+
+  # if Rails.env.development?
+  #   # viewでいるのはindexのみ
+  #   resources :notification_managements, only: %i[  new create edit update destroy ]
+  # end
 end

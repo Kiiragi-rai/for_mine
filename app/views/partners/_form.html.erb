@@ -1,5 +1,5 @@
 
-<div class="card shadow-sm">
+<div class="card shadow-sm" data-controller="progressbar-intro">
   <div class="card-body">
     <%= form_with model: partner ,url: partner_path do |f| %>
 
@@ -7,8 +7,11 @@
   
     <div class="mb-3">
       <%= f.label :name, "名前（必須）" %>
-      <%= f.text_field :name, class: "form-control",placeholder:"for-mineくん" %>
+      <%= f.text_field :name, class: "form-control",placeholder:"for-mineくん", notification_target: "name" %>
     </div>
+
+    <p data-notification-target="pbintro" class="text-muted d-none mt-0" style="font-size: 0.85rem;"></p>
+
   
     <div class="row">
       <div class="col mb-3">

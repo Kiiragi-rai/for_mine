@@ -6,8 +6,11 @@ export default class extends Controller {
 
   connect() {
 
-    const checked = this.element.querySelector("input[value='true']:checked")
-    if (checked) {
+    // const checked = this.element.querySelector("input[value='true']:checked")
+    const checked = this.element.querySelector("input[name='anniversary_notification_setting_form[is_enabled]']:checked")
+
+  
+    if (checked == true) {
       this.resultTarget.classList.remove('d-none')
       this.frequencyTarget.classList.remove("d-none")
     }

@@ -81,7 +81,8 @@ class Partner < ApplicationRecord
         value = change_to_progress_bar_value
 
         return "text-bg-success" if value >= 80
-        return "text-bg-warning" if value >= 50
+        return "text-bg-info" if value >= 60  
+        return "text-bg-warning" if value >= 30
         "text-bg-danger"
       end
 

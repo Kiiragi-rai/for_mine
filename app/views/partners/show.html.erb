@@ -2,11 +2,17 @@
   <div class="row justify-content-center">
     <div class="col-lg-8">
 
-
-
       <% if @partner.present? %>
 
-        <label class="form-label">登録率</label>
+      <% if @partnercount <= 30 %>
+        <p class="text-muted  mb-0" style="font-size: 0.85rem;">パートナーのことをもっと教えてくれると、より良いプレゼントを提案できるよ😊</p>
+      <% elsif @partnercount <= 70 %>
+        <p class="text-muted  mb-0" style="font-size: 0.85rem;">パートナーのことがだいぶ分かってきたよ😊あと少しでぴったりなプレゼントを提案できそう</p>
+      <% else %>
+        <p class="text-muted  mb-0" style="font-size: 0.85rem;">パートナーのことをたくさん教えてくれたから、かなり精度の高いプレゼントを提案できる状態だよ✨</p>
+      <% end %>
+
+        <label class="form-label mb-0">登録率</label>
 
         <div class="progress mb-3"> 
           <div class="progress-bar <%= @partner.progress_bar_color %>"

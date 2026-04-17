@@ -6,8 +6,11 @@ export default class extends Controller {
 
   connect() {
 
-    const checked = this.element.querySelector("input[value='true']:checked")
-    if (checked) {
+    // const checked = this.element.querySelector("input[value='true']:checked")
+    const checked = this.element.querySelector("input[name='anniversary_notification_setting_form[is_enabled]']:checked")
+
+  
+    if (checked && checked.value === "true") {
       this.resultTarget.classList.remove('d-none')
       this.frequencyTarget.classList.remove("d-none")
     }
@@ -17,7 +20,7 @@ export default class extends Controller {
   toggle(event){
     const value = event.target.value
 
-    if (value == "true") {
+    if (value === "true") {
       this.resultTarget.classList.remove("d-none")
       this.frequencyTarget.classList.remove("d-none")
       this.calculate()
@@ -50,7 +53,7 @@ export default class extends Controller {
   
     let next_anniversary = anniversaryDateForYear(today.getFullYear(), month, day)
   
-    if (next_anniversary <= today) {
+    if (next_anniversary < today) {
       next_anniversary = anniversaryDateForYear(today.getFullYear() + 1, month, day)
     }
   

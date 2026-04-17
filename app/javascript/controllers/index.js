@@ -22,5 +22,8 @@ application.register("modal", ModalController)
 import NotificationController from "./notification_controller"
 application.register("notification", NotificationController)
 
+import ProgressbarIntroController from "./progressbar_intro_controller"
+application.register("progressbar-intro", ProgressbarIntroController)
+
 import SliderController from "./slider_controller"
 application.register("slider", SliderController)

@@ -17,7 +17,7 @@
   <div class="mb-3">
     <%= f.label :anniversary_date, "記念日（必須）", class:"form-label" %>
     <%= f.date_field :anniversary_date, class:"form-control" ,  data: {
-    notification_target: "date"
+    notification_target: "date", action: "change->notification#calculate"
   } %>
   </div>
 

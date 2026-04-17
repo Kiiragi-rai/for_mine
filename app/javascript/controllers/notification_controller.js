@@ -50,7 +50,7 @@ export default class extends Controller {
   
     let next_anniversary = anniversaryDateForYear(today.getFullYear(), month, day)
   
-    if (next_anniversary <= today) {
+    if (next_anniversary < today) {
       next_anniversary = anniversaryDateForYear(today.getFullYear() + 1, month, day)
     }
   

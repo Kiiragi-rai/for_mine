@@ -1,4 +1,3 @@
-
 <div class="card shadow-sm" data-controller="progressbar-intro">
   <div class="card-body">
     <%= form_with model: partner ,url: partner_path do |f| %>
@@ -7,12 +6,11 @@
   
     <div class="mb-3">
       <%= f.label :name, "名前（必須）" %>
-      <%= f.text_field :name, class: "form-control",placeholder:"for-mineくん", notification_target: "name" %>
+      <%= f.text_field :name, class: "form-control",placeholder:"for-mineくん", data: { progressbar_intro_target: "name", action:"change->progressbar-intro#appear" }%>
     </div>
 
-    <p data-notification-target="pbintro" class="text-muted d-none mt-0" style="font-size: 0.85rem;"></p>
+    <p data-progressbar-intro-target="intro" class="text-muted d-none mt-0" style="font-size: 0.85rem;">ここから下の情報を入れればいれるだけ、プレゼント提案の精度が上がります</p>
 
-  
     <div class="row">
       <div class="col mb-3">
         <%= f.label :sex, "性別" %>

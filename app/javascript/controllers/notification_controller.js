@@ -10,7 +10,7 @@ export default class extends Controller {
     const checked = this.element.querySelector("input[name='anniversary_notification_setting_form[is_enabled]']:checked")
 
   
-    if (checked == true) {
+    if (checked && checked.value === "true") {
       this.resultTarget.classList.remove('d-none')
       this.frequencyTarget.classList.remove("d-none")
     }
@@ -20,7 +20,7 @@ export default class extends Controller {
   toggle(event){
     const value = event.target.value
 
-    if (value == "true") {
+    if (value === "true") {
       this.resultTarget.classList.remove("d-none")
       this.frequencyTarget.classList.remove("d-none")
       this.calculate()

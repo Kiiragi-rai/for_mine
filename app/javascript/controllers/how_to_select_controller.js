@@ -10,7 +10,7 @@ export default class extends Controller {
     this.selectTarget.value  = url.searchParams.get(searchKey) || "1";
   }
 
-  change(evnet){
+  change(event){
     const searchKey = "itemId"
     const url = new URL(window.location.href)
 

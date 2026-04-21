@@ -76,7 +76,7 @@ class AnniversariesController < ApplicationController
             title: "記念日編集"
           )
             flash.now[:danger] = "うまく更新できなかったみたい…もう一度だけ確認してみよう🙏"
-            render :edit, status: :unprocessable_content
+            render :edit, status: :unprocessable_entity
         end
     end
     def destroy

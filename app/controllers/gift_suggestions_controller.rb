@@ -36,7 +36,6 @@ class GiftSuggestionsController < ApplicationController
 
         if Rails.env.development? || Rails.env.test?
           # if Rails.env.production?
-
           result = {
               "presentSuggestions" => [
                 { "name" => "文房具セット", "reason" => "..." },
@@ -45,40 +44,35 @@ class GiftSuggestionsController < ApplicationController
               ]
             }
 
-
-              if current_user.gift_suggestions.create(
+               current_user.gift_suggestions.create!(
                 input_json: partner_info,
                 result_json: result,
                 status: :success
                 )
              session[:gift_contents] = result
               redirect_to new_gift_suggestion_path, notice: "プレゼント、一緒に考えてみたよ🎁いいものが見つかるといいね"
-              else
-                render :new, status: :unprocessable_entity
-              end
-
+              return
         # 本番
-        else
-            begin
+        end
+         
               # プレゼント提案
               result = GiftSuggestions::Generate.new(prompt).call
 
+              # if result[:error]
 
-              if result[:error]
+              #   current_user.gift_suggestions.create!(
+              #     error_message: result[:error],
+              #     status: :failure
+              #     )
 
-                current_user.gift_suggestions.create!(
-                  error_message: result[:error],
-                  status: :failure
-                  )
-
-                  set_meta_tags(
-                    title: "プレゼント提案"
-                  )
+              #     set_meta_tags(
+              #       title: "プレゼント提案"
+              #     )
                   
-                redirect_to gift_suggestions_path, alert: "うまく提案できなかったみたい…もう一度試してみよう🙏"
-                return
+              #   redirect_to gift_suggestions_path, alert: "うまく提案できなかったみたい…もう一度試してみよう🙏"
+              #   return
 
-              end
+              # end
               # input いらんくない？
               current_user.gift_suggestions.create!(
                   input_json: partner_info,
@@ -92,16 +86,13 @@ class GiftSuggestionsController < ApplicationController
             rescue StandardError => e
               # こっちもcreateに
               # input いらんくない？
-
+              Rails.logger.error("プレゼント提案#createエラー: #{e.full_message}")
               current_user.gift_suggestions.create!(
                 input_json: partner_info,
                 status: :failure,
                 error_message: e.message
               )
               redirect_to gift_suggestions_path, alert: "少し問題が起きたみたい…時間をおいて試してみてね🙏"
-          end
-
-        end
   end
 
 

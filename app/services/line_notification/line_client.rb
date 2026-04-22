@@ -33,9 +33,10 @@ module LineNotification
       # ステータス判定
       status.between?(200, 299)
 
-      rescue StandardError => e
-        Rails.logger.error("[LINE PUSH ERROR] #{e.full_message}")
-        false
+      # こっちでも残しておくか悩み　　false渡して処理でもいいし
+      # rescue StandardError => e
+      #   Rails.logger.error("[LINE PUSH ERROR] #{e.full_message}")
+      #   false
     end
 
       private

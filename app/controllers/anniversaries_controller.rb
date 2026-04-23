@@ -48,7 +48,7 @@ class AnniversariesController < ApplicationController
         else
           set_meta_tags(
             title: "記念日作成"
-            ) 
+            )
           render :new, status: :unprocessable_entity
         end
     end

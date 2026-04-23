@@ -36,7 +36,7 @@ class Partner < ApplicationRecord
     validates :job, allow_nil: true, length: { maximum: 100 }
     validates :budget_max, numericality: { greater_than_or_equal_to: 0 }, allow_nil: true
     validates :budget_min, numericality: { greater_than_or_equal_to: 0 }, allow_nil: true
-    validates :age, numericality: { greater_than: 0, less_than: 150 }, allow_nil: true
+    validates :age, numericality: { greater_than_or_equal_to: 0, less_than: 150 }, allow_nil: true
     validate :budget_max_is_greater_than_budget_min
 
     # 配列用セッター
@@ -81,7 +81,7 @@ class Partner < ApplicationRecord
         value = change_to_progress_bar_value
 
         return "text-bg-success" if value >= 80
-        return "text-bg-info" if value >= 60  
+        return "text-bg-info" if value >= 60
         return "text-bg-warning" if value >= 30
         "text-bg-danger"
       end

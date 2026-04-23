@@ -21,10 +21,10 @@ module GiftSuggestions
       PROMPT
 
       # 通知履歴
-      names = @last_result&.dig("presentSuggestions")&.map { |h| h["name"] }
+      past_history = @last_result&.dig("presentSuggestions")&.map { |h| h["name"] }
 
-      if names.present?
-      prompt << "\n #{names.to_json}は避けてください"
+      if past_history.present?
+      prompt << "\n #{past_history.to_json}は避けてください"
       end
 
       prompt

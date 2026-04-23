@@ -16,7 +16,7 @@
 
   <div class="mb-3">
     <%= f.label :anniversary_date, "記念日（必須）", class:"form-label" %>
-    <%= f.date_field :anniversary_date, class:"form-control" ,  data: {
+    <%= f.date_field :anniversary_date, class:"form-control" , max: Date.current, data: {
     notification_target: "date", action: "change->notification#calculate"
   } %>
   </div>
@@ -36,7 +36,7 @@
   <div class="mb-3">
    <%= f.label :start_on, "通知開始日", class:"form-label" %>
    <p data-notification-target="result" class="text-muted d-none mt-0" style="font-size: 0.85rem;"></p>
-    <%= f.date_field :start_on, class:"form-control" %>
+    <%= f.date_field :start_on , min: Date.current, max: Date.current + 1.year, class:"form-control" %>
   </div>
 
   

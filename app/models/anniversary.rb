@@ -51,8 +51,8 @@ class Anniversary < ApplicationRecord
 
     # カレンダー用
     def start_time
-      # next_anniversary
-      anniversary_date
+      next_anniversary
+      # anniversary_date.next_anniversary
     end
 
     def self.ransackable_attributes(auth_object = nil)

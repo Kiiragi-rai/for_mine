@@ -12,6 +12,7 @@ class NotificationTargetGetJob < ApplicationJob
     # ここはNotification_Managementのmodelでこの処理を書いていいのでは？
     # notification_managementへ登録
     notification_targets.each do |target|
+     begin
       managed = NotificationManagement.create_for(target)
 
       # nil がsmanaged に入ることもあるため、スキップいるよな
@@ -30,6 +31,9 @@ class NotificationTargetGetJob < ApplicationJob
       else
       SendNotificationLineJob.set(wait_until: managed.scheduled_for).perform_later(management_id: management_id)
       end
+    rescue StandardError => e
+      Rails.logger.error("通知対象取得jobでエラー: #{e.full_message}")
+    end
     end
   end
 end

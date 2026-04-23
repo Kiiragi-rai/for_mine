@@ -7,6 +7,7 @@ class SendNotificationLineJob < ApplicationJob
   Rails.logger.info "ここからsend notificaitonline jobだよん"
     # ここから
     notification_management = NotificationManagement.find_by(id: management_id)
+    return if notification_management.blank?
     return if notification_management.success?
 
     notification_setting = notification_management.notification_setting
@@ -15,7 +16,7 @@ class SendNotificationLineJob < ApplicationJob
     user = User.find_by(id: notification_management.user_id)
     return if user.blank?
 
-    if Rails.env.development?
+    if Rails.env.development? || Rails.env.test?
         uid = ENV["UID"]
     else
      uid = user.uid
@@ -34,31 +35,38 @@ class SendNotificationLineJob < ApplicationJob
       # ここまで事前でいいかも
       Rails.logger.info "#{message_content} これメッセージ"
       # 送信
-      begin
+
       if Rails.env.development? ||Rails.env.test?
       Rails.logger.info "ためしーーー"
-      else
+      return 
+      end
            Rails.logger.info "本番通知だよー"
           success = LineNotification::LineClient.send_line_message_with_button_to_home(uid: uid, messages: message_content)
 
           if success
-            notification_management.update!(status: :success, sent_at: Time.current)
-            notification_setting.update!(last_sent_on: Date.current)
+            # transaction入れる
+            # これ時間共通のもの入れよう
+            sent_time = Time.current
+            Rails.logger.info("これsent timeだよ #{sent_time}")
+            NotificationManagement.transaction do
+            notification_management.update!(status: :success, sent_at: sent_time)
+            notification_setting.update!(last_sent_on: sent_time)
+            end
           else
             notification_management.update!(status: :failure)
           end
 
           notification_setting.reset_notification! if notification_setting.finished?
-      end
+
         rescue StandardError => e
           notification_management&.update(status: :failure,
           sent_at: Time.current,
           error_message: e.message
           )
          # どうしようかな
-         notification_setting.reset_notification! if notification_setting.finished?
+         notification_setting&.reset_notification! if notification_setting&.finished?
 
-          Rails.logger.error("LINE SEND ERROR #{e.full_message}")
-      end
+          Rails.logger.error("LINE送信jobでエラー：#{e.full_message}")
+      
    end
 end

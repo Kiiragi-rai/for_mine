@@ -35,6 +35,7 @@ export default class extends Controller {
     const dateValue = this.dateTarget.value
     if (!dateValue) {
       this.resultTarget.textContent = "記念日を入力してください"
+      this.frequencyTarget.textContent =  "記念日を入力してください"
       return
     }
  

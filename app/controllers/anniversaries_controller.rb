@@ -31,7 +31,7 @@ class AnniversariesController < ApplicationController
         @anniversary = current_user.anniversaries.build
         @form = AnniversaryNotificationSettingForm.new(anniversary: @anniversary)
         set_meta_tags(
-          title: "記念日作成"
+          title: "記念日登録"
         )
         # ここに１００日後、
       end

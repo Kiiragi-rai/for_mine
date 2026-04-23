@@ -12,7 +12,9 @@ class AnniversariesController < ApplicationController
 
     def calendar
       # struct使ってタイトル加工しようかな
-      @anniversaries = current_user.anniversaries
+      @anniversaries = current_user.anniversaries.joins(:notification_setting)
+      &.where(notification_settings: { is_enabled: true })
+
       set_meta_tags(
         title: "記念日カレンダー"
       )

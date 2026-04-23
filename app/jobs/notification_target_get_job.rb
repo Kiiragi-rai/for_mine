@@ -34,5 +34,6 @@ class NotificationTargetGetJob < ApplicationJob
     rescue StandardError => e
       Rails.logger.error("通知対象取得jobでエラー: #{e.full_message}")
     end
+    end
   end
 end

@@ -52,9 +52,9 @@ class GiftSuggestionsController < ApplicationController
              session[:gift_contents] = result
               redirect_to new_gift_suggestion_path, notice: "プレゼント、一緒に考えてみたよ🎁いいものが見つかるといいね"
               return
-        # 本番
+          # 本番
         end
-         
+
               # プレゼント提案
               result = GiftSuggestions::Generate.new(prompt).call
 
@@ -68,7 +68,7 @@ class GiftSuggestionsController < ApplicationController
               #     set_meta_tags(
               #       title: "プレゼント提案"
               #     )
-                  
+
               #   redirect_to gift_suggestions_path, alert: "うまく提案できなかったみたい…もう一度試してみよう🙏"
               #   return
 

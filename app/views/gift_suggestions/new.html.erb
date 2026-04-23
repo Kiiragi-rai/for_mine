@@ -2,13 +2,11 @@
 
 <div class="container py-4" data-controller="gift-loading">
 
-
-
-
-
       <%= form_with url: gift_suggestions_path,
         data: { turbo: false , action: "submit->gift-loading#submit"} do |form| %>
     <div class="text-center py-4">
+      <p class="text-muted  mb-0" style="font-size: 0.85rem;">プレゼントを提案できるのは月に５回までだよ😊</p>
+
         <%= form.submit "プレゼントを考える",
             class: "btn btn-primary",
             data: { gift_loading_target: "submitButton"} %>

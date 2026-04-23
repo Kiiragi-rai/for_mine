@@ -157,7 +157,7 @@ end
     anniversary.anniversary_date = anniversary_date
     notification_setting.is_enabled = is_enabled
     notification_setting.frequency_days = frequency_days
-  #  puts "DEBUG frequency_days: #{frequency_days.inspect} (#{frequency_days.class})"
+    #  puts "DEBUG frequency_days: #{frequency_days.inspect} (#{frequency_days.class})"
     notification_setting.start_on = start_on
     notification_setting.notification_hour = notification_hour
 

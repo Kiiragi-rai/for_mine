@@ -38,7 +38,7 @@ class SendNotificationLineJob < ApplicationJob
 
       if Rails.env.development? ||Rails.env.test?
       Rails.logger.info "ためしーーー"
-      return 
+      return
       end
            Rails.logger.info "本番通知だよー"
           success = LineNotification::LineClient.send_line_message_with_button_to_home(uid: uid, messages: message_content)
@@ -67,6 +67,5 @@ class SendNotificationLineJob < ApplicationJob
          notification_setting&.reset_notification! if notification_setting&.finished?
 
           Rails.logger.error("LINE送信jobでエラー：#{e.full_message}")
-      
    end
 end
